@@ -1,0 +1,12 @@
+*.log
+*.session
+*.cache
+.settings
+.project
+.buildpath
+npm-debug.log
+
+.vscode
+dist
+tmp
+node_modules
