@@ -1,0 +1,40 @@
+{
+  "name": "devapt-devtools",
+  "version": "1.0.0",
+  "description": "Developpers Application Toolkit - Developper Tools",
+  "author": "Luc BORIES (https://github.com/lucbories)",
+  "license": "Apache-2.0",
+  "license2": "Apache License 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucbories/devapt-devtools.git"
+  },
+  "bugs": {
+    "url": "git+https://github.com/lucbories/devapt-devtools/issues"
+  },
+  "homepage": "https://github.com/lucbories/devapt-devtools#readme.md",
+  "main": "dist/index.js",
+  "engines": [],
+  "directories": [
+    "dist"
+  ],
+  "scripts": {
+    "start_master": "babel-node --debug src/server/start_master.js",
+    "start_nodeB": "babel-node --debug src/server/start_nodeB.js"
+  },
+  "keywords": [
+    "server",
+    "api",
+    "rest",
+    "devapt",
+    "toolkit",
+    "redux",
+    "reactive",
+    "devtools"
+  ],
+  "dependencies": {
+    "devapt": "^1.0.0",
+    "left-pad": "0.0.4"
+  },
+  "devDependencies": {}
+}
