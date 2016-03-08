@@ -78,16 +78,6 @@
 	
 	
 	"plugins":{
-		"backend-foundation5":{
-			"js":"backend-foundation5/plugin",
-			"css":["/assets/css/normalize.css", "/assets/css/foundation.css"],
-			"autoload":true
-		},
-		"backend-jquery-ui":{
-			"js":"backend-jquery-ui/plugin",
-			"css":[],
-			"autoload":true
-		}
 	},
 	
 	"security":{
@@ -101,14 +91,14 @@
 			"expiration":60,
 			"secret":"APPPPPPP449++((éç(à",
 			
-			"mode":"database",
-			"model":"MODEL_AUTH_USERS",
-			"username":"login",
-			"password":"password",
+			"mode":"jsonfile",
+			"file_name":"users.json",
 			
 			"alt": {
-				"mode":"jsonfile",
-				"file":"users.json",
+				"mode":"database",
+				"model":"MODEL_AUTH_USERS",
+				"username":"login",
+				"password":"password",
 				
 				"login":"demo",
 				"password":"demo"

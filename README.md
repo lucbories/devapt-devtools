@@ -14,7 +14,10 @@ Developpers Tools application helps you to develop applications using devapt run
 
 ## USAGE
 
-
+TODO:
+Menubar: Home / Metrics / Config / Runtime / Logs / Topology
+Config -> Applications / Modules / Plugins / Nodes / Services / Views / Models / Menubars / Menus
+Metrics: node / services /
 
 ## LICENCE
 

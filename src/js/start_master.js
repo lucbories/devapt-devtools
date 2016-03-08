@@ -22,15 +22,16 @@ const optional_trace_settings = {
 		* 		- create bus or connect to bus
 		*/
 		"RuntimeStage0":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
 		* Runtime Stage 1 consists of:
 		* 		- load master apps settings
+		*		- load security setting
 		*/
 		"RuntimeStage1":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -39,7 +40,7 @@ const optional_trace_settings = {
 		* 		- create services
 		*/
 		"RuntimeStage2":{
-			"enabled":true
+			"enabled":false
 		},
 		
 		/**
@@ -85,8 +86,12 @@ const runtime_settings = {
 	},
 	
 	'base_dir': path.join(__dirname, '..'),
-	'apps_settings_file': 'resources/world.json',
-    
+	
+    "settings_provider": {
+        'source':'local_file',
+        "relative_path":"resources/world.json"
+    },
+	
    	'trace': optional_trace_settings
 }
 

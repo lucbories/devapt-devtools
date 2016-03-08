@@ -5,6 +5,7 @@
 .project
 .buildpath
 npm-debug.log
+go.cmd
 
 .vscode
 dist

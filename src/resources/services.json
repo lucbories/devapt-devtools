@@ -104,6 +104,10 @@
 				{
 					"route":"/img/.*.jpg",
 					"directory":"./public"
+				},
+				{
+					"route":"/plugins",
+					"directory":"public/assets/plugins"
 				}
 			]
 		},

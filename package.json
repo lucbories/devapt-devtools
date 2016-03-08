@@ -19,6 +19,7 @@
     "dist"
   ],
   "scripts": {
+    "start": "./go.cmd",
     "start_master": "babel-node --debug src/server/start_master.js",
     "start_nodeB": "babel-node --debug src/server/start_nodeB.js"
   },
@@ -34,7 +35,12 @@
   ],
   "dependencies": {
     "devapt": "^1.0.0",
-    "left-pad": "0.0.4"
+    "helmet": "^1.3.0",
+    "left-pad": "0.0.4",
+    "passport-http": "^0.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "del": "^2.2.0",
+    "run-sequence": "^1.1.5"
+  }
 }

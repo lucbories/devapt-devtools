@@ -8,3 +8,4 @@ tmp/
 .babelrc
 .gitignore
 json.config
+go.cmd
