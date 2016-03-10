@@ -1,24 +1,60 @@
 
-export default function get_menubar_anchors(arg_app_url, arg_url_credentials)
+import T from 'typr'
+import assert from 'assert'
+import devapt from 'devapt'
+
+
+
+const runtime = devapt.runtime
+
+function get_menubar_menus()
 {
-	console.log(arg_url_credentials, 'arg_url_credentials')
-	
     return [
-		`<a href="/${arg_app_url}/store/config/all/${arg_url_credentials}">Config All</a>`,
-		`<a href="/${arg_app_url}/store/config/applications/${arg_url_credentials}">Config Applications</a>`,
-		
-		`<a href="/${arg_app_url}/store/config/resources/${arg_url_credentials}">Config Resources</a>`,
-		`<a href="/${arg_app_url}/store/config/views/${arg_url_credentials}">Config Views</a>`,
-		`<a href="/${arg_app_url}/store/config/models/${arg_url_credentials}">Config Models</a>`,
-		`<a href="/${arg_app_url}/store/config/menubars/${arg_url_credentials}">Config Menubars</a>`,
-		`<a href="/${arg_app_url}/store/config/menus/${arg_url_credentials}">Config Menus</a>`,
-		
-		`<a href="/${arg_app_url}/store/config/modules/${arg_url_credentials}">Config Modules</a>`,
-		`<a href="/${arg_app_url}/store/config/plugins/${arg_url_credentials}">Config Plugins</a>`,
-		`<a href="/${arg_app_url}/store/config/nodes/${arg_url_credentials}">Config Nodes</a>`,
-		`<a href="/${arg_app_url}/store/config/services/${arg_url_credentials}">Config Services</a>`,
-		
-		`<a href="/${arg_app_url}/store/runtime/${arg_url_credentials}">Runtime</a>`,
-		`<a href="/${arg_app_url}/metrics/${arg_url_credentials}">Metrics</a>`
+		{ url:'/store/config/all/', label:'Config All' },
+		{ url:'/store/config/applications/', label:'Config Applications' },
+		{ url:'/store/config/resources/', label:'Config Resources' },
+		{ url:'/store/config/views/', label:'Config Views' },
+		{ url:'/store/config/models/', label:'Config Models' },
+		{ url:'/store/config/menubars/', label:'Config Menubars' },
+		{ url:'/store/config/menus/', label:'Config Menus' },
+		{ url:'/store/config/modules/', label:'Config Modules' },
+		{ url:'/store/config/plugins/', label:'Config Plugins' },
+		{ url:'/store/config/nodes/', label:'Config Nodes' },
+		{ url:'/store/config/services/', label:'Config Services' },
+		{ url:'/store/runtime/', label:'Runtime' },
+		{ url:'/metrics/', label:'Metrics' }
 	]
+}
+
+function get_menubar_anchors_html(arg_app_url, arg_request)
+{
+	const menus = get_menubar_menus()
+	let html = '';
+	
+	menus.forEach(
+		function(value)
+		{
+			const url = runtime.context.get_url_with_credentials(arg_app_url + value.url)
+			html += '<a href="/' + url + '">' + value.label + '</a>\n'
+		}
+	)
+	
+	return html
+}
+
+export default function get_menubar_anchors(arg_app_url, arg_request)
+{
+	const menus = get_menubar_menus()
+	let urls = [];
+	
+	menus.forEach(
+		function(value)
+		{
+			const url = runtime.context.get_url_with_credentials(arg_app_url + value.url, arg_request)
+			const anchor =  '<a href="/' + url + '">' + value.label + '</a>\n'
+			urls.push(anchor)
+		}
+	)
+	
+	return urls
 }

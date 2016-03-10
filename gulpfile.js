@@ -13,11 +13,13 @@ var browserSync = require('browser-sync').create();
 
 var SRC_ALL_JS = 'src/js/**/*.js';
 var SRC_ALL_JSON = 'src/resources/**/*.json';
+var SRC_ALL_JADE = 'src/jade/**/*.jade';
 var SRC_ALL_TEMPLATE = 'src/resources/**/*.template';
 var SRC_ALL_INCLUDE = 'src/resources/**/*.include';
 
 var DST = 'dist';
 var DST_ALL_JS = 'dist/js'
+var DST_ALL_JADE = 'dist/jade'
 var DST_ALL_RESOURCES = 'dist/resources'
 
 
@@ -53,6 +55,17 @@ gulp.task('build_all_json', () => {
 
 
 /*
+    COPY ALL SRC/ JADE FILES TO DIST/
+        build only changed files
+*/
+gulp.task('build_all_jade', () => {
+    return gulp.src(SRC_ALL_JADE)
+		.pipe(changed(DST_ALL_JADE))
+        .pipe(gulp.dest(DST_ALL_JADE));
+});
+
+
+/*
     COPY ALL SRC/ TEMPLATE FILES TO DIST/
         build only changed files
 */
@@ -82,7 +95,7 @@ gulp.task('build_all_include', () => {
 
 // gulp.task('release', ['build_all_files', 'build_all_json']);
 
-gulp.task('default', ['build_all_js', 'build_all_json', 'build_all_template', 'build_all_include']);
+gulp.task('default', ['build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include']);
 
 
 

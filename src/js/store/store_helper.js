@@ -3,6 +3,8 @@ import T from 'typr'
 import assert from 'assert'
 import devapt from 'devapt'
 
+import get_menubar_anchors from '../menubar'
+
 
 
 const runtime = devapt.runtime
@@ -12,7 +14,7 @@ const Render = devapt.Render
 
 const context = 'devtools/store/store_helper'
 
-
+/*
 function get_menu_anchors(arg_app_url, arg_url_credentials)
 {
 console.log(arg_url_credentials, 'arg_url_credentials')
@@ -34,7 +36,7 @@ console.log(arg_url_credentials, 'arg_url_credentials')
 		`<a href="/${arg_app_url}/store/runtime/${arg_url_credentials}">Runtime</a>`,
 		`<a href="/${arg_app_url}/metrics/${arg_url_credentials}">Metrics</a>`
 	]
-}
+}*/
 
 
 export default function make_middleware(arg_collection, arg_label, arg_title, arg_sub_collection)
@@ -102,9 +104,9 @@ export default function make_middleware(arg_collection, arg_label, arg_title, ar
 		`
 		
 		// TODO: credentials
-		const html = new Render('html_assets_1', 'html_assets_1', 'html_assets_1')
-			.page('main', {label:'Devapt Devtools - Store / Config / ' + arg_title})
-				.hbox('menus', null, {items:get_menu_anchors('devtools', '?username=demo&password=6c5ac7b4d3bd3311f033f971196cfa75'), label:'Devtools'})
+		const html = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', req)
+			.page('main', {label:'Devapt Devtools - Store / Config / ' + arg_title, headers:[]})
+				.hbox('menus', null, {items:get_menubar_anchors('devtools', req), label:'Devtools'})
 					.up()
 				// .vbox('content', null, {label:'content'})
 					.button('button1', null, {label:'mybutton', action_url:'myurl'})
@@ -114,7 +116,7 @@ export default function make_middleware(arg_collection, arg_label, arg_title, ar
 				// .up()
 			.script('test', {
 					page_scripts:[get_script2],
-					page_scripts_urls:[/*'http://localhost:8080/assets/js/vendor/require.js',*/ 'js/vendor/browser.min.js'] }, null)
+					page_scripts_urls:['js/vendor/browser.min.js'] }, null)
 				.up()
 			.render()
 		

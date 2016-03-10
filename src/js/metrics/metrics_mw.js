@@ -90,15 +90,15 @@ export default*/ class Metrics extends Component
 
 export default function(req, res)
 {
-    const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1')
+    const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', req)
     const metrics = new Metrics('metrics', { render:renderer })
     // const html = metrics.render()
     
     // res.send(html)
     
     
-    const html = renderer.page('main', {label:'Devapt Devtools - Metrics'})
-        .hbox('menus', null, {items:get_menubar_anchors('devtools'), label:'Devtools'})
+    const html = renderer.page('main', {request:req, label:'Devapt Devtools - Metrics'})
+        .hbox('menus', null, {items:get_menubar_anchors('devtools', req), label:'Devtools'})
             .up()
         .button('button1', null, {label:'mybutton', action_url:'myurl'})
             .up()
