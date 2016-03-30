@@ -3,7 +3,7 @@ import T from 'typr'
 import assert from 'assert'
 import devapt from 'devapt'
 
-import get_menubar_anchors from '../menubar'
+// import get_menubar_anchors from '../menubar'
 
 
 

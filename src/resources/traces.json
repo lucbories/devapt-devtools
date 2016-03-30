@@ -1,0 +1,21 @@
+{
+	"traces":{
+		"enabled":true,
+		
+		"unused":{
+			"levels":["debug", "info", "warn", "error"],
+			
+			"modules":{
+				"*":false
+			},
+			
+			"classes":{
+				"*":false
+			},
+			
+			"instances":{
+				"*":false
+			}
+		}
+	}
+}

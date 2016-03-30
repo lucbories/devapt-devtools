@@ -109,7 +109,21 @@
 					"route":"/plugins",
 					"directory":"public/assets/plugins"
 				}
-			]
+			],
+			"security":{
+				"enabled":false,
+				"authentication":{
+					"enabled":false,
+					"engines":[]
+				},
+				"authorization":{
+					"enabled":false,
+					"engines":[],
+					"permissions":{
+						"*":["*"]
+					}
+				}
+			}
 		},
 		
 		"rest_api_models_query_1":{ 

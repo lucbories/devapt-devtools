@@ -7,14 +7,9 @@ import devapt from 'devapt'
 const runtime = devapt.runtime
 
 const optional_trace_settings = {
-	// GLOBAL TRACE SETTINGS
-	'enabled':true, // TODO: not used yet
-	
-	'levels':['debug', 'info', 'warn', 'error'], // TODO: not used yet
-	
 	// RUNTIME STAGES TRACE SETTINGS
 	"stages":{
-		"enabled":true, // TODO: not used yet
+		"enabled":true, // TODO
 		
 		/**
 		* Runtime Stage 0 consists of:
@@ -22,7 +17,7 @@ const optional_trace_settings = {
 		* 		- create bus or connect to bus
 		*/
 		"RuntimeStage0":{
-			"enabled":true
+			"enabled":false
 		},
 		
 		/**
@@ -31,7 +26,7 @@ const optional_trace_settings = {
 		*		- load security setting
 		*/
 		"RuntimeStage1":{
-			"enabled":true
+			"enabled":false
 		},
 		
 		/**
@@ -66,12 +61,7 @@ const optional_trace_settings = {
 		"RuntimeStage5":{
 			"enabled":true
 		}
-	},
-	
-	// MODULES TRACE SETTINGS
-	'modules':null, // TODO: not used yet
-	'classes':null, // TODO: not used yet
-	'instances':null // TODO: not used yet
+	}
 }
 
 
