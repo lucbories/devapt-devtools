@@ -1,13 +1,13 @@
 
 'use strict';
 
-// var del = require('del');
+var del = require('del');
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var changed = require('gulp-changed');
-var browserSync = require('browser-sync').create();
+// var browserSync = require('browser-sync').create();
 
 
 
@@ -22,6 +22,15 @@ var DST_ALL_JS = 'dist/js'
 var DST_ALL_JADE = 'dist/jade'
 var DST_ALL_RESOURCES = 'dist/resources'
 
+
+
+
+/*
+    CLEAN DIST DIRECTORY
+*/
+gulp.task('clean', () => {
+  return del(DST);
+});
 
 
 /*
@@ -89,6 +98,26 @@ gulp.task('build_all_include', () => {
 
 
 /*
+	WATCH FOR CHANGES
+*/
+gulp.task('watch',
+	function()
+	{
+		var cb = function() { console.log(args, 'watch cb'); };
+		// ['build_all_js']
+		/*var watcher = */gulp.watch(SRC_ALL_JS, {interval:2000}, cb);
+		
+		// watcher.on('change',
+			// function(event) {
+				// console.log('JS File ' + event.path + ' was ' + event.type + ', running tasks...');
+			// }
+		// );
+	}
+);
+
+
+
+/*
     DEFINE MAIN GULP TASKS
 */
 // gulp.task('build_bundles', ['build_bundle_browser', 'build_bundle_common', 'build_bundle_server']);
@@ -101,13 +130,10 @@ gulp.task('default', ['build_all_js', 'build_all_json', 'build_all_jade', 'build
 
 
 
-// var watcher = gulp.watch('js/**/*.js', ['uglify','reload']);
-// watcher.on('change', function(event) {
-//   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-// });
 
-gulp.task('js-watch', ['build_all_js'], browserSync.reload);
-gulp.task('serve', ['build_all_js'],
+/*
+gulp.task('js-watch', ['default'], browserSync.reload);
+gulp.task('serve', ['build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include'],
     function ()
     {
         // Serve files from the root of this project
@@ -128,3 +154,4 @@ gulp.task('serve', ['build_all_js'],
         );
     }
 );
+*/

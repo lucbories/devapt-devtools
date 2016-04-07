@@ -2,20 +2,25 @@
 	"traces":{
 		"enabled":true,
 		
+		"modules":{
+			".*":true,
+			"common/executables/executable_route_assets":true,
+			"common/security/authentication_wrapper":true
+		},
+		
+		"classes":{
+			".*":true,
+			".*Server.*":true,
+			"AuthenticationPluginURL":true
+		},
+		
+		"instances":{
+			".*":true,
+			"NodeALocal8081xxx":true
+		},
+		
 		"unused":{
-			"levels":["debug", "info", "warn", "error"],
-			
-			"modules":{
-				"*":false
-			},
-			
-			"classes":{
-				"*":false
-			},
-			
-			"instances":{
-				"*":false
-			}
+			"levels":["debug", "info", "warn", "error"]
 		}
 	}
 }

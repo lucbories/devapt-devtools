@@ -7,9 +7,9 @@ import get_menubar_menus from '../menubar'
 
 
 
-// const runtime = devapt.runtime
+const runtime = devapt.runtime
 const config = devapt.config
-const logs = devapt.logs
+const logs = runtime.get_logger_manager()
 const Render = devapt.Render
 
 const context = 'devtools/store/store_helper'

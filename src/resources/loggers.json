@@ -1,6 +1,19 @@
 {
 	"loggers":{
 		"winston":{
+			"transports":{
+				"file_1":{
+					"type":"file",
+					"level": "debug",
+					"filename": "./tmp/debug_by_json.log",
+					"maxsize":100000,
+					"maxFiles":2
+				},
+				"console_1":{
+					"type":"console",
+					"level":"debug"
+				}
+			}
 		}
 	}
 }

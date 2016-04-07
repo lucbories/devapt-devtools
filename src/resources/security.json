@@ -16,7 +16,9 @@
 				
 				"file_users": {
 					"mode":"jsonfile",
-					"file_name":"users.json"
+					"file_name":"users.json",
+					"username_fieldname":"login",
+					"password_fieldname":"password"
 				},
 				
 				"db_users": {

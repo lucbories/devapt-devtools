@@ -17,7 +17,7 @@ const optional_trace_settings = {
 		* 		- create bus or connect to bus
 		*/
 		"RuntimeStage0":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -26,7 +26,7 @@ const optional_trace_settings = {
 		*		- load security setting
 		*/
 		"RuntimeStage1":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -35,7 +35,7 @@ const optional_trace_settings = {
 		* 		- create services
 		*/
 		"RuntimeStage2":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -71,7 +71,7 @@ const runtime_settings = {
 	
 	'master':{
 		'name':'NodeA',
-		'host':"localhost",
+		'host':'localhost',
 		'port':5000
 	},
 	
@@ -79,7 +79,7 @@ const runtime_settings = {
 	
     "settings_provider": {
         'source':'local_file',
-        "relative_path":"resources/world.json"
+        'relative_path':'resources/world.json'
     },
 	
    	'trace': optional_trace_settings
