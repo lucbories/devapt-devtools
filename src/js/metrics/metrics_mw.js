@@ -23,29 +23,29 @@ export default*/ class Metrics extends Component
 	{
         // UPDATE SETTINGS
 		arg_settings = T.isObject(arg_settings) ? arg_settings : {}
-		arg_settings.page_styles = []
-		arg_settings.page_headers = ['<meta keywords="metrics" />']
+		arg_settings.styles = []
+		arg_settings.headers = ['<meta keywords="metrics" />']
 		
 		super(arg_name, arg_settings)
 		
 		this.$type = 'Metrics'
         
         // GET RENDERER
-        const render = arg_settings.render ? arg_settings.render : null
-        assert( T.isObject(render) && render.is_render, context + ':bad render object')
-        this.renderer = render
-        
-        
-        // GET METRICS STATE
-        const metrics_server = runtime.node.metrics_server
-        const http_state = metrics_server.get_http_metrics().metrics
-		
-        // CREATE STATE TREE
-        const settings = { state:{tree:http_state, label:'HTTP Metrics'} }
-        let tree = this.renderer.rendering_manager.create('Tree', this.name + '_state_tree', settings)
+		const render = arg_settings.render ? arg_settings.render : null
+		assert( T.isObject(render) && render.is_render, context + ':bad render object')
+		this.renderer = render
+
+
+		// GET METRICS STATE
+		const metrics_server = runtime.node.metrics_server
+		const http_state = metrics_server.get_http_metrics().metrics
+
+		// CREATE STATE TREE
+		const settings = { state:{tree:http_state, label:'HTTP Metrics'} }
+		let tree = this.renderer.rendering_manager.create('Tree', this.name + '_state_tree', settings)
 		assert( T.isObject(tree) && tree.is_component, context + ':bad Tree component object')
-		
-        this.add_child(tree)
+
+		this.add_child(tree)
 	}
 	
 	
@@ -76,8 +76,8 @@ export default*/ class Metrics extends Component
         //     .add(tree)
         //         .up()
         //     .script('test', {
-        //         page_scripts:[],
-        //         page_scripts_urls:['js/vendor/browser.min.js'] }, null)
+        //         scripts:[],
+        //         scripts_urls:['js/vendor/browser.min.js'] }, null)
         //     .up()
         //     .render()
 		
@@ -105,8 +105,8 @@ export default function(req, res)
 	.add(metrics)
 	.up()
 	.script('test', {
-		page_scripts:[],
-		page_scripts_urls:['js/vendor/browser.min.js'] }, null)
+		scripts:[],
+		scripts_urls:['js/vendor/browser.min.js'] }, null)
 	.up()
 	.render()
 

@@ -26,7 +26,7 @@ export default function get_menubar_menus()
 			]
 		},
 		{ url:'/store/runtime/', label:'Runtime' },
-		{ url:'/metrics/', label:'Topology', component:'Topology' },
+		{ url:'/topology/', label:'Topology' },
 		{ url:'/metrics/', label:'Metrics' }
 	]
 }

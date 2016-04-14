@@ -23,6 +23,11 @@
 					"route":"/metrics",
 					"mw_file":"js/metrics/metrics_mw.js"
 				},
+				
+				{
+					"route":"/topology",
+					"mw_file":"js/topology/topology_mw.js"
+				},
                 
                 
 				{

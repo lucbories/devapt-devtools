@@ -92,8 +92,8 @@ export default function make_middleware(arg_collection, arg_label, arg_title, ar
 				.up()
 				// .up()
 			.script('test', {
-				page_scripts:[get_script2],
-				page_scripts_urls:['js/vendor/browser.min.js'] }, null)
+				scripts:[get_script2],
+				scripts_urls:['js/vendor/browser.min.js'] }, null)
 				.up()
 			.render()
 		
