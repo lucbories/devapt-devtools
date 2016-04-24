@@ -34,6 +34,7 @@
     "devtools"
   ],
   "dependencies": {
+    "chokidar": "^1.4.3",
     "devapt": "^1.0.0",
     "devapt-features-foundation6": "^1.0.0",
     "jsplumb": "^2.0.7",

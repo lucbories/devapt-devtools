@@ -30,7 +30,8 @@
 			"services":{
 				"provides":{
 					"devtools_store": { "servers":["NodeALocal8080"] },
-					"devtools_panel": { "servers":["NodeALocal8081"] }
+					"devtools_panel": { "servers":["NodeALocal8081"] },
+					"metrics": { "servers":["NodeALocal8081"] }
 				},
 				"consumes":{
 				}

@@ -93,7 +93,7 @@ export default function make_middleware(arg_collection, arg_label, arg_title, ar
 				// .up()
 			.script('test', {
 				scripts:[get_script2],
-				scripts_urls:['js/vendor/browser.min.js'] }, null)
+				scripts_urls:['js/vendor/browser.min.js', 'js/devapt-browser.js', 'js/app.js'] }, null)
 				.up()
 			.render()
 		

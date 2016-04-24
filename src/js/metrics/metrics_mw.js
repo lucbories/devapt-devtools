@@ -87,7 +87,6 @@ export default*/ class Metrics extends Component
 }
 
 
-
 export default function(req, res)
 {
 	const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', req)
@@ -100,13 +99,13 @@ export default function(req, res)
 	const html = renderer.page('main', {request:req, label:'Devapt Devtools - Metrics'})
 	.menubar('menus', null, {items:get_menubar_menus(), app_url:'devtools', request:req, label:'Devtools'})
 	.up()
-	.button('button1', null, {label:'mybutton', action_url:'myurl'})
+	.button('button1', null, {label:'my GGG Button', action_url:'myurl'})
 	.up()
 	.add(metrics)
 	.up()
 	.script('test', {
 		scripts:[],
-		scripts_urls:['js/vendor/browser.min.js'] }, null)
+		scripts_urls:['js/vendor/browser.min.js', 'js/devapt-browser.js', 'js/app.js'] }, null)
 	.up()
 	.render()
 

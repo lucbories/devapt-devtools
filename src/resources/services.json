@@ -16,17 +16,20 @@
 			]
 		},
 		
+		"metrics":{
+			"type":"metrics"
+		},
+		
 		"devtools_panel":{
 			"type":"middleware",
 			"routes":[
 				{
-					"route":"/metrics",
-					"mw_file":"js/metrics/metrics_mw.js"
-				},
-				
-				{
 					"route":"/topology",
 					"mw_file":"js/topology/topology_mw.js"
+				},
+				{
+					"route":"/metrics",
+					"mw_file":"js/metrics/metrics_mw.js"
 				},
                 
                 
@@ -112,7 +115,8 @@
 				},
 				{
 					"route":"/plugins",
-					"directory":"public/assets/plugins"
+					"plugins":["Foundation-6"],
+					"adirectory":"public/assets/plugins"
 				}
 			],
 			"security":{
@@ -206,8 +210,6 @@
 		
 		"svc4":{
 			"type":"rest_api_resources_modifier"
-		},
-		
-		"svc6":{ "type":"html_app" }
+		}
 	}
 }

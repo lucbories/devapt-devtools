@@ -11,7 +11,7 @@ export default function get_menubar_menus()
 {
 	return [
 		{ url:'/store/config/all/', label:'Config All' },
-		{ label:'Config',
+		{ label:'Config AA',
 			items:[
 				{ url:'/store/config/applications/', label:'Config Applications' },
 				{ url:'/store/config/resources/', label:'Config Resources' },

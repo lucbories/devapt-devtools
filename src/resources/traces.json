@@ -3,24 +3,24 @@
 		"enabled":true,
 		
 		"modules":{
-			".*":true,
-			"common/executables/executable_route_assets":true,
-			"common/security/authentication_wrapper":true
+			".*":false
 		},
 		
 		"classes":{
-			".*":true,
-			".*Server.*":true,
-			"AuthenticationPluginURL":true
+			".*":false
 		},
 		
 		"instances":{
-			".*":true,
-			"NodeALocal8081xxx":true
+			".*":false
 		},
 		
 		"unused":{
-			"levels":["debug", "info", "warn", "error"]
+			"levels":["debug", "info", "warn", "error"],
+			"NodeALocal8081xxx":true,
+			".*Server.*":true,
+			"AuthenticationPluginURL":true,
+			"common/executables/executable_route_assets":true,
+			"common/security/authentication_wrapper":true
 		}
 	}
 }

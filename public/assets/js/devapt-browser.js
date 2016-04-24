@@ -17,18 +17,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import Render from './common/rendering/render'
 // import Component from './common/rendering/base/component'
 
-/**
- * Main public part of Devapt library
- * @name index.js
- * @license Apache-2.0
- * @auhtor Luc BORIES
- * 
- * @property {object} devapt.runtime - Runtime class instance
- * @property {object} devapt.store - Redux store instance
- * @property {object} devapt.config - configuration part of a Redux store instance
- * @property {object} devapt.logs - logging wrapper
- * @property {object} devapt.render - rendering wrapper Class (Render)
- * @property {object} devapt.Component - rendering base class (Component)
+/**
+ * Main public part of Devapt library
+ * @name index.js
+ * @license Apache-2.0
+ * @auhtor Luc BORIES
+ * 
+ * @property {object} devapt.runtime - Runtime class instance
+ * @property {object} devapt.store - Redux store instance
+ * @property {object} devapt.config - configuration part of a Redux store instance
+ * @property {object} devapt.logs - logging wrapper
+ * @property {object} devapt.render - rendering wrapper Class (Render)
+ * @property {object} devapt.Component - rendering base class (Component)
  */
 
 exports.default = { runtime: _client_runtime2.default /*, config, store, Render, Component*/ };
@@ -55,19 +55,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * @file Console logger class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Console logger class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var LoggerService = function (_Logger) {
 	_inherits(LoggerService, _Logger);
 
-	/**
-  * Create a Console Logger instance.
-  * @param {string} arg_context - trace context.
-  * @returns {nothing}
+	/**
+  * Create a Console Logger instance.
+  * @param {string} arg_context - trace context.
+  * @returns {nothing}
   */
 
 	function LoggerService(arg_enabled) {
@@ -79,10 +79,10 @@ var LoggerService = function (_Logger) {
 		return _this;
 	}
 
-	/**
-  * Logger DEBUG implementation.
-  * @param {string} arg_msg - message string.
-  * @returns {nothing}
+	/**
+  * Logger DEBUG implementation.
+  * @param {string} arg_msg - message string.
+  * @returns {nothing}
   */
 
 
@@ -92,10 +92,10 @@ var LoggerService = function (_Logger) {
 			console.debug(arg_msg);
 		}
 
-		/**
-   * Logger INFO implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger INFO implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -104,10 +104,10 @@ var LoggerService = function (_Logger) {
 			console.info(arg_msg);
 		}
 
-		/**
-   * Logger WARN implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger WARN implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -116,10 +116,10 @@ var LoggerService = function (_Logger) {
 			console.warn(arg_msg);
 		}
 
-		/**
-   * Logger ERROR implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger ERROR implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -135,7 +135,7 @@ var LoggerService = function (_Logger) {
 exports.default = LoggerService;
 
 
-},{"../common/loggers/logger":29}],3:[function(require,module,exports){
+},{"../common/loggers/logger":20}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -156,6 +156,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // let context = 'browser/service'
 
 var DEFAULT_OPS = [{
+	name: 'ping',
+	operands: []
+}, {
 	name: 'get',
 	operands: []
 }, {
@@ -199,18 +202,18 @@ var DEFAULT_OPS = [{
 	operands: []
 }];
 
-/**
- * @file client Service class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file client Service class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Service = function () {
-	/**
-  * Create a client Runtime instance.
-  * @param {string} arg_svc_name - service name
-  * @param {object} arg_svc_settings - service settiings
-  * @returns {nothing}
+	/**
+  * Create a client Runtime instance.
+  * @param {string} arg_svc_name - service name
+  * @param {object} arg_svc_settings - service settiings
+  * @returns {nothing}
   */
 
 	function Service(arg_svc_name, arg_svc_settings) {
@@ -222,10 +225,10 @@ var Service = function () {
 		this.load(arg_svc_settings);
 	}
 
-	/**
-  * Load runtime settings.
-  * @param {object} arg_settings - runtime settings
-  * @returns {object} promise
+	/**
+  * Load runtime settings.
+  * @param {object} arg_settings - runtime settings
+  * @returns {object} promise
   */
 
 
@@ -275,7 +278,7 @@ var Service = function () {
 exports.default = Service;
 
 
-},{"baconjs":115}],4:[function(require,module,exports){
+},{"baconjs":100}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -318,52 +321,52 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/application';
 
-/*
-"applications":{
-		"tutorial-auth":{
-			"url":"tutorial-auth/api/v1",
-			
-			"services":{
-				"provides":{
-					"svc1":["*"],
-					"svc2":["*"],
-					"svc3":[],
-					"svc4":[],
-					"svc5":false,
-					"svc6":false
-				},
-				"consumes":{
-				}
-			},
-			
-			"modules": ["security"],
-			"plugins":[],
-			"resources":[],
-			
-			"assets":{
-				"css":[],
-				"js":[],
-				"img":[],
-				"index":""
-			},
-			"license":"APACHE-LICENSE-2.0"
-		},...
+/*
+"applications":{
+		"tutorial-auth":{
+			"url":"tutorial-auth/api/v1",
+			
+			"services":{
+				"provides":{
+					"svc1":["*"],
+					"svc2":["*"],
+					"svc3":[],
+					"svc4":[],
+					"svc5":false,
+					"svc6":false
+				},
+				"consumes":{
+				}
+			},
+			
+			"modules": ["security"],
+			"plugins":[],
+			"resources":[],
+			
+			"assets":{
+				"css":[],
+				"js":[],
+				"img":[],
+				"index":""
+			},
+			"license":"APACHE-LICENSE-2.0"
+		},...
 */
 
-/**
- * @file Application class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Application class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Application = function (_Instance) {
 	_inherits(Application, _Instance);
 
-	/**
-  * Application constructor.
- * @extends Instance
-  * @param {string} arg_name - Application name
- * @returns {nothing}
+	/**
+  * Application constructor.
+ * @extends Instance
+  * @param {string} arg_name - Application name
+ * @returns {nothing}
   */
 
 	function Application(arg_name) {
@@ -393,9 +396,9 @@ var Application = function (_Instance) {
 		return _this;
 	}
 
-	/**
-     * Load configuration and build application.
-  * @returns {nothing}
+	/**
+     * Load configuration and build application.
+  * @returns {nothing}
      */
 
 
@@ -510,9 +513,9 @@ var Application = function (_Instance) {
 			this.leave_group('load');
 		}
 
-		/**
-   * Get all application models names.
-   * @{returns} - Array of String
+		/**
+   * Get all application models names.
+   * @{returns} - Array of String
    */
 
 	}, {
@@ -521,9 +524,9 @@ var Application = function (_Instance) {
 			return this.get_resources_names('models');
 		}
 
-		/**
-   * Get all application views names.
-   * @{returns} - Array of String
+		/**
+   * Get all application views names.
+   * @{returns} - Array of String
    */
 
 	}, {
@@ -532,9 +535,9 @@ var Application = function (_Instance) {
 			return this.get_resources_names('views');
 		}
 
-		/**
-   * Get all application menubars names.
-   * @{returns} - Array of String
+		/**
+   * Get all application menubars names.
+   * @{returns} - Array of String
    */
 
 	}, {
@@ -543,9 +546,9 @@ var Application = function (_Instance) {
 			return this.get_resources_names('menubars');
 		}
 
-		/**
-   * Get all application menus names.
-   * @{returns} - Array of String
+		/**
+   * Get all application menus names.
+   * @{returns} - Array of String
    */
 
 	}, {
@@ -554,10 +557,10 @@ var Application = function (_Instance) {
 			return this.get_resources_names('menus');
 		}
 
-		/**
-   * Get all application resources of given type names.
-   * @param {string} arg_type - Resource type
-   * @{returns} - Array of String
+		/**
+   * Get all application resources of given type names.
+   * @param {string} arg_type - Resource type
+   * @{returns} - Array of String
    */
 
 	}, {
@@ -587,7 +590,7 @@ var Application = function (_Instance) {
 exports.default = Application;
 
 
-},{"../store/index":96,"./collection":5,"./instance":9,"./runtime":17,"assert":117,"typr":509}],5:[function(require,module,exports){
+},{"../store/index":81,"./collection":5,"./instance":9,"./runtime":15,"assert":102,"typr":494}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -614,17 +617,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var context = 'common/base/collection';
 
-/**
- * @file Application class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Application class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Collection = function () {
-	/**
-  * Create a collection of Instance objects.
-  * @param {array} args - variadic arguments.
-  * @returns {nothing}
+	/**
+  * Create a collection of Instance objects.
+  * @param {array} args - variadic arguments.
+  * @returns {nothing}
   */
 
 	function Collection() {
@@ -641,10 +644,10 @@ var Collection = function () {
 		this.set_all(args);
 	}
 
-	/**
-  * Set all collection items.
-  * @param {Instance|array} arg_items - collection items: one or many Instance objects.
-  * @returns {nothing}
+	/**
+  * Set all collection items.
+  * @param {Instance|array} arg_items - collection items: one or many Instance objects.
+  * @returns {nothing}
   */
 
 
@@ -668,10 +671,10 @@ var Collection = function () {
 			}
 		}
 
-		/**
-   * Get all collection items or filter items with given type.
-   * @param {array|string|nothing} arg_types - type or types for items filtering.
-   * @returns {array} - all or filtered items, empty array if not found.
+		/**
+   * Get all collection items or filter items with given type.
+   * @param {array|string|nothing} arg_types - type or types for items filtering.
+   * @returns {array} - all or filtered items, empty array if not found.
    */
 
 	}, {
@@ -693,8 +696,8 @@ var Collection = function () {
 			return [];
 		}
 
-		/**
-   * Get an item by its name
+		/**
+   * Get an item by its name
    */
 
 	}, {
@@ -703,8 +706,8 @@ var Collection = function () {
 			return this.find_by_name(arg_name);
 		}
 
-		/**
-   * Default iterator operator.
+		/**
+   * Default iterator operator.
    */
 
 		// * [Symbol.iterator]() {
@@ -742,10 +745,10 @@ var Collection = function () {
 			return this.$items.iterator();
 		}
 
-		/**
-   * Get all items names with or without a filter on items types.
-   * @param {array|string|nothing} arg_types - type or types for items filtering.
-   * @returns {array} - all or filtered items names, empty array if not found.
+		/**
+   * Get all items names with or without a filter on items types.
+   * @param {array|string|nothing} arg_types - type or types for items filtering.
+   * @returns {array} - all or filtered items names, empty array if not found.
    */
 
 	}, {
@@ -773,9 +776,9 @@ var Collection = function () {
 			return [];
 		}
 
-		/**
-   * Get all items ids with or without a filter on items types.
-   * @returns {array} - all items ids.
+		/**
+   * Get all items ids with or without a filter on items types.
+   * @returns {array} - all items ids.
    */
 
 	}, {
@@ -786,9 +789,9 @@ var Collection = function () {
 			});
 		}
 
-		/**
-   * Get all items count.
-   * @returns {number} - all items count.
+		/**
+   * Get all items count.
+   * @returns {number} - all items count.
    */
 
 	}, {
@@ -797,9 +800,9 @@ var Collection = function () {
 			return this.$items.length;
 		}
 
-		/**
-   * Get first item.
-   * @returns {object|null} - first collection items or null if collection is empty.
+		/**
+   * Get first item.
+   * @returns {object|null} - first collection items or null if collection is empty.
    */
 
 	}, {
@@ -813,9 +816,9 @@ var Collection = function () {
 			return this.$weight_map.first(); // TO FIX
 		}
 
-		/**
-   * Get Last item.
-   * @returns {object|null} - last collection items or null if collection is empty.
+		/**
+   * Get Last item.
+   * @returns {object|null} - last collection items or null if collection is empty.
    */
 
 	}, {
@@ -829,11 +832,11 @@ var Collection = function () {
 			return this.$weight_map.last(); // TO FIX
 		}
 
-		/**
-   * Add an item to the collection.
-   * TODO: use indices to optimize search.
-   * @param {Instance} arg_item - Instance item.
-   * @returns {nothing}
+		/**
+   * Add an item to the collection.
+   * TODO: use indices to optimize search.
+   * @param {Instance} arg_item - Instance item.
+   * @returns {nothing}
    */
 
 	}, {
@@ -864,10 +867,34 @@ var Collection = function () {
 			this.error('bad item: not an instance object');
 		}
 
-		/**
-   * Remove an item from the collection.
-   * @param {Instance} arg_item - Instance item.
-   * @returns {nothing}
+		/**
+   * Add an item to the collection at the first position.
+   * TODO: use indices to optimize search.
+   * @param {Instance} arg_item - Instance item.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'add_first',
+		value: function add_first(arg_item) {
+			if (_typr2.default.isObject(arg_item) && arg_item instanceof _instance2.default) {
+				if (this.has_accepted_type('*') || this.has_accepted_type(arg_item.$type)) {
+					this.$items = [arg_item].concat(this.$items);
+
+					return;
+				}
+
+				this.error('not accepted type [' + arg_item.$type + '] for instance [' + arg_item.$name + ']');
+				return;
+			}
+
+			this.error('bad item: not an instance object');
+		}
+
+		/**
+   * Remove an item from the collection.
+   * @param {Instance} arg_item - Instance item.
+   * @returns {nothing}
    */
 
 	}, {
@@ -884,10 +911,10 @@ var Collection = function () {
 			this.error('bad item: not an instance object or not found');
 		}
 
-		/**
-   * Test if an item is inside the collection.
-   * @param {Instance} arg_item - Instance item.
-   * @returns {boolean}
+		/**
+   * Test if an item is inside the collection.
+   * @param {Instance} arg_item - Instance item.
+   * @returns {boolean}
    */
 
 	}, {
@@ -899,11 +926,11 @@ var Collection = function () {
 			return false;
 		}
 
-		/**
-   * Find an item by its name into the collection.
-   * TODO: optimize with a map index
-   * @param {string} arg_name - instance name.
-   * @returns {Instance|undefined}
+		/**
+   * Find an item by its name into the collection.
+   * TODO: optimize with a map index
+   * @param {string} arg_name - instance name.
+   * @returns {Instance|undefined}
    */
 
 	}, {
@@ -915,11 +942,11 @@ var Collection = function () {
 			});
 		}
 
-		/**
-   * Find an item by its id into the collection.
-   * TODO: optimize with a map index
-   * @param {string} arg_id - instance id.
-   * @returns {Instance|undefined}
+		/**
+   * Find an item by its id into the collection.
+   * TODO: optimize with a map index
+   * @param {string} arg_id - instance id.
+   * @returns {Instance|undefined}
    */
 
 	}, {
@@ -930,12 +957,12 @@ var Collection = function () {
 			});
 		}
 
-		/**
-   * Find an item by one of its attributes into the collection.
-   * TODO: optimize with a map index
-   * @param {string} arg_attr_name - instance attribute name.
-   * @param {any} arg_attr_value - instance attribute value.
-   * @returns {Instance|undefined}
+		/**
+   * Find an item by one of its attributes into the collection.
+   * TODO: optimize with a map index
+   * @param {string} arg_attr_name - instance attribute name.
+   * @param {any} arg_attr_value - instance attribute value.
+   * @returns {Instance|undefined}
    */
 
 	}, {
@@ -946,9 +973,24 @@ var Collection = function () {
 			});
 		}
 
-		/**
-   * Get all collection accepted types.
-   * @returns {array} - array of types strings.
+		/**
+   * Find an item by one of its attributes into the collection.
+   * TODO: optimize with a map index
+   * @param {string} arg_filter_function - function to apply on instance, returns a boolean.
+   * @returns {Instance|undefined}
+   */
+
+	}, {
+		key: 'find_by_filter',
+		value: function find_by_filter(arg_filter_function) {
+			return this.$items.find(function (item) {
+				return arg_filter_function(item);
+			});
+		}
+
+		/**
+   * Get all collection accepted types.
+   * @returns {array} - array of types strings.
    */
 
 	}, {
@@ -957,10 +999,10 @@ var Collection = function () {
 			this.$accepted_types;
 		}
 
-		/**
-   * Set all collection accepted types.
-   * @param {array} arg_types - accepted types strings array.
-   * @returns {nothing}
+		/**
+   * Set all collection accepted types.
+   * @param {array} arg_types - accepted types strings array.
+   * @returns {nothing}
    */
 
 	}, {
@@ -970,10 +1012,10 @@ var Collection = function () {
 			this.$accepted_types = arg_types;
 		}
 
-		/**
-   * Add one collection accepted type.
-   * @param {string} arg_type - accepted types string.
-   * @returns {nothing}
+		/**
+   * Add one collection accepted type.
+   * @param {string} arg_type - accepted types string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -983,10 +1025,10 @@ var Collection = function () {
 			this.$accepted_types.push(arg_type);
 		}
 
-		/**
-   * Test if collection has given accepted type.
-   * @param {string} arg_type - accepted types string.
-   * @returns {boolean}
+		/**
+   * Test if collection has given accepted type.
+   * @param {string} arg_type - accepted types string.
+   * @returns {boolean}
    */
 
 	}, {
@@ -995,10 +1037,10 @@ var Collection = function () {
 			return this.$accepted_types.indexOf(arg_type) > -1;
 		}
 
-		/**
-   * forEach wrapper.
-   * @param {function} arg_cb - callback to call on each item.
-   * @returns {nothing}
+		/**
+   * forEach wrapper on ordered items.
+   * @param {function} arg_cb - callback to call on each item.
+   * @returns {nothing}
    */
 
 	}, {
@@ -1037,7 +1079,7 @@ var Collection = function () {
 exports.default = Collection;
 
 
-},{"./instance":9,"assert":117,"typr":509}],6:[function(require,module,exports){
+},{"./instance":9,"assert":102,"typr":494}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1064,17 +1106,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var context = 'common/base/context';
 
-/**
- * @file Context class: provides contextual mathods (browser/server, locales, i18n).
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Context class: provides contextual mathods (browser/server, locales, i18n).
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Context = function () {
-	/**
-  * Create a context instance.
-  * @param {object} arg_runtime - current runtime.
-  * @returns {nothing}
+	/**
+  * Create a context instance.
+  * @param {object} arg_runtime - current runtime.
+  * @returns {nothing}
   */
 
 	function Context(arg_runtime) {
@@ -1087,9 +1129,9 @@ var Context = function () {
 
 	// *************************************************** FILE PATH ********************************************************
 
-	/**
-  * Get project base directory, the root directory of the project.
-  * @returns {string} - absolute root directory path
+	/**
+  * Get project base directory, the root directory of the project.
+  * @returns {string} - absolute root directory path
   */
 
 
@@ -1099,12 +1141,12 @@ var Context = function () {
 			return this.$runtime ? this.$runtime.get_setting('base_dir') : null;
 		}
 
-		/**
-   * Get absolute path of given relative path.
-   * @param {string} arg_relative_path1 - relative path 1
-   * @param {string} arg_relative_path2 - relative path 2
-   * @param {string} arg_relative_path3 - relative path 3
-   * @returns {string} - absolute path
+		/**
+   * Get absolute path of given relative path.
+   * @param {string} arg_relative_path1 - relative path 1
+   * @param {string} arg_relative_path2 - relative path 2
+   * @param {string} arg_relative_path3 - relative path 3
+   * @returns {string} - absolute path
    */
 
 	}, {
@@ -1125,12 +1167,12 @@ var Context = function () {
 			return _path2.default.join(base_dir, arg_relative_path1);
 		}
 
-		/**
-   * Get absolute path of given relative plugin name.
-   * @param {string} arg_relative_plugin - plugin name
-   * @param {string} arg_relative_path1 - relative path 1
-   * @param {string} arg_relative_path2 - relative path 2
-   * @returns {string} - absolute path
+		/**
+   * Get absolute path of given relative plugin name.
+   * @param {string} arg_relative_plugin - plugin name
+   * @param {string} arg_relative_path1 - relative path 1
+   * @param {string} arg_relative_path2 - relative path 2
+   * @returns {string} - absolute path
    */
 
 	}, {
@@ -1143,12 +1185,12 @@ var Context = function () {
 			return this.get_absolute_path('plugins', arg_relative_plugin, arg_relative_path1, arg_relative_path2);
 		}
 
-		/**
-   * Get absolute path of given relative resource file.
-   * @param {string} arg_relative_resource - resource file name
-   * @param {string} arg_relative_path1 - relative path 1
-   * @param {string} arg_relative_path2 - relative path 2
-   * @returns {string} - absolute path
+		/**
+   * Get absolute path of given relative resource file.
+   * @param {string} arg_relative_resource - resource file name
+   * @param {string} arg_relative_path1 - relative path 1
+   * @param {string} arg_relative_path2 - relative path 2
+   * @returns {string} - absolute path
    */
 
 	}, {
@@ -1160,11 +1202,11 @@ var Context = function () {
 
 		// *************************************************** URL ********************************************************
 
-		/**
-   * Get an url to server the given image asset.
-   * @param {string} arg_url - image asset relative url.
-   * @param {object} arg_request - request object.
-   * @returns {string} absolute image asset url.
+		/**
+   * Get an url to server the given image asset.
+   * @param {string} arg_url - image asset relative url.
+   * @param {object} arg_request - request object.
+   * @returns {string} absolute image asset url.
    */
 
 	}, {
@@ -1213,7 +1255,7 @@ var Context = function () {
 exports.default = Context;
 
 
-},{"assert":117,"path":333,"typr":509}],7:[function(require,module,exports){
+},{"assert":102,"path":318,"typr":494}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1236,21 +1278,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/errorable';
 
-/**
- * @file Base class to deal with errors.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Base class to deal with errors.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Errorable = function (_Loggable) {
 	_inherits(Errorable, _Loggable);
 
-	/**
-  * Create an Errorable instance.
-  * @extends Loggable
-  * @param {string} arg_log_context - trace context.
-  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-  * @returns {nothing}
+	/**
+  * Create an Errorable instance.
+  * @extends Loggable
+  * @param {string} arg_log_context - trace context.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
   */
 
 	function Errorable(arg_log_context, arg_logger_manager) {
@@ -1265,10 +1307,10 @@ var Errorable = function (_Loggable) {
 		return _this;
 	}
 
-	/**
-  * Set an error.
-  * @param {string} arg_msg - error message
-  * @returns {nothing}
+	/**
+  * Set an error.
+  * @param {string} arg_msg - error message
+  * @returns {nothing}
   */
 
 
@@ -1279,9 +1321,9 @@ var Errorable = function (_Loggable) {
 			this.$error_msg = arg_msg;
 		}
 
-		/**
-   * Test is an error is set.
-   * @returns {boolean}
+		/**
+   * Test is an error is set.
+   * @returns {boolean}
    */
 
 	}, {
@@ -1290,9 +1332,9 @@ var Errorable = function (_Loggable) {
 			return this.$has_error;
 		}
 
-		/**
-   * Get error message.
-   * @returns {string}
+		/**
+   * Get error message.
+   * @returns {string}
    */
 
 	}, {
@@ -1301,8 +1343,8 @@ var Errorable = function (_Loggable) {
 			return this.$error_msg;
 		}
 
-		/**
-   * Default helper for "not implemented" error.
+		/**
+   * Default helper for "not implemented" error.
    */
 
 	}, {
@@ -1341,22 +1383,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/executable';
 
-/**
- * @file Executable base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Executable base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Executable = function (_Errorable) {
   _inherits(Executable, _Errorable);
 
-  /**
-   * Create an Executable base class.
-  * @extends Errorable
-  * @abstract
-   * @param {string|undefined} arg_log_context - (optional).
-  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-   * @returns {nothing}
+  /**
+   * Create an Executable base class.
+  * @extends Errorable
+  * @abstract
+   * @param {string|undefined} arg_log_context - (optional).
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+   * @returns {nothing}
    */
 
   function Executable(arg_log_context, arg_logger_manager) {
@@ -1368,11 +1410,11 @@ var Executable = function (_Errorable) {
     return _this;
   }
 
-  /**
-      * Prepare an execution with contextual informations.
-      * @abstract
-      * @param {object} arg_settings - execution settings.
-      * @returns {nothing}
+  /**
+      * Prepare an execution with contextual informations.
+      * @abstract
+      * @param {object} arg_settings - execution settings.
+      * @returns {nothing}
       */
 
 
@@ -1382,11 +1424,11 @@ var Executable = function (_Errorable) {
       arg_settings = arg_settings ? arg_settings : undefined; // for ESLint unused variable error
     }
 
-    /**
-        * Execution with contextual informations.
-        * @abstract
-        * @param {object} arg_data - execution datas.
-        * @returns {object} promise
+    /**
+        * Execution with contextual informations.
+        * @abstract
+        * @param {object} arg_data - execution datas.
+        * @returns {object} promise
         */
 
   }, {
@@ -1396,30 +1438,30 @@ var Executable = function (_Errorable) {
       return Promise.reject('not implemented');
     }
 
-    /**
-     * Finish (todo).
-     * @abstract
-     * @returns {nothing}
+    /**
+     * Finish (todo).
+     * @abstract
+     * @returns {nothing}
      */
 
   }, {
     key: 'finish',
     value: function finish() {}
 
-    /**
-     * On execution success (todo).
-     * @abstract
-     * @returns {nothing}
+    /**
+     * On execution success (todo).
+     * @abstract
+     * @returns {nothing}
      */
 
   }, {
     key: 'exec_ack',
     value: function exec_ack() {}
 
-    /**
-     * On execution failure (todo).
-     * @abstract
-     * @returns {nothing}
+    /**
+     * On execution failure (todo).
+     * @abstract
+     * @returns {nothing}
      */
 
   }, {
@@ -1475,25 +1517,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var context = 'common/base/instance';
 var NOT_STORED_COLLECTIONS = ['registered_services', 'components', 'svc_providers', 'svc_consumers'];
 
-/**
- * @file Devapt base class for resources, servers, Collection items...
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Devapt base class for resources, servers, Collection items...
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Instance = function (_Settingsable) {
 	_inherits(Instance, _Settingsable);
 
-	/**
-  * Create an instance.
-  * @extends Settingsable
-  * @abstract
-  * @param {string} arg_collection - collection name.
-  * @param {string} arg_class - class name.
-  * @param {string} arg_name - instance name.
-  * @param {object} arg_settings - settings plain object
-  * @param {string} arg_log_context - log context.
-  * @returns {nothing}
+	/**
+  * Create an instance.
+  * @extends Settingsable
+  * @abstract
+  * @param {string} arg_collection - collection name.
+  * @param {string} arg_class - class name.
+  * @param {string} arg_name - instance name.
+  * @param {object} arg_settings - settings plain object
+  * @param {string} arg_log_context - log context.
+  * @returns {nothing}
   */
 
 	function Instance(arg_collection, arg_class, arg_name, arg_settings, arg_log_context) {
@@ -1536,17 +1578,19 @@ var Instance = function (_Settingsable) {
 			if (_typr2.default.isObject(logger.$settings) && _typr2.default.isObject(logger.$settings.traces)) {
 				var traces = logger.$settings['traces'];
 				_this.is_trace_enabled = _this.should_trace(traces);
-			} else {
-				console.log(context + ':undefined logger settings for ' + _this.get_descriptor_string());
 			}
+			// else
+			// {
+			// 	console.log(context + ':undefined logger settings for ' + this.get_descriptor_string())
+			// }
 		}
 		return _this;
 	}
 
-	/**
-  * Should trace flag.
-  * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
-  * @returns {boolean} - trace flag.
+	/**
+  * Should trace flag.
+  * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
+  * @returns {boolean} - trace flag.
   */
 
 
@@ -1573,10 +1617,10 @@ var Instance = function (_Settingsable) {
 			return should_trace;
 		}
 
-		/**
-   * Should trace flag for classes.
-   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
-   * @returns {boolean} - trace flag.
+		/**
+   * Should trace flag for classes.
+   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
+   * @returns {boolean} - trace flag.
    */
 
 	}, {
@@ -1619,10 +1663,10 @@ var Instance = function (_Settingsable) {
 			return should_trace;
 		}
 
-		/**
-   * Should trace flag for instances names.
-   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
-   * @returns {boolean} - trace flag.
+		/**
+   * Should trace flag for instances names.
+   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
+   * @returns {boolean} - trace flag.
    */
 
 	}, {
@@ -1664,9 +1708,9 @@ var Instance = function (_Settingsable) {
 			return should_trace;
 		}
 
-		/**
-   * Get instance unique id.
-   * @returns {string}
+		/**
+   * Get instance unique id.
+   * @returns {string}
    */
 
 	}, {
@@ -1675,9 +1719,9 @@ var Instance = function (_Settingsable) {
 			return this.$id;
 		}
 
-		/**
-   * Get instance unique name.
-   * @returns {string}
+		/**
+   * Get instance unique name.
+   * @returns {string}
    */
 
 	}, {
@@ -1686,9 +1730,9 @@ var Instance = function (_Settingsable) {
 			return this.$name;
 		}
 
-		/**
-   * Get instance weight.
-   * @returns {number}
+		/**
+   * Get instance weight.
+   * @returns {number}
    */
 
 	}, {
@@ -1697,10 +1741,10 @@ var Instance = function (_Settingsable) {
 			return this.$weight;
 		}
 
-		/**
-   * Set instance weight.
-   * @param {number} arg_weight - instance weight.
-   * @returns {nothing}
+		/**
+   * Set instance weight.
+   * @param {number} arg_weight - instance weight.
+   * @returns {nothing}
    */
 
 	}, {
@@ -1710,9 +1754,9 @@ var Instance = function (_Settingsable) {
 			this.$weight = arg_weight;
 		}
 
-		/**
-   * Get instance type.
-   * @returns {string}
+		/**
+   * Get instance type.
+   * @returns {string}
    */
 
 	}, {
@@ -1721,9 +1765,9 @@ var Instance = function (_Settingsable) {
 			return this.$type;
 		}
 
-		/**
-   * Get instance class.
-   * @returns {string}
+		/**
+   * Get instance class.
+   * @returns {string}
    */
 
 	}, {
@@ -1732,9 +1776,9 @@ var Instance = function (_Settingsable) {
 			return this.$class;
 		}
 
-		/**
-   * Get instance description: {$type:..., $class:..., $id:..., $name:...}.
-   * @returns {object} - instance object description
+		/**
+   * Get instance description: {$type:..., $class:..., $id:..., $name:...}.
+   * @returns {object} - instance object description
    */
 
 	}, {
@@ -1743,9 +1787,9 @@ var Instance = function (_Settingsable) {
 			return { $type: this.$type, $class: this.$class, $id: this.$id, $name: this.$name };
 		}
 
-		/**
-   * Get instance description string: $type:..., $class:..., $id:..., $name:....
-   * @returns {string} - instance object description
+		/**
+   * Get instance description string: $type:..., $class:..., $id:..., $name:....
+   * @returns {string} - instance object description
    */
 
 	}, {
@@ -1754,9 +1798,9 @@ var Instance = function (_Settingsable) {
 			return '{$type:' + this.get_type() + ', $class:' + this.get_class() + ', $id:' + this.get_id() + ', $name:' + this.get_name() + '}';
 		}
 
-		/**
-   * Test if this code run inside a browser.
-   * @returns {boolean}
+		/**
+   * Test if this code run inside a browser.
+   * @returns {boolean}
    */
 
 	}, {
@@ -1765,9 +1809,9 @@ var Instance = function (_Settingsable) {
 			return (0, _is_browser2.is_browser)();
 		}
 
-		/**
-   * Test if this code run on a browser.
-   * @returns {boolean}
+		/**
+   * Test if this code run on a browser.
+   * @returns {boolean}
    */
 
 	}, {
@@ -1776,10 +1820,10 @@ var Instance = function (_Settingsable) {
 			return (0, _is_browser2.is_server)();
 		}
 
-		/**
-   * Load instance settings.
-   * @abstract
-   * @returns {nothing}
+		/**
+   * Load instance settings.
+   * @abstract
+   * @returns {nothing}
    */
 
 	}, {
@@ -1795,7 +1839,7 @@ var Instance = function (_Settingsable) {
 exports.default = Instance;
 
 
-},{"../store/config/actions":81,"../store/index":96,"../utils/is_browser":111,"../utils/uid":114,"./settingsable":20,"assert":117,"typr":509}],10:[function(require,module,exports){
+},{"../store/config/actions":66,"../store/index":81,"../utils/is_browser":96,"../utils/uid":98,"./settingsable":17,"assert":102,"typr":494}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1818,17 +1862,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var context = 'common/base/loggable';
 
-/**
- * @file Base class to deal with traces.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Base class to deal with traces.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Loggable = function () {
-	/**
-  * Create an Loggable instance.
-  * @param {string} arg_context - trace context.
-  * @returns {nothing}
+	/**
+  * Create an Loggable instance.
+  * @param {string} arg_context - trace context.
+  * @returns {nothing}
   */
 
 	function Loggable(arg_context, arg_logger_manager) {
@@ -1837,7 +1881,7 @@ var Loggable = function () {
 		this.is_loggable = true;
 		this.$context = arg_context;
 
-		this.is_trace_enabled = true;
+		// this.is_trace_enabled = true
 
 		if (_typr2.default.isObject(arg_logger_manager) && arg_logger_manager.is_logger_manager) {
 			this.logger_manager = arg_logger_manager;
@@ -1852,10 +1896,10 @@ var Loggable = function () {
 		// }
 	}
 
-	/**
-  * Should trace flag.
-  * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
-  * @returns {boolean} - trace flag.
+	/**
+  * Should trace flag.
+  * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
+  * @returns {boolean} - trace flag.
   */
 
 
@@ -1876,10 +1920,10 @@ var Loggable = function () {
 			return should_trace;
 		}
 
-		/**
-   * Should trace flag for modules.
-   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
-   * @returns {boolean} - trace flag.
+		/**
+   * Should trace flag for modules.
+   * @param {object} arg_traces_cfg - traces settings object as { modules:{}, classes:{}, instances:{} }
+   * @returns {boolean} - trace flag.
    */
 
 	}, {
@@ -1915,9 +1959,9 @@ var Loggable = function () {
 			return should_trace;
 		}
 
-		/**
-   * Get logger manager.
-   * @returns {LoggerManager}
+		/**
+   * Get logger manager.
+   * @returns {LoggerManager}
    */
 
 	}, {
@@ -1932,9 +1976,9 @@ var Loggable = function () {
 			return this.logger_manager;
 		}
 
-		/**
-   * Enable traces.
-   * @returns {nothing}
+		/**
+   * Enable traces.
+   * @returns {nothing}
    */
 
 	}, {
@@ -1943,9 +1987,9 @@ var Loggable = function () {
 			this.get_logger_manager().enable_trace();
 		}
 
-		/**
-   * Disable traces.
-   * @returns {nothing}
+		/**
+   * Disable traces.
+   * @returns {nothing}
    */
 
 	}, {
@@ -1954,9 +1998,9 @@ var Loggable = function () {
 			this.get_logger_manager().disable_trace();
 		}
 
-		/**
-   * Get trace flag.
-   * @returns {boolean}
+		/**
+   * Get trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -1965,10 +2009,10 @@ var Loggable = function () {
 			return this.get_logger_manager().get_trace();
 		}
 
-		/**
-   * Set trace flag.
-   * @param {boolean} arg_value - trace flag.
-   * @returns {nothing}
+		/**
+   * Set trace flag.
+   * @param {boolean} arg_value - trace flag.
+   * @returns {nothing}
    */
 
 	}, {
@@ -1977,9 +2021,9 @@ var Loggable = function () {
 			this.get_logger_manager().set_trace(arg_value);
 		}
 
-		/**
-   * Toggle trace flag.
-   * @returns {boolean}
+		/**
+   * Toggle trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -1988,10 +2032,10 @@ var Loggable = function () {
 			this.get_logger_manager().toggle_trace();
 		}
 
-		/**
-   * Trace DEBUG formatted message.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace DEBUG formatted message.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2006,10 +2050,10 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO formatted message.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace INFO formatted message.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2024,10 +2068,10 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace WARN formatted message.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace WARN formatted message.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2042,10 +2086,10 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace ERROR formatted message.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace ERROR formatted message.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2060,10 +2104,10 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO message on "enter trace group".
-   * @param {string} arg_group - trace group name.
-   * @returns {nothing}
+		/**
+   * Trace INFO message on "enter trace group".
+   * @param {string} arg_group - trace group name.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2074,10 +2118,10 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO message on "leave trace group".
-   * @param {string} arg_group - trace group name.
-   * @returns {nothing}
+		/**
+   * Trace INFO message on "leave trace group".
+   * @param {string} arg_group - trace group name.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2088,9 +2132,9 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 1 separator.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 1 separator.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2101,9 +2145,9 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 2 separator.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 2 separator.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2114,9 +2158,9 @@ var Loggable = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 3 separator.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 3 separator.
+   * @returns {nothing}
    */
 
 	}, {
@@ -2129,60 +2173,60 @@ var Loggable = function () {
 
 		// STATIC METHODS
 
-		/**
-   * Trace DEBUG formatted message.
-   * @static
-   * @param {string} arg_context - trace context string.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace DEBUG formatted message.
+   * @static
+   * @param {string} arg_context - trace context string.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 		// static static_debug(arg_context, ...arg_msg)
 		// {
 		// 	this.get_logger_manager().debug(arg_context, Loggable.format(arg_msg))
 		// }
 
-		/**
-   * Trace INFO formatted message.
-   * @static
-   * @param {string} arg_context - trace context string.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace INFO formatted message.
+   * @static
+   * @param {string} arg_context - trace context string.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 		// static static_info(arg_context, ...arg_msg)
 		// {
 		// 	this.get_logger_manager().info(arg_context, Loggable.format(arg_msg))
 		// }
 
-		/**
-   * Trace ERROR formatted message.
-   * @static
-   * @param {string} arg_context - trace context string.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace ERROR formatted message.
+   * @static
+   * @param {string} arg_context - trace context string.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 		// static static_error(arg_context, ...arg_msg)
 		// {
 		// 	this.get_logger_manager().error(arg_context, Loggable.format(arg_msg))
 		// }
 
-		/**
-   * Trace INFO formatted message on "enter trace group".
-   * @static
-   * @param {string} arg_context - trace context string.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace INFO formatted message on "enter trace group".
+   * @static
+   * @param {string} arg_context - trace context string.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 		// static static_enter_group(arg_context, arg_group)
 		// {
 		// 	this.get_logger_manager().info(arg_context, '[' + arg_group + '] ------- ENTER -------')
 		// }
 
-		/**
-   * Trace INFO formatted message on "leave trace group".
-   * @static
-   * @param {string} arg_context - trace context string.
-   * @param {string|array} args - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace INFO formatted message on "leave trace group".
+   * @static
+   * @param {string} arg_context - trace context string.
+   * @param {string|array} args - variadic messages to format.
+   * @returns {nothing}
    */
 		// static static_leave_group(arg_context, arg_group)
 		// {
@@ -2197,7 +2241,7 @@ var Loggable = function () {
 exports.default = Loggable;
 
 
-},{"./runtime":17,"assert":117,"typr":509}],11:[function(require,module,exports){
+},{"./runtime":15,"assert":102,"typr":494}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2208,26 +2252,26 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * @file Metric base class.
- * 
- * Attributes:
- *  is_metric:true (boolean, invariant)
- * 
- * Methods:
- *  before
- *  after
- *  iteration
- *  get_values
- * 
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Metric base class.
+ * 
+ * Attributes:
+ *  is_metric:true (boolean, invariant)
+ * 
+ * Methods:
+ *  before
+ *  after
+ *  iteration
+ *  get_values
+ * 
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Metric = function () {
-				/**
-     * Metric constructor (base class for all metric classes).
-    * @returns {nothing}
+				/**
+     * Metric constructor (base class for all metric classes).
+    * @returns {nothing}
      */
 
 				function Metric() {
@@ -2236,9 +2280,9 @@ var Metric = function () {
 								this.is_metric = true;
 				}
 
-				/**
-        * Executed before request processing.
-     * @returns {nothing}
+				/**
+        * Executed before request processing.
+     * @returns {nothing}
         */
 
 
@@ -2246,27 +2290,27 @@ var Metric = function () {
 								key: "before",
 								value: function before() {}
 
-								/**
-            * Executed at each request processing iteration.
-         * @returns {nothing}
+								/**
+            * Executed at each request processing iteration.
+         * @returns {nothing}
             */
 
 				}, {
 								key: "iteration",
 								value: function iteration() {}
 
-								/**
-            * Executed after request processing.
-         * @returns {nothing}
+								/**
+            * Executed after request processing.
+         * @returns {nothing}
             */
 
 				}, {
 								key: "after",
 								value: function after() {}
 
-								/**
-            * Returns metrics values plain object.
-         * @returns {array}
+								/**
+            * Returns metrics values plain object.
+         * @returns {array}
             */
 
 				}, {
@@ -2343,20 +2387,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/module';
 
-/**
- * @file Module resource class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Module resource class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Module = function (_Instance) {
 	_inherits(Module, _Instance);
 
-	/**
-  * Create a module resource instance.
-  * @extends Instance
-  * @param {string} arg_name - module name
-  * @returns {nothing}
+	/**
+  * Create a module resource instance.
+  * @extends Instance
+  * @param {string} arg_name - module name
+  * @returns {nothing}
   */
 
 	function Module(arg_name) {
@@ -2373,9 +2417,9 @@ var Module = function (_Instance) {
 		return _this;
 	}
 
-	/**
-  * Load module settings.
-  * @returns {nothing}
+	/**
+  * Load module settings.
+  * @returns {nothing}
   */
 
 
@@ -2403,11 +2447,11 @@ var Module = function (_Instance) {
 			});
 		}
 
-		/**
-   * Create a module resource.
-   * @param {string} arg_name - resource name.
-   * @param {object} arg_settings - resource settings.
-   * @returns {Resource|Database|View|Model|Menu|Menubar} - an Resource instance.
+		/**
+   * Create a module resource.
+   * @param {string} arg_name - resource name.
+   * @param {object} arg_settings - resource settings.
+   * @returns {Resource|Database|View|Model|Menu|Menubar} - an Resource instance.
    */
 
 	}, {
@@ -2440,317 +2484,7 @@ var Module = function (_Instance) {
 exports.default = Module;
 
 
-},{"../resources/database":39,"../resources/menu":40,"../resources/menubar":41,"../resources/model_sequelize":43,"../resources/view":44,"../store/index":96,"./collection":5,"./instance":9,"./resource":16,"assert":117,"typr":509}],13:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _instance = require('./instance');
-
-var _instance2 = _interopRequireDefault(_instance);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-// import assert from 'assert'
-
-// let context = 'common/base/plugin'
-
-/**
- * @file Plugins base class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var Plugin = function (_Instance) {
-	_inherits(Plugin, _Instance);
-
-	/**
-  * Create a plugin instance.
-  * @extends Instance
-  * @param {string} arg_name - plugin name
-  * @param {string} arg_class - plugin class name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string|undefined} arg_log_context - optional.
-  * @returns {nothing}
-  */
-
-	function Plugin(arg_name, arg_class, arg_settings, arg_log_context) {
-		_classCallCheck(this, Plugin);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Plugin).call(this, 'plugins', arg_class ? arg_class.toString() : 'Plugin', arg_name, arg_settings, arg_log_context));
-		// assert( T.isObject(arg_settings), context + ':bad settings object')
-
-		_this.is_plugin = true;
-		_this.$is_enabled = false;
-		return _this;
-	}
-
-	/**
-  * Enable a plugin.
-  * @abstract
-  * @param {object|undefined} arg_context - optional contextual map
-  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
-  */
-
-
-	_createClass(Plugin, [{
-		key: 'enable',
-		value: function enable(arg_context) {
-			this.$is_enabled = true;
-			this.manager.enabled_plugins.add(this);
-			return Promise.resolve(true);
-		}
-
-		/**
-   * Disable a plugin.
-   * @abstract
-   * @param {object|undefined} arg_context - optional contextual map
-   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
-   */
-
-	}, {
-		key: 'disable',
-		value: function disable(arg_context) {
-			this.$is_enabled = false;
-			this.manager.enabled_plugins.remove(this);
-			return Promise.resolve(true);
-		}
-	}]);
-
-	return Plugin;
-}(_instance2.default);
-
-exports.default = Plugin;
-
-
-},{"./instance":9}],14:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _errorable = require('./errorable');
-
-var _errorable2 = _interopRequireDefault(_errorable);
-
-var _collection = require('./collection');
-
-var _collection2 = _interopRequireDefault(_collection);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/base/plugins_manager';
-
-/**
- * @file Plugins manager class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var PluginsManager = function (_Errorable) {
-	_inherits(PluginsManager, _Errorable);
-
-	/**
-  * Create a plugins manager instance.
-  * @extends Errorable
-  * @param {string|undefined} arg_log_context - optional.
-  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-  * @returns {nothing}
-  */
-
-	function PluginsManager(arg_log_context, arg_logger_manager) {
-		_classCallCheck(this, PluginsManager);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PluginsManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
-
-		_this.is_plugins_manager = true;
-
-		_this.registered_plugins = new _collection2.default();
-		_this.enabled_plugins = new _collection2.default();
-		return _this;
-	}
-
-	/**
-  * Get registered plugins list.
-  * @returns {array} - plugins list 
-  */
-
-
-	_createClass(PluginsManager, [{
-		key: 'get_plugins',
-		value: function get_plugins() {
-			return this.registered_plugins.get_all();
-		}
-
-		/**
-   * Get registered plugins list with a filtered type.
-   * @param {string|array} arg_type_or_types - type name or types names array
-   * @returns {array} - plugins list 
-   */
-
-	}, {
-		key: 'get_typed_plugins',
-		value: function get_typed_plugins(arg_type_or_types) {
-			return this.registered_plugins.get_all(arg_type_or_types);
-		}
-
-		/**
-   * Register a plugin to be used later, do not active it now.
-   * @param {object} arg_plugin - plugin instance.
-   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
-   */
-
-	}, {
-		key: 'register_plugin',
-		value: function register_plugin(arg_plugin) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_plugin) && arg_plugin.is_plugin, context + ':bad plugin object');
-
-			var plugin_name = arg_plugin.get_name();
-			if (this.registered_plugins.find_by_name(plugin_name)) {
-				this.error_already_registered(plugin_name);
-				return Promise.resolve(false);
-			}
-
-			this.registered_plugins.add(arg_plugin);
-			arg_plugin.manager = this;
-
-			return Promise.resolve(true);
-		}
-
-		/**
-   * Unregister a registered plugin and disble it before if needed.
-   * @param {object} arg_plugin - plugin instance.
-   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
-   */
-
-	}, {
-		key: 'unregister_plugin',
-		value: function unregister_plugin(arg_plugin) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_plugin) && arg_plugin.is_plugin, context + ':bad plugin object');
-
-			var plugin_name = arg_plugin.get_name();
-
-			// PLUGIN IS REGISTERED ?
-			if (!this.registered_plugins.has(arg_plugin)) {
-				this.error_not_registered(plugin_name);
-				return Promise.resolve(false);
-			}
-
-			var disable_promise = Promise.resolve(true);
-
-			// PLUGIN IS ENABLED ?
-			if (this.enabled_plugins.has(arg_plugin)) {
-				this.enabled_plugins.remove(arg_plugin);
-				disable_promise = arg_plugin.disable();
-			}
-
-			// UNREGISTER
-			this.registered_plugins.remove(arg_plugin);
-			arg_plugin.manager = null;
-			delete arg_plugin.manager;
-
-			return disable_promise;
-		}
-
-		/**
-   * Get a registered plugin by its name and its enabled flag.
-   * @param {string} arg_name - registered plugin name
-   * @param {boolean} arg_enabled - plugin is enabled ?
-   * @returns {Plugin}
-   */
-
-	}, {
-		key: 'plugin',
-		value: function plugin(arg_name, arg_enabled) {
-			if (arg_enabled) {
-				return this.enabled_plugins.item(arg_name);
-			}
-			return this.registered_plugins.item(arg_name);
-		}
-
-		/**
-   * Get a registered plugin by its name.
-   * @param {string} arg_name - registered plugin name
-   * @returns {Plugin}
-   */
-
-	}, {
-		key: 'registered_plugin',
-		value: function registered_plugin(arg_name) {
-			return this.registered_plugins.item(arg_name);
-		}
-
-		/**
-   * Get a enabled plugin by its name.
-   * @param {string} arg_name - enabled plugin name
-   * @returns {Plugin}
-   */
-
-	}, {
-		key: 'enabled_plugin',
-		value: function enabled_plugin(arg_name) {
-			return this.enabled_plugins.item(arg_name);
-		}
-
-		/**
-   * Error wrapper - on registering an already registered plugin
-   * @param {string} arg_plugin_name - plugin name
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'error_already_registered',
-		value: function error_already_registered(arg_plugin_name) {
-			this.error('plugin with name [' + arg_plugin_name + '] is already registered');
-		}
-
-		/**
-   * Error wrapper - a plugin is not registered
-   * @param {string} arg_plugin_name - plugin name
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'error_not_registered',
-		value: function error_not_registered(arg_plugin_name) {
-			this.error('plugin with name [' + arg_plugin_name + '] is not registered');
-		}
-	}]);
-
-	return PluginsManager;
-}(_errorable2.default);
-
-exports.default = PluginsManager;
-
-
-},{"./collection":5,"./errorable":7,"assert":117,"typr":509}],15:[function(require,module,exports){
+},{"../resources/database":38,"../resources/menu":39,"../resources/menubar":40,"../resources/model_sequelize":42,"../resources/view":43,"../store/index":81,"./collection":5,"./instance":9,"./resource":14,"assert":102,"typr":494}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2781,21 +2515,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/registered_service';
 
-/**
- * @file Registered service class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Registered service class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var RegisteredService = function (_Instance) {
 	_inherits(RegisteredService, _Instance);
 
-	/**
-  * Create a registered service instance.
-  * @extends Instance
-  * @param {string} arg_name - instance name
-  * @param {object} arg_settings - instance settings map
-  * @returns {nothing}
+	/**
+  * Create a registered service instance.
+  * @extends Instance
+  * @param {string} arg_name - instance name
+  * @param {object} arg_settings - instance settings map
+  * @returns {nothing}
   */
 
 	function RegisteredService(arg_name, arg_settings) {
@@ -2814,9 +2548,9 @@ var RegisteredService = function (_Instance) {
 		return _this;
 	}
 
-	/**
-  * Get service name.
-  * @returns {string}
+	/**
+  * Get service name.
+  * @returns {string}
   */
 
 
@@ -2826,9 +2560,9 @@ var RegisteredService = function (_Instance) {
 			return this.get_setting('service_name', null);
 		}
 
-		/**
-   * Get node name.
-   * @returns {string}
+		/**
+   * Get node name.
+   * @returns {string}
    */
 
 	}, {
@@ -2837,9 +2571,9 @@ var RegisteredService = function (_Instance) {
 			return this.get_setting('node_name', null);
 		}
 
-		/**
-   * Get server name.
-   * @returns {string}
+		/**
+   * Get server name.
+   * @returns {string}
    */
 
 	}, {
@@ -2848,9 +2582,9 @@ var RegisteredService = function (_Instance) {
 			return this.get_setting('server_name', null);
 		}
 
-		/**
-   * Get server host name.
-   * @returns {string}
+		/**
+   * Get server host name.
+   * @returns {string}
    */
 
 	}, {
@@ -2859,9 +2593,9 @@ var RegisteredService = function (_Instance) {
 			return this.get_setting('server_host', null);
 		}
 
-		/**
-   * Get server port value.
-   * @returns {string|number}
+		/**
+   * Get server port value.
+   * @returns {string|number}
    */
 
 	}, {
@@ -2877,7 +2611,7 @@ var RegisteredService = function (_Instance) {
 exports.default = RegisteredService;
 
 
-},{"./instance":9,"assert":117,"typr":509}],16:[function(require,module,exports){
+},{"./instance":9,"assert":102,"typr":494}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2908,23 +2642,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/resource';
 
-/**
- * @file Resource base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Resource base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Resource = function (_Instance) {
 	_inherits(Resource, _Instance);
 
-	/**
-  * Create a resource instance.
-  * @extends Instance
-  * @param {string} arg_name - instance name
-  * @param {object} arg_settings - instance settings map
-  * @param {string} arg_class - class name
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
+	/**
+  * Create a resource instance.
+  * @extends Instance
+  * @param {string} arg_name - instance name
+  * @param {object} arg_settings - instance settings map
+  * @param {string} arg_class - class name
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
   */
 
 	function Resource(arg_name, arg_settings, arg_class, arg_log_context) {
@@ -2938,9 +2672,9 @@ var Resource = function (_Instance) {
 		return _this;
 	}
 
-	/**
-  * Export instance settings to a plain object.
-  * @returns {object}
+	/**
+  * Export instance settings to a plain object.
+  * @returns {object}
   */
 
 
@@ -2957,7 +2691,7 @@ var Resource = function (_Instance) {
 exports.default = Resource;
 
 
-},{"./instance":9,"assert":117,"typr":509}],17:[function(require,module,exports){
+},{"./instance":9,"assert":102,"typr":494}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3022,8 +2756,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/runtime';
 
-/**
- * DEFAULT RUNTIME SETTINGS
+/**
+ * DEFAULT RUNTIME SETTINGS
  */
 var default_settings = {
 	'is_master': false,
@@ -3035,8 +2769,8 @@ var default_settings = {
 	},
 
 	'node': {
-		'name': null /*,
-               'host':"localhost",
+		'name': null /*,
+               'host':"localhost",
                'port':5001*/
 	},
 
@@ -3046,19 +2780,19 @@ var default_settings = {
 	}
 };
 
-/**
- * @file Runtime class - main library interface.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Runtime class - main library interface.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Runtime = function (_Settingsable) {
 	_inherits(Runtime, _Settingsable);
 
-	/**
-  * Create a Runtime instance.
-  * @extends Settingsable
-  * @returns {nothing}
+	/**
+  * Create a Runtime instance.
+  * @extends Settingsable
+  * @returns {nothing}
   */
 
 	function Runtime() {
@@ -3084,6 +2818,7 @@ var Runtime = function (_Settingsable) {
 		_this.servers = new _collection2.default();
 		_this.services = new _collection2.default();
 		_this.registered_services = new _collection2.default();
+		_this.socketio_servers = {};
 
 		_this.modules = new _collection2.default();
 		_this.plugins = new _collection2.default();
@@ -3100,10 +2835,10 @@ var Runtime = function (_Settingsable) {
 		return _this;
 	}
 
-	/**
-  * Load runtime settings.
-  * @param {object} arg_settings - runtime settings
-  * @returns {object} promise
+	/**
+  * Load runtime settings.
+  * @param {object} arg_settings - runtime settings
+  * @returns {object} promise
   */
 
 
@@ -3135,14 +2870,14 @@ var Runtime = function (_Settingsable) {
 			return tx_promise;
 		}
 
-		/**
-   * Register a running service.
-   * @param {string} arg_node_name - node name
-   * @param {string} arg_svc_name - service name
-   * @param {string} arg_server_name - server name
-   * @param {string} arg_server_host - server host name
-   * @param {string|number} arg_server_port - server host port
-   * @returns {nothing}
+		/**
+   * Register a running service.
+   * @param {string} arg_node_name - node name
+   * @param {string} arg_svc_name - service name
+   * @param {string} arg_server_name - server name
+   * @param {string} arg_server_host - server host name
+   * @param {string|number} arg_server_port - server host port
+   * @returns {nothing}
    */
 
 	}, {
@@ -3166,10 +2901,10 @@ var Runtime = function (_Settingsable) {
 			this.leave_group('register_service');
 		}
 
-		/**
-   * Get a node by its name.
-   * @param {string} arg_name - node name
-   * @returns {Node}
+		/**
+   * Get a node by its name.
+   * @param {string} arg_name - node name
+   * @returns {Node}
    */
 
 	}, {
@@ -3178,10 +2913,10 @@ var Runtime = function (_Settingsable) {
 			return this.nodes.item(arg_name);
 		}
 
-		/**
-   * Get a server by its name.
-   * @param {string} arg_name - server name
-   * @returns {Server}
+		/**
+   * Get a server by its name.
+   * @param {string} arg_name - server name
+   * @returns {Server}
    */
 
 	}, {
@@ -3190,10 +2925,10 @@ var Runtime = function (_Settingsable) {
 			return this.servers.item(arg_name);
 		}
 
-		/**
-   * Get a service by its name.
-   * @param {string} arg_name - service name
-   * @returns {Service}
+		/**
+   * Get a service by its name.
+   * @param {string} arg_name - service name
+   * @returns {Service}
    */
 
 	}, {
@@ -3202,10 +2937,10 @@ var Runtime = function (_Settingsable) {
 			return this.services.item(arg_name);
 		}
 
-		/**
-   * Get a registered service by its name.
-   * @param {string} arg_name - registered service name
-   * @returns {Service}
+		/**
+   * Get a registered service by its name.
+   * @param {string} arg_name - registered service name
+   * @returns {Service}
    */
 
 	}, {
@@ -3214,10 +2949,10 @@ var Runtime = function (_Settingsable) {
 			return this.registered_services.item(arg_name);
 		}
 
-		/**
-   * Get a module by its name.
-   * @param {string} arg_name - module name
-   * @returns {Module}
+		/**
+   * Get a module by its name.
+   * @param {string} arg_name - module name
+   * @returns {Module}
    */
 
 	}, {
@@ -3226,10 +2961,10 @@ var Runtime = function (_Settingsable) {
 			return this.modules.item(arg_name);
 		}
 
-		/**
-   * Get a plugin by its name.
-   * @param {string} arg_name - plugin name
-   * @returns {Plugin}
+		/**
+   * Get a plugin by its name.
+   * @param {string} arg_name - plugin name
+   * @returns {Plugin}
    */
 
 	}, {
@@ -3238,10 +2973,10 @@ var Runtime = function (_Settingsable) {
 			return this.plugins.item(arg_name);
 		}
 
-		/**
-   * Get a resource by its name.
-   * @param {string} arg_name - resource name
-   * @returns {Resource}
+		/**
+   * Get a resource by its name.
+   * @param {string} arg_name - resource name
+   * @returns {Resource}
    */
 
 	}, {
@@ -3250,10 +2985,10 @@ var Runtime = function (_Settingsable) {
 			return this.resources.item(arg_name);
 		}
 
-		/**
-   * Get a transaction by its name.
-   * @param {string} arg_name - transaction name
-   * @returns {Transaction}
+		/**
+   * Get a transaction by its name.
+   * @param {string} arg_name - transaction name
+   * @returns {Transaction}
    */
 
 	}, {
@@ -3262,10 +2997,10 @@ var Runtime = function (_Settingsable) {
 			return this.transactions.item(arg_name);
 		}
 
-		/**
-   * Get a application by its name.
-   * @param {string} arg_name - application name
-   * @returns {Application}
+		/**
+   * Get a application by its name.
+   * @param {string} arg_name - application name
+   * @returns {Application}
    */
 
 	}, {
@@ -3274,9 +3009,9 @@ var Runtime = function (_Settingsable) {
 			return this.applications.item(arg_name);
 		}
 
-		/**
-   * Get security object.
-   * @returns {Security}
+		/**
+   * Get security object.
+   * @returns {Security}
    */
 
 	}, {
@@ -3284,6 +3019,79 @@ var Runtime = function (_Settingsable) {
 		value: function security() {
 			(0, _assert2.default)(_typr2.default.isObject(this.security_mgr) && this.security_mgr.is_security, context + ':bad security object');
 			return this.security_mgr;
+		}
+
+		/**
+   * Get plugins factory object.
+   * @returns {PluginsFactory}
+   */
+
+	}, {
+		key: 'get_plugins_factory',
+		value: function get_plugins_factory() {
+			(0, _assert2.default)(_typr2.default.isObject(this.plugins_factory) && this.plugins_factory.is_plugins_factory, context + ':bad plugins factory object');
+			return this.plugins_factory;
+		}
+
+		/**
+   * Register and configure a socketio server.
+   * @param {string} arg_server_name - bound server name
+   * @param {object} arg_socketio - socketio server
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'add_socketio',
+		value: function add_socketio(arg_server_name, arg_socketio) {
+			var self = this;
+			(0, _assert2.default)(_typr2.default.isString(arg_server_name), context + ':add_socketio:bad server name');
+			(0, _assert2.default)(_typr2.default.isObject(arg_socketio) && arg_socketio.emit && arg_socketio.on, context + ':add_socketio:bad socketio server');
+
+			self.socketio_servers[arg_server_name] = arg_socketio;
+
+			arg_socketio.on('connection', function (socket) {
+				console.info(context + ':add_socketio:new connection on /');
+
+				// ROOT
+				socket.on('disconnect', function () {
+					self.on_socketio_disconnect();
+				});
+
+				self.on_socketio_connect(arg_socketio, socket);
+			});
+		}
+
+		/**
+   * On socketio server connect event.
+   * @param {object} arg_socketio - socketio server.
+   * @param {object} arg_socket - client socket.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'on_socketio_connect',
+		value: function on_socketio_connect(arg_socketio, arg_socket) {
+			var self = this;
+			console.info(context + ':on_socketio_connect:socket connected');
+
+			arg_socket.emit('welcome on /', { from: 'server runtime' });
+
+			// ON PING
+			arg_socket.on('ping', function (data) {
+				console.info(context + ':on_socketio_connect:socket receives ping', data);
+				arg_socket.emit('pong', { from: 'server runtime' });
+			});
+		}
+
+		/**
+   * On socketio server disconnect event.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'on_socketio_disconnect',
+		value: function on_socketio_disconnect() {
+			console.info(context + ':on_socketio_disconnect:socket disconnected');
 		}
 	}]);
 
@@ -3295,7 +3103,7 @@ var runtime_singleton = new Runtime();
 exports.default = runtime_singleton;
 
 
-},{"../datas/providers/json_provider":22,"../loggers/logger_manager":31,"../runtime/index":45,"./collection":5,"./context":6,"./registered_service":15,"./security":18,"./settingsable":20,"./transaction":21,"assert":117,"immutable":470,"typr":509}],18:[function(require,module,exports){
+},{"../datas/providers/json_provider":19,"../loggers/logger_manager":22,"../runtime/index":44,"./collection":5,"./context":6,"./registered_service":13,"./security":16,"./settingsable":17,"./transaction":18,"assert":102,"immutable":455,"typr":494}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3336,21 +3144,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/security';
 
-/**
- * @file Security class - main security features wrapper.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Security class - main security features wrapper.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Security = function (_Errorable) {
 	_inherits(Security, _Errorable);
 
-	/**
-  * Create a Security instance.
-  * @extends Errorable
-  * @param {string} arg_log_context - trace logging context string.
-  * @param {object} arg_settings - runtime settings.
-  * @returns {nothing}
+	/**
+  * Create a Security instance.
+  * @extends Errorable
+  * @param {string} arg_log_context - trace logging context string.
+  * @param {object} arg_settings - runtime settings.
+  * @returns {nothing}
   */
 
 	function Security(arg_log_context, arg_settings) {
@@ -3377,11 +3185,11 @@ var Security = function (_Errorable) {
 		return _this;
 	}
 
-	/**
-  * Load security settings
-  * 
-  * @param {object} arg_settings - runtime settings (Immutable object)
-  * @returns {nothing}
+	/**
+  * Load security settings
+  * 
+  * @param {object} arg_settings - runtime settings (Immutable object)
+  * @returns {nothing}
   */
 
 
@@ -3402,18 +3210,18 @@ var Security = function (_Errorable) {
 
 			this.authentication_manager.load(authentication);
 			this.authorization_manager.load(authorization);
-			/*
-   
-   	TODO
-   	https://gist.github.com/danwit/e0a7c5ad57c9ce5659d2
-   	https://github.com/OptimalBits/node_acl
-   	http://www.hamiltonchapman.com/blog/2014/3/25/user-accounts-using-sequelize-and-passport-in-nodejs
+			/*
+   
+   	TODO
+   	https://gist.github.com/danwit/e0a7c5ad57c9ce5659d2
+   	https://github.com/OptimalBits/node_acl
+   	http://www.hamiltonchapman.com/blog/2014/3/25/user-accounts-using-sequelize-and-passport-in-nodejs
    */
 		}
 
-		/**
-   * Get authentication plugins manager
-   * @returns {object} - a PluginsManager instance
+		/**
+   * Get authentication plugins manager
+   * @returns {object} - a PluginsManager instance
    */
 
 	}, {
@@ -3422,9 +3230,9 @@ var Security = function (_Errorable) {
 			return this.authentication_manager;
 		}
 
-		/**
-   * Get authorization plugins manager
-   * @returns {object} - a PluginsManager instance
+		/**
+   * Get authorization plugins manager
+   * @returns {object} - a PluginsManager instance
    */
 
 	}, {
@@ -3433,9 +3241,9 @@ var Security = function (_Errorable) {
 			return this.authorization_manager;
 		}
 
-		/**
-   * Get authentication plugins manager
-   * @returns {object} - a PluginsManager instance
+		/**
+   * Get authentication plugins manager
+   * @returns {object} - a PluginsManager instance
    */
 
 	}, {
@@ -3445,9 +3253,9 @@ var Security = function (_Errorable) {
 			return this.authentication_manager;
 		}
 
-		/**
-   * Get authorization plugins manager
-   * @returns {object} - a PluginsManager instance
+		/**
+   * Get authorization plugins manager
+   * @returns {object} - a PluginsManager instance
    */
 
 	}, {
@@ -3459,9 +3267,9 @@ var Security = function (_Errorable) {
 
 		// PREDEFINED ERRORS
 
-		/**
-   * Error wrapper - on bad user
-   * @returns {nothing}
+		/**
+   * Error wrapper - on bad user
+   * @returns {nothing}
    */
 
 	}, {
@@ -3470,9 +3278,9 @@ var Security = function (_Errorable) {
 			this.error('bad user');
 		}
 
-		/**
-   * Error wrapper - on bad credentials
-   * @returns {nothing}
+		/**
+   * Error wrapper - on bad credentials
+   * @returns {nothing}
    */
 
 	}, {
@@ -3485,491 +3293,103 @@ var Security = function (_Errorable) {
 	return Security;
 }(_errorable2.default);
 
-/*
-	EXAMPLE OF CONFIGURATION
-	
-	"security":{
-		"is_readonly":false,
-		
-		"connexions":["connexions.json"],
-		
-		"authentication": {
-			"enabled":true,
-			
-			"expiration":60,
-			"secret":"APPPPPPP449++((éç(à",
-			
-			"mode":"database",
-			"model":"MODEL_AUTH_USERS",
-			"username":"login",
-			"password":"password",
-			
-			"alt": {
-				"mode":"jsonfile",
-				"file":"users.json",
-				
-				"login":"demo",
-				"password":"demo"
-			}
-		},
-		
-		"authorization": {
-			"enabled":true,
-			"mode":"database",
-			
-			"model":"MODEL_AUTH_USERS_ROLES",
-			"role":"label",
-			"username":"users_login",
-			
-			"alt": {
-				"mode":"jsonfile",
-				"file":"users.json"
-			},
-			
-			"roles":{
-				"*": {
-					"list_resources":"ROLE_RESOURCES_LIST",
-					"get_resource":"ROLE_RESOURCE_GET"
-				},
-				"views": {
-					"list_resources":"ROLE_RESOURCES_LIST",
-					"get_resource":"ROLE_RESOURCE_GET"
-				}
-			}
-		}
-	}
+/*
+	EXAMPLE OF CONFIGURATION
+	
+	"security":{
+		"is_readonly":false,
+		
+		"connexions":["connexions.json"],
+		
+		"authentication": {
+			"enabled":true,
+			
+			"expiration":60,
+			"secret":"APPPPPPP449++((éç(à",
+			
+			"mode":"database",
+			"model":"MODEL_AUTH_USERS",
+			"username":"login",
+			"password":"password",
+			
+			"alt": {
+				"mode":"jsonfile",
+				"file":"users.json",
+				
+				"login":"demo",
+				"password":"demo"
+			}
+		},
+		
+		"authorization": {
+			"enabled":true,
+			"mode":"database",
+			
+			"model":"MODEL_AUTH_USERS_ROLES",
+			"role":"label",
+			"username":"users_login",
+			
+			"alt": {
+				"mode":"jsonfile",
+				"file":"users.json"
+			},
+			
+			"roles":{
+				"*": {
+					"list_resources":"ROLE_RESOURCES_LIST",
+					"get_resource":"ROLE_RESOURCE_GET"
+				},
+				"views": {
+					"list_resources":"ROLE_RESOURCES_LIST",
+					"get_resource":"ROLE_RESOURCE_GET"
+				}
+			}
+		}
+	}
 */
 
-/*
-	AUTHENTICATION
-	
-		"authentication": {
-			"enabled":true,
-			
-			"expiration":60,
-			"secret":"APPPPPPP449++((éç(à",
-			
-			"mode":"database",
-			"model":"MODEL_AUTH_USERS",
-			"username":"login",
-			"password":"password",
-			
-			"alt": {
-				"mode":"jsonfile",
-				"file":"users.json",
-				
-				"login":"demo",
-				"password":"demo"
-			}
-		},
-	
-	"authentication":
-		mandatories:"enabled", "mode"
-		mode:
-			database:
-				model:mandatory
-				username:mandatory
-				password:mandatory
-			jsonfile:
-				file:mandatory
-				username:mandatory
-				password:mandatory
-		
+/*
+	AUTHENTICATION
+	
+		"authentication": {
+			"enabled":true,
+			
+			"expiration":60,
+			"secret":"APPPPPPP449++((éç(à",
+			
+			"mode":"database",
+			"model":"MODEL_AUTH_USERS",
+			"username":"login",
+			"password":"password",
+			
+			"alt": {
+				"mode":"jsonfile",
+				"file":"users.json",
+				
+				"login":"demo",
+				"password":"demo"
+			}
+		},
+	
+	"authentication":
+		mandatories:"enabled", "mode"
+		mode:
+			database:
+				model:mandatory
+				username:mandatory
+				password:mandatory
+			jsonfile:
+				file:mandatory
+				username:mandatory
+				password:mandatory
+		
 */
 
 
 exports.default = Security;
 
 
-},{"../security/authentication_manager":53,"../security/authorization_manager":57,"./errorable":7,"assert":117,"immutable":470,"typr":509}],19:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _is_browser = require('../utils/is_browser');
-
-var _index = require('../store/index');
-
-var _instance = require('./instance');
-
-var _instance2 = _interopRequireDefault(_instance);
-
-var _collection = require('./collection');
-
-var _collection2 = _interopRequireDefault(_collection);
-
-var _runtime = require('./runtime');
-
-var _runtime2 = _interopRequireDefault(_runtime);
-
-var _service_consumer = require('../services/base/service_consumer');
-
-var _service_consumer2 = _interopRequireDefault(_service_consumer);
-
-var _service_provider = require('../services/base/service_provider');
-
-var _service_provider2 = _interopRequireDefault(_service_provider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/base/service';
-
-// STATUS CONSTANTS
-// unknow -> created -> enabled -> disabled -> enabled
-var _STATUS_UNKNOW = 'unknow';
-var _STATUS_ERROR = 'error';
-var _STATUS_CREATED = 'created';
-var _STATUS_ENABLED = 'enabled';
-var _STATUS_DISABLED = 'disabled';
-
-/**
- * @file Service base class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var Service = function (_Instance) {
-	_inherits(Service, _Instance);
-
-	_createClass(Service, null, [{
-		key: 'STATUS_UNKNOW',
-
-		// STATIC CONST ACCESSORS
-		value: function STATUS_UNKNOW() {
-			return _STATUS_UNKNOW;
-		}
-	}, {
-		key: 'STATUS_ERROR',
-		value: function STATUS_ERROR() {
-			return _STATUS_ERROR;
-		}
-	}, {
-		key: 'STATUS_CREATED',
-		value: function STATUS_CREATED() {
-			return _STATUS_CREATED;
-		}
-	}, {
-		key: 'STATUS_ENABLED',
-		value: function STATUS_ENABLED() {
-			return _STATUS_ENABLED;
-		}
-	}, {
-		key: 'STATUS_DISABLED',
-		value: function STATUS_DISABLED() {
-			return _STATUS_DISABLED;
-		}
-
-		/**
-   * Create a service instance.
-   * @extends Instance
-   * @param {string} arg_name - plugin name
-   * @param {object} arg_settings - plugin settings map
-   * @param {string} arg_log_context - trace context string.
-   * @returns {nothing}
-   */
-
-	}]);
-
-	function Service(arg_svc_name, arg_locale_exec, arg_remote_exec, arg_log_context) {
-		_classCallCheck(this, Service);
-
-		(0, _assert2.default)(_index.config.has_collection('services'), context + ':not found config.services');
-		var settings = (0, _index.config)().hasIn(['services', arg_svc_name]) ? (0, _index.config)().getIn(['services', arg_svc_name]) : {};
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Service).call(this, 'services', 'Service', arg_svc_name, settings, arg_log_context ? arg_log_context : context));
-
-		_this.status = _STATUS_UNKNOW;
-
-		// CHECK EXECUTABLES
-		// assert( T.isObject(arg_locale_exec) && arg_locale_exec.is_executable, context + ':bad locale executable')
-		// assert( T.isObject(arg_remote_exec) && arg_remote_exec.is_executable, context + ':bad remote executable')
-
-		_this.is_service = true;
-
-		_this.status = Service.STATUS_CREATED;
-		// this.registered_nodes = new Collection()
-
-		_this.locale_exec = arg_locale_exec;
-		_this.remote_exec = arg_remote_exec;
-
-		_this.providers = new _collection2.default();
-		return _this;
-	}
-
-	// STATUS TEST
-
-
-	_createClass(Service, [{
-		key: 'is_unknow',
-		value: function is_unknow() {
-			return this.status === _STATUS_UNKNOW;
-		}
-	}, {
-		key: 'is_error',
-		value: function is_error() {
-			return this.status === _STATUS_ERROR;
-		}
-	}, {
-		key: 'is_created',
-		value: function is_created() {
-			return this.status === _STATUS_CREATED;
-		}
-	}, {
-		key: 'is_enabled',
-		value: function is_enabled() {
-			return this.status === _STATUS_ENABLED;
-		}
-	}, {
-		key: 'is_disabled',
-		value: function is_disabled() {
-			return this.status === _STATUS_DISABLED;
-		}
-
-		/**
-   * Enable service.
-   * @returns {boolean}
-   */
-
-	}, {
-		key: 'enable',
-		value: function enable() {
-			if (this.is_unknow() || this.is_error() || this.is_enabled()) {
-				return false;
-			}
-
-			this.status = Service.STATUS_ENABLED;
-			return true;
-		}
-
-		/**
-   * Disable service.
-   * @returns {boolean}
-   */
-
-	}, {
-		key: 'disable',
-		value: function disable() {
-			if (this.is_unknow() || this.is_error() || this.is_disabled()) {
-				return false;
-			}
-
-			this.status = Service.STATUS_DISABLED;
-			return true;
-		}
-
-		/**
-   * Activate a service feature for an application.
-   * @param {Application} arg_application - Application instance.
-   * @param {object} arg_app_svc_cfg - service configuration on application.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'activate',
-		value: function activate(arg_application, arg_app_svc_cfg) {
-			// console.log(arg_app_svc_cfg, context + ':arg_app_svc_cfg')
-			(0, _assert2.default)(_typr2.default.isObject(arg_application) && arg_application.is_application, context + ':bad application object');
-			(0, _assert2.default)(_typr2.default.isObject(arg_app_svc_cfg), context + ':bad app svc settings object');
-			(0, _assert2.default)(_typr2.default.isArray(arg_app_svc_cfg.servers), context + ':bad app svc servers array');
-			// this.info('servers ' + arg_app_svc_cfg.servers.length)
-
-			for (var i in arg_app_svc_cfg.servers) {
-				var server_name = arg_app_svc_cfg.servers[i];
-				(0, _assert2.default)(_typr2.default.isString(server_name), context + ':bad server name string');
-				// this.info('server_name ' + server_name)
-
-				var server = _runtime2.default.node.servers.find_by_name(server_name);
-				if (_typr2.default.isObject(server)) {
-					this.activate_on_server(arg_application, server, arg_app_svc_cfg);
-				} else {
-					this.info('server_name not found ' + server_name);
-				}
-			}
-		}
-
-		/**
-   * Activate a service feature for an application on a server.
-   * @param {Application} arg_application - Application instance.
-   * @param {Server} arg_server - Server instance.
-   * @param {object} arg_app_svc_cfg - service configuration on application.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'activate_on_server',
-		value: function activate_on_server(arg_application, arg_server, arg_app_svc_cfg) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_application) && arg_application.is_application, context + ':bad application object');
-			(0, _assert2.default)(_typr2.default.isObject(arg_server) && arg_server.is_server, context + ':bad server object');
-			this.info('activate_on_server [' + arg_server.get_name() + '] for application [' + arg_application.get_name() + ']');
-
-			var exec_cfg = this.get_settings().toJS();
-			exec_cfg.server = arg_server;
-			// console.log(exec_cfg, context + ':exec_cfg')
-
-			if ((0, _is_browser.is_browser)()) {
-				if (_typr2.default.isObject(this.locale_exec)) {
-					this.locale_exec.prepare(exec_cfg);
-					this.locale_exec.execute(arg_application);
-				}
-			} else if ((0, _is_browser.is_server)()) {
-				if (_typr2.default.isObject(this.remote_exec)) {
-					this.remote_exec.prepare(exec_cfg);
-					this.remote_exec.execute(arg_application);
-				}
-			}
-
-			var provider = this.get_provider_by_app_server(arg_application.get_name(), arg_server.get_name());
-
-			provider.activate(arg_application, arg_server, arg_app_svc_cfg);
-		}
-
-		/**
-   * Get service providers.
-   * @returns {Collection}
-   */
-
-	}, {
-		key: 'get_providers',
-		value: function get_providers() {
-			return this.providers;
-		}
-
-		/**
-   * Get one service provider corresponding to the given strategy.
-   * @param {object} arg_strategy - search stratgey (TODO).
-   * @returns {ServiceProvider|null} - found service provider or null
-   */
-
-	}, {
-		key: 'get_a_provider',
-		value: function get_a_provider(arg_strategy) {
-			var provider = null;
-
-			if (!arg_strategy) {
-				// USE THE FIRST ITEM OF THE LIST OR THE WEAKED LIST IF ENABLED
-				provider = this.providers.get_first();
-			}
-
-			// TODO: define metrics on the provider and update the weak at each turn
-			// TODO: define Strategy class with: bablance, round
-
-			if (!provider) {
-				// const key = 'app' + '-' + 'name'
-				// provider = this.create_provider(this.get_name() + '_provider_for_' + key, this)
-				// this.providers.add(provider)
-			}
-
-			return provider;
-		}
-
-		/**
-   * Get one service provider corresponding to the given application and server.
-   * @param {string} arg_app_name - application name.
-   * @param {string} arg_server_name - server name.
-   * @returns {ServiceProvider|null} - found service provider or null
-   */
-
-	}, {
-		key: 'get_provider_by_app_server',
-		value: function get_provider_by_app_server(arg_app_name, arg_server_name) {
-			var key = arg_app_name + '-' + arg_server_name;
-			var provider = this.providers.find_by_attr('application_server', key);
-			(0, _assert2.default)(!provider, context + ':service provider already activated');
-
-			if (!provider) {
-				provider = this.create_provider(this.get_name() + '_provider_for_' + key, this);
-				this.providers.add(provider);
-			}
-
-			return provider;
-		}
-
-		/**
-   * Create a new ServiceProvider instance for this service.
-   * @param {string} arg_name - instance name.
-   * @param {Service} arg_service - service instance.
-   * @returns {ServiceProvider} - created service provider.
-   */
-
-	}, {
-		key: 'create_provider',
-		value: function create_provider(arg_name, arg_service) {
-			// this.error('create_provider is not implemented')
-			return new _service_provider2.default(arg_name, arg_service);
-		}
-
-		/**
-   * Create a new ServiceConsumer instance.
-   * @returns {ServiceConsumer} - created service consumer.
-   */
-
-	}, {
-		key: 'create_consumer',
-		value: function create_consumer() {
-			// this.error('create_consumer is not implemented')
-			return new _service_consumer2.default(this.get_name() + '_consumer_' + this.get_id(), this);
-		}
-
-		/**
-   * Get a service provider by its name.
-   * @param {string} arg_name - service provider name
-   * @returns {ServiceProvider}
-   */
-
-	}, {
-		key: 'provider',
-		value: function provider(arg_name) {
-			return this.providers.item(arg_name);
-		}
-	}]);
-
-	return Service;
-}(_instance2.default);
-
-/*
-Loading:
-	create rt = new Runtime()
-	rt.load()
-		load_config
-			fill config.*
-		load_runtime
-			create instances and fill runtime.*
-			1 create servers
-			2 create services
-			3 create applications
-
-EXAMPLES
-	'rest_api_models_query':['*'],
-	'rest_api_models_modifier':['*'],
-	'rest_api_resources_query':['*'],
-	'rest_api_resources_modifier':['*'],
-	'html_assets':false,
-	'html_app':false
-*/
-
-
-exports.default = Service;
-
-
-},{"../services/base/service_consumer":69,"../services/base/service_provider":71,"../store/index":96,"../utils/is_browser":111,"./collection":5,"./instance":9,"./runtime":17,"assert":117,"typr":509}],20:[function(require,module,exports){
+},{"../security/authentication_manager":52,"../security/authorization_manager":56,"./errorable":7,"assert":102,"immutable":455,"typr":494}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3997,21 +3417,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/base/settingsable';
 
-/**
- *@file Settingsable base class: child classes are able to manage settings.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ *@file Settingsable base class: child classes are able to manage settings.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Settingsable = function (_Loggable) {
 	_inherits(Settingsable, _Loggable);
 
-	/**
-  * Create a Settingsable instance.
-  * @extends Loggable
-  * @param {object} arg_settings - instance settings map.
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
+	/**
+  * Create a Settingsable instance.
+  * @extends Loggable
+  * @param {object} arg_settings - instance settings map.
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
   */
 
 	function Settingsable(arg_settings, arg_log_context) {
@@ -4026,10 +3446,10 @@ var Settingsable = function (_Loggable) {
 		return _this;
 	}
 
-	/**
-  * Set instance settings.
-  * @param {object} arg_settings - instance settings map.
-  * @returns {nothing}
+	/**
+  * Set instance settings.
+  * @param {object} arg_settings - instance settings map.
+  * @returns {nothing}
   */
 
 
@@ -4039,9 +3459,9 @@ var Settingsable = function (_Loggable) {
 			this.$settings = arg_settings;
 		}
 
-		/**
-   * Get instance settings.
-   * @returns {object}
+		/**
+   * Get instance settings.
+   * @returns {object}
    */
 
 	}, {
@@ -4050,10 +3470,10 @@ var Settingsable = function (_Loggable) {
 			return this.$settings;
 		}
 
-		/**
-   * Test if a key exists in settings.
-   * @param {string} arg_name - settings value key.
-   * @returns {boolean}
+		/**
+   * Test if a key exists in settings.
+   * @param {string} arg_name - settings value key.
+   * @returns {boolean}
    */
 
 	}, {
@@ -4065,11 +3485,11 @@ var Settingsable = function (_Loggable) {
 			return this.$settings.has(arg_name);
 		}
 
-		/**
-   * Get a value in settings for given key.
-   * @param {string} arg_name - settings value key.
-   * @param {any} arg_default - default value.
-   * @returns {any} - found value or given default value
+		/**
+   * Get a value in settings for given key.
+   * @param {string} arg_name - settings value key.
+   * @param {any} arg_default - default value.
+   * @returns {any} - found value or given default value
    */
 
 	}, {
@@ -4081,11 +3501,11 @@ var Settingsable = function (_Loggable) {
 			return this.$settings.has(arg_name) ? this.$settings.get(arg_name) : arg_default ? arg_default : null;
 		}
 
-		/**
-   * Set a value in settings for given key.
-   * @param {string} arg_name - settings value key.
-   * @param {any} arg_value - settings value.
-   * @returns {nothing}
+		/**
+   * Set a value in settings for given key.
+   * @param {string} arg_name - settings value key.
+   * @param {any} arg_value - settings value.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4104,7 +3524,7 @@ var Settingsable = function (_Loggable) {
 exports.default = Settingsable;
 
 
-},{"./loggable":10,"typr":509}],21:[function(require,module,exports){
+},{"./loggable":10,"typr":494}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4158,25 +3578,25 @@ var STATUS_PREPARED = 'PREPARED';
 var STATUS_EXEC_OK = 'EXEC_OK';
 var STATUS_EXEC_KO = 'EXEC_KO';
 
-/**
- * @file Transaction class to manage grouped executions with commit/rollback features.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Transaction class to manage grouped executions with commit/rollback features.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Transaction = function (_Instance) {
 	_inherits(Transaction, _Instance);
 
-	/**
-  * Create a Transaction. Set status to CREATED.
-  * @extends Instance
-  * @param {string} arg_app_name - application name.
-  * @param {string} arg_svc_name - service name.
-  * @param {string} arg_tx_name - transaction name.
-  * @param {object} arg_settings - settings
-  * @param {Array} arg_executables - executables array (optional)
-  * @param {string} arg_type - transaction type (optional)
-  * @returns {nothing}
+	/**
+  * Create a Transaction. Set status to CREATED.
+  * @extends Instance
+  * @param {string} arg_app_name - application name.
+  * @param {string} arg_svc_name - service name.
+  * @param {string} arg_tx_name - transaction name.
+  * @param {object} arg_settings - settings
+  * @param {Array} arg_executables - executables array (optional)
+  * @param {string} arg_type - transaction type (optional)
+  * @returns {nothing}
   */
 
 	function Transaction(arg_app_name, arg_svc_name, arg_tx_name, arg_settings, arg_executables, arg_type) {
@@ -4199,10 +3619,10 @@ var Transaction = function (_Instance) {
 		return _this;
 	}
 
-	/**
-  * Set transaction executables.
-  * @param {Array} arg_executables - executables instances array.
-  * @returns {nothing}
+	/**
+  * Set transaction executables.
+  * @param {Array} arg_executables - executables instances array.
+  * @returns {nothing}
   */
 
 
@@ -4218,13 +3638,13 @@ var Transaction = function (_Instance) {
 			});
 		}
 
-		/**
-   * Set the transaction type. Value should be choosen from the list:EVERY,SEQUENCE,ONE
-   *	  * EVERY: transaction is finished when all executables are finished without order.
-   *	  * SEQUENCE: transaction is finished when all executables are finished in a ordered sequence.
-   *	  * ONE: transaction is finished when an executable finished without waiting other executables.
-   * @param {string} arg_type - transaction type value.
-   * @returns {nothing}
+		/**
+   * Set the transaction type. Value should be choosen from the list:EVERY,SEQUENCE,ONE
+   *	  * EVERY: transaction is finished when all executables are finished without order.
+   *	  * SEQUENCE: transaction is finished when all executables are finished in a ordered sequence.
+   *	  * ONE: transaction is finished when an executable finished without waiting other executables.
+   * @param {string} arg_type - transaction type value.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4246,10 +3666,10 @@ var Transaction = function (_Instance) {
 			this.tx_type = TYPE_EVERY;
 		}
 
-		/**
-   * Prepare transaction executables. Change status to PREPARED.
-   * @param {object} arg_context - executables context.
-   * @returns {nothing}
+		/**
+   * Prepare transaction executables. Change status to PREPARED.
+   * @param {object} arg_context - executables context.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4267,10 +3687,10 @@ var Transaction = function (_Instance) {
 			this.status = STATUS_PREPARED;
 		}
 
-		/**
-   * Execute all executables regarding the transaction type.
-   * @param {anything} arg_data - any parameter
-   * @returns {Promise} - a promise of executables results array
+		/**
+   * Execute all executables regarding the transaction type.
+   * @param {anything} arg_data - any parameter
+   * @returns {Promise} - a promise of executables results array
    */
 
 	}, {
@@ -4295,10 +3715,10 @@ var Transaction = function (_Instance) {
 			// return Promise.reject('bad transaction type')
 		}
 
-		/**
-   * Execute every executables without order and fails if one failure appears.
-   * @param {anything} arg_data - any parameter
-   * @returns {Promise} - a promise of executables results array
+		/**
+   * Execute every executables without order and fails if one failure appears.
+   * @param {anything} arg_data - any parameter
+   * @returns {Promise} - a promise of executables results array
    */
 
 	}, {
@@ -4373,10 +3793,10 @@ var Transaction = function (_Instance) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Execute every executables without order and fulfill on first resolved, fails if one failure appears.
-   * @param {anything} arg_data - any parameter
-   * @returns {Promise} - a promise of executables results array
+		/**
+   * Execute every executables without order and fulfill on first resolved, fails if one failure appears.
+   * @param {anything} arg_data - any parameter
+   * @returns {Promise} - a promise of executables results array
    */
 
 	}, {
@@ -4444,10 +3864,10 @@ var Transaction = function (_Instance) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Execute every executables in a fixed order and stop on failure.
-   * @param {anything} arg_data - any parameter
-   * @returns {Promise} - a promise of executables results array
+		/**
+   * Execute every executables in a fixed order and stop on failure.
+   * @param {anything} arg_data - any parameter
+   * @returns {Promise} - a promise of executables results array
    */
 
 	}, {
@@ -4547,9 +3967,9 @@ var Transaction = function (_Instance) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Commit transaction execution on executables success. Change status to EXEC_OK.
-   * @returns {nothing}
+		/**
+   * Commit transaction execution on executables success. Change status to EXEC_OK.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4561,9 +3981,9 @@ var Transaction = function (_Instance) {
 			this.status = STATUS_EXEC_OK;
 		}
 
-		/**
-   * Rollback transaction execution on executables failure. Change status to EXEC_KO.
-   * @returns {nothing}
+		/**
+   * Rollback transaction execution on executables failure. Change status to EXEC_KO.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4580,9 +4000,9 @@ var Transaction = function (_Instance) {
 			});
 		}
 
-		/**
-   * Finish all executables.
-   * @returns {nothing}
+		/**
+   * Finish all executables.
+   * @returns {nothing}
    */
 
 	}, {
@@ -4597,9 +4017,9 @@ var Transaction = function (_Instance) {
 			});
 		}
 
-		/**
-   * Get instance description: {$type:..., $class:..., $id:..., $name:...}.
-   * @returns {object} - instance object description
+		/**
+   * Get instance description: {$type:..., $class:..., $id:..., $name:...}.
+   * @returns {object} - instance object description
    */
 
 	}, {
@@ -4610,9 +4030,9 @@ var Transaction = function (_Instance) {
 			return parent_desc;
 		}
 
-		/**
-   * Get transaction metrics: {id:..., status:..., metrics:...}.
-   * @returns {object} - transaction metrics plain object
+		/**
+   * Get transaction metrics: {id:..., status:..., metrics:...}.
+   * @returns {object} - transaction metrics plain object
    */
 
 	}, {
@@ -4625,9 +4045,9 @@ var Transaction = function (_Instance) {
 			return { $id: this.$id, $status: this.status, metrics: values };
 		}
 
-		/**
-   * Get executables results array: {index:..., result:..., has_error:..., error_msg:...}.
-   * @returns {Array} - all executed executables results.
+		/**
+   * Get executables results array: {index:..., result:..., has_error:..., error_msg:...}.
+   * @returns {Array} - all executed executables results.
    */
 
 	}, {
@@ -4636,9 +4056,9 @@ var Transaction = function (_Instance) {
 			return this.results;
 		}
 
-		/**
-   * Get result of the first ended executable.
-   * @returns {object} - result object.
+		/**
+   * Get result of the first ended executable.
+   * @returns {object} - result object.
    */
 
 	}, {
@@ -4647,9 +4067,9 @@ var Transaction = function (_Instance) {
 			return this.results && this.results.length > 0 ? this.results[0] : null;
 		}
 
-		/**
-   * Get result of the first ended executable which failed.
-   * @returns {object} - error object.
+		/**
+   * Get result of the first ended executable which failed.
+   * @returns {object} - error object.
    */
 
 	}, {
@@ -4668,26 +4088,26 @@ var Transaction = function (_Instance) {
 	return Transaction;
 }(_instance2.default);
 
-/**
- * Transaction type SEQUENCE: all executables are run one at a time in the registered order.
+/**
+ * Transaction type SEQUENCE: all executables are run one at a time in the registered order.
  */
 
 
 exports.default = Transaction;
 Transaction.SEQUENCE = TYPE_SEQUENCE;
 
-/**
- * Transaction type ONE: all executables are run at the same time without order and transaction ends when a run finish.
+/**
+ * Transaction type ONE: all executables are run at the same time without order and transaction ends when a run finish.
  */
 Transaction.ONE = TYPE_ONE;
 
-/**
- * Transaction type EVERY: all executables are run at the same time without order.
+/**
+ * Transaction type EVERY: all executables are run at the same time without order.
  */
 Transaction.EVERY = TYPE_EVERY;
 
 
-},{"../metrics/metric_duration":33,"../metrics/metric_host":34,"../store/index":96,"./instance":9,"assert":117,"typr":509}],22:[function(require,module,exports){
+},{"../metrics/metric_duration":24,"../metrics/metric_host":25,"../store/index":81,"./instance":9,"assert":102,"typr":494}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4723,15 +4143,15 @@ var SOURCE_NOSQL_DATABASE = exports.SOURCE_NOSQL_DATABASE = 'nosql_database';
 
 var SOURCES = [SOURCE_LOCAL_FILE, SOURCE_MSG_BUS, SOURCE_REMOTE_URL, SOURCE_SQL_DATABASE, SOURCE_NOSQL_DATABASE];
 
-/**
- * Json providier class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Json providier class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var JsonProvider = function () {
-	/**
-  * Create a Provider instance
+	/**
+  * Create a Provider instance
   */
 
 	function JsonProvider(arg_settings) {
@@ -4747,9 +4167,9 @@ var JsonProvider = function () {
 		(0, _assert2.default)(SOURCES.indexOf(this.source) > -1, context + ':bad source string, should be part of [' + SOURCES + ']');
 	}
 
-	/**
-  * Provide JSON datas
-  * @returns {object} JSON datas Promise
+	/**
+  * Provide JSON datas
+  * @returns {object} JSON datas Promise
   */
 
 
@@ -4767,11 +4187,11 @@ var JsonProvider = function () {
 			return promise;
 		}
 
-		/**
-   * Provide JSON datas inside a promise
-   * @param {function} resolve - a promise should be resolved
-   * @param {function} reject - a promise should be rejected
-   * @returns {nothing}
+		/**
+   * Provide JSON datas inside a promise
+   * @param {function} resolve - a promise should be resolved
+   * @param {function} reject - a promise should be rejected
+   * @returns {nothing}
    */
 
 	}, {
@@ -4834,908 +4254,7 @@ var JsonProvider = function () {
 exports.default = JsonProvider;
 
 
-},{"../../base/runtime":17,"assert":117,"typr":509}],23:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _executable = require('../base/executable');
-
-var _executable2 = _interopRequireDefault(_executable);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/executables/executable_route';
-
-/**
- * @file Route registering base class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ExecutableRoute = function (_Executable) {
-	_inherits(ExecutableRoute, _Executable);
-
-	/**
-  * Create a ExecutableRoute instance.
- * @extends Executable
-  * @abstract
-  */
-
-	function ExecutableRoute() {
-		_classCallCheck(this, ExecutableRoute);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(ExecutableRoute).call(this, context));
-	}
-
-	/**
-     * Prepare an execution with contextual informations.
-     * @override
-     * @param {object} arg_settings - execution settings.
-     * @returns {nothing}
-     */
-
-
-	_createClass(ExecutableRoute, [{
-		key: 'prepare',
-		value: function prepare(arg_settings) {
-			// console.log(arg_settings, context + ':arg_settings')
-
-			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':no given config');
-			this.store_config = arg_settings;
-
-			(0, _assert2.default)(_typr2.default.isObject(this.store_config), context + ':bad config object');
-
-			(0, _assert2.default)(_typr2.default.isObject(this.store_config.server), context + ':bad server object');
-			(0, _assert2.default)(this.store_config.server.is_server, context + ':bad server instance');
-
-			this.server = this.store_config.server;
-
-			// assert(T.isArray(this.store_config.server_types), context + ':bad server_types array')
-			this.store_config.server_types = ['restify', 'express'];
-		}
-
-		/**
-      * Execution with contextual informations.
-      * @override
-      * @param {object} arg_data - Application instance.
-      * @returns {object} promise.
-      */
-
-	}, {
-		key: 'execute',
-		value: function execute(arg_data) {
-			// console.log(this.store_config, context + ':store_config')
-
-			// CHECK APPLICATION
-			(0, _assert2.default)(_typr2.default.isObject(arg_data), context + ':bad application object');
-			(0, _assert2.default)(arg_data.is_application, context + ':bad application instance');
-			var application = arg_data;
-
-			this.info('Execute: add server route for ' + application.$name);
-
-			// CHECK SERVER
-			var server_instance = this.server;
-			(0, _assert2.default)(_typr2.default.isString(server_instance.server_type), context + ':bad server_instance.server_type string');
-			(0, _assert2.default)(this.store_config.server_types.indexOf(server_instance.server_type) > -1, context + ':server_instance.server_type not valid');
-			(0, _assert2.default)(_typr2.default.isObject(server_instance.server) || _typr2.default.isFunction(server_instance.server), context + ':bad server_instance.server object or function');
-
-			// LOOP ON ROUTES
-			var routes_registering_promises = [];
-			(0, _assert2.default)(_typr2.default.isArray(this.store_config.routes), context + ':bad server_instance.routes object');
-			var cfg_routes = this.store_config.routes;
-			var _iteratorNormalCompletion = true;
-			var _didIteratorError = false;
-			var _iteratorError = undefined;
-
-			try {
-				for (var _iterator = cfg_routes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-					var cfg_route = _step.value;
-
-					(0, _assert2.default)(_typr2.default.isObject(cfg_route), context + ':bad cfg_route object');
-					(0, _assert2.default)(_typr2.default.isString(cfg_route.route), context + ':bad route string');
-
-					var app_route = _typr2.default.isString(application.url) ? application.url : '';
-
-					var route = app_route + cfg_route.route;
-					route = (route[0] == '/' ? '' : '/') + route;
-					// console.log(route, 'route')
-
-					if (route.indexOf('.*') > -1) {
-						route = route.replace('/', '\/');
-						cfg_route.full_route = new RegExp(route);
-					} else {
-						cfg_route.full_route = route;
-					}
-
-					this.debug('route', cfg_route.full_route.toString());
-					this.debug('directory', cfg_route.directory);
-					var route_resistering_promise = this.process_route(server_instance, application, cfg_route, arg_data);
-					routes_registering_promises.push(route_resistering_promise);
-
-					this.info('registering route [' + route + '] for application [' + application.$name + ']');
-				}
-			} catch (err) {
-				_didIteratorError = true;
-				_iteratorError = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion && _iterator.return) {
-						_iterator.return();
-					}
-				} finally {
-					if (_didIteratorError) {
-						throw _iteratorError;
-					}
-				}
-			}
-
-			return Promise.all(routes_registering_promises);
-		}
-
-		/**
-      * Process a route registering.
-      * @param {object} arg_server - Server instance.
-      * @param {object} arg_application - Application instance.
-      * @param {object} arg_cfg_route - plain object route configuration.
-      * @param {object} arg_data - plain object contextual datas.
-      * @returns {object} promise with a boolean resolved value (true:success, false: failure).
-      */
-
-	}, {
-		key: 'process_route',
-		value: function process_route(arg_server, arg_application, arg_cfg_route, arg_data) {
-			// console.log(arg_cfg_route, 'arg_cfg_route')
-
-			var route_cb = this.get_route_cb(arg_application, arg_cfg_route, arg_data);
-			if (!route_cb) {
-				console.error('bad route callback', context);
-				return Promise.reject(context + ':process_route:bad route callback');
-			}
-
-			try {
-				// RESTIFY SERVER
-				if (this.store_config.server.is_restify_server) {
-					this.debug('process restify route [%s]', arg_cfg_route.full_route);
-
-					// TODO Restify route should be: an app assets/ with a route /js/.* and folder should be ./public to serve a file in ./public/assets/js/test.js
-
-					arg_server.server.get(arg_cfg_route.full_route, route_cb);
-					return Promise.resolve(true);
-				}
-
-				// EXPRESS SERVER
-				if (this.store_config.server.is_express_server) {
-					this.debug('process express route [%s]', arg_cfg_route.full_route);
-
-					// TODO Restify route should be: an app assets/ with a route /js and folder should be ./public/assets/js to serve a file in ./public/assets/js/test.js
-
-					arg_server.server.use(arg_cfg_route.full_route, route_cb);
-					return Promise.resolve(true);
-				}
-			} catch (e) {
-				console.error(e, context);
-				return Promise.reject(context + ':process_route:' + e.toString());
-			}
-
-			return Promise.reject(context + ':process_route:bad server type');
-		}
-
-		/**
-      * Callback for route handling.
-      * @abstract
-      * @param {object} arg_application - Application instance.
-      * @param {object} arg_cfg_route - plain object route configuration.
-      * @param {object} arg_data - plain object contextual datas.
-      * @param {function} route handler.
-      */
-
-	}, {
-		key: 'get_route_cb',
-		value: function get_route_cb(arg_application, arg_cfg_route, arg_data) {
-			(0, _assert2.default)(false, context + ':get_route_cb(cfg_route) should be implemented');
-		}
-	}]);
-
-	return ExecutableRoute;
-}(_executable2.default);
-
-exports.default = ExecutableRoute;
-
-
-},{"../base/executable":8,"assert":117,"typr":509}],24:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _restify = require('restify');
-
-var _restify2 = _interopRequireDefault(_restify);
-
-var _express = require('express');
-
-var _express2 = _interopRequireDefault(_express);
-
-var _executable_route = require('./executable_route');
-
-var _executable_route2 = _interopRequireDefault(_executable_route);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/executables/executable_route_assets';
-
-/**
- * @file Assets route registering class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ExecutableRouteAssets = function (_ExecutableRoute) {
-	_inherits(ExecutableRouteAssets, _ExecutableRoute);
-
-	/**
-  * Create an assets route registering executable.
-  * @extends ExecutableRoute
-  * @returns {nothing}
-  */
-
-	function ExecutableRouteAssets() {
-		_classCallCheck(this, ExecutableRouteAssets);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(ExecutableRouteAssets).call(this, context));
-	}
-
-	/**
-  * Callback for route handling.
-  * @override
-  * @param {object} arg_application - Application instance.
-  * @param {object} arg_cfg_route - plain object route configuration.
-  * @param {object} arg_data - plain object contextual datas.
-  * @param {function} route handler.
-  */
-
-
-	_createClass(ExecutableRouteAssets, [{
-		key: 'get_route_cb',
-		value: function get_route_cb(arg_application, arg_cfg_route /*, arg_data*/) {
-			(0, _assert2.default)(_typr2.default.isString(arg_cfg_route.directory), context + ':bad directory string');
-
-			// RESTIFY SERVER
-			if (this.store_config.server.is_restify_server) {
-				var cb_arg = {
-					directory: arg_cfg_route.directory
-				};
-				if (_typr2.default.isString(arg_cfg_route.default_file)) {
-					cb_arg.default = arg_cfg_route.default_file;
-				}
-
-				// console.log(cb_arg, 'restify route cfg')
-				// console.log('restify static route', arg_cfg_route.directory)
-				return _restify2.default.serveStatic(cb_arg);
-			}
-
-			// EXPRESS SERVER
-			if (this.store_config.server.is_express_server) {
-				// TODO: use default static file
-				// console.log('express static route', arg_cfg_route.directory)
-				var one_day = 86400000;
-				var static_cfg = {
-					maxAge: one_day
-				};
-				return _express2.default.static(arg_cfg_route.directory, static_cfg);
-			}
-
-			// UNKNOW SERVER TO SERVE STATIC FILES
-			console.error('UNKNOW SERVER TO SERVE STATIC FILES');
-			return null;
-		}
-	}]);
-
-	return ExecutableRouteAssets;
-}(_executable_route2.default);
-
-exports.default = ExecutableRouteAssets;
-
-
-},{"./executable_route":23,"assert":117,"express":404,"restify":116,"typr":509}],25:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
-var _runtime = require('../base/runtime');
-
-var _runtime2 = _interopRequireDefault(_runtime);
-
-var _executable_route = require('./executable_route');
-
-var _executable_route2 = _interopRequireDefault(_executable_route);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/executables/executable_route_get_resources';
-
-/**
- * @file Get resource route registering class.
- * @todo check resources accesses
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ExecutableRouteGetResources = function (_ExecutableRoute) {
-	_inherits(ExecutableRouteGetResources, _ExecutableRoute);
-
-	/**
-  * Create a ExecutableRouteGetResources instance.
- * @extends ExecutableRoute
- * @returns {nothing}
-  */
-
-	function ExecutableRouteGetResources() {
-		_classCallCheck(this, ExecutableRouteGetResources);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(ExecutableRouteGetResources).call(this, context));
-	}
-
-	/**
-  * Get a collection resources list.
-  * @param {object} res - response instance
-  * @param {object} arg_application - Application instance.
-  * @param {object} arg_cfg_route - plain object route configuration.
-  * @returns {nothing}
-  */
-
-
-	_createClass(ExecutableRouteGetResources, [{
-		key: 'send_resources_list',
-		value: function send_resources_list(res, arg_application, arg_cfg_route) {
-			this.info('LIST resources');
-
-			// GET RESOURCES LIST
-			var resources_list = arg_application.resources.get_all_names(arg_cfg_route.collection);
-
-			// SEND OUTPUT
-			res.contentType = 'json';
-			res.send({ resources: resources_list });
-		}
-
-		/**
-      * Callback for route handling.
-      * @override
-      * @param {object} arg_application - Application instance.
-      * @param {object} arg_cfg_route - plain object route configuration.
-      * @param {object} arg_data - plain object contextual datas.
-      * @param {function} route handler.
-      */
-
-	}, {
-		key: 'get_route_cb',
-		value: function get_route_cb(arg_application, arg_cfg_route, arg_data) {
-			var self = this;
-
-			return function exec_http(req, res, next) {
-				// self.enable_trace()
-
-				self.enter_group('ExecutableRouteGetResources.exec_http');
-
-				// CHECK ARGS
-				(0, _assert2.default)(_typr2.default.isString(arg_cfg_route.collection), context + ':bad collection name');
-				// console.log(arg_cfg_route, 'arg_cfg_route')
-
-				// TODO: CHECK ACCESS TO RESOURCE FROM USER
-
-				// LIST RESOURCES
-				if (!arg_cfg_route.item) {
-					self.send_resources_list(res, arg_application, arg_cfg_route);
-
-					self.leave_group('ExecutableRouteGetResources.exec_http');
-					return next();
-				}
-				(0, _assert2.default)(_typr2.default.isString(arg_cfg_route.item), context + ':bad collection item string');
-
-				// GET RESOURCE NAME
-				var resource = null;
-				var resource_name = req.params[arg_cfg_route.item];
-				(0, _assert2.default)(_typr2.default.isString(resource_name), context + ':bad resource name [%s]', resource_name);
-
-				if (resource_name.length == 0) {
-					self.send_resources_list(res, arg_application, arg_cfg_route);
-
-					self.leave_group('ExecutableRouteGetResources.exec_http');
-					return next();
-				}
-
-				// GET ONE RESOURCE
-				self.info('GET one resource');
-				if (arg_cfg_route.collection === '*') {
-					self.info('GET one resource [' + resource_name + '] of any collection');
-
-					resource = arg_application.resources.find_by_name(resource_name);
-				} else {
-					self.info('GET one resource [' + resource_name + '] of one collection [' + arg_cfg_route.collection + ']');
-
-					// LOOKUP RESOURCE
-					resource = arg_application.resources.find_by_name(resource_name);
-					if (resource) {
-						self.debug('resource found but test collection name');
-						(0, _assert2.default)(resource.$type == arg_cfg_route.collection, context + ':bad type [' + resource.$type + '] for resource [' + resource_name + ']');
-					} else {
-						self.debug('resource not found [' + resource_name + ']');
-						// const resources = arg_application.resources.get_all_names()
-						// console.log(resources, 'arg_application.resources')
-					}
-
-					// CHECK RESOURCE TYPE
-					if (resource && resource.$type != arg_cfg_route.collection) {
-						console.error('bad resource type');
-						console.log(resource.$type, 'resource.$type');
-						console.log(arg_cfg_route.collection, 'arg_cfg_route.collection');
-						resource = null;
-					}
-				}
-
-				// RESOURCE NOT FOUND ?
-				if (!_typr2.default.isObject(resource)) {
-					// SEND OUTPUT
-					res.status(404);
-					res.contentType = 'json';
-					res.send({ error: 'Resource not found [' + resource_name + ']' });
-
-					// next( new Error('Resource not found [' + resource_name + ']') )
-					return next();
-				}
-
-				// TODO: SANITY CHECK OF RESOURCE CONFIG (connections...)
-
-				// WRAP INCLUDED FILE
-				if (resource.has_setting('include_file_path_name')) {
-					self.debug('Process resource.include_file_path_name [%s]', resource.include_file_path_name);
-
-					var file_path = resource.get_setting('include_file_path_name');
-					if (_typr2.default.isString(file_path)) {
-						try {
-							var file_content = self.include_file(self, resource_name, file_path);
-							resource.set_setting('include_file_content', file_content);
-						} catch (e) {
-							var error_msg = 'an error occures when loading file [' + e.toString() + ']';
-							resource.set_setting('include_file_content', error_msg);
-							self.error(error_msg);
-							console.error(error_msg);
-						}
-					}
-				}
-
-				// SEND OUTPUT
-				res.contentType = 'json';
-				res.send({ resource: resource.export_settings() });
-
-				self.leave_group('ExecutableRouteGetResources.exec_http');
-				return next();
-			};
-		}
-
-		/**
-   * Load an asset file for a resource
-   * @param {object} self - this class instance
-   * @param {string} arg_resource_name - resource name
-   * @param {string} arg_file_path_name - file path name
-   * @returns {string} file content
-   */
-
-	}, {
-		key: 'include_file',
-		value: function include_file(self, arg_resource_name, arg_file_path_name) {
-			var file_path = _runtime2.default.context.get_absolute_path(arg_file_path_name);
-			self.debug('Process file_path [%s]', file_path);
-
-			var content = _fs2.default.readFileSync(file_path, { encoding: 'utf-8' });
-
-			if (!content) {
-				var error_msg = context + ':resource include file not found [' + arg_resource_name + '] for resource [' + file_path + ']';
-				console.error('loading resource include file');
-				throw new Error(error_msg);
-			}
-
-			console.log('loading resource include file: return');
-			return content;
-		}
-	}]);
-
-	return ExecutableRouteGetResources;
-}(_executable_route2.default);
-
-exports.default = ExecutableRouteGetResources;
-
-
-},{"../base/runtime":17,"./executable_route":23,"assert":117,"fs":116,"typr":509}],26:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _runtime = require('../base/runtime');
-
-var _runtime2 = _interopRequireDefault(_runtime);
-
-var _executable_route = require('./executable_route');
-
-var _executable_route2 = _interopRequireDefault(_executable_route);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/executables/executable_route_middleware';
-
-/**
- * @file Middleware route registering class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ExecutableRouteMiddleware = function (_ExecutableRoute) {
-	_inherits(ExecutableRouteMiddleware, _ExecutableRoute);
-
-	/**
-  * Create a route middleware executable
- * @extends ExecutableRoute
- * @returns {nothing}
-  */
-
-	function ExecutableRouteMiddleware() {
-		_classCallCheck(this, ExecutableRouteMiddleware);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(ExecutableRouteMiddleware).call(this, context));
-	}
-
-	/**
-     * Callback for route handling.
-     * @override
-     * @param {object} arg_application - Application instance.
-     * @param {object} arg_cfg_route - plain object route configuration.
-     * @param {object} arg_data - plain object contextual datas.
-     * @param {function} route handler.
-     */
-
-
-	_createClass(ExecutableRouteMiddleware, [{
-		key: 'get_route_cb',
-		value: function get_route_cb(arg_application, arg_cfg_route, arg_data) {
-			var self = this;
-
-			var path_file_name = _runtime2.default.context.get_absolute_path(arg_cfg_route.mw_file);
-			/*fs.watch(path_file_name,
-   	function(event, target_file)
-   	{
-   		self.info('Reloading middleware file [' + path_file_name + ']')
-   		
-   		console.log(target_file, 'is', event)
-   		delete require.cache[path_file_name]
-   		
-   		const mw_cb = require(path_file_name).default
-   		// console.log(mw_cb, 'mw_cb')
-   	}
-   )*/
-
-			return function exec_http(req, res, next) {
-				self.enter_group('ExecutableRouteMiddleware.exec_http');
-
-				// CHECK ARGS
-				(0, _assert2.default)(_typr2.default.isString(arg_cfg_route.mw_file), context + ':bad middleware file string');
-
-				var mw_cb = null;
-
-				// LOAD MIDDLEWARE FILE
-				try {
-					self.info('Loading middleware before');
-
-					if (!mw_cb) {
-						self.info('Loading middleware file [' + path_file_name + ']');
-						mw_cb = require(path_file_name).default;
-						// console.log(mw_cb, 'mw_cb')
-					}
-
-					self.info('Loading middleware after');
-				} catch (e) {
-					console.log(context + ':middleware loading error:' + e);
-					self.error('middleware file not found or not valid');
-					self.leave_group('ExecutableRouteMiddleware.exec_http');
-					return next(e);
-				}
-				(0, _assert2.default)(_typr2.default.isFunction(mw_cb), context + ':bad middleware function');
-
-				// EXECUTE MIDDLEWARE FUNCTION
-				try {
-					self.info('Execute middleware: before');
-					// console.log(mw_cb, 'mw_cb')
-					mw_cb(req, res);
-					self.info('Execute middleware: after');
-				} catch (e) {
-					console.log(context + ':middleware execution error:' + e);
-					self.error('middleware execution failed');
-					self.leave_group('ExecutableRouteMiddleware.exec_http');
-					return next(e);
-				}
-
-				self.leave_group('ExecutableRouteMiddleware.exec_http');
-				return;
-			};
-		}
-	}]);
-
-	return ExecutableRouteMiddleware;
-}(_executable_route2.default);
-
-exports.default = ExecutableRouteMiddleware;
-
-
-},{"../base/runtime":17,"./executable_route":23,"assert":117,"typr":509}],27:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _executable_route = require('./executable_route');
-
-var _executable_route2 = _interopRequireDefault(_executable_route);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/executables/executable_route_model_crud';
-
-/**
- * @file CRUD operations route registering class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ExecutableRouteModelCrud = function (_ExecutableRoute) {
-	_inherits(ExecutableRouteModelCrud, _ExecutableRoute);
-
-	/**
-  * Create a route registration executable for CRUD operations
- * @extends ExecutableRoute
- * @returns {nothing}
-  */
-
-	function ExecutableRouteModelCrud() {
-		_classCallCheck(this, ExecutableRouteModelCrud);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(ExecutableRouteModelCrud).call(this, context));
-	}
-
-	/**
-     * Process a route registering.
-     * @override
-     * @param {object} arg_server - Server instance.
-     * @param {object} arg_application - Application instance.
-     * @param {object} arg_cfg_route - plain object route configuration.
-     * @param {object} arg_data - plain object contextual datas.
-     * @returns {object} promise with a boolean resolved value (true:success, false: failure).
-     */
-
-
-	_createClass(ExecutableRouteModelCrud, [{
-		key: 'process_route',
-		value: function process_route(arg_server, arg_application, arg_cfg_route, arg_data) {
-			var self = this;
-			self.enter_group('ExecutableRouteModelCrud.process_route');
-
-			// EPILOGUE CALLBACK FUNCTION TO CHECK AUTHENTICATION AND AUTHORIZATION
-			/*var security_epilogue_cb2 = function(arg_model_name, arg_role, arg_action_name)
-   {
-   	return function(arg_req, arg_res, arg_context)
-   	{
-   		console.info('check security for [' + arg_action_name + '] on model [' + arg_model_name + '] with role [' + arg_role + ']');
-   		
-   		var authentication_msg = 'Authentication is rejected to ' + arg_action_name + ' for model [' + arg_model_name + ']';
-   		var authorization_msg = 'Authorization is rejected to ' + arg_action_name + ' for model [' + arg_model_name + ']';
-   		var failure_msg = 'Failure for ' + arg_action_name + ' for model [' + arg_model_name + ']';
-   		
-   		var failure_cb = function(arg_msg)
-   		{
-   			return  arg_context.error( new ForbiddenError(failure_msg + ":[" + arg_msg + ']') );
-   		}
-   		
-   		var success_cb = function(arg_authenticated)
-   		{
-   			if (! arg_authenticated)
-   			{
-   				console.error(authentication_msg);
-   				// throw new ForbiddenError(authentication_msg);
-   				return arg_context.error( new ForbiddenError(authentication_msg) );
-   			}
-   			console.info('items ' + arg_action_name + ' authentication is accepted for model [' + arg_model_name + ']');
-   			
-   			authorization.check_authorization(arg_req, arg_role).then(
-   				function(arg_authorized)
-   				{
-   					if (! arg_authorized)
-   					{
-   						console.error(authorization_msg);
-   						// throw new ForbiddenError(authorization_msg);
-   						return arg_context.error( new ForbiddenError(authorization_msg) );
-   					}
-   					
-   					console.info('items ' + arg_action_name + ' authorization is accepted for model [' + arg_model_name + ']');
-   					
-   				},
-   				failure_cb
-   			)
-   		}
-   		
-   		authentication.check_request(arg_req).then(success_cb, failure_cb);
-   	}
-   }*/
-
-			var security_epilogue_cb = function security_epilogue_cb() /*arg_model_name, arg_role, arg_action_name*/{
-				return function (arg_req, arg_res, arg_context) {
-					return arg_context.continue();
-				};
-			};
-
-			var app_models = arg_application.resources.get_all('models');
-
-			app_models.forEach(function (model) {
-				// CHECK ARGS
-				(0, _assert2.default)(_typr2.default.isObject(model), context + ':bad model object');
-				(0, _assert2.default)(_typr2.default.isString(model.$name), context + ':bad model name');
-				(0, _assert2.default)(_typr2.default.isObject(model.roles), context + ':bad model roles');
-
-				self.info('add route for model [' + model.$name + ']');
-
-				var model_name = model.$name;
-				var model_roles = model.roles;
-				var epilogue_resource = model.get_epilogue_resource(arg_server, arg_cfg_route.full_route);
-
-				// REGISTER CREATE ACCESS CHECK
-				epilogue_resource.create.auth(security_epilogue_cb(model_name, model_roles.create, 'create items'));
-
-				// REGISTER LIST ACCESS CHECK
-				epilogue_resource.list.auth(security_epilogue_cb(model_name, model_roles.read, 'list items'));
-
-				// REGISTER READ ACCESS CHECK
-				epilogue_resource.read.auth(security_epilogue_cb(model_name, model_roles.read, 'read an item'));
-
-				// REGISTER UPDATE ACCESS CHECK
-				epilogue_resource.update.auth(security_epilogue_cb(model_name, model_roles.update, 'update items'));
-
-				// REGISTER DELETE ACCESS CHECK
-				epilogue_resource.delete.auth(security_epilogue_cb(model_name, model_roles.delete, 'delete items'));
-			});
-
-			self.leave_group('ExecutableRouteModelCrud.process_route');
-		}
-	}]);
-
-	return ExecutableRouteModelCrud;
-}(_executable_route2.default);
-
-exports.default = ExecutableRouteModelCrud;
-
-
-},{"./executable_route":23,"assert":117,"typr":509}],28:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.ExecutableRouteModelCrud = exports.ExecutableRouteGetResource = exports.ExecutableRouteAssets = exports.ExecutableRouteMiddleware = undefined;
-
-var _executable_route_middleware = require('./executable_route_middleware');
-
-var _executable_route_middleware2 = _interopRequireDefault(_executable_route_middleware);
-
-var _executable_route_assets = require('./executable_route_assets');
-
-var _executable_route_assets2 = _interopRequireDefault(_executable_route_assets);
-
-var _executable_route_get_resource = require('./executable_route_get_resource');
-
-var _executable_route_get_resource2 = _interopRequireDefault(_executable_route_get_resource);
-
-var _executable_route_model_crud = require('./executable_route_model_crud');
-
-var _executable_route_model_crud2 = _interopRequireDefault(_executable_route_model_crud);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.ExecutableRouteMiddleware = _executable_route_middleware2.default;
-exports.ExecutableRouteAssets = _executable_route_assets2.default;
-exports.ExecutableRouteGetResource = _executable_route_get_resource2.default;
-exports.ExecutableRouteModelCrud = _executable_route_model_crud2.default;
-
-
-},{"./executable_route_assets":24,"./executable_route_get_resource":25,"./executable_route_middleware":26,"./executable_route_model_crud":27}],29:[function(require,module,exports){
+},{"../../base/runtime":15,"assert":102,"typr":494}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -5752,17 +4271,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * @file Logger base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Logger base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Logger = function () {
-	/**
-  * Create a Logger instance.
-  * @param {string} arg_context - trace context.
-  * @returns {nothing}
+	/**
+  * Create a Logger instance.
+  * @param {string} arg_context - trace context.
+  * @returns {nothing}
   */
 
 	function Logger(arg_enabled) {
@@ -5780,9 +4299,9 @@ var Logger = function () {
 		this.set_trace(arg_enabled);
 	}
 
-	/**
-  * Enable traces.
-  * @returns {nothing}
+	/**
+  * Enable traces.
+  * @returns {nothing}
   */
 
 
@@ -5792,9 +4311,9 @@ var Logger = function () {
 			this.is_trace_enabled = true;
 		}
 
-		/**
-   * Disable traces.
-   * @returns {nothing}
+		/**
+   * Disable traces.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5803,9 +4322,9 @@ var Logger = function () {
 			this.is_trace_enabled = false;
 		}
 
-		/**
-   * Get trace flag.
-   * @returns {boolean}
+		/**
+   * Get trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -5814,10 +4333,10 @@ var Logger = function () {
 			return this.is_trace_enabled;
 		}
 
-		/**
-   * Set trace flag.
-   * @param {boolean} arg_enabled - trace flag.
-   * @returns {nothing}
+		/**
+   * Set trace flag.
+   * @param {boolean} arg_enabled - trace flag.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5826,9 +4345,9 @@ var Logger = function () {
 			this.is_trace_enabled = _typr2.default.isBoolean(arg_enabled) ? arg_enabled : false;
 		}
 
-		/**
-   * Toggle trace flag.
-   * @returns {boolean}
+		/**
+   * Toggle trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -5837,21 +4356,21 @@ var Logger = function () {
 			this.is_trace_enabled = !this.is_trace_enabled;
 		}
 
-		/**
-   * Get formatted trace message.
-   * @static
-   * @param {string|array} args - messages to format.
-   * @returns {string} - formatted trace message.
+		/**
+   * Get formatted trace message.
+   * @static
+   * @param {string|array} args - messages to format.
+   * @returns {string} - formatted trace message.
    */
 
 	}, {
 		key: 'debug',
 
 
-		/**
-   * Trace DEBUG formatted message.
-   * @param {string|array} arg_msg - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace DEBUG formatted message.
+   * @param {string|array} arg_msg - variadic messages to format.
+   * @returns {nothing}
    */
 		value: function debug() {
 			if (this.is_trace_enabled && this.is_trace_enabled_debug) {
@@ -5865,10 +4384,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace INFO formatted message.
-   * @param {string|array} arg_msg - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace INFO formatted message.
+   * @param {string|array} arg_msg - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5885,10 +4404,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace WARN formatted message.
-   * @param {string|array} arg_msg - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace WARN formatted message.
+   * @param {string|array} arg_msg - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5905,10 +4424,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace ERROR formatted message.
-   * @param {string|array} arg_msg - variadic messages to format.
-   * @returns {nothing}
+		/**
+   * Trace ERROR formatted message.
+   * @param {string|array} arg_msg - variadic messages to format.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5925,43 +4444,43 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Logger DEBUG implementation.
-   * @absract
-   * @method debug_self
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger DEBUG implementation.
+   * @absract
+   * @method debug_self
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
-		/**
-   * Logger INFO implementation.
-   * @absract
-   * @method info_self
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger INFO implementation.
+   * @absract
+   * @method info_self
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
-		/**
-   * Logger WARN implementation.
-   * @absract
-   * @method warn_self
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger WARN implementation.
+   * @absract
+   * @method warn_self
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
-		/**
-   * Logger ERROR implementation.
-   * @absract
-   * @method error_self
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger ERROR implementation.
+   * @absract
+   * @method error_self
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
-		/**
-   * Trace INFO message on "enter trace group".
-   * @param {string} arg_context - trace context.
-   * @param {string} arg_group - trace group name.
-   * @returns {nothing}
+		/**
+   * Trace INFO message on "enter trace group".
+   * @param {string} arg_context - trace context.
+   * @param {string} arg_group - trace group name.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5974,11 +4493,11 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace INFO message on "leave trace group".
-   * @param {string} arg_context - trace context.
-   * @param {string} arg_group - trace group name.
-   * @returns {nothing}
+		/**
+   * Trace INFO message on "leave trace group".
+   * @param {string} arg_context - trace context.
+   * @param {string} arg_group - trace group name.
+   * @returns {nothing}
    */
 
 	}, {
@@ -5991,10 +4510,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 1 separator.
-   * @param {string} arg_context - trace context.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 1 separator.
+   * @param {string} arg_context - trace context.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6007,10 +4526,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 2 separator.
-   * @param {string} arg_context - trace context.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 2 separator.
+   * @param {string} arg_context - trace context.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6023,10 +4542,10 @@ var Logger = function () {
 			}
 		}
 
-		/**
-   * Trace INFO trace level 3 separator.
-   * @param {string} arg_context - trace context.
-   * @returns {nothing}
+		/**
+   * Trace INFO trace level 3 separator.
+   * @param {string} arg_context - trace context.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6095,7 +4614,7 @@ var Logger = function () {
 exports.default = Logger;
 
 
-},{"typr":509}],30:[function(require,module,exports){
+},{"typr":494}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6116,19 +4635,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * @file Console logger class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Console logger class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var LoggerConsole = function (_Logger) {
 	_inherits(LoggerConsole, _Logger);
 
-	/**
-  * Create a Console Logger instance.
-  * @param {string} arg_context - trace context.
-  * @returns {nothing}
+	/**
+  * Create a Console Logger instance.
+  * @param {string} arg_context - trace context.
+  * @returns {nothing}
   */
 
 	function LoggerConsole(arg_enabled) {
@@ -6140,10 +4659,10 @@ var LoggerConsole = function (_Logger) {
 		return _this;
 	}
 
-	/**
-  * Logger DEBUG implementation.
-  * @param {string} arg_msg - message string.
-  * @returns {nothing}
+	/**
+  * Logger DEBUG implementation.
+  * @param {string} arg_msg - message string.
+  * @returns {nothing}
   */
 
 
@@ -6153,10 +4672,10 @@ var LoggerConsole = function (_Logger) {
 			console.debug(arg_msg);
 		}
 
-		/**
-   * Logger INFO implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger INFO implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6165,10 +4684,10 @@ var LoggerConsole = function (_Logger) {
 			console.info(arg_msg);
 		}
 
-		/**
-   * Logger WARN implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger WARN implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6177,10 +4696,10 @@ var LoggerConsole = function (_Logger) {
 			console.warn(arg_msg);
 		}
 
-		/**
-   * Logger ERROR implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger ERROR implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6196,7 +4715,7 @@ var LoggerConsole = function (_Logger) {
 exports.default = LoggerConsole;
 
 
-},{"./logger":29}],31:[function(require,module,exports){
+},{"./logger":20}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6215,17 +4734,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // const context = 'common/loggers/logger_manager'
 
-/**
- * @file Logger manager class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Logger manager class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var LoggerManager = function () {
-	/**
-  * Create a Logger manager instance.
-  * @param {object} arg_settings - loggers settings
-  * @returns {nothing}
+	/**
+  * Create a Logger manager instance.
+  * @param {object} arg_settings - loggers settings
+  * @returns {nothing}
   */
 
 	function LoggerManager(arg_settings) {
@@ -6239,10 +4758,10 @@ var LoggerManager = function () {
 		}
 	}
 
-	/**
-  * Load settings.
-  * @param {object} arg_settings - loggers settings
-  * @returns {nothing}
+	/**
+  * Load settings.
+  * @param {object} arg_settings - loggers settings
+  * @returns {nothing}
   */
 
 
@@ -6265,9 +4784,9 @@ var LoggerManager = function () {
 			this.$settings = arg_settings;
 		}
 
-		/**
-   * Enable traces.
-   * @returns {nothing}
+		/**
+   * Enable traces.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6278,9 +4797,9 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Disable traces.
-   * @returns {nothing}
+		/**
+   * Disable traces.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6291,9 +4810,9 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Get trace flag.
-   * @returns {boolean}
+		/**
+   * Get trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -6306,10 +4825,10 @@ var LoggerManager = function () {
 			return trace;
 		}
 
-		/**
-   * Set trace flag.
-   * @param {boolean} arg_value - trace flag.
-   * @returns {nothing}
+		/**
+   * Set trace flag.
+   * @param {boolean} arg_value - trace flag.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6320,9 +4839,9 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Toggle trace flag.
-   * @returns {boolean}
+		/**
+   * Toggle trace flag.
+   * @returns {boolean}
    */
 
 	}, {
@@ -6333,10 +4852,10 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Loggers DEBUG implementation.
-   * @param {string|array} arg_msg - messages strings.
-   * @returns {nothing}
+		/**
+   * Loggers DEBUG implementation.
+   * @param {string|array} arg_msg - messages strings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6351,10 +4870,10 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Loggers INFO implementation.
-   * @param {string|array} arg_msg - messages strings.
-   * @returns {nothing}
+		/**
+   * Loggers INFO implementation.
+   * @param {string|array} arg_msg - messages strings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6369,10 +4888,10 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Loggers WARN implementation.
-   * @param {string|array} arg_msg - messages strings.
-   * @returns {nothing}
+		/**
+   * Loggers WARN implementation.
+   * @param {string|array} arg_msg - messages strings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6387,10 +4906,10 @@ var LoggerManager = function () {
 			});
 		}
 
-		/**
-   * Loggers ERROR implementation.
-   * @param {string|array} arg_msg - messages strings.
-   * @returns {nothing}
+		/**
+   * Loggers ERROR implementation.
+   * @param {string|array} arg_msg - messages strings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6412,7 +4931,7 @@ var LoggerManager = function () {
 exports.default = LoggerManager;
 
 
-},{"./logger_console":30,"./logger_winston":32,"typr":509}],32:[function(require,module,exports){
+},{"./logger_console":21,"./logger_winston":23,"typr":494}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6459,19 +4978,19 @@ var customLevels = {
 	}
 };
 
-/**
- * @file Winston logger class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Winston logger class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var LoggerWinston = function (_Logger) {
 	_inherits(LoggerWinston, _Logger);
 
-	/**
-  * Create a Winston Logger instance.
-  * @param {string} arg_context - trace context.
-  * @returns {nothing}
+	/**
+  * Create a Winston Logger instance.
+  * @param {string} arg_context - trace context.
+  * @returns {nothing}
   */
 
 	function LoggerWinston(arg_enabled, arg_settings) {
@@ -6532,10 +5051,10 @@ var LoggerWinston = function (_Logger) {
 		return _this;
 	}
 
-	/**
-  * Create a console transport for Winston logger.
-  * @param {object} arg_transport_cfg - console transport settings.
-  * @returns {winston.transports.Console}
+	/**
+  * Create a console transport for Winston logger.
+  * @param {object} arg_transport_cfg - console transport settings.
+  * @returns {winston.transports.Console}
   */
 
 
@@ -6573,10 +5092,10 @@ var LoggerWinston = function (_Logger) {
 			return new _winston2.default.transports.Console(arg_transport_cfg);
 		}
 
-		/**
-   * Create a file transport for Winston logger.
-   * @param {object} arg_transport_cfg - file transport settings.
-   * @returns {winston.transports.File}
+		/**
+   * Create a file transport for Winston logger.
+   * @param {object} arg_transport_cfg - file transport settings.
+   * @returns {winston.transports.File}
    */
 
 	}, {
@@ -6628,10 +5147,10 @@ var LoggerWinston = function (_Logger) {
 			return new _winston2.default.transports.File(arg_transport_cfg);
 		}
 
-		/**
-   * Logger DEBUG implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger DEBUG implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6640,10 +5159,10 @@ var LoggerWinston = function (_Logger) {
 			this.logger.log('debug', arg_msg);
 		}
 
-		/**
-   * Logger INFO implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger INFO implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6652,10 +5171,10 @@ var LoggerWinston = function (_Logger) {
 			this.logger.log('info', arg_msg);
 		}
 
-		/**
-   * Logger WARN implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger WARN implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6664,10 +5183,10 @@ var LoggerWinston = function (_Logger) {
 			this.logger.log('warn', arg_msg);
 		}
 
-		/**
-   * Logger ERROR implementation.
-   * @param {string} arg_msg - message string.
-   * @returns {nothing}
+		/**
+   * Logger ERROR implementation.
+   * @param {string} arg_msg - message string.
+   * @returns {nothing}
    */
 
 	}, {
@@ -6684,7 +5203,7 @@ exports.default = LoggerWinston;
 
 
 }).call(this,require('_process'))
-},{"./logger":29,"_process":334,"typr":509,"winston":511}],33:[function(require,module,exports){
+},{"./logger":20,"_process":319,"typr":494,"winston":496}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6705,19 +5224,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * @file Duration metric class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Duration metric class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var MetricDuration = function (_Metric) {
 	_inherits(MetricDuration, _Metric);
 
-	/**
-  * MetricDuration constructor.
- * @extends Metric
- * @returns {nothing}
+	/**
+  * MetricDuration constructor.
+ * @extends Metric
+ * @returns {nothing}
   */
 
 	function MetricDuration() {
@@ -6726,8 +5245,8 @@ var MetricDuration = function (_Metric) {
 		return _possibleConstructorReturn(this, Object.getPrototypeOf(MetricDuration).call(this));
 	}
 
-	/**
-     * Executed before request processing
+	/**
+     * Executed before request processing
      */
 
 
@@ -6737,8 +5256,8 @@ var MetricDuration = function (_Metric) {
 			this.ts_before = Date.now();
 		}
 
-		/**
-      * Executed at each request processing iteration
+		/**
+      * Executed at each request processing iteration
       */
 
 	}, {
@@ -6748,8 +5267,8 @@ var MetricDuration = function (_Metric) {
 			this.ts_at.push(Date.now());
 		}
 
-		/**
-      * Executed after request processing
+		/**
+      * Executed after request processing
       */
 
 	}, {
@@ -6758,8 +5277,8 @@ var MetricDuration = function (_Metric) {
 			this.ts_after = Date.now();
 		}
 
-		/**
-      * Returns metrics values plain object
+		/**
+      * Returns metrics values plain object
       */
 
 	}, {
@@ -6786,7 +5305,7 @@ var MetricDuration = function (_Metric) {
 exports.default = MetricDuration;
 
 
-},{"../base/metric":11}],34:[function(require,module,exports){
+},{"../base/metric":11}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6807,19 +5326,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * @file Host information metric class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Host information metric class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var MetricHost = function (_Metric) {
 				_inherits(MetricHost, _Metric);
 
-				/**
-     * MetricHost constructor.
-    * @extends Metric
-    * @returns {nothing}
+				/**
+     * MetricHost constructor.
+    * @extends Metric
+    * @returns {nothing}
      */
 
 				function MetricHost() {
@@ -6828,8 +5347,8 @@ var MetricHost = function (_Metric) {
 								return _possibleConstructorReturn(this, Object.getPrototypeOf(MetricHost).call(this));
 				}
 
-				/**
-        * Executed before request processing
+				/**
+        * Executed before request processing
         */
 
 
@@ -6837,24 +5356,24 @@ var MetricHost = function (_Metric) {
 								key: 'before',
 								value: function before() {}
 
-								/**
-            * Executed at each request processing iteration
+								/**
+            * Executed at each request processing iteration
             */
 
 				}, {
 								key: 'iteration',
 								value: function iteration() {}
 
-								/**
-            * Executed after request processing
+								/**
+            * Executed after request processing
             */
 
 				}, {
 								key: 'after',
 								value: function after() {}
 
-								/**
-            * Returns metrics values plain object
+								/**
+            * Returns metrics values plain object
             */
 
 				}, {
@@ -6870,7 +5389,7 @@ var MetricHost = function (_Metric) {
 exports.default = MetricHost;
 
 
-},{"../base/metric":11}],35:[function(require,module,exports){
+},{"../base/metric":11}],26:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6904,21 +5423,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/**
- * Metric class for HTTP servers.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Metric class for HTTP servers.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var MetricHttp = function (_Metric) {
 	_inherits(MetricHttp, _Metric);
 
-	/**
-  * MetricHttp constructor.
- * @extends Metric
-  * @param {object}  Http request object (Request class instance)
-  * @param {object}  Http response object (Response class instance)
- * @returns {nothing}
+	/**
+  * MetricHttp constructor.
+ * @extends Metric
+  * @param {object}  Http request object (Request class instance)
+  * @param {object}  Http response object (Response class instance)
+ * @returns {nothing}
   */
 
 	function MetricHttp(arg_request, arg_response) {
@@ -6936,8 +5455,8 @@ var MetricHttp = function (_Metric) {
 		return _this;
 	}
 
-	/**
-     * Executed before request processing
+	/**
+     * Executed before request processing
      */
 
 
@@ -6985,16 +5504,16 @@ var MetricHttp = function (_Metric) {
 			this.metrics.response.status = null;
 		}
 
-		/**
-      * Executed at each request processing iteration
+		/**
+      * Executed at each request processing iteration
       */
 
 	}, {
 		key: 'iteration',
 		value: function iteration() {}
 
-		/**
-      * Executed after request processing
+		/**
+      * Executed after request processing
       */
 
 	}, {
@@ -7014,8 +5533,8 @@ var MetricHttp = function (_Metric) {
 			// console.log(this.metrics, 'request metrics')
 		}
 
-		/**
-      * Returns metrics values plain object
+		/**
+      * Returns metrics values plain object
       */
 
 	}, {
@@ -7024,24 +5543,24 @@ var MetricHttp = function (_Metric) {
 			return this.metrics;
 		}
 
-		/**
-      * Executed before main request processing
-      * {object}   server object (Server base class instance)
+		/**
+      * Executed before main request processing
+      * {object}   server object (Server base class instance)
       */
 
 	}, {
 		key: 'get_pid',
 
 
-		/**
-      * Returns process id
+		/**
+      * Returns process id
       */
 		value: function get_pid() {
 			return process.pid;
 		}
 
-		/**
-      * Returns request id or a self generated unique id
+		/**
+      * Returns request id or a self generated unique id
       */
 
 	}, {
@@ -7050,8 +5569,8 @@ var MetricHttp = function (_Metric) {
 			return _typr2.default.isFunction(this.req.getId) && this.req.getId() || this.req.id && _typr2.default.isFunction(this.req.id) && this.req.id() || this.req.id || _nodeUuid2.default.v1();
 		}
 
-		/**
-      * Returns client ip address or undefined
+		/**
+      * Returns client ip address or undefined
       */
 
 	}, {
@@ -7060,8 +5579,8 @@ var MetricHttp = function (_Metric) {
 			return this.req.ip || this.req._remoteAddress || this.req.connection && this.req.connection.remoteAddress || undefined;
 		}
 
-		/**
-      * Returns client port or undefined
+		/**
+      * Returns client port or undefined
       */
 
 	}, {
@@ -7070,8 +5589,8 @@ var MetricHttp = function (_Metric) {
 			return this.req.connection && this.req.connection.remotePort || undefined;
 		}
 
-		/**
-      * Returns client security token or undefined
+		/**
+      * Returns client security token or undefined
       */
 
 	}, {
@@ -7080,8 +5599,8 @@ var MetricHttp = function (_Metric) {
 			return this.req.secure || undefined;
 		}
 
-		/**
-      * Returns processing latency (response time)
+		/**
+      * Returns processing latency (response time)
       */
 
 	}, {
@@ -7097,7 +5616,7 @@ var MetricHttp = function (_Metric) {
 		value: function create_middleware(arg_server) {
 			// HANDLE END OF REQUEST PROCESSING FOR RESTIFY SERVER
 			if (arg_server.is_restify_server) {
-				arg_server.server.on('after', function (req, res) {
+				arg_server.server.on('after', function (req /*, res*/) {
 					// console.log('MetricHttp middleware on finish')
 
 					var metric = req.devapt_metrics;
@@ -7142,227 +5661,50 @@ var MetricHttp = function (_Metric) {
 }(_metric2.default);
 
 // RESTIFY AUDIT FORMAT
-
-
-exports.default = MetricHttp;
-var r = {
-	"name": "audit", "hostname": "LFR000867",
-	"pid": 6552, "audit": true,
-	"level": 30,
-	"remoteAddress": "::ffff:127.0.0.1", "remotePort": 58229,
-	"req_id": "8d407e4e-5ee7-4c46-b7e9-e046d268a4c7",
-	"req": {
-		"method": "GET", "url": "/tutorial-rest/api/v1/views/",
-		"headers": {
-			"user-agent": "curl/7.30.0",
-			"host": "localhost:8080",
-			"accept": '*/*'
+/*
+const r = {
+	"name":"audit","hostname":"LFR000867",
+	"pid":6552,"audit":true,
+	"level":30,
+	"remoteAddress":"::ffff:127.0.0.1","remotePort":58229,
+	"req_id":"8d407e4e-5ee7-4c46-b7e9-e046d268a4c7",
+	"req":{
+		"method":"GET","url":"/tutorial-rest/api/v1/views/",
+		"headers":{
+			"user-agent":"curl/7.30.0",
+			"host":"localhost:8080",
+			"accept":'* / *'
 		},
-		"httpVersion": "1.1",
-		"trailers": {},
-		"version": "* ",
-		"timers": {
-			"parseAccept": 78, "parseAuthorization": 5, "parseQueryString": 19, "_jsonp": 153, "gzip": 43, "readBody": 21,
-			"parseBody": 9, "bunyan": 39, "rateLimit": 175, "exec_http": 1763
+		"httpVersion":"1.1",
+		"trailers":{},
+		"version":"* ",
+		"timers":{
+			"parseAccept":78,"parseAuthorization":5,"parseQueryString":19,"_jsonp":153,"gzip":43,"readBody":21,
+			"parseBody":9,"bunyan":39,"rateLimit":175,"exec_http":1763
 		}
 	},
-	"res": {
-		"statusCode": 200,
-		"headers": {
-			"content- type": "application/ json",
-			"content- length": 662
+	"res":{
+		"statusCode":200,
+		"headers":{
+			"content- type":"application/ json",
+			"content- length":662
 		},
-		"trailer": false
+		"trailer":false
 	},
-	"latency": 0,
-	"_audit": true,
-	"msg": "handled: 200",
-	"time": "2015- 12 - 17T16: 10:00.583Z",
-	"v": 0
-};
-
-
-}).call(this,require('_process'))
-},{"../../../package.json":536,"../base/metric":11,"_process":334,"assert":117,"node-uuid":490,"typr":509}],36:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _metric_http = require('./metric_http');
-
-var _metric_http2 = _interopRequireDefault(_metric_http);
-
-var _metric_http_state = require('./metric_http_state');
-
-var _metric_http_state2 = _interopRequireDefault(_metric_http_state);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var context = 'common/metrics/metric_hhtp_reducer';
-
-/**
- * @file Reducer class for HTTP metrics collect.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var MetricHttpReducer = function () {
-    /**
-     * Reducer for HTTP metric class.
-     * @returns {nothing}
-    */
-
-    function MetricHttpReducer() {
-        _classCallCheck(this, MetricHttpReducer);
-    }
-
-    _createClass(MetricHttpReducer, [{
-        key: 'reduce',
-        value: function reduce(arg_state, arg_metric) {
-            (0, _assert2.default)(_typr2.default.isObject(arg_state) && arg_state.is_metric_http_state, context + ':reduce:bad state object');
-            (0, _assert2.default)(_typr2.default.isObject(arg_metric) || _typr2.default.isArray(arg_metric), context + ':reduce:bad metric object or array');
-
-            arg_metric = _typr2.default.isArray(arg_metric) ? arg_metric : [arg_metric];
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = arg_metric[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var loop_metric = _step.value;
-
-                    (0, _assert2.default)(_typr2.default.isObject(loop_metric) && loop_metric.metric == 'http', context + ':reduce:bad metric object');
-
-                    // VERSIONS
-                    this.incr(arg_state, 'version_counters', loop_metric.version);
-
-                    // REQUEST UUID
-                    arg_state.metrics.id_counter += 1;
-                    this.incr(arg_state, 'pid_counters', loop_metric.pid);
-
-                    // DURATIONS
-                    arg_state.metrics.latency_counter += 1;
-                    arg_state.metrics.latency_sum += loop_metric.latency;
-                    arg_state.metrics.latency_mean = arg_state.metrics.latency_sum / arg_state.metrics.latency_counter;
-                    arg_state.metrics.latency_min = loop_metric.latency < arg_state.metrics.latency_min ? loop_metric.latency : arg_state.metrics.latency_min;
-                    arg_state.metrics.latency_max = loop_metric.latency > arg_state.metrics.latency_max ? loop_metric.latency : arg_state.metrics.latency_max;
-
-                    // SERVICE IDENTIFICATION
-                    this.incr(arg_state, 'service_name_counters', loop_metric.service.name);
-                    this.incr(arg_state, 'service_url_counters', loop_metric.service.url);
-                    this.incr(arg_state, 'service_method_counters', loop_metric.service.method);
-                    this.incr(arg_state, 'service_http_version_counters', loop_metric.service.http_version);
-                    this.incr(arg_state, 'service_route_counters', loop_metric.service.route);
-
-                    // SERVER IDENTIFICATION
-                    this.incr(arg_state, 'server_node_name_counters', loop_metric.server.node_name);
-                    this.incr(arg_state, 'server_server_name_counters', loop_metric.server.server_name);
-
-                    // CLIENT IDENTIFICATION
-                    this.incr(arg_state, 'client_user_name_counters', loop_metric.client.user_name);
-                    this.incr(arg_state, 'client_user_id_counters', loop_metric.client.user_id);
-                    this.incr(arg_state, 'client_browser_counters', loop_metric.client.browser);
-                    this.incr(arg_state, 'client_referrer_counters', loop_metric.client.referrer);
-
-                    // RESPONSE
-                    this.incr(arg_state, 'response_status_counters', loop_metric.response.status);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return arg_state;
-        }
-    }, {
-        key: 'incr',
-        value: function incr(arg_state, arg_state_key, arg_metric_key) {
-            arg_state_key = arg_state_key ? arg_state_key : 'unknow';
-
-            if (!(arg_state_key in arg_state.metrics)) {
-                arg_state.metrics[arg_state_key] = {};
-            }
-
-            if (!(arg_metric_key in arg_state.metrics[arg_state_key])) {
-                arg_state.metrics[arg_state_key][arg_metric_key] = 0;
-            }
-
-            arg_state.metrics[arg_state_key][arg_metric_key] += 1;
-        }
-    }, {
-        key: 'create_state',
-        value: function create_state() {
-            return new _metric_http_state2.default();
-        }
-    }]);
-
-    return MetricHttpReducer;
-}();
-
-/*
-		arg_state.metrics.versions = {}
-		
-		// REQUEST UUID
-		arg_state.metrics.id_counter = 0
-		arg_state.metrics.pid_counters = {} // { pid1:counter1, pid2:counter2 }
-		
-		// DURATIONS
-		arg_state.metrics.latency_min = undefined
-		arg_state.metrics.latency_counter = 0
-		arg_state.metrics.latency_sum = 0
-		arg_state.metrics.latency_mean = undefined
-		arg_state.metrics.latency_max = undefined
-		
-		// SERVICE IDENTIFICATION
-		arg_state.metrics.service_name_counters = {}
-		arg_state.metrics.service_url_counters = {}
-		arg_state.metrics.service_method_counters = {}
-		arg_state.metrics.service_http_version_counters = {} 
-		arg_state.metrics.service_route_counters = {}
-		
-		// SERVER IDENTIFICATION
-		arg_state.metrics.server_node_name_counters = {}
-		
-		// CLIENT IDENTIFICATION
-		arg_state.metrics.client_user_name_counters = {}
-		arg_state.metrics.client_user_id_counters = {}
-		arg_state.metrics.client_browser_counters = {}
-		arg_state.metrics.client_referrer_counters = {}
-	
-		// RESPONSE
-		arg_state.metrics.response_status_counters = {}
+	"latency":0,
+	"_audit":true,
+	"msg":"handled: 200",
+	"time":"2015- 12 - 17T16: 10:00.583Z",
+	"v":0
+}
 */
 
 
-exports.default = MetricHttpReducer;
+exports.default = MetricHttp;
 
 
-},{"./metric_http":35,"./metric_http_state":37,"assert":117,"typr":509}],37:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"../../../package.json":521,"../base/metric":11,"_process":319,"assert":102,"node-uuid":475,"typr":494}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7379,9 +5721,177 @@ var _assert = require('assert');
 
 var _assert2 = _interopRequireDefault(_assert);
 
+var _metric_http_state = require('./metric_http_state');
+
+var _metric_http_state2 = _interopRequireDefault(_metric_http_state);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var context = 'common/metrics/metric_hhtp_reducer';
+
+/**
+ * @file Reducer class for HTTP metrics collect.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var MetricHttpReducer = function () {
+	/**
+  * Reducer for HTTP metric class.
+  * @returns {nothing}
+ */
+
+	function MetricHttpReducer() {
+		_classCallCheck(this, MetricHttpReducer);
+	}
+
+	_createClass(MetricHttpReducer, [{
+		key: 'reduce',
+		value: function reduce(arg_state, arg_metric) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_state) && arg_state.is_metric_http_state, context + ':reduce:bad state object');
+			(0, _assert2.default)(_typr2.default.isObject(arg_metric) || _typr2.default.isArray(arg_metric), context + ':reduce:bad metric object or array');
+
+			arg_metric = _typr2.default.isArray(arg_metric) ? arg_metric : [arg_metric];
+
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = arg_metric[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var loop_metric = _step.value;
+
+					(0, _assert2.default)(_typr2.default.isObject(loop_metric) && loop_metric.metric == 'http', context + ':reduce:bad metric object');
+
+					// VERSIONS
+					this.incr(arg_state, 'version_counters', loop_metric.version);
+
+					// REQUEST UUID
+					arg_state.metrics.id_counter += 1;
+					this.incr(arg_state, 'pid_counters', loop_metric.pid);
+
+					// DURATIONS
+					arg_state.metrics.latency_counter += 1;
+					arg_state.metrics.latency_sum += loop_metric.latency;
+					arg_state.metrics.latency_mean = arg_state.metrics.latency_sum / arg_state.metrics.latency_counter;
+					arg_state.metrics.latency_min = loop_metric.latency < arg_state.metrics.latency_min ? loop_metric.latency : arg_state.metrics.latency_min;
+					arg_state.metrics.latency_max = loop_metric.latency > arg_state.metrics.latency_max ? loop_metric.latency : arg_state.metrics.latency_max;
+
+					// SERVICE IDENTIFICATION
+					this.incr(arg_state, 'service_name_counters', loop_metric.service.name);
+					this.incr(arg_state, 'service_url_counters', loop_metric.service.url);
+					this.incr(arg_state, 'service_method_counters', loop_metric.service.method);
+					this.incr(arg_state, 'service_http_version_counters', loop_metric.service.http_version);
+					this.incr(arg_state, 'service_route_counters', loop_metric.service.route);
+
+					// SERVER IDENTIFICATION
+					this.incr(arg_state, 'server_node_name_counters', loop_metric.server.node_name);
+					this.incr(arg_state, 'server_server_name_counters', loop_metric.server.server_name);
+
+					// CLIENT IDENTIFICATION
+					this.incr(arg_state, 'client_user_name_counters', loop_metric.client.user_name);
+					this.incr(arg_state, 'client_user_id_counters', loop_metric.client.user_id);
+					this.incr(arg_state, 'client_browser_counters', loop_metric.client.browser);
+					this.incr(arg_state, 'client_referrer_counters', loop_metric.client.referrer);
+
+					// RESPONSE
+					this.incr(arg_state, 'response_status_counters', loop_metric.response.status);
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+
+			return arg_state;
+		}
+	}, {
+		key: 'incr',
+		value: function incr(arg_state, arg_state_key, arg_metric_key) {
+			arg_state_key = arg_state_key ? arg_state_key : 'unknow';
+
+			if (!(arg_state_key in arg_state.metrics)) {
+				arg_state.metrics[arg_state_key] = {};
+			}
+
+			if (!(arg_metric_key in arg_state.metrics[arg_state_key])) {
+				arg_state.metrics[arg_state_key][arg_metric_key] = 0;
+			}
+
+			arg_state.metrics[arg_state_key][arg_metric_key] += 1;
+		}
+	}, {
+		key: 'create_state',
+		value: function create_state() {
+			return new _metric_http_state2.default();
+		}
+	}]);
+
+	return MetricHttpReducer;
+}();
+
+/*
+		arg_state.metrics.versions = {}
+		
+		// REQUEST UUID
+		arg_state.metrics.id_counter = 0
+		arg_state.metrics.pid_counters = {} // { pid1:counter1, pid2:counter2 }
+		
+		// DURATIONS
+		arg_state.metrics.latency_min = undefined
+		arg_state.metrics.latency_counter = 0
+		arg_state.metrics.latency_sum = 0
+		arg_state.metrics.latency_mean = undefined
+		arg_state.metrics.latency_max = undefined
+		
+		// SERVICE IDENTIFICATION
+		arg_state.metrics.service_name_counters = {}
+		arg_state.metrics.service_url_counters = {}
+		arg_state.metrics.service_method_counters = {}
+		arg_state.metrics.service_http_version_counters = {} 
+		arg_state.metrics.service_route_counters = {}
+		
+		// SERVER IDENTIFICATION
+		arg_state.metrics.server_node_name_counters = {}
+		
+		// CLIENT IDENTIFICATION
+		arg_state.metrics.client_user_name_counters = {}
+		arg_state.metrics.client_user_id_counters = {}
+		arg_state.metrics.client_browser_counters = {}
+		arg_state.metrics.client_referrer_counters = {}
+	
+		// RESPONSE
+		arg_state.metrics.response_status_counters = {}
+*/
+
+
+exports.default = MetricHttpReducer;
+
+
+},{"./metric_http_state":28,"assert":102,"typr":494}],28:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// import T from 'typr'
+// import assert from 'assert'
 
 var MetricHttpState = function () {
 	function MetricHttpState() {
@@ -7427,7 +5937,7 @@ var MetricHttpState = function () {
 	}
 
 	_createClass(MetricHttpState, [{
-		key: 'get_values',
+		key: "get_values",
 		value: function get_values() {
 			return this.metrics;
 		}
@@ -7439,7 +5949,7 @@ var MetricHttpState = function () {
 exports.default = MetricHttpState;
 
 
-},{"assert":117,"typr":509}],38:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7600,7 +6110,1122 @@ var parser = {
 exports.default = parser;
 
 
-},{"fs":116,"ini":471}],39:[function(require,module,exports){
+},{"fs":101,"ini":456}],30:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _plugins_manager = require('./plugins_manager');
+
+var _plugins_manager2 = _interopRequireDefault(_plugins_manager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import Collection from './collection'
+
+
+var context = 'common/base/features_manager';
+
+/**
+ * @file Features manager class.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var FeaturesManager = function (_PluginsManager) {
+	_inherits(FeaturesManager, _PluginsManager);
+
+	/**
+  * Create a features manager instance.
+  * @extends PluginsManager
+  * @param {string|undefined} arg_log_context - optional.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function FeaturesManager(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, FeaturesManager);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FeaturesManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+
+		_this.is_features_manager = true;
+		return _this;
+	}
+
+	/**
+     * Create a feature instance by lookup on self contained plugins.
+     * @param {string} arg_class_name - type or class feature name.
+     * @param {string} arg_name - feature name.
+     * @param {object} arg_settings - feature settings plain object.
+     * @param {object} arg_state - feature initial state plain object (optional).
+     * @returns {object} feature instance.
+     */
+
+
+	_createClass(FeaturesManager, [{
+		key: 'create',
+		value: function create(arg_class_name, arg_name, arg_settings, arg_state) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':bad class string');
+			(0, _assert2.default)(_typr2.default.isString(arg_name), context + ':bad name string');
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
+			if (arg_state) {
+				(0, _assert2.default)(_typr2.default.isObject(arg_state), context + ':bad state object');
+			}
+
+			var found_plugin = this.registered_plugins.find_by_filter(function (plugin) {
+				return plugin.has(arg_class_name);
+			});
+
+			if (found_plugin) {
+				// console.log(context + ':create:loop on plugin ' + plugin.get_name() + ' found with type=' + arg_class_name + ' name=' + arg_name)
+
+				return found_plugin.create(arg_class_name, arg_name, arg_settings, arg_state);
+			}
+
+			console.error(context + ':create:feature not found with type=' + arg_class_name + ' name=' + arg_name);
+
+			return undefined;
+		}
+
+		/**
+      * Test if a feature class is known into self contained plugins.
+      * @param {string} arg_class_name - feature class name.
+      * @returns {boolean} feature class found or not.
+      */
+
+	}, {
+		key: 'has',
+		value: function has(arg_class_name) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':bad class string');
+
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = this.$items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var plugin = _step.value;
+
+					if (plugin.has(arg_class_name)) {
+						return true;
+					}
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+
+			return false;
+		}
+	}]);
+
+	return FeaturesManager;
+}(_plugins_manager2.default);
+
+exports.default = FeaturesManager;
+
+
+},{"./plugins_manager":34,"assert":102,"typr":494}],31:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _plugin = require('./plugin');
+
+var _plugin2 = _interopRequireDefault(_plugin);
+
+var _runtime = require('../base/runtime');
+
+var _runtime2 = _interopRequireDefault(_runtime);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/rendering/plugins/rendering_plugin';
+
+/**
+ * Plugin class for features managing.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var FeaturesPlugin = function (_Plugin) {
+	_inherits(FeaturesPlugin, _Plugin);
+
+	/**
+  * Create a Featured Plugin instance.
+ * @extends Instance
+ * @param {PluginsManager} arg_manager - plugins manager
+ * @param {string} arg_name - plugin name
+ * @param {string} arg_class - plugin class name
+ * @param {object} arg_settings - plugin settings map
+ * @param {string|undefined} arg_log_context - optional.
+ * @returns {nothing}
+  */
+
+	function FeaturesPlugin(arg_manager, arg_name, arg_class, arg_settings, arg_log_context) {
+		_classCallCheck(this, FeaturesPlugin);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FeaturesPlugin).call(this, arg_manager, arg_name, arg_class, arg_settings, arg_log_context ? arg_log_context : context));
+
+		_this.is_features_plugin = true;
+		return _this;
+	}
+
+	/**
+     * Create a component instance by lookup on self contained plugins.
+  * @abstract
+     * @param {string} arg_class_name - type or class feature name.
+     * @param {string} arg_name - feature name.
+     * @param {object} arg_settings - feature settings plain object.
+     * @param {object} arg_state - feature initial state plain object (optional).
+     * @returns {object} feature instance.
+     */
+
+
+	_createClass(FeaturesPlugin, [{
+		key: 'create',
+		value: function create(arg_class_name, arg_name, arg_settings, arg_state) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':bad class string');
+			(0, _assert2.default)(_typr2.default.isString(arg_name), context + ':bad name string');
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
+			if (arg_state) {
+				(0, _assert2.default)(_typr2.default.isObject(arg_state), context + ':bad state object');
+			}
+
+			var component_class = FeaturesPlugin.get_class(arg_class_name);
+			if (component_class) {
+				return new component_class(arg_name, arg_settings, arg_state);
+			}
+
+			(0, _assert2.default)(false, context + ':not yet implemented');
+
+			return undefined;
+		}
+
+		/**
+      * Get a feature class.
+   * @abstract
+      * @param {string} arg_class_name - feature class name.
+      * @returns {object} feature class.
+      */
+
+	}, {
+		key: 'has',
+
+
+		/**
+      * Test if a feature class is known into self contained plugins.
+   * @abstract
+      * @param {string} arg_class_name - feature class name.
+      * @returns {boolean} feature class found or not.
+      */
+		value: function has(arg_class_name) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':bad class string');
+
+			(0, _assert2.default)(false, context + ':not yet implemented');
+
+			return false;
+		}
+
+		/**
+   * Load a feature class from a script file.
+   * @param {string} arg_path - path file name
+   * @returns {object|undefined} - class object
+   */
+
+	}, {
+		key: 'load_feature_class',
+		value: function load_feature_class(arg_path) {
+			(0, _assert2.default)(_typr2.default.isString(arg_path), context + ':bad path string');
+
+			try {
+				var file_path_name = _runtime2.default.context.get_absolute_plugin_path(arg_path);
+				// console.info('loading plugin at [' + arg_path + '] at [' + file_path_name + ']')
+
+				var required = require(file_path_name);
+				var FeatureClass = 'default' in required ? required.default : required;
+				// console.log('loading rendering plugin class', PluginClass)
+
+				return FeatureClass;
+			} catch (e) {
+				console.error(context + '.load:' + arg_path + ' failed', e);
+			}
+
+			return undefined;
+		}
+	}], [{
+		key: 'get_class',
+		value: function get_class(arg_class_name) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':get_class:bad class string');
+
+			(0, _assert2.default)(false, context + ':get_class:not yet implemented');
+
+			return false;
+		}
+	}]);
+
+	return FeaturesPlugin;
+}(_plugin2.default);
+
+exports.default = FeaturesPlugin;
+
+
+},{"../base/runtime":15,"./plugin":32,"assert":102,"typr":494}],32:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _instance = require('../base/instance');
+
+var _instance2 = _interopRequireDefault(_instance);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/plugins/plugin';
+
+/**
+ * @file Plugins base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var Plugin = function (_Instance) {
+	_inherits(Plugin, _Instance);
+
+	/**
+  * Create a plugin instance.
+  * @extends Instance
+  * @param {PluginsManager} arg_manager - plugins manager
+  * @param {string} arg_name - plugin name
+  * @param {string} arg_class - plugin class name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string|undefined} arg_log_context - optional.
+  * @returns {nothing}
+  */
+
+	function Plugin(arg_manager, arg_name, arg_class, arg_settings, arg_log_context) {
+		_classCallCheck(this, Plugin);
+
+		var create_context = _typr2.default.isString(arg_log_context) ? arg_log_context : context;
+		(0, _assert2.default)(_typr2.default.isObject(arg_manager) && arg_manager.is_plugins_manager, create_context + ':bad manager object for ' + arg_name);
+		(0, _assert2.default)(_typr2.default.isString(arg_name), create_context + ':bad name string');
+		(0, _assert2.default)(_typr2.default.isString(arg_class.toString()), create_context + ':bad class string for ' + arg_name);
+		(0, _assert2.default)(_typr2.default.isObject(arg_settings), create_context + ':bad settings object for ' + arg_name);
+
+		arg_settings.version = _typr2.default.isString(arg_settings.version) ? arg_settings.version : '0.0.0';
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Plugin).call(this, 'plugins', arg_class ? arg_class.toString() : 'Plugin', arg_name, arg_settings, arg_log_context));
+
+		_this.is_plugin = true;
+
+		_this.$version = arg_settings.version;
+		_this.manager = arg_manager;
+		_this.is_enabled = false;
+		return _this;
+	}
+
+	/**
+  * Enable a plugin.
+  * @abstract
+  * @param {object|undefined} arg_context - optional contextual map
+  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+  */
+
+
+	_createClass(Plugin, [{
+		key: 'enable',
+		value: function enable() /*arg_context*/{
+			this.is_enabled = true;
+			this.manager.enabled_plugins.add(this);
+			return Promise.resolve(true);
+		}
+
+		/**
+   * Disable a plugin.
+   * @abstract
+   * @param {object|undefined} arg_context - optional contextual map
+   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+   */
+
+	}, {
+		key: 'disable',
+		value: function disable() /*arg_context*/{
+			this.is_enabled = false;
+			this.manager.enabled_plugins.remove(this);
+			return Promise.resolve(true);
+		}
+
+		/**
+   * Get the plugin version
+   * @returns {string} plugin version
+   */
+
+	}, {
+		key: 'get_version',
+		value: function get_version() {
+			return this.$version;
+		}
+	}]);
+
+	return Plugin;
+}(_instance2.default);
+
+exports.default = Plugin;
+
+
+},{"../base/instance":9,"assert":102,"typr":494}],33:[function(require,module,exports){
+(function (__dirname){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _services_default_plugin = require('../../plugins/default/services_default_plugin');
+
+var _services_default_plugin2 = _interopRequireDefault(_services_default_plugin);
+
+var _services_manager = require('../plugins/services_manager');
+
+var _services_manager2 = _interopRequireDefault(_services_manager);
+
+var _rendering_manager = require('../plugins/rendering_manager');
+
+var _rendering_manager2 = _interopRequireDefault(_rendering_manager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var context = 'common/plugins/plugins_factory';
+
+/**
+ * Plugin class for renderers plugin.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var PluginsFactory = function () {
+	/**
+  * Create a PluginsFactory instance.
+ * @returns {nothing}
+  */
+
+	function PluginsFactory(arg_runtime) {
+		_classCallCheck(this, PluginsFactory);
+
+		this.is_plugins_factory = true;
+
+		// SERVICES PLUGINS MANAGER
+		this.services_manager = new _services_manager2.default(context, arg_runtime.get_logger_manager());
+		var default_svc_plugin = new _services_default_plugin2.default(this.services_manager);
+		this.services_manager.register_plugin(default_svc_plugin);
+
+		// RENDERING PLUGINS MANAGER
+		var default_plugin_path = arg_runtime.context.get_absolute_path(__dirname, '../../plugins/default/rendering_default_plugin');
+		var plugins = [default_plugin_path];
+		this.rendering_manager = new _rendering_manager2.default(context, arg_runtime.get_logger_manager());
+		this.rendering_manager.load(plugins);
+	}
+
+	/**
+  * Get services plugins manager.
+  * @returns {FeaturesManager}
+  */
+
+
+	_createClass(PluginsFactory, [{
+		key: 'get_services_manager',
+		value: function get_services_manager() {
+			(0, _assert2.default)(_typr2.default.isObject(this.services_manager), context + ':get_services_manager:bad services manager object');
+			return this.services_manager;
+		}
+
+		/**
+   * Get rendering plugins manager.
+   * @returns {FeaturesManager}
+   */
+
+	}, {
+		key: 'get_rendering_manager',
+		value: function get_rendering_manager() {
+			(0, _assert2.default)(_typr2.default.isObject(this.rendering_manager), context + ':get_rendering_manager:bad rendering manager object');
+			return this.rendering_manager;
+		}
+	}]);
+
+	return PluginsFactory;
+}();
+
+exports.default = PluginsFactory;
+
+
+}).call(this,"/dist\\common\\plugins")
+},{"../../plugins/default/services_default_plugin":99,"../plugins/rendering_manager":35,"../plugins/services_manager":36,"assert":102,"typr":494}],34:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _runtime = require('../base/runtime');
+
+var _runtime2 = _interopRequireDefault(_runtime);
+
+var _errorable = require('../base/errorable');
+
+var _errorable2 = _interopRequireDefault(_errorable);
+
+var _collection = require('../base/collection');
+
+var _collection2 = _interopRequireDefault(_collection);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/base/plugins_manager';
+
+/**
+ * @file Plugins manager class.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var PluginsManager = function (_Errorable) {
+	_inherits(PluginsManager, _Errorable);
+
+	/**
+  * Create a plugins manager instance.
+  * @extends Errorable
+  * @param {string|undefined} arg_log_context - optional.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function PluginsManager(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, PluginsManager);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PluginsManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+
+		_this.is_plugins_manager = true;
+
+		_this.registered_plugins = new _collection2.default();
+		_this.enabled_plugins = new _collection2.default();
+		return _this;
+	}
+
+	/**
+  * Load a map of plugins.
+  * @param {array} arg_plugins - plugins file name or class array.
+  * @returns {nothing}
+  */
+
+
+	_createClass(PluginsManager, [{
+		key: 'load',
+		value: function load(arg_plugins) {
+			// console.log(arg_plugins, 'arg_plugins')
+			// const base_dir = get_base_dir()
+
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = arg_plugins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var plugin = _step.value;
+
+					// GIVEN PLUGIN IS A RELATIVE FILE PATH NAME
+					if (_typr2.default.isString(plugin)) {
+						// const plugin_dir = plugin != default_plugin_path ? base_dir : __dirname
+
+						// const file_path_name = path.isAbsolute(plugin) ? plugin : path.join(plugin_dir, plugin)
+						var file_path_name = _runtime2.default.context.get_absolute_plugin_path(plugin);
+						console.info('loading plugin at [' + plugin + '] at [' + file_path_name + ']');
+
+						try {
+							var required = require(file_path_name);
+							var PluginClass = 'default' in required ? required.default : required;
+							// console.log('loading rendering plugin class', PluginClass)
+
+							plugin = new PluginClass(this);
+						} catch (e) {
+							console.error(context + '.load:' + plugin + 'failed', e);
+						}
+					}
+
+					// GIVEN PLUGIN IS A PLUGIN CLASS INSTANCE
+					if (_typr2.default.isObject(plugin) && this.plugin_is_valid(plugin)) {
+						var plugin_name = plugin.get_name();
+						if (_typr2.default.isString(plugin_name)) {
+							// this.plugins[plugin_name] = plugin
+							// this.plugins_ordered.push(plugin)
+							this.register_plugin(plugin);
+							continue;
+						}
+					}
+
+					// UNKNOW PLUGIN TYPE
+					console.error(plugin, 'plugin');
+					(0, _assert2.default)(false, context + ':bad plugin');
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+		}
+
+		/**
+   * Load plugin at first position
+   * @param {Plugin} arg_plugin - plugin instance
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'load_at_first',
+		value: function load_at_first(arg_plugin) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_plugin) && this.plugin_is_valid(arg_plugin), context + ':load_at_first:bad plugin object');
+			this.register_plugin(arg_plugin, 0);
+		}
+
+		/**
+   * Test if plugin is valid.
+   * @abstract
+   * @method plugin_is_valid
+   * @param {Plugin} arg_plugin - plugin instance.
+   * @returns {boolean} - given plugin is valid for this manager.
+   */
+
+		/**
+   * Get registered plugins list.
+   * @returns {array} - plugins list 
+   */
+
+	}, {
+		key: 'get_plugins',
+		value: function get_plugins() {
+			return this.registered_plugins.get_all();
+		}
+
+		/**
+   * Get registered plugins list with a filtered type.
+   * @param {string|array} arg_type_or_types - type name or types names array
+   * @returns {array} - plugins list 
+   */
+
+	}, {
+		key: 'get_typed_plugins',
+		value: function get_typed_plugins(arg_type_or_types) {
+			return this.registered_plugins.get_all(arg_type_or_types);
+		}
+
+		/**
+   * Register a plugin to be used later, do not active it now.
+   * @param {object} arg_plugin - plugin instance.
+   * @param {integer} arg_position - index in array (0:first or undefined)
+   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+   */
+
+	}, {
+		key: 'register_plugin',
+		value: function register_plugin(arg_plugin, arg_position) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_plugin) && arg_plugin.is_plugin, context + ':bad plugin object');
+
+			var plugin_name = arg_plugin.get_name();
+			if (this.registered_plugins.find_by_name(plugin_name)) {
+				this.error_already_registered(plugin_name);
+				return Promise.resolve(false);
+			}
+
+			if (arg_position === 0) {
+				this.registered_plugins.add_first(arg_plugin);
+			} else {
+				this.registered_plugins.add(arg_plugin);
+			}
+			// arg_plugin.manager = this
+
+			return Promise.resolve(true);
+		}
+
+		/**
+   * Unregister a registered plugin and disble it before if needed.
+   * @param {object} arg_plugin - plugin instance.
+   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+   */
+
+	}, {
+		key: 'unregister_plugin',
+		value: function unregister_plugin(arg_plugin) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_plugin) && arg_plugin.is_plugin, context + ':bad plugin object');
+
+			var plugin_name = arg_plugin.get_name();
+
+			// PLUGIN IS REGISTERED ?
+			if (!this.registered_plugins.has(arg_plugin)) {
+				this.error_not_registered(plugin_name);
+				return Promise.resolve(false);
+			}
+
+			var disable_promise = Promise.resolve(true);
+
+			// PLUGIN IS ENABLED ?
+			if (this.enabled_plugins.has(arg_plugin)) {
+				this.enabled_plugins.remove(arg_plugin);
+				disable_promise = arg_plugin.disable();
+			}
+
+			// UNREGISTER
+			this.registered_plugins.remove(arg_plugin);
+			arg_plugin.manager = null;
+			delete arg_plugin.manager;
+
+			return disable_promise;
+		}
+
+		/**
+   * Get a registered plugin by its name and its enabled flag.
+   * @param {string} arg_name - registered plugin name
+   * @param {boolean} arg_enabled - plugin is enabled ?
+   * @returns {Plugin}
+   */
+
+	}, {
+		key: 'plugin',
+		value: function plugin(arg_name, arg_enabled) {
+			if (arg_enabled) {
+				return this.enabled_plugins.item(arg_name);
+			}
+			return this.registered_plugins.item(arg_name);
+		}
+
+		/**
+   * Get a registered plugin by its name.
+   * @param {string} arg_name - registered plugin name
+   * @returns {Plugin}
+   */
+
+	}, {
+		key: 'registered_plugin',
+		value: function registered_plugin(arg_name) {
+			return this.registered_plugins.item(arg_name);
+		}
+
+		/**
+   * Get a enabled plugin by its name.
+   * @param {string} arg_name - enabled plugin name
+   * @returns {Plugin}
+   */
+
+	}, {
+		key: 'enabled_plugin',
+		value: function enabled_plugin(arg_name) {
+			return this.enabled_plugins.item(arg_name);
+		}
+
+		/**
+   * Error wrapper - on registering an already registered plugin
+   * @param {string} arg_plugin_name - plugin name
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'error_already_registered',
+		value: function error_already_registered(arg_plugin_name) {
+			this.error('plugin with name [' + arg_plugin_name + '] is already registered');
+		}
+
+		/**
+   * Error wrapper - a plugin is not registered
+   * @param {string} arg_plugin_name - plugin name
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'error_not_registered',
+		value: function error_not_registered(arg_plugin_name) {
+			this.error('plugin with name [' + arg_plugin_name + '] is not registered');
+		}
+	}]);
+
+	return PluginsManager;
+}(_errorable2.default);
+
+exports.default = PluginsManager;
+
+
+},{"../base/collection":5,"../base/errorable":7,"../base/runtime":15,"assert":102,"typr":494}],35:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _features_manager = require('./features_manager');
+
+var _features_manager2 = _interopRequireDefault(_features_manager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/rendering/base/rendering_manager';
+
+/**
+ * Rendering manager class for renderer plugins managing.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var RenderingManager = function (_FeaturesManager) {
+	_inherits(RenderingManager, _FeaturesManager);
+
+	/**
+  * Create a RenderingManager instance
+ * @extends FeaturesManager
+ * @param {string|undefined} arg_log_context - optional.
+ * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function RenderingManager(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, RenderingManager);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RenderingManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+
+		_this.is_rendering_manager = true;
+		return _this;
+	}
+
+	/**
+  * Test if plugin is valid.
+  * @param {Plugin} arg_plugin - plugin instance.
+  * @returns {boolean} - given plugin is valid for this manager.
+  */
+
+
+	_createClass(RenderingManager, [{
+		key: 'plugin_is_valid',
+		value: function plugin_is_valid(arg_plugin) {
+			return arg_plugin.is_rendering_plugin;
+		}
+
+		/**
+   * Get all plugin public assets (CSS, JS, HTML...).
+   * @returns {object} - a map of assets: plugin name => type => public name => absolute file path
+   */
+
+	}, {
+		key: 'get_public_assets',
+		value: function get_public_assets() {
+			var assets = {};
+			this.registered_plugins.forEach(function (plugin) {
+				assets[plugin.get_name()] = plugin.get_public_assets();
+			});
+			return assets;
+		}
+
+		/**
+   * Get all plugin public  assets.
+   * @param {string} arg_type - asset type: js, css, html...
+   * @returns {object} - a map of assets:public name => absolute file path
+   */
+
+	}, {
+		key: 'get_public_assets_of_type',
+		value: function get_public_assets_of_type(arg_type) {
+			(0, _assert2.default)(_typr2.default.isString(arg_type), context + ':get_public_assets_of_type:bad asset type string');
+			arg_type = arg_type.toLocaleLowerCase();
+
+			var assets = {};
+			this.registered_plugins.forEach(function (plugin) {
+				var plugin_assets = plugin.get_public_assets_of_type(arg_type);
+				assets = Object.assign(assets, plugin_assets);
+			});
+
+			return assets;
+		}
+
+		/**
+   * Get all plugin public JS assets.
+   * @returns {object} - a map of assets:public name => absolute file path
+   */
+
+	}, {
+		key: 'get_public_js_assets',
+		value: function get_public_js_assets() {
+			return this.get_public_assets_of_type('js');
+		}
+
+		/**
+   * Get all plugin public css assets.
+   * @returns {object} - a map of assets:public name => absolute file path
+   */
+
+	}, {
+		key: 'get_public_css_assets',
+		value: function get_public_css_assets() {
+			return this.get_public_assets_of_type('css');
+		}
+
+		/**
+   * Get all plugin public html assets.
+   * @returns {object} - a map of assets:public name => absolute file path
+   */
+
+	}, {
+		key: 'get_public_html_assets',
+		value: function get_public_html_assets() {
+			return this.get_public_assets_of_type('html');
+		}
+	}]);
+
+	return RenderingManager;
+}(_features_manager2.default);
+
+exports.default = RenderingManager;
+
+
+},{"./features_manager":30,"assert":102,"typr":494}],36:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _features_manager = require('./features_manager');
+
+var _features_manager2 = _interopRequireDefault(_features_manager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import T from 'typr'
+// import assert from 'assert'
+
+var context = 'common/plugins/services_manager';
+
+/**
+ * Services manager class for plugins managing.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var ServicesManager = function (_FeaturesManager) {
+	_inherits(ServicesManager, _FeaturesManager);
+
+	/**
+  * Create a ServicesManager instance
+ * @extends FeaturesManager
+ * @param {string|undefined} arg_log_context - optional.
+ * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function ServicesManager(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, ServicesManager);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServicesManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+
+		_this.is_service_manager = true;
+		return _this;
+	}
+
+	/**
+  * Test if plugin is valid.
+  * @param {Plugin} arg_plugin - plugin instance.
+  * @returns {boolean} - given plugin is valid for this manager.
+  */
+
+
+	_createClass(ServicesManager, [{
+		key: 'plugin_is_valid',
+		value: function plugin_is_valid(arg_plugin) {
+			return arg_plugin.is_services_plugin;
+		}
+	}]);
+
+	return ServicesManager;
+}(_features_manager2.default);
+
+exports.default = ServicesManager;
+
+
+},{"./features_manager":30}],37:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _features_plugin = require('./features_plugin');
+
+var _features_plugin2 = _interopRequireDefault(_features_plugin);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import T from 'typr'
+// import assert from 'assert'
+
+var context = 'common/rendering/plugins/services_plugin';
+
+/**
+ * Plugin class for services plugin.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var ServicesPlugin = function (_FeaturesPlugin) {
+	_inherits(ServicesPlugin, _FeaturesPlugin);
+
+	/**
+  * Create a ServicesPlugin instance.
+ * @extends Instance
+ * @param {PluginsManager} arg_manager - plugins manager
+ * @param {string} arg_name - plugin name
+ * @param {string} arg_version - plugin version.
+ * @returns {nothing}
+  */
+
+	function ServicesPlugin(arg_manager, arg_name, arg_version) {
+		_classCallCheck(this, ServicesPlugin);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServicesPlugin).call(this, arg_manager, arg_name, 'ServicesPlugin', { version: arg_version }, context));
+
+		_this.is_services_plugin = true;
+		return _this;
+	}
+
+	return ServicesPlugin;
+}(_features_plugin2.default);
+
+exports.default = ServicesPlugin;
+
+
+},{"./features_plugin":31}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7757,7 +7382,7 @@ var Database = function (_Resource) {
 exports.default = Database;
 
 
-},{"../base/resource":16,"assert":117,"sequelize":116,"typr":509}],40:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"sequelize":101,"typr":494}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7827,7 +7452,7 @@ var Menu = function (_Resource) {
 exports.default = Menu;
 
 
-},{"../base/resource":16,"assert":117,"typr":509}],41:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7897,7 +7522,7 @@ var Menubar = function (_Resource) {
 exports.default = Menubar;
 
 
-},{"../base/resource":16,"assert":117,"typr":509}],42:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7970,11 +7595,11 @@ var Model = function (_Resource) {
       return cfg;
     }
 
-    /**
-     * Find a record by its id.
-     * @abstract
-     * @param {string|number} arg_id - record id
-     * @returns {Promise} - promise of found record or null
+    /**
+     * Find a record by its id.
+     * @abstract
+     * @param {string|number} arg_id - record id
+     * @returns {Promise} - promise of found record or null
      */
 
   }, {
@@ -7987,11 +7612,11 @@ var Model = function (_Resource) {
       return Promise.resolve(null);
     }
 
-    /**
-     * Find a record with a set of values.
-     * @abstract
-     * @param {object} arg_values_map - values map
-     * @returns {Promise} - promise of found record or null
+    /**
+     * Find a record with a set of values.
+     * @abstract
+     * @param {object} arg_values_map - values map
+     * @returns {Promise} - promise of found record or null
      */
 
   }, {
@@ -8008,24 +7633,24 @@ var Model = function (_Resource) {
   return Model;
 }(_resource2.default);
 
-/*
-
-// REGISTER A MODEL
-    models[arg_model_name] = {
-      database:arg_cx_name,
-      name:arg_model_name,
-      model:arg_model,
-      roles:arg_roles,
-      includes: arg_includes
-    }
-
+/*
+
+// REGISTER A MODEL
+    models[arg_model_name] = {
+      database:arg_cx_name,
+      name:arg_model_name,
+      model:arg_model,
+      roles:arg_roles,
+      includes: arg_includes
+    }
+
 */
 
 
 exports.default = Model;
 
 
-},{"../base/resource":16,"../base/runtime":17,"../utils/to_boolean":113,"assert":117,"epilogue":397,"sequelize":116,"typr":509}],43:[function(require,module,exports){
+},{"../base/resource":14,"../base/runtime":15,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8403,18 +8028,18 @@ var ModelSequelize = function (_Model) {
             var epilogue_settings = {
                 model: this.sequelize_model,
                 endpoints: [arg_route + '/' + this.$name, arg_route + '/' + this.$name + '/:' + this.sequelize_model.primaryKeyAttribute],
-                include: this.includes /*,
-                                       search: {
-                                       param: 'searchOnlyUsernames',
-                                       operator: '$gt', // $like as default or $ne, $not, $gte, $gt, $lte, $lt, $like (default), $ilike/$iLike, $notLike, $notILike
-                                       attributes: [ 'username' ]
-                                       },
-                                       sort: {
-                                       default: '-email,username',
-                                       param: 'orderby',
-                                       attributes: [ 'username' ]
-                                       },
-                                       pagination: false // default: true with use of offset and count or page and count
+                include: this.includes /*,
+                                       search: {
+                                       param: 'searchOnlyUsernames',
+                                       operator: '$gt', // $like as default or $ne, $not, $gte, $gt, $lte, $lt, $like (default), $ilike/$iLike, $notLike, $notILike
+                                       attributes: [ 'username' ]
+                                       },
+                                       sort: {
+                                       default: '-email,username',
+                                       param: 'orderby',
+                                       attributes: [ 'username' ]
+                                       },
+                                       pagination: false // default: true with use of offset and count or page and count
                                        */
             };
 
@@ -8460,10 +8085,10 @@ var ModelSequelize = function (_Model) {
             return null;
         }
 
-        /**
-         * Find a record by its id.
-         * @param {object} arg_id - record id
-         * @returns {object} - promise of found record or null
+        /**
+         * Find a record by its id.
+         * @param {object} arg_id - record id
+         * @returns {object} - promise of found record or null
          */
 
     }, {
@@ -8479,24 +8104,24 @@ var ModelSequelize = function (_Model) {
     return ModelSequelize;
 }(_model2.default);
 
-/*
-
-// REGISTER A MODEL
-    models[arg_model_name] = {
-      database:arg_cx_name,
-      name:arg_model_name,
-      model:arg_model,
-      roles:arg_roles,
-      includes: arg_includes
-    }
-
+/*
+
+// REGISTER A MODEL
+    models[arg_model_name] = {
+      database:arg_cx_name,
+      name:arg_model_name,
+      model:arg_model,
+      roles:arg_roles,
+      includes: arg_includes
+    }
+
 */
 
 
 exports.default = ModelSequelize;
 
 
-},{"../base/runtime":17,"../resources/model":42,"../utils/to_boolean":113,"assert":117,"epilogue":397,"sequelize":116,"typr":509}],44:[function(require,module,exports){
+},{"../base/runtime":15,"../resources/model":41,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8566,7 +8191,7 @@ var View = function (_Resource) {
 exports.default = View;
 
 
-},{"../base/resource":16,"assert":117,"typr":509}],45:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8608,11 +8233,11 @@ exports.RuntimeStage4Executable = _runtime_stage4_executable2.default;
 exports.RuntimeStage5Executable = _runtime_stage5_executable2.default;
 
 
-},{"./runtime_stage0_executable":47,"./runtime_stage1_executable":48,"./runtime_stage2_executable":49,"./runtime_stage3_executable":50,"./runtime_stage4_executable":51,"./runtime_stage5_executable":52}],46:[function(require,module,exports){
+},{"./runtime_stage0_executable":46,"./runtime_stage1_executable":47,"./runtime_stage2_executable":48,"./runtime_stage3_executable":49,"./runtime_stage4_executable":50,"./runtime_stage5_executable":51}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-				value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -8639,70 +8264,70 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/executables/runtime_sexecutable';
 
-/**
- * @file Runtime stages base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Runtime stages base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
 */
 
 var RuntimeExecutable = function (_Executable) {
-				_inherits(RuntimeExecutable, _Executable);
+	_inherits(RuntimeExecutable, _Executable);
 
-				/**
-     * Create a runtime executable base class.
-    * @extends Executable
-    * @abstract
-     * @param {string|undefined} arg_log_context - (optional).
-    * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-     * @returns {nothing}
+	/**
+  * Create a runtime executable base class.
+ * @extends Executable
+ * @abstract
+  * @param {string|undefined} arg_log_context - (optional).
+ * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function RuntimeExecutable(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, RuntimeExecutable);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(RuntimeExecutable).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+	}
+
+	/**
+     * Prepare an execution with contextual informations.
+     * @param {object} arg_settings - execution settings.
+     * @returns {nothing}
      */
 
-				function RuntimeExecutable(arg_log_context, arg_logger_manager) {
-								_classCallCheck(this, RuntimeExecutable);
 
-								return _possibleConstructorReturn(this, Object.getPrototypeOf(RuntimeExecutable).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
-				}
+	_createClass(RuntimeExecutable, [{
+		key: 'prepare',
+		value: function prepare(arg_settings) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':prepare:bad settings object');
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings.runtime), context + ':bad runtime object');
+			this.runtime = arg_settings.runtime;
+		}
 
-				/**
-        * Prepare an execution with contextual informations.
-        * @param {object} arg_settings - execution settings.
-        * @returns {nothing}
-        */
+		/**
+      * Execution with contextual informations.
+      * @abstract
+      * @returns {Promise} - promise of a result.
+      */
 
+	}, {
+		key: 'execute',
+		value: function execute() {
+			this.enter_group('execute');
 
-				_createClass(RuntimeExecutable, [{
-								key: 'prepare',
-								value: function prepare(arg_settings) {
-												(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':prepare:bad settings object');
-												(0, _assert2.default)(_typr2.default.isObject(arg_settings.runtime), context + ':bad runtime object');
-												this.runtime = arg_settings.runtime;
-								}
+			this.info('not yet implemented');
 
-								/**
-            * Execution with contextual informations.
-            * @abstract
-            * @returns {Promise} - promise of a result.
-            */
+			this.leave_group('execute');
+			return Promise.reject(context + ':execute:not yet implemented');
+		}
+	}]);
 
-				}, {
-								key: 'execute',
-								value: function execute() {
-												this.enter_group('execute');
-
-												this.info('not yet implemented');
-
-												this.leave_group('execute');
-												return Promise.reject(context + ':execute:not yet implemented');
-								}
-				}]);
-
-				return RuntimeExecutable;
+	return RuntimeExecutable;
 }(_executable2.default);
 
 exports.default = RuntimeExecutable;
 
 
-},{"../base/executable":8,"assert":117,"typr":509}],47:[function(require,module,exports){
+},{"../base/executable":8,"assert":102,"typr":494}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8735,10 +8360,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/executables/runtime_stage0_executable';
 
-/**
- * Runtime Stage 0 consists of:
- * 		- create node
- * 		- create bus or connect to bus
+/**
+ * Runtime Stage 0 consists of:
+ * 		- create node
+ * 		- create bus or connect to bus
 */
 
 var RuntimeStage0Executable = function (_RuntimeExecutable) {
@@ -8792,7 +8417,7 @@ var RuntimeStage0Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage0Executable;
 
 
-},{"../servers/node":63,"./runtime_executable":46,"assert":117}],48:[function(require,module,exports){
+},{"../servers/node":62,"./runtime_executable":45,"assert":102}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8828,10 +8453,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/executables/runtime_stage1_executable';
 
-/**
- * Runtime Stage 1 consists of:
- * 	  - load master apps settings
- *	  - load security settings
+/**
+ * Runtime Stage 1 consists of:
+ * 	  - load master apps settings
+ *	  - load security settings
 */
 
 var RuntimeStage1Executable = function (_RuntimeExecutable) {
@@ -8921,7 +8546,10 @@ var RuntimeStage1Executable = function (_RuntimeExecutable) {
 				var security_settings = (0, _index.config)().get('security');
 				// console.log(security_settings, context + '.execute:security_settings')
 
+				var saved_trace2 = self.get_trace();
+				self.set_trace(false);
 				runtime.security().load(security_settings);
+				self.set_trace(saved_trace2);
 
 				return true;
 			}).catch(
@@ -8944,7 +8572,7 @@ var RuntimeStage1Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage1Executable;
 
 
-},{"../datas/providers/json_provider":22,"../store/config/actions":81,"../store/index":96,"./runtime_executable":46,"typr":509}],49:[function(require,module,exports){
+},{"../datas/providers/json_provider":19,"../store/config/actions":66,"../store/index":81,"./runtime_executable":45,"typr":494}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8963,31 +8591,13 @@ var _assert2 = _interopRequireDefault(_assert);
 
 var _index = require('../store/index');
 
-var _service = require('../base/service');
-
-var _service2 = _interopRequireDefault(_service);
-
-var _index2 = require('../executables/index');
-
-var exec = _interopRequireWildcard(_index2);
-
-var _mw_service = require('../services/middleware/mw_service');
-
-var _mw_service2 = _interopRequireDefault(_mw_service);
-
-var _crud_service = require('../services/crud/crud_service');
-
-var _crud_service2 = _interopRequireDefault(_crud_service);
-
-var _resources_service = require('../services/resource/resources_service');
-
-var _resources_service2 = _interopRequireDefault(_resources_service);
-
 var _runtime_executable = require('./runtime_executable');
 
 var _runtime_executable2 = _interopRequireDefault(_runtime_executable);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _plugins_factory = require('../plugins/plugins_factory');
+
+var _plugins_factory2 = _interopRequireDefault(_plugins_factory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8997,12 +8607,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import MiddlewareService from '../services/middleware/mw_service'
+// import CrudService from '../services/crud/crud_service'
+// import ResourcesService from '../services/resource/resources_service'
+// import AssetsService from '../services/assets/assets_service'
+// import MetricsService from '../services/metrics/metrics_service'
+
+// import DefaultServicePlugin from '../../plugins/default/services_default_plugin'
+// import ServicesManager from '../plugins/services_manager'
+
+
 var context = 'common/executables/runtime_stage2_executable';
 
-/**
- * Runtime Stage 2 consists of:
- * 		- create master node servers
- * 		- create services
+/**
+ * Runtime Stage 2 consists of:
+ * 		- create master node servers
+ * 		- create services
 */
 
 var RuntimeStage2Executable = function (_RuntimeExecutable) {
@@ -9023,6 +8643,9 @@ var RuntimeStage2Executable = function (_RuntimeExecutable) {
 
 			this.separate_level_1();
 			this.enter_group('execute');
+
+			// CREATE PLUGINS MANAGERS AND LOAD DEFAULT PLUGINS
+			this.runtime.plugins_factory = new _plugins_factory2.default(this.runtime);
 
 			if (this.runtime.is_master) {
 				this.info('Create master node servers');
@@ -9059,68 +8682,25 @@ var RuntimeStage2Executable = function (_RuntimeExecutable) {
 
 			this.enter_group('make_services');
 
+			var svc_mgr = this.runtime.plugins_factory.services_manager;
+
 			var services = _index.config.get_collection_names('services');
 			services.forEach(function (service_name) {
 				(0, _assert2.default)(_typr2.default.isString(service_name), context + ':bad service namr');
 				_this2.info('Processing service creation of:' + service_name);
 
 				var cfg_service = _index.config.get_collection_item('services', service_name);
-				// console.log(cfg_service, 'cfg_svc')
+
 				(0, _assert2.default)(_typr2.default.isObject(cfg_service), context + ':bad service cfg for [' + service_name + ']');
 				(0, _assert2.default)(_typr2.default.isString(cfg_service.get('type')), context + ':bad service type [' + cfg_service.type + ']');
-				// assert( T.isString(cfg_service.get('server')), context + ':bad service server [' + cfg_service.server + ']')
 
-				var service = null;
-
-				switch (cfg_service.get('type')) {
-					case 'middleware':
-						{
-							service = new _mw_service2.default(service_name, cfg_service);
-							break;
-						}
-					case 'rest_api_models_query':
-						{
-							service = new _crud_service2.default(service_name, cfg_service);
-							break;
-						}
-					case 'rest_api_models_modifier':
-						{
-							service = new _crud_service2.default(service_name, cfg_service);
-							break;
-						}
-					case 'rest_api_resources_query':
-						{
-							service = new _resources_service2.default(service_name, cfg_service);
-							break;
-						}
-					case 'rest_api_resources_modifier':
-						{
-							// let locale_exec = null
-							// let remote_exec = null
-							// service = new Service(service_name, locale_exec, remote_exec) // TODO: create Real service
-							break;
-						}
-					case 'html_assets':
-						{
-							var locale_exec = new exec.ExecutableRouteAssets();
-							var remote_exec = locale_exec;
-							service = new _service2.default(service_name, locale_exec, remote_exec);
-							break;
-						}
-					case 'html_app':
-						{
-							// let locale_exec = null
-							// let remote_exec = null
-							// service = new Service(service_name, locale_exec, remote_exec) // TODO: create Real service
-							break;
-						}
-				}
-
-				// assert( T.isObject(service), context + ':bad service type [' + cfg_service.get('type') + ']')
+				var service = svc_mgr.create(cfg_service.get('type'), service_name, cfg_service);
 
 				if (service) {
 					service.enable();
 					_this2.runtime.services.add(service);
+				} else {
+					console.error(context + ':make_services:bad service for ' + service_name);
 				}
 			});
 
@@ -9134,7 +8714,7 @@ var RuntimeStage2Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage2Executable;
 
 
-},{"../base/service":19,"../executables/index":28,"../services/crud/crud_service":72,"../services/middleware/mw_service":75,"../services/resource/resources_service":78,"../store/index":96,"./runtime_executable":46,"assert":117,"typr":509}],50:[function(require,module,exports){
+},{"../plugins/plugins_factory":33,"../store/index":81,"./runtime_executable":45,"assert":102,"typr":494}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9153,10 +8733,6 @@ var _module = require('../base/module');
 
 var _module2 = _interopRequireDefault(_module);
 
-var _plugin = require('../base/plugin');
-
-var _plugin2 = _interopRequireDefault(_plugin);
-
 var _database = require('../resources/database');
 
 var _database2 = _interopRequireDefault(_database);
@@ -9174,12 +8750,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // import T from 'typr'
 
+// import Plugin from '../plugins/plugin'
 
-var context = 'common/executables/runtime_stage3_executable';
 
-/**
- * Runtime Stage 3 consists of:
- * 		- create connexions, modules and plugins
+var context = 'common/runtime/runtime_stage3_executable';
+
+/**
+ * Runtime Stage 3 consists of:
+ * 		- create connexions, modules and plugins
 */
 
 var RuntimeStage3Executable = function (_RuntimeExecutable) {
@@ -9345,18 +8923,20 @@ var RuntimeStage3Executable = function (_RuntimeExecutable) {
 	}, {
 		key: 'make_plugins',
 		value: function make_plugins() {
-			var _this4 = this;
-
 			this.enter_group('make_plugins');
 
-			var cfg_plugins = _index.config.get_collection('plugins');
-			cfg_plugins.forEach(function (plugin_cfg, plugin_name) {
-				_this4.info('Processing plugin creation of:' + plugin_name);
-
-				var plugin = new _plugin2.default(plugin_name, plugin_cfg);
-				plugin.load();
-				_this4.runtime.plugins.add(plugin);
-			});
+			// TODO
+			/*
+   let cfg_plugins = config.get_collection('plugins')
+   cfg_plugins.forEach(
+   	(plugin_cfg, plugin_name) => {
+   		this.info('Processing plugin creation of:' + plugin_name)
+   		
+   		let plugin = new Plugin(plugin_name, plugin_cfg)
+   		plugin.load()
+   		this.runtime.plugins.add(plugin)
+   	}
+   )*/
 
 			this.leave_group('make_plugins');
 		}
@@ -9368,7 +8948,7 @@ var RuntimeStage3Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage3Executable;
 
 
-},{"../base/module":12,"../base/plugin":13,"../resources/database":39,"../store/index":96,"./runtime_executable":46,"assert":117}],51:[function(require,module,exports){
+},{"../base/module":12,"../resources/database":38,"../store/index":81,"./runtime_executable":45,"assert":102}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9399,9 +8979,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/executables/runtime_stage4_executable';
 
-/**
- * Runtime Stage 4 consists of:
- * 		- create applications
+/**
+ * Runtime Stage 4 consists of:
+ * 		- create applications
 */
 
 var RuntimeStage4Executable = function (_RuntimeExecutable) {
@@ -9461,7 +9041,7 @@ var RuntimeStage4Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage4Executable;
 
 
-},{"../base/application":4,"../store/index":96,"./runtime_executable":46}],52:[function(require,module,exports){
+},{"../base/application":4,"../store/index":81,"./runtime_executable":45}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9489,9 +9069,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/executables/runtime_stage5_executable';
 
-/**
- * Runtime Stage 5 consists of:
- * 		- enable servers
+/**
+ * Runtime Stage 5 consists of:
+ * 		- enable servers
 */
 
 var RuntimeStage5Executable = function (_RuntimeExecutable) {
@@ -9533,7 +9113,7 @@ var RuntimeStage5Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage5Executable;
 
 
-},{"./runtime_executable":46}],53:[function(require,module,exports){
+},{"./runtime_executable":45}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9556,7 +9136,7 @@ var _nodeForge = require('node-forge');
 
 var _nodeForge2 = _interopRequireDefault(_nodeForge);
 
-var _plugins_manager = require('../base/plugins_manager');
+var _plugins_manager = require('../plugins/plugins_manager');
 
 var _plugins_manager2 = _interopRequireDefault(_plugins_manager);
 
@@ -9578,22 +9158,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/security/authentication_manager';
 
-/**
- * Authentication class to manage authentication plugins.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Authentication class to manage authentication plugins.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var AuthenticationManager = function (_PluginsManager) {
 	_inherits(AuthenticationManager, _PluginsManager);
 
-	/**
-  * Create an Authentication manager class: load and create all authentication plugins.
-  * AuthenticationWrapper use created plugins.
-  * @extends PluginsManager
-  * @param {string|undefined} arg_log_context - optional.
-  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-  * @returns {nothing}
+	/**
+  * Create an Authentication manager class: load and create all authentication plugins.
+  * AuthenticationWrapper use created plugins.
+  * @extends PluginsManager
+  * @param {string|undefined} arg_log_context - optional.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
   */
 
 	function AuthenticationManager(arg_log_context, arg_logger_manager) {
@@ -9605,13 +9185,15 @@ var AuthenticationManager = function (_PluginsManager) {
 
 		_this.authentication_is_enabled = true;
 		_this.authentication_mode = null;
+
+		console.log(_this.is_trace_enabled, 'this.is_trace_enabled');
 		return _this;
 	}
 
-	/**
-  * Load security settings
-  * @param {object} arg_settings - authentication settings (Immutable object)
-  * @returns {nothing}
+	/**
+  * Load security settings
+  * @param {object} arg_settings - authentication settings (Immutable object)
+  * @returns {nothing}
   */
 
 
@@ -9650,10 +9232,10 @@ var AuthenticationManager = function (_PluginsManager) {
 			this.leave_group('load');
 		}
 
-		/**
-   * Load security plugin from settings
-   * @param {object} arg_settings - authentication settings (Immutable object)
-   * @returns {boolean}
+		/**
+   * Load security plugin from settings
+   * @param {object} arg_settings - authentication settings (Immutable object)
+   * @returns {boolean}
    */
 
 	}, {
@@ -9693,7 +9275,7 @@ var AuthenticationManager = function (_PluginsManager) {
 					// default:
 					{
 						var _ret = function () {
-							var plugin = new _authentication_plugin_url2.default(arg_settings.name, context);
+							var plugin = new _authentication_plugin_url2.default(_this3, arg_settings.name, context);
 							// self.info(context + ':load_plugin:create plugin for mode [' + mode + '] for name [' + plugin.get_name() + ']')
 
 							_this3.register_plugin(plugin).then(function (result) {
@@ -9726,12 +9308,12 @@ var AuthenticationManager = function (_PluginsManager) {
 			return false;
 		}
 
-		/**
-   * Hash a password.
-   * @param {string} arg_password - password to hash
-   * @param {string|undefined} arg_digest_method - digest method name (sha1,sha256,sha384,sha512,md5)
-   * @param {string|undefined} arg_encoding_method - encoding method name (hex,utf8,utf16,binary,base64,hexstr)
-   * @returns {string} - hashed password
+		/**
+   * Hash a password.
+   * @param {string} arg_password - password to hash
+   * @param {string|undefined} arg_digest_method - digest method name (sha1,sha256,sha384,sha512,md5)
+   * @param {string|undefined} arg_encoding_method - encoding method name (hex,utf8,utf16,binary,base64,hexstr)
+   * @returns {string} - hashed password
    */
 
 	}, {
@@ -9785,20 +9367,20 @@ var AuthenticationManager = function (_PluginsManager) {
 			return encoded;
 		}
 
-		/**
-   * Check request credentials authentication.
-   *	Request format:
-   *		req.username=...
-   *		req.authorization={
-   *			scheme: <Basic|Signature|...>,
-   *			credentials: <Undecoded value of header>,
-   *			basic: {
-   *				username: $user
-   *				password: $password
-   *			}
-   *		}
-   * @param {object} arg_request - request object
-   * @returns {boolean}
+		/**
+   * Check request credentials authentication.
+   *	Request format:
+   *		req.username=...
+   *		req.authorization={
+   *			scheme: <Basic|Signature|...>,
+   *			credentials: <Undecoded value of header>,
+   *			basic: {
+   *				username: $user
+   *				password: $password
+   *			}
+   *		}
+   * @param {object} arg_request - request object
+   * @returns {boolean}
    */
 
 	}, {
@@ -9817,20 +9399,20 @@ var AuthenticationManager = function (_PluginsManager) {
 			return false;
 		}
 
-		/**
-   * Get request credentials from headers.
-   *	Request format:
-   *		req.username=...
-   *		req.authorization={
-   *			scheme: <Basic|Signature|...>,
-   *			credentials: <Undecoded value of header>,
-   *			basic: {
-   *				username: $user
-   *				password: $password
-   *			}
-   *		}
-   * @param {object} arg_request - request object
-   * @returns {object} - plain object as { 'user':..., 'password':... }
+		/**
+   * Get request credentials from headers.
+   *	Request format:
+   *		req.username=...
+   *		req.authorization={
+   *			scheme: <Basic|Signature|...>,
+   *			credentials: <Undecoded value of header>,
+   *			basic: {
+   *				username: $user
+   *				password: $password
+   *			}
+   *		}
+   * @param {object} arg_request - request object
+   * @returns {object} - plain object as { 'user':..., 'password':... }
    */
 
 	}, {
@@ -9931,10 +9513,10 @@ var AuthenticationManager = function (_PluginsManager) {
 			return credentials;
 		}
 
-		/**
-   * Error wrapper - error during plugin loading.
-   * @param {string} arg_plugin_mode - plugin mode
-   * @returns {nothing}
+		/**
+   * Error wrapper - error during plugin loading.
+   * @param {string} arg_plugin_mode - plugin mode
+   * @returns {nothing}
    */
 
 	}, {
@@ -9943,10 +9525,10 @@ var AuthenticationManager = function (_PluginsManager) {
 			this.error('bad plugin [' + arg_plugin_mode + ']');
 		}
 
-		/**
-   * Error wrapper - unknow digest method
-   * @param {string} arg_digest_method - digest method name
-   * @returns {nothing}
+		/**
+   * Error wrapper - unknow digest method
+   * @param {string} arg_digest_method - digest method name
+   * @returns {nothing}
    */
 
 	}, {
@@ -9955,10 +9537,10 @@ var AuthenticationManager = function (_PluginsManager) {
 			this.error('bad digest method [' + arg_digest_method + ']');
 		}
 
-		/**
-   * Error wrapper - unknow encoding method
-   * @param {string} arg_encoding_method - encoding method name
-   * @returns {nothing}
+		/**
+   * Error wrapper - unknow encoding method
+   * @param {string} arg_encoding_method - encoding method name
+   * @returns {nothing}
    */
 
 	}, {
@@ -9967,9 +9549,9 @@ var AuthenticationManager = function (_PluginsManager) {
 			this.error('bad encoding method [' + arg_encoding_method + ']');
 		}
 
-		/**
-   * Error wrapper - unknow request credentials format
-   * @returns {nothing}
+		/**
+   * Error wrapper - unknow request credentials format
+   * @returns {nothing}
    */
 
 	}, {
@@ -9985,7 +9567,7 @@ var AuthenticationManager = function (_PluginsManager) {
 exports.default = AuthenticationManager;
 
 
-},{"../base/plugins_manager":14,"./authentication_plugin_url":55,"assert":117,"node-forge":489,"typr":509}],54:[function(require,module,exports){
+},{"../plugins/plugins_manager":34,"./authentication_plugin_url":54,"assert":102,"node-forge":474,"typr":494}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9996,19 +9578,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _crypto = require('crypto');
-
-var _crypto2 = _interopRequireDefault(_crypto);
-
-var _plugin = require('../base/plugin');
+var _plugin = require('../plugins/plugin');
 
 var _plugin2 = _interopRequireDefault(_plugin);
 
@@ -10019,41 +9589,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import T from 'typr'
+// import assert from 'assert'
+// import crypto from 'crypto'
 
 var context = 'common/security/authentication_plugin';
 
-/**
- * Authentication plugin base class.
- * @abstract
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Authentication plugin base class.
+ * @abstract
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var AuthenticationPlugin = function (_Plugin) {
 	_inherits(AuthenticationPlugin, _Plugin);
 
-	/**
-  * Create an Authentication base class.
-  * @param {string} arg_name - plugin name.
-  * @param {string} arg_class - plugin class name.
-  * @param {string|undefined} arg_log_context - optional.
-  * @returns {nothing}
+	/**
+  * Create an Authentication base class.
+  * @param {AuhtenticationManager} arg_manager - authentication plugins manager.
+  * @param {string} arg_name - plugin name.
+  * @param {string} arg_class - plugin class name.
+  * @param {string|undefined} arg_log_context - optional.
+  * @returns {nothing}
   */
 
-	function AuthenticationPlugin(arg_name, arg_class, arg_log_context) {
+	function AuthenticationPlugin(arg_manager, arg_name, arg_class, arg_log_context) {
 		_classCallCheck(this, AuthenticationPlugin);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticationPlugin).call(this, arg_name, arg_class ? arg_class.toString() : 'AuthenticationPlugin', undefined, arg_log_context ? arg_log_context : context));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticationPlugin).call(this, arg_manager, arg_name, arg_class ? arg_class.toString() : 'AuthenticationPlugin', { version: '1.0.0' }, arg_log_context ? arg_log_context : context));
 
 		_this.is_authentication_plugin = true;
 		return _this;
 	}
 
-	/**
-  * Enable authentication plugin with contextual informations.
-  * @abstract
-  * @param {object|undefined} arg_settings - optional contextual settings.
-  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+	/**
+  * Enable authentication plugin with contextual informations.
+  * @abstract
+  * @param {object|undefined} arg_settings - optional contextual settings.
+  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
   */
 
 
@@ -10066,11 +9640,11 @@ var AuthenticationPlugin = function (_Plugin) {
 			return resolved_promise;
 		}
 
-		/**
-   * Disable authentication plugin with contextual informations.
-   * @abstract
-   * @param {object|undefined} arg_settings - optional contextual settings.
-   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+		/**
+   * Disable authentication plugin with contextual informations.
+   * @abstract
+   * @param {object|undefined} arg_settings - optional contextual settings.
+   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
    */
 
 	}, {
@@ -10082,23 +9656,23 @@ var AuthenticationPlugin = function (_Plugin) {
 			return resolved_promise;
 		}
 
-		/**
-   * Apply authentication plugin io given server. Use a middleware.
-   * @abstract
-   * @param {object} arg_server - Runtime server (Express/Restify server for example)
-   * @returns {nothing}
+		/**
+   * Apply authentication plugin io given server. Use a middleware.
+   * @abstract
+   * @param {object} arg_server - Runtime server (Express/Restify server for example)
+   * @returns {nothing}
    */
 
 	}, {
 		key: 'apply_on_server',
 		value: function apply_on_server() /*arg_server*/{}
 
-		/**
-   * Get a authentication middleware to use on servers (see Connect/Express middleware signature).
-   * @abstract
-   * @param {boolean} arg_should_401 - should send an 401 error on authentication failure.
-   * @param {Function} arg_next_auth_mw - next authentication middleware.
-   * @returns {Function} - function(request,response,next){...}
+		/**
+   * Get a authentication middleware to use on servers (see Connect/Express middleware signature).
+   * @abstract
+   * @param {boolean} arg_should_401 - should send an 401 error on authentication failure.
+   * @param {Function} arg_next_auth_mw - next authentication middleware.
+   * @returns {Function} - function(request,response,next){...}
    */
 
 	}, {
@@ -10107,11 +9681,11 @@ var AuthenticationPlugin = function (_Plugin) {
 			return undefined;
 		}
 
-		/**
-   * Authenticate a user with request credentials.
-   * @abstract
-   * @param {object|undefined} arg_credentials - request credentials object
-   * @returns {object} - a promise of boolean
+		/**
+   * Authenticate a user with request credentials.
+   * @abstract
+   * @param {object|undefined} arg_credentials - request credentials object
+   * @returns {object} - a promise of boolean
    */
 
 	}, {
@@ -10120,10 +9694,10 @@ var AuthenticationPlugin = function (_Plugin) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Login current request (alias of authenticate).
-   * @abstract
-   * @returns {object} - a promise of boolean
+		/**
+   * Login current request (alias of authenticate).
+   * @abstract
+   * @returns {object} - a promise of boolean
    */
 
 	}, {
@@ -10132,10 +9706,10 @@ var AuthenticationPlugin = function (_Plugin) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Logout current authenticated user.
-   * @abstract
-   * @returns {object} - a promise of boolean
+		/**
+   * Logout current authenticated user.
+   * @abstract
+   * @returns {object} - a promise of boolean
    */
 
 	}, {
@@ -10144,10 +9718,10 @@ var AuthenticationPlugin = function (_Plugin) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Get credentials token of authenticated user.
-   * @abstract
-   * @returns {string} - credentials token
+		/**
+   * Get credentials token of authenticated user.
+   * @abstract
+   * @returns {string} - credentials token
    */
 
 	}, {
@@ -10156,10 +9730,10 @@ var AuthenticationPlugin = function (_Plugin) {
 			return null;
 		}
 
-		/**
-   * Create a new credentials token for authenticated user.
-   * @abstract
-   * @returns {string} - credentials token
+		/**
+   * Create a new credentials token for authenticated user.
+   * @abstract
+   * @returns {string} - credentials token
    */
 
 	}, {
@@ -10168,10 +9742,10 @@ var AuthenticationPlugin = function (_Plugin) {
 			return null;
 		}
 
-		/**
-   * Check a credentials token.
-   * @abstract
-   * @returns {boolean} - request token is valid
+		/**
+   * Check a credentials token.
+   * @abstract
+   * @returns {boolean} - request token is valid
    */
 
 	}, {
@@ -10187,7 +9761,7 @@ var AuthenticationPlugin = function (_Plugin) {
 exports.default = AuthenticationPlugin;
 
 
-},{"../base/plugin":13,"assert":117,"crypto":137,"typr":509}],55:[function(require,module,exports){
+},{"../plugins/plugin":32}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10232,37 +9806,38 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/security/authentication_plugin_url';
 
-/**
- * Authentication class for URL parameters.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Authentication class for URL parameters.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 	_inherits(AuthenticationPluginURL, _AuthenticationPlugin);
 
-	/**
-  * Create an Authentication plugin class based on query parameters.
-  * @param {string} arg_name - plugin name.
-  * @param {string|undefined} arg_log_context - optional.
-  * @returns {nothing}
+	/**
+  * Create an Authentication plugin class based on query parameters.
+  * @param {AuhtenticationManager} arg_manager - authentication plugins manager.
+  * @param {string} arg_name - plugin name.
+  * @param {string|undefined} arg_log_context - optional.
+  * @returns {nothing}
   */
 
-	function AuthenticationPluginURL(arg_name, arg_log_context) {
+	function AuthenticationPluginURL(arg_manager, arg_name, arg_log_context) {
 		_classCallCheck(this, AuthenticationPluginURL);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticationPluginURL).call(this, arg_name, 'AuthenticationPluginURL', arg_log_context ? arg_log_context : context));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticationPluginURL).call(this, arg_manager, arg_name, 'AuthenticationPluginURL', arg_log_context ? arg_log_context : context));
 
 		_this.is_authentication_url_plugin = true;
 
-		_this.is_trace_enabled = true;
+		// this.is_trace_enabled = true
 		return _this;
 	}
 
-	/**
-  * Enable authentication plugin with contextual informations.
-  * @param {object|undefined} arg_settings - optional contextual settings.
-  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+	/**
+  * Enable authentication plugin with contextual informations.
+  * @param {object|undefined} arg_settings - optional contextual settings.
+  * @returns {object} - a promise object of a boolean result (success:true, failure:false)
   */
 
 
@@ -10353,10 +9928,10 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 			return resolved_promise;
 		}
 
-		/**
-   * Disable authentication plugin with contextual informations.
-   * @param {object|undefined} arg_settings - optional contextual settings.
-   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
+		/**
+   * Disable authentication plugin with contextual informations.
+   * @param {object|undefined} arg_settings - optional contextual settings.
+   * @returns {object} - a promise object of a boolean result (success:true, failure:false)
    */
 
 	}, {
@@ -10366,11 +9941,11 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 			return resolved_promise;
 		}
 
-		/**
-   * Get a authentication middleware to use on servers (see Connect/Express middleware signature).
-   * @param {boolean} arg_should_401 - should send an 401 error on authentication failure.
-   * @param {Function} arg_next_auth_mw - next authentication middleware.
-   * @returns {Function} - function(request,response,next){...}
+		/**
+   * Get a authentication middleware to use on servers (see Connect/Express middleware signature).
+   * @param {boolean} arg_should_401 - should send an 401 error on authentication failure.
+   * @param {Function} arg_next_auth_mw - next authentication middleware.
+   * @returns {Function} - function(request,response,next){...}
    */
 
 	}, {
@@ -10450,10 +10025,10 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 			};
 		}
 
-		/**
-   * Authenticate a user with a file giving request credentials.
-   * @param {object|undefined} arg_credentials - request credentials object
-   * @returns {object} - a promise of boolean
+		/**
+   * Authenticate a user with a file giving request credentials.
+   * @param {object|undefined} arg_credentials - request credentials object
+   * @returns {object} - a promise of boolean
    */
 
 	}, {
@@ -10507,10 +10082,10 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 			return Promise.resolve(false);
 		}
 
-		/**
-   * Get user id from a user record.
-   * @param {object} arg_user_record - user record object
-   * @returns {string} - user id
+		/**
+   * Get user id from a user record.
+   * @param {object} arg_user_record - user record object
+   * @returns {string} - user id
    */
 
 	}, {
@@ -10520,10 +10095,10 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 			return _typr2.default.isObject(arg_user_record) && id_field in arg_user_record ? arg_user_record[id_field] : null;
 		}
 
-		/**
-   * Get user record by its id.
-   * @param {string} arg_user_id - user id
-   * @returns {string} - user id
+		/**
+   * Get user record by its id.
+   * @param {string} arg_user_id - user id
+   * @returns {string} - user id
    */
 
 	}, {
@@ -10554,7 +10129,7 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 exports.default = AuthenticationPluginURL;
 
 
-},{"../base/runtime":17,"./authentication_plugin":54,"assert":117,"lowdb":473,"lowdb/file-sync":472,"path":333,"typr":509}],56:[function(require,module,exports){
+},{"../base/runtime":15,"./authentication_plugin":53,"assert":102,"lowdb":458,"lowdb/file-sync":457,"path":318,"typr":494}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10589,20 +10164,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/security/authentication_wrapper';
 
-/**
- * @file Authentication wrapper class to interact with authentication plugins.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Authentication wrapper class to interact with authentication plugins.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var AuthenticationWrapper = function (_Settingsable) {
 	_inherits(AuthenticationWrapper, _Settingsable);
 
-	/**
-  * Create an Authentication wrapper class to interact with authentication plugins.
-  * @extends Settingsable
-  * @param {string|undefined} arg_log_context - optional.
-  * @returns {nothing}
+	/**
+  * Create an Authentication wrapper class to interact with authentication plugins.
+  * @extends Settingsable
+  * @param {string|undefined} arg_log_context - optional.
+  * @returns {nothing}
   */
 
 	function AuthenticationWrapper(arg_log_context) {
@@ -10616,10 +10191,10 @@ var AuthenticationWrapper = function (_Settingsable) {
 		return _this;
 	}
 
-	/**
-  * Load security settings
-  * @param {object} arg_settings - authentication settings (Immutable object)
-  * @returns {nothing}
+	/**
+  * Load security settings
+  * @param {object} arg_settings - authentication settings (Immutable object)
+  * @returns {nothing}
   */
 
 
@@ -10652,10 +10227,10 @@ var AuthenticationWrapper = function (_Settingsable) {
 			});
 		}
 
-		/**
-   * Apply all plugins authentication middleware on a Server instance.
-   * @param {Server} arg_server - server instance
-   * @returns {boolean}
+		/**
+   * Apply all plugins authentication middleware on a Server instance.
+   * @param {Server} arg_server - server instance
+   * @returns {boolean}
    */
 
 	}, {
@@ -10736,11 +10311,11 @@ var AuthenticationWrapper = function (_Settingsable) {
 exports.default = AuthenticationWrapper;
 
 
-},{"../base/runtime":17,"../base/settingsable":20,"assert":117,"typr":509}],57:[function(require,module,exports){
+},{"../base/runtime":15,"../base/settingsable":17,"assert":102,"typr":494}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10753,11 +10328,7 @@ var _assert = require('assert');
 
 var _assert2 = _interopRequireDefault(_assert);
 
-var _nodeForge = require('node-forge');
-
-var _nodeForge2 = _interopRequireDefault(_nodeForge);
-
-var _plugins_manager = require('../base/plugins_manager');
+var _plugins_manager = require('../plugins/plugins_manager');
 
 var _plugins_manager2 = _interopRequireDefault(_plugins_manager);
 
@@ -10768,146 +10339,150 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import forge from 'node-forge'
 
 // import AuthorizationPluginPassportLocalDb from './authorization_plugin_passport_local_db'
 // import AuthorizationPluginPassportLocalFile from './authorization_plugin_passport_local_file'
 
 var context = 'common/security/authorization_manager';
 
-/**
- * Authorization class to manage authorization plugins.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * Authorization class to manage authorization plugins.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var AuthorizationManager = function (_PluginsManager) {
-    _inherits(AuthorizationManager, _PluginsManager);
+	_inherits(AuthorizationManager, _PluginsManager);
 
-    /**
-     * Create an Authorization manager class.
-     * @param {string|undefined} arg_log_context - optional.
-    * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
-     * @returns {nothing}
-     */
+	/**
+  * Create an Authorization manager class.
+  * @param {string|undefined} arg_log_context - optional.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
 
-    function AuthorizationManager(arg_log_context, arg_logger_manager) {
-        _classCallCheck(this, AuthorizationManager);
+	function AuthorizationManager(arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, AuthorizationManager);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthorizationManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthorizationManager).call(this, arg_log_context ? arg_log_context : context, arg_logger_manager));
 
-        _this.is_authorization_manager = true;
+		_this.is_authorization_manager = true;
 
-        _this.authorization_is_enabled = true;
-        _this.authorization_mode = null;
-        return _this;
-    }
+		_this.authorization_is_enabled = true;
+		_this.authorization_mode = null;
+		return _this;
+	}
 
-    /**
-     * Load security settings
-     * @param {object} arg_settings - authorization settings (Immutable object)
-     * @returns {nothing}
-     */
+	/**
+  * Load security settings
+  * @param {object} arg_settings - authorization settings (Immutable object)
+  * @returns {nothing}
+  */
 
 
-    _createClass(AuthorizationManager, [{
-        key: 'load',
-        value: function load(arg_settings) {
-            (0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
-            (0, _assert2.default)(_typr2.default.isFunction(arg_settings.has), context + ':bad settings immutable');
-            (0, _assert2.default)(arg_settings.has('enabled'), context + ':bad settings.enabled');
-            // assert(arg_settings.has('mode'), context + ':bad settings.mode')
+	_createClass(AuthorizationManager, [{
+		key: 'load',
+		value: function load(arg_settings) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
+			(0, _assert2.default)(_typr2.default.isFunction(arg_settings.has), context + ':bad settings immutable');
+			(0, _assert2.default)(arg_settings.has('enabled'), context + ':bad settings.enabled');
+			// assert(arg_settings.has('mode'), context + ':bad settings.mode')
 
-            // LOAD AUTHORIZATION SETTINGS
-            this.authorization_is_enabled = arg_settings.get('enabled');
-            // this.authorization_mode = arg_settings.get('mode')
+			// LOAD AUTHORIZATION SETTINGS
+			this.authorization_is_enabled = arg_settings.get('enabled');
+			// this.authorization_mode = arg_settings.get('mode')
 
-            // LOAD PLUGIN
-            // const result = this.load_plugin(arg_settings)
-            // if (! result)
-            // {
-            //     this.error_bad_plugin(this.authorization_mode)
-            // }
+			// LOAD PLUGIN
+			// const result = this.load_plugin(arg_settings)
+			// if (! result)
+			// {
+			//	 this.error_bad_plugin(this.authorization_mode)
+			// }
 
-            // TODO: default security plugin ?
-            // TODO: alt plugin settings ?
-        }
+			// TODO: default security plugin ?
+			// TODO: alt plugin settings ?
+		}
 
-        /**
-         * Load security plugin from settings
-         * @param {object} arg_settings - authorization settings (Immutable object)
-28shl = function r28shl(num, shift) {
-  return ((num << shift) & 0xfffffff) | (num >>> (28 - shift));
-load_plugin(arg_settings) {
-            (0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
-            (0, _assert2.default)(_typr2.default.isFunction(arg_settings.has), context + ':bad settings immutable');
-            (0, _assert2.default)(arg_settings.has('mode'), context + ':bad settings.mode');
+		/**
+   * Load security plugin from settings
+   * @param {object} arg_settings - authorization settings (Immutable object)
+   * @returns {boolean}
+   */
 
-            // LOAD PLUGIN
-            var mode = arg_settings.get('mode').toLocaleLowerCase();
-            switch (mode) {
-                case 'database':
-                    {
-                        // const plugin = new AuthorizationPluginPassportLocalDb(context)
-                        // this.register_plugin(plugin)
-                        // plugin.enable(arg_settings)
-                        return true;
-                    }
-                case 'jsonfile':
-                    {
-                        // const plugin = new AuthorizationPluginPassportLocalFile(context)
-                        // this.register_plugin(plugin)
-                        // plugin.enable(arg_settings)
-                        return true;
-                    }
-            }
+	}, {
+		key: 'load_plugin',
+		value: function load_plugin(arg_settings) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad settings object');
+			(0, _assert2.default)(_typr2.default.isFunction(arg_settings.has), context + ':bad settings immutable');
+			(0, _assert2.default)(arg_settings.has('mode'), context + ':bad settings.mode');
 
-            return false;
-        }
+			// LOAD PLUGIN
+			var mode = arg_settings.get('mode').toLocaleLowerCase();
+			switch (mode) {
+				case 'database':
+					{
+						// const plugin = new AuthorizationPluginPassportLocalDb(context)
+						// this.register_plugin(plugin)
+						// plugin.enable(arg_settings)
+						return true;
+					}
+				case 'jsonfile':
+					{
+						// const plugin = new AuthorizationPluginPassportLocalFile(context)
+						// this.register_plugin(plugin)
+						// plugin.enable(arg_settings)
+						return true;
+					}
+			}
 
-        /**
-         * Authenticate a user with request credentials.
-         * @param {object|undefined} arg_credentials - request credentials object
-         * @returns {object} - a promise of boolean
-         */
+			return false;
+		}
 
-    }, {
-        key: 'authenticate',
-        value: function authenticate(arg_credentials) {
-            return Promise.resolve(false);
-        }
+		/**
+   * Authenticate a user with request credentials.
+   * @param {object|undefined} arg_credentials - request credentials object
+   * @returns {object} - a promise of boolean
+   */
 
-        /**
-         * Login current request (alias of authenticate).
-         * @abstract
-         * @returns {object} - a promise of boolean
-         */
+	}, {
+		key: 'authenticate',
+		value: function authenticate() /*arg_credentials*/{
+			return Promise.resolve(false);
+		}
 
-    }, {
-        key: 'login',
-        value: function login() {
-            return Promise.resolve(false);
-        }
+		/**
+   * Login current request (alias of authenticate).
+   * @abstract
+   * @returns {object} - a promise of boolean
+   */
 
-        /**
-        * Error wrapper - error during plugin loading.
-        * @param {string} arg_plugin_mode - plugin mode
-        * @returns {nothing}
-        */
+	}, {
+		key: 'login',
+		value: function login() {
+			return Promise.resolve(false);
+		}
 
-    }, {
-        key: 'error_bad_plugin',
-        value: function error_bad_plugin(arg_plugin_mode) {
-            this.error('bad plugin [' + arg_plugin_mode + ']');
-        }
-    }]);
+		/**
+   * Error wrapper - error during plugin loading.
+   * @param {string} arg_plugin_mode - plugin mode
+   * @returns {nothing}
+   */
 
-    return AuthorizationManager;
+	}, {
+		key: 'error_bad_plugin',
+		value: function error_bad_plugin(arg_plugin_mode) {
+			this.error('bad plugin [' + arg_plugin_mode + ']');
+		}
+	}]);
+
+	return AuthorizationManager;
 }(_plugins_manager2.default);
 
 exports.default = AuthorizationManager;
 
 
-},{"../base/plugins_manager":14,"assert":117,"node-forge":489,"typr":509}],58:[function(require,module,exports){
+},{"../plugins/plugins_manager":34,"assert":102,"typr":494}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10938,25 +10513,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/bus_client_instance';
 
-/**
- * @file Base class for message bus client instances.
- * 
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Base class for message bus client instances.
+ * 
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var BusClientInstance = function (_Instance) {
 	_inherits(BusClientInstance, _Instance);
 
-	/**
-  * Create a bus client instance.
-  * @extends Instance
-  * @param {string} arg_collection - collection name.
-  * @param {string} arg_class - class name.
-  * @param {string} arg_name - instance name.
-  * @param {object} arg_settings - settings plain object
-  * @param {string} arg_context - log context.
-  * @returns {nothing}
+	/**
+  * Create a bus client instance.
+  * @extends Instance
+  * @param {string} arg_collection - collection name.
+  * @param {string} arg_class - class name.
+  * @param {string} arg_name - instance name.
+  * @param {object} arg_settings - settings plain object
+  * @param {string} arg_context - log context.
+  * @returns {nothing}
   */
 
 	function BusClientInstance(arg_collection, arg_class, arg_name, arg_settings, arg_context) {
@@ -10973,11 +10548,11 @@ var BusClientInstance = function (_Instance) {
 		return _this;
 	}
 
-	/**
-  * Initialize bus client.
-  * @param {string} arg_host - bus server host.
-  * @param {string} arg_port - bus server port.
-  * @returns {nothing}
+	/**
+  * Initialize bus client.
+  * @param {string} arg_host - bus server host.
+  * @param {string} arg_port - bus server port.
+  * @returns {nothing}
   */
 
 
@@ -10988,13 +10563,16 @@ var BusClientInstance = function (_Instance) {
 
 			var BusServer = require('../servers/simplebus_server').default;
 			this.bus_client = BusServer.create_client(this, arg_host, arg_port);
+			this.bus_server_class = BusServer;
+			this.bus_server_host = arg_host;
+			this.bus_server_port = arg_port;
 
 			this.leave_group('init_bus_client');
 		}
 
-		/**
-   * Register instance to master node (nothing to do here).
-   * @returns {nothing}
+		/**
+   * Register instance to master node (nothing to do here).
+   * @returns {nothing}
    */
 
 	}, {
@@ -11005,11 +10583,11 @@ var BusClientInstance = function (_Instance) {
 			this.leave_group('register_to_master');
 		}
 
-		/**
-   * Send a message to a node.
-   * @param {string} arg_node_name - recipient node name.
-   * @param {object} arg_payload - message payload plain object.
-   * @returns {nothing}
+		/**
+   * Send a message to a node.
+   * @param {string} arg_node_name - recipient node name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11032,11 +10610,11 @@ var BusClientInstance = function (_Instance) {
 			}
 		}
 
-		/**
-   * Send a message to the metrics server.
-   * @param {string} arg_metric_type - type of metrics.
-   * @param {object} arg_metrics - metrics plain object.
-   * @returns {nothing}
+		/**
+   * Send a message to the metrics server.
+   * @param {string} arg_metric_type - type of metrics.
+   * @param {object} arg_metrics - metrics plain object.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11053,12 +10631,12 @@ var BusClientInstance = function (_Instance) {
 			this.send_msg('metrics_server', { is_metrics_message: true, 'metric': arg_metric_type, 'metrics': metrics, 'metrics_count': count });
 		}
 
-		/**
-   * Process a received message.
-   * @abstract
-   * @param {string} arg_sender - sender node/server name.
-   * @param {object} arg_payload - message payload plain object.
-   * @returns {nothing}
+		/**
+   * Process a received message.
+   * @abstract
+   * @param {string} arg_sender - sender node/server name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11082,7 +10660,7 @@ var BusClientInstance = function (_Instance) {
 exports.default = BusClientInstance;
 
 
-},{"../base/instance":9,"../servers/simplebus_server":66,"assert":117,"typr":509}],59:[function(require,module,exports){
+},{"../base/instance":9,"../servers/simplebus_server":65,"assert":102,"typr":494}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11107,23 +10685,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/bus_server';
 
-/**
- * @file Bus server base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Bus server base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var BusServer = function (_Server) {
 	_inherits(BusServer, _Server);
 
-	/**
-  * Create a server instance.
-  * @extends Server
-  * @abstract
-  * @param {string} arg_name - server name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
+	/**
+  * Create a server instance.
+  * @extends Server
+  * @abstract
+  * @param {string} arg_name - server name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
   */
 
 	function BusServer(arg_name, arg_settings, arg_context) {
@@ -11135,9 +10713,9 @@ var BusServer = function (_Server) {
 		return _this;
 	}
 
-	/**
-  * Build server.
-  * @returns {nothing}
+	/**
+  * Build server.
+  * @returns {nothing}
   */
 
 
@@ -11151,9 +10729,9 @@ var BusServer = function (_Server) {
 			this.leave_group('build_server');
 		}
 
-		/**
-   * Enable server (start it).
-   * @returns {nothing}
+		/**
+   * Enable server (start it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -11166,9 +10744,9 @@ var BusServer = function (_Server) {
 			this.leave_group('enable Bus server');
 		}
 
-		/**
-   * Disable server (stop it).
-   * @returns {nothing}
+		/**
+   * Disable server (stop it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -11181,10 +10759,10 @@ var BusServer = function (_Server) {
 			this.leave_group('disable Bus server');
 		}
 
-		/**
-   * Post a message on the bus.
-   * @param {object} arg_msg - message payload.
-   * @returns {nothing}
+		/**
+   * Post a message on the bus.
+   * @param {object} arg_msg - message payload.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11193,11 +10771,11 @@ var BusServer = function (_Server) {
 			console.error(context + ':post:not yet implemented');
 		}
 
-		/**
-   * Subscribe to messages of the bus.
-   * @param {string|object} arg_filter - messages criteria for filtering.
-   * @param {function} arg_handler - subscription callback as f(msg).
-   * @returns {nothing}
+		/**
+   * Subscribe to messages of the bus.
+   * @param {string|object} arg_filter - messages criteria for filtering.
+   * @param {function} arg_handler - subscription callback as f(msg).
+   * @returns {nothing}
    */
 
 	}, {
@@ -11276,7 +10854,7 @@ var BusServer = function (_Server) {
 exports.default = BusServer;
 
 
-},{"./server":65}],60:[function(require,module,exports){
+},{"./server":64}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11309,25 +10887,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/bus_server_instance';
 
-/**
- * @file Base class for message bus server instances.
- * 
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Base class for message bus server instances.
+ * 
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var BusServerInstance = function (_BusClientInstance) {
 	_inherits(BusServerInstance, _BusClientInstance);
 
-	/**
-  * Create a bus server instance.
-  * @extends BusClientInstance
-  * @param {string} arg_collection - collection name.
-  * @param {string} arg_class - class name.
-  * @param {string} arg_name - instance name.
-  * @param {object} arg_settings - settings plain object
-  * @param {string} arg_context - log context.
-  * @returns {nothing}
+	/**
+  * Create a bus server instance.
+  * @extends BusClientInstance
+  * @param {string} arg_collection - collection name.
+  * @param {string} arg_class - class name.
+  * @param {string} arg_name - instance name.
+  * @param {object} arg_settings - settings plain object
+  * @param {string} arg_context - log context.
+  * @returns {nothing}
   */
 
 	function BusServerInstance(arg_collection, arg_class, arg_name, arg_settings, arg_context) {
@@ -11344,11 +10922,11 @@ var BusServerInstance = function (_BusClientInstance) {
 		return _this;
 	}
 
-	/**
-  * Initialize bus server.
-  * @param {string} arg_host - bus server host.
-  * @param {string} arg_port - bus server port.
-  * @returns {nothing}
+	/**
+  * Initialize bus server.
+  * @param {string} arg_host - bus server host.
+  * @param {string} arg_port - bus server port.
+  * @returns {nothing}
   */
 
 
@@ -11388,7 +10966,7 @@ var BusServerInstance = function (_BusClientInstance) {
 exports.default = BusServerInstance;
 
 
-},{"./bus_client_instance":58,"./simplebus_server":66,"assert":117,"immutable":470,"typr":509}],61:[function(require,module,exports){
+},{"./bus_client_instance":57,"./simplebus_server":65,"assert":102,"immutable":455,"typr":494}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11447,10 +11025,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/express_server';
 
-/**
- * @file Express server class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Express server class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var ExpressServer = function (_Server) {
@@ -11470,8 +11048,6 @@ var ExpressServer = function (_Server) {
 	_createClass(ExpressServer, [{
 		key: 'build_server',
 		value: function build_server() {
-			var _this2 = this;
-
 			this.enter_group('build_server');
 
 			(0, _assert2.default)(this.server_protocole == 'http' || this.server_protocole == 'https', context + ':bad protocole for express [' + this.server_protocole + ']');
@@ -11505,68 +11081,15 @@ var ExpressServer = function (_Server) {
 			this.server.set('view engine', 'jade');
 
 			// BUILD SOCKETIO
-			var use_socketio = this.get_setting('use_socketio', true);
+			var use_socketio = this.get_setting('use_socketio', false);
+
 			if (use_socketio) {
-				(function () {
-					console.log(context + ':creating socket io');
+				console.log(context + ':creating socket io');
 
-					_this2.server_http = _http2.default.Server(_this2.server);
-					_this2.serverio = (0, _socket2.default)(_this2.server_http);
+				this.server_http = _http2.default.Server(this.server);
+				this.serverio = (0, _socket2.default)(this.server_http);
 
-					var srv = _this2;
-					var root_srv_socket = _this2.serverio;
-					_this2.serverio.on('connection', function (socket) {
-						console.info(context + ':build_server:new connection on /');
-
-						// ROOT
-						socket.on('disconnect', function () {
-							console.info(context + ':build_server:socket disconnected');
-						});
-
-						socket.on('hello', function (data) {
-							console.info(context + ':build_server:socket receives hello', data);
-						});
-
-						socket.emit('welcome on /', { hello: 'world' });
-
-						// METRICS
-						srv.serverio_metrics = root_srv_socket.of('/metrics');
-						srv.serverio_metrics.on('connection', function (socket) {
-							console.info(context + ':build_server:new connection on /metrics', socket.id);
-
-							socket.on('disconnect', function () {
-								console.info(context + ':build_server:socket disconnected from /metrics');
-								socket.emit('welcome on /metrics', { hello: 'world' });
-							});
-							socket.on('get', function (data) {
-								console.info(context + ':build_server:socket get on /metrics', socket.id, data);
-								socket.emit('get', '/metrics/get response');
-							});
-							socket.on('end', function () {
-								socket.disconnect(0);
-							});
-						});
-
-						// socket.on('my other event',
-						// 	function (data)
-						// 	{
-						// 		console.log(data)
-						// 	}
-						// )
-						/*
-      var messages = connections.flatMap(
-      	function(socket)
-      	{
-      		return Bacon.fromBinder(
-      			function(txt)
-      			{
-      				sink( { author: socket, txt: txt } )
-      			}
-      		)
-      	}
-      )*/
-					});
-				})();
+				_runtime2.default.add_socketio(this.get_name(), this.serverio);
 			}
 
 			this.leave_group('build_server');
@@ -11622,7 +11145,7 @@ var ExpressServer = function (_Server) {
 exports.default = ExpressServer;
 
 
-},{"../base/runtime":17,"../metrics/metric_http":35,"./server":65,"assert":117,"compression":368,"express":404,"express-favicon":403,"http":354,"socket.io":116}],62:[function(require,module,exports){
+},{"../base/runtime":15,"../metrics/metric_http":26,"./server":64,"assert":102,"compression":353,"express":389,"express-favicon":388,"http":339,"socket.io":101}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11657,10 +11180,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/metrics_server';
 
-/**
- * @file Metrics server class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Metrics server class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var MetricsServer = function (_Server) {
@@ -11718,9 +11241,9 @@ var MetricsServer = function (_Server) {
 			this.leave_group('receive_msg');
 		}
 
-		/**
-   * Process received metrics
-   * {array} Array of metrics plain objects
+		/**
+   * Process received metrics
+   * {array} Array of metrics plain objects
    */
 
 	}, {
@@ -11757,7 +11280,7 @@ var MetricsServer = function (_Server) {
 exports.default = MetricsServer;
 
 
-},{"../metrics/metric_http_reducer":36,"./server":65,"assert":117,"typr":509}],63:[function(require,module,exports){
+},{"../metrics/metric_http_reducer":27,"./server":64,"assert":102,"typr":494}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11823,21 +11346,21 @@ var STATE_STOPPING = 'NODE_IS_STOPPING';
 var STATE_STOPPED = 'NODE_IS_STOPPED';
 var STATE_UNREGISTERING = 'NODE_IS_UNREGISTERING_TO_MASTER';
 
-/**
- * @file Node class: node is an item of a topology and manages a set of servers.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Node class: node is an item of a topology and manages a set of servers.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Node = function (_BusServerInstance) {
 	_inherits(Node, _BusServerInstance);
 
-	/**
-  * Create a Node instance.
-  * @extends BusServerInstance
-  * @param {string} arg_name - resource name.
-  * @param {object} arg_settings - resource settings.
-  * @returns {nothing}
+	/**
+  * Create a Node instance.
+  * @extends BusServerInstance
+  * @param {string} arg_name - resource name.
+  * @param {object} arg_settings - resource settings.
+  * @returns {nothing}
   */
 
 	function Node(arg_name, arg_settings) {
@@ -11857,9 +11380,9 @@ var Node = function (_BusServerInstance) {
 		return _this;
 	}
 
-	/**
-  * Load Node settings.
-  * @returns {nothing}
+	/**
+  * Load Node settings.
+  * @returns {nothing}
   */
 
 
@@ -11894,10 +11417,10 @@ var Node = function (_BusServerInstance) {
 			this.leave_group('load()');
 		}
 
-		/**
-   * Switch Node state.
-   * @param {string} arg_state - target state.
-   * @returns {nothing}
+		/**
+   * Switch Node state.
+   * @param {string} arg_state - target state.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11907,11 +11430,11 @@ var Node = function (_BusServerInstance) {
 			this.info(arg_state);
 		}
 
-		/**
-   * Init node metrics server.
-   * @param {string} arg_host - metrics server host.
-   * @param {string} arg_port - metrics server port.
-   * @returns {nothing}
+		/**
+   * Init node metrics server.
+   * @param {string} arg_host - metrics server host.
+   * @param {string} arg_port - metrics server port.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11929,9 +11452,9 @@ var Node = function (_BusServerInstance) {
 			this.metrics_server.init_bus_client(arg_host, arg_port);
 		}
 
-		/**
-   * Get metrics server instance.
-   * @returns {Server} - Metrics server.
+		/**
+   * Get metrics server instance.
+   * @returns {Server} - Metrics server.
    */
 
 	}, {
@@ -11940,10 +11463,10 @@ var Node = function (_BusServerInstance) {
 			return this.metrics_server;
 		}
 
-		/**
-   * Send a message to master node through a bus.
-   * @param {object} arg_payload - content of the message to send.
-   * @returns {nothing}
+		/**
+   * Send a message to master node through a bus.
+   * @param {object} arg_payload - content of the message to send.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11953,9 +11476,9 @@ var Node = function (_BusServerInstance) {
 			console.log('send a msg to master [%s]', this.master_name, arg_payload);
 		}
 
-		/**
-   * Register this node to master node.
-   * @returns {nothing}
+		/**
+   * Register this node to master node.
+   * @returns {nothing}
    */
 
 	}, {
@@ -11974,10 +11497,10 @@ var Node = function (_BusServerInstance) {
 			this.switch_state(STATE_WAITING);
 		}
 
-		/**
-   * Load settings on master node.
-   * @param {object} arg_settings - master node settings.
-   * @returns {nothing}
+		/**
+   * Load settings on master node.
+   * @param {object} arg_settings - master node settings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12001,9 +11524,9 @@ var Node = function (_BusServerInstance) {
 			this.switch_state(STATE_LOADED);
 		}
 
-		/**
-   * Starts node servers.
-   * @returns {nothing}
+		/**
+   * Starts node servers.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12028,9 +11551,9 @@ var Node = function (_BusServerInstance) {
 			this.leave_group('start');
 		}
 
-		/**
-   * Stops node servers.
-   * @returns {nothing}
+		/**
+   * Stops node servers.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12055,9 +11578,9 @@ var Node = function (_BusServerInstance) {
 			this.leave_group('stop');
 		}
 
-		/**
-   * Unegister this node from master node. (TODO)
-   * @returns {nothing}
+		/**
+   * Unegister this node from master node. (TODO)
+   * @returns {nothing}
    */
 
 	}, {
@@ -12075,36 +11598,36 @@ var Node = function (_BusServerInstance) {
 			this.switch_state(STATE_CREATED);
 		}
 
-		/**
-   * Find master node. (TODO)
-   * @returns {Node} - master node instance.
+		/**
+   * Find master node. (TODO)
+   * @returns {Node} - master node instance.
    */
 
 	}, {
 		key: 'find_master',
 		value: function find_master() {}
 
-		/**
-   * Promote this node to master node.
-   * @returns {Promise} - Promise of boolean: success or failure
+		/**
+   * Promote this node to master node.
+   * @returns {Promise} - Promise of boolean: success or failure
    */
 
 	}, {
 		key: 'promote_master',
 		value: function promote_master() {}
 
-		/**
-   * Revoke this node from master node.
-   * @returns {Promise} - Promise of boolean: success or failure
+		/**
+   * Revoke this node from master node.
+   * @returns {Promise} - Promise of boolean: success or failure
    */
 
 	}, {
 		key: 'revoke_master',
 		value: function revoke_master() {}
 
-		/**
-   * Load node servers from master node settings.
-   * @returns {nothing}
+		/**
+   * Load node servers from master node settings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12140,12 +11663,12 @@ var Node = function (_BusServerInstance) {
 			this.leave_group('load_servers');
 		}
 
-		/**
-   * Create a server instance on this node.
-   * @param {string} arg_type - server type string
-   * @param {string} arg_name - server name string
-   * @param {object} arg_settings - server settings object
-   * @returns {Server} - a new Server instance
+		/**
+   * Create a server instance on this node.
+   * @param {string} arg_type - server type string
+   * @param {string} arg_name - server name string
+   * @param {object} arg_settings - server settings object
+   * @returns {Server} - a new Server instance
    */
 
 	}, {
@@ -12182,7 +11705,7 @@ var Node = function (_BusServerInstance) {
 exports.default = Node;
 
 
-},{"../base/collection":5,"../servers/bus_server_instance":60,"../servers/express_server":61,"../servers/metrics_server":62,"../servers/restify_server":64,"../servers/server":65,"assert":117,"immutable":470,"typr":509}],64:[function(require,module,exports){
+},{"../base/collection":5,"../servers/bus_server_instance":59,"../servers/express_server":60,"../servers/metrics_server":61,"../servers/restify_server":63,"../servers/server":64,"assert":102,"immutable":455,"typr":494}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12219,10 +11742,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/restify_server';
 
-/**
- * @file Restify server class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Restify server class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var RestifyServer = function (_Server) {
@@ -12324,7 +11847,7 @@ var RestifyServer = function (_Server) {
 exports.default = RestifyServer;
 
 
-},{"../metrics/metric_http":35,"./server":65,"assert":117,"restify":116}],65:[function(require,module,exports){
+},{"../metrics/metric_http":26,"./server":64,"assert":102,"restify":101}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12370,9 +11893,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/server';
 
-/**
- * @public
- * Type of servers.
+/**
+ * @public
+ * Type of servers.
  */
 var ServerTypes = exports.ServerTypes = {
 	SERVER_TYPE_EXPRESS: 'express',
@@ -12382,23 +11905,23 @@ var ServerTypes = exports.ServerTypes = {
 	SERVER_TYPE_CLUSTER: 'cluster'
 };
 
-/**
- * @file Server base class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file Server base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var Server = function (_BusClientInstance) {
 	_inherits(Server, _BusClientInstance);
 
-	/**
-  * Create a server instance.
-  * @extends BusClientInstance
-  * @param {string} arg_name - server name
-  * @param {string} arg_class - server class name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
+	/**
+  * Create a server instance.
+  * @extends BusClientInstance
+  * @param {string} arg_name - server name
+  * @param {string} arg_class - server class name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
   */
 
 	function Server(arg_name, arg_class, arg_settings, arg_log_context) {
@@ -12429,9 +11952,9 @@ var Server = function (_BusClientInstance) {
 		return _this;
 	}
 
-	/**
-  * Get security settings object into the server.
-  * @returns {object} - security settings
+	/**
+  * Get security settings object into the server.
+  * @returns {object} - security settings
   */
 
 
@@ -12446,9 +11969,9 @@ var Server = function (_BusClientInstance) {
 			return security_settings;
 		}
 
-		/**
-   * Get security settings from server or runtime.
-   * @returns {Immutable.Map} - security settings
+		/**
+   * Get security settings from server or runtime.
+   * @returns {Immutable.Map} - security settings
    */
 
 	}, {
@@ -12555,9 +12078,9 @@ var Server = function (_BusClientInstance) {
 			return null;
 		}
 
-		/**
-   * Load server settings.
-   * @returns {nothing}
+		/**
+   * Load server settings.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12619,9 +12142,9 @@ var Server = function (_BusClientInstance) {
 			this.leave_group('load');
 		}
 
-		/**
-   * Enable server (start it).
-   * @returns {nothing}
+		/**
+   * Enable server (start it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -12649,9 +12172,9 @@ var Server = function (_BusClientInstance) {
 			}
 		}
 
-		/**
-   * Disable server (stop it).
-   * @returns {nothing}
+		/**
+   * Disable server (stop it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -12662,62 +12185,62 @@ var Server = function (_BusClientInstance) {
 	return Server;
 }(_bus_client_instance2.default);
 
-/*
-https://engineering.gosquared.com/making-dashboard-faster
-function parallel(middlewares) {
-  return function (req, res, next) {
-    async.each(middlewares, function (mw, cb) {
-      mw(req, res, cb);
-    }, next);
-  };
-}
-
-app.use(parallel([
-  getUser,
-  getSiteList,
-  getCurrentSite,
-  getSubscription
-]));
-
-
-		const has_cluster = this.$settings.has('workers')
-		
-		// CLUSTER
-		if (has_cluster)
-		{
-			var cluster = require('cluster');
-			var numCPUs = require('os').cpus().length;
-			
-			// const workers = this.$settings.get('workers')
-			// const min_workers = this.workers.min || 1;
-			// const max_workers = this.workers.max || 3;
-			// const method_workers = this.workers.method || 'roundrobin';
-			
-			should_listen = ! cluster.isMaster
-			
-			if (cluster.isMaster)
-			{
-				// Fork workers.
-				for(var i = 0; i < numCPUs; i++)
-				{
-					cluster.fork()
-				}
-				
-				cluster.on('exit',
-					function(worker, code, signal)
-					{
-						console.log('worker ' + worker.process.pid + ' died')
-					}
-				)
-			}
-		}
+/*
+https://engineering.gosquared.com/making-dashboard-faster
+function parallel(middlewares) {
+  return function (req, res, next) {
+    async.each(middlewares, function (mw, cb) {
+      mw(req, res, cb);
+    }, next);
+  };
+}
+
+app.use(parallel([
+  getUser,
+  getSiteList,
+  getCurrentSite,
+  getSubscription
+]));
+
+
+		const has_cluster = this.$settings.has('workers')
+		
+		// CLUSTER
+		if (has_cluster)
+		{
+			var cluster = require('cluster');
+			var numCPUs = require('os').cpus().length;
+			
+			// const workers = this.$settings.get('workers')
+			// const min_workers = this.workers.min || 1;
+			// const max_workers = this.workers.max || 3;
+			// const method_workers = this.workers.method || 'roundrobin';
+			
+			should_listen = ! cluster.isMaster
+			
+			if (cluster.isMaster)
+			{
+				// Fork workers.
+				for(var i = 0; i < numCPUs; i++)
+				{
+					cluster.fork()
+				}
+				
+				cluster.on('exit',
+					function(worker, code, signal)
+					{
+						console.log('worker ' + worker.process.pid + ' died')
+					}
+				)
+			}
+		}
 */
 
 
 exports.default = Server;
 
 
-},{"../base/collection":5,"../security/authentication_wrapper":56,"../store/index":96,"./bus_client_instance":58,"assert":117,"immutable":470,"typr":509}],66:[function(require,module,exports){
+},{"../base/collection":5,"../security/authentication_wrapper":55,"../store/index":81,"./bus_client_instance":57,"assert":102,"immutable":455,"typr":494}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12752,22 +12275,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var context = 'common/servers/simplebus_server';
 
-/**
- * @file SimpleBus server class.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file SimpleBus server class.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var SimpleBusServer = function (_BusServer) {
 	_inherits(SimpleBusServer, _BusServer);
 
-	/**
-  * Create a server instance.
-  * @extends BusServer
-  * @param {string} arg_name - server name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
+	/**
+  * Create a server instance.
+  * @extends BusServer
+  * @param {string} arg_name - server name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
   */
 
 	function SimpleBusServer(arg_name, arg_settings, arg_context) {
@@ -12779,9 +12302,9 @@ var SimpleBusServer = function (_BusServer) {
 		return _this;
 	}
 
-	/**
-  * Build server.
-  * @returns {nothing}
+	/**
+  * Build server.
+  * @returns {nothing}
   */
 
 
@@ -12809,9 +12332,9 @@ var SimpleBusServer = function (_BusServer) {
 			this.leave_group('build_server');
 		}
 
-		/**
-   * Enable server (start it).
-   * @returns {nothing}
+		/**
+   * Enable server (start it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -12824,9 +12347,9 @@ var SimpleBusServer = function (_BusServer) {
 			this.leave_group('enable Bus server');
 		}
 
-		/**
-   * Disable server (stop it).
-   * @returns {nothing}
+		/**
+   * Disable server (stop it).
+   * @returns {nothing}
    */
 
 	}, {
@@ -12839,10 +12362,10 @@ var SimpleBusServer = function (_BusServer) {
 			this.leave_group('disable Bus server');
 		}
 
-		/**
-   * Post a message on the bus.
-   * @param {object} arg_msg - message payload.
-   * @returns {nothing}
+		/**
+   * Post a message on the bus.
+   * @param {object} arg_msg - message payload.
+   * @returns {nothing}
    */
 
 	}, {
@@ -12851,11 +12374,11 @@ var SimpleBusServer = function (_BusServer) {
 			this.bus.post(arg_msg);
 		}
 
-		/**
-   * Subscribe to messages of the bus.
-   * @param {string|object} arg_filter - messages criteria for filtering.
-   * @param {function} arg_handler - subscription callback as f(msg).
-   * @returns {nothing}
+		/**
+   * Subscribe to messages of the bus.
+   * @param {string|object} arg_filter - messages criteria for filtering.
+   * @param {function} arg_handler - subscription callback as f(msg).
+   * @returns {nothing}
    */
 
 	}, {
@@ -12872,18 +12395,20 @@ var SimpleBusServer = function (_BusServer) {
 			var client = _simplebus2.default.createClient(arg_port, arg_host);
 
 			client.start(function () {
-				client.subscribe({ "target": node_name }, function (arg_msg) {
-					console.log(arg_msg, context + ':client.on_msg:enter');
+				client.subscribe({ 'target': node_name }, function (arg_msg) {
+					// console.log(arg_msg, context + ':client.on_msg:enter')
 
 					(0, _assert2.default)(_typr2.default.isObject(arg_msg) && _typr2.default.isObject(arg_msg.payload), context + ':subscribe:bad payload object');
 					arg_node.receive_msg(arg_msg.sender, arg_msg.payload);
 
-					console.log(context + ':client.on_msg:leave');
+					// console.log(context + ':client.on_msg:leave')
 				});
 
 				arg_node.info('Messages bus client is started');
 
-				arg_node.register_to_master();
+				if (arg_node.register_to_master) {
+					arg_node.register_to_master();
+				}
 			});
 
 			// SET SOCKET CLIENT HANDLERS
@@ -12960,1576 +12485,7 @@ var SimpleBusServer = function (_BusServer) {
 exports.default = SimpleBusServer;
 
 
-},{"./bus_server":59,"assert":117,"simplebus":504,"typr":509}],67:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _service = require('../../base/service');
-
-var _service2 = _interopRequireDefault(_service);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/services/base/base_service';
-
-/**
- * Base service class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var BaseService = function (_Service) {
-	_inherits(BaseService, _Service);
-
-	/**
-  * Create a service.
-  * @param {string} arg_svc_name - service name
-  * @param {object} arg_service_settings - service settings
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function BaseService(arg_svc_name, arg_service_settings, arg_context) {
-		_classCallCheck(this, BaseService);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BaseService).call(this, arg_svc_name, null, null, arg_context ? arg_context : context));
-
-		_this.is_base_service = true;
-		return _this;
-	}
-
-	/**
-  * Activate service feature for an application on a server.
-  * @param {Application} arg_application - application instance
-  * @param {Server} arg_server - server instance
-  * @param {object} arg_app_svc_cfg - application service settings
-  * @returns {nothing}
-  */
-
-
-	_createClass(BaseService, [{
-		key: 'activate_on_server',
-		value: function activate_on_server(arg_application, arg_server, arg_app_svc_cfg) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_application) && arg_application.is_application, context + ':activate_on_server:bad application instance');
-			(0, _assert2.default)(_typr2.default.isObject(arg_server) && arg_server.is_server, context + ':activate_on_server:bad server instance');
-
-			var provider = this.get_provider_by_app_server(arg_application.get_name(), arg_server.get_name());
-
-			provider.activate(arg_application, arg_server, arg_app_svc_cfg);
-		}
-	}]);
-
-	return BaseService;
-}(_service2.default);
-
-exports.default = BaseService;
-
-
-},{"../../base/service":19,"assert":117,"typr":509}],68:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _restify = require('restify');
-
-var _restify2 = _interopRequireDefault(_restify);
-
-var _service_consumer = require('./service_consumer');
-
-var _service_consumer2 = _interopRequireDefault(_service_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/services/base/routes_svc_consumer';
-
-/**
- * Routes service consumer class for middleware routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var RoutesSvcConsumer = function (_ServiceConsumer) {
-	_inherits(RoutesSvcConsumer, _ServiceConsumer);
-
-	/**
-  * Create a service consumer for routes.
-  * @param {string} arg_consumer_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function RoutesSvcConsumer(arg_consumer_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, RoutesSvcConsumer);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(RoutesSvcConsumer).call(this, arg_consumer_name, arg_service_instance, arg_context ? arg_context : context));
-	}
-
-	/**
-  * Enhance operands if needed
-  * @params {array} arg_operands - Variable list of operands
-  * @returns {array} - array of routes to consume
-  */
-
-
-	_createClass(RoutesSvcConsumer, [{
-		key: 'prepare_args',
-		value: function prepare_args(arg_operands) {
-			this.enter_group('prepare_args');
-
-			// GET ARGS ROUTES
-			var routes = [];
-			if (arg_operands.length > 0) {
-				for (var key in arg_operands) {
-					// console.log(key, context + ':consume.args.key')
-					var arg_item = arg_operands[key];
-					// console.log(arg_item, context + ':consume.args.item')
-					if (_typr2.default.isObject(arg_item) && _typr2.default.isString(arg_item.route)) {
-						routes.push(arg_item.route);
-					}
-				}
-			}
-
-			// GET DEFAULT ROUTES IF NO ARGS
-			if (routes.length == 0) {
-				var routes_cfg = this.service.get_setting('routes').toJS();
-				for (var _key in routes_cfg) {
-					// console.log(key, context + ':consume.args.key')
-					var route_cfg = routes_cfg[_key];
-					// console.log(route_cfg, context + ':consume.args.route_cfg')
-					if (_typr2.default.isObject(route_cfg) && _typr2.default.isString(route_cfg.route)) {
-						routes.push(route_cfg.route);
-					}
-				}
-			}
-			this.info(routes, 'routes');
-
-			this.leave_group('prepare_args');
-			return routes;
-		}
-
-		/**
-   * Consume a service on the same host.
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_routes - Routes to request
-   * @return {object} a promise of results
-   */
-
-	}, {
-		key: 'consume_local',
-		value: function consume_local(arg_provider, arg_routes) {
-			return Promise.resolve(undefined);
-		}
-
-		/**
-   * Consume a service on a remote host
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_routes - Routes to request
-   * @return {object} a promise of results
-   */
-
-	}, {
-		key: 'consume_remote',
-		value: function consume_remote(arg_provider, arg_routes) {
-			this.enter_group('consume_remote');
-
-			(0, _assert2.default)(_typr2.default.isObject(arg_provider) && arg_provider.is_service_provider, context + ':consume_remote:bad service provider');
-			(0, _assert2.default)(_typr2.default.isArray(arg_routes), context + ':consume_remote:bad routes array');
-
-			var app_url = arg_provider.application.url;
-			var provider_url = this.get_server_url_for(arg_provider);
-
-			var self = this;
-			var promises = [];
-
-			var get_cb = function get_cb() {
-				var client = _restify2.default.createJsonClient({
-					url: provider_url,
-					version: '~1.0'
-				});
-
-				var _iteratorNormalCompletion = true;
-				var _didIteratorError = false;
-				var _iteratorError = undefined;
-
-				try {
-					for (var _iterator = arg_routes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-						var key = _step.value;
-
-						var route = arg_routes[key];
-						(0, _assert2.default)(_typr2.default.isString(route) && route != '', context + ':consume_remote:bad route string');
-
-						var route_app_url = app_url + (route[0] == '/' ? '' : '/') + route;
-						self.info('svc consume route', route_app_url);
-
-						var route_promise = client.get(route_app_url, function (err, req, res, obj) {
-							_assert2.default.ifError(err);
-							console.log('Server returned: %j', obj);
-						});
-
-						promises.push(route_promise);
-					}
-				} catch (err) {
-					_didIteratorError = true;
-					_iteratorError = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion && _iterator.return) {
-							_iterator.return();
-						}
-					} finally {
-						if (_didIteratorError) {
-							throw _iteratorError;
-						}
-					}
-				}
-
-				return Promise.all(promises);
-			};
-
-			var promise = new Promise(get_cb);
-			this.leave_group('consume_remote');
-			return promise;
-		}
-	}]);
-
-	return RoutesSvcConsumer;
-}(_service_consumer2.default);
-
-exports.default = RoutesSvcConsumer;
-
-
-},{"./service_consumer":69,"assert":117,"restify":116,"typr":509}],69:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _instance = require('../../base/instance');
-
-var _instance2 = _interopRequireDefault(_instance);
-
-var _is_browser = require('../../utils/is_browser');
-
-var _is_remote = require('../../utils/is_remote');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/services/base/service_consumer';
-
-/**
- * Service consumer base class.
- * @abstract
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ServiceConsumer = function (_Instance) {
-	_inherits(ServiceConsumer, _Instance);
-
-	/**
-  * Create a service consumer.
-  * @param {string} arg_consumer_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ServiceConsumer(arg_consumer_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, ServiceConsumer);
-
-		(0, _assert2.default)(_typr2.default.isString(arg_consumer_name), context + ':bad consumer name string');
-		(0, _assert2.default)(_typr2.default.isObject(arg_service_instance) && arg_service_instance.is_service, context + ':bad service object');
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceConsumer).call(this, 'svc_consumers', 'ServiceConsumer', arg_consumer_name, arg_service_instance.get_settings(), arg_context ? arg_context : context));
-
-		_this.is_service_consumer = true;
-		_this.service = arg_service_instance;
-		return _this;
-	}
-
-	/**
-  * Get service instance.
-  * @returns {Service}
-  */
-
-
-	_createClass(ServiceConsumer, [{
-		key: 'get_service',
-		value: function get_service() {
-			return _typr2.default.isObject(this.service) && this.service.is_service ? this.service : null;
-		}
-
-		/**
-   * Load settings
-   * @abstract
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'load',
-		value: function load() {}
-
-		/**
-   * Enhance operands if needed
-   * @abstract
-   * @params {array} arg_operands - Variable list of operands
-   * @returns {array} - array of operands
-   */
-
-	}, {
-		key: 'prepare_args',
-		value: function prepare_args(arg_operands) {
-			return arg_operands;
-		}
-
-		/**
-   * Get consumed service server url.
-   * @param {object} arg_provider - service provider
-   * @returns {string} - server url
-   */
-
-	}, {
-		key: 'get_server_url_for',
-		value: function get_server_url_for(arg_provider) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_provider) && arg_provider.is_service_provider, context + ':get_url_for:bad provider object');
-
-			var host = arg_provider.server.server_host;
-			var port = arg_provider.server.server_port;
-			var proto = arg_provider.server.server_protocole;
-
-			var url = proto + '://' + host + ':' + port;
-			this.debug('get_server_url_for', url);
-			// console.log(context + ':get_url_for', url)
-
-			return url;
-		}
-
-		/**
-   * Get consumed service application url.
-   * @param {object} arg_provider - service provider
-   * @returns {string} - service url
-   */
-
-	}, {
-		key: 'get_app_url_for',
-		value: function get_app_url_for(arg_provider) {
-			var url = this.get_server_url_for(arg_provider);
-			var app_url = arg_provider.application.url;
-
-			return url + '/' + app_url;
-		}
-
-		/**
-   * Get consumed service url.
-   * @param {object} arg_provider - service provider
-   * @param {string|object} arg_operands - consumer operands as {url:...} (to consume a service with an url)
-   * @returns {string} - service url
-   */
-
-	}, {
-		key: 'get_url_for',
-		value: function get_url_for(arg_provider, arg_operands) {
-			var url = this.get_app_url_for(arg_provider);
-			var opds_url = _typr2.default.isString(arg_operands) ? arg_operands : _typr2.default.isObject(arg_operands) ? arg_operands.url : null;
-
-			return url + (opds_url ? '/' + opds_url : '');
-		}
-
-		/**
-   * Consume datas from service producer.
-   * @params {...objects} args - Variable list of operands object
-   * @returns {Promise} - promise of results
-   */
-
-	}, {
-		key: 'consume',
-		value: function consume() {
-			this.enter_group('consume');
-
-			var promise = null;
-
-			try {
-				for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-					args[_key] = arguments[_key];
-				}
-
-				var operands = this.prepare_args(args);
-
-				// SERVER
-				if ((0, _is_browser.is_server)()) {
-					this.info('svc consumer is on a server');
-
-					promise = this.consume_from_server(operands);
-
-					this.leave_group('consume');
-					return promise;
-				}
-
-				// BROWSER
-				if ((0, _is_browser.is_browser)()) {
-					this.info('svc consumer is on a browser');
-
-					promise = this.consume_from_browser(args);
-
-					this.leave_group('consume');
-					return promise;
-				}
-			} catch (e) {
-				this.error(context + ':consume', e);
-			}
-
-			promise = Promise.resolve(undefined);
-			this.leave_group('consume');
-			return promise;
-		}
-
-		/**
-   * Consume service on a server
-   * @params {array} arg_operands - operands object array
-   * @returns {Promise} - promise of results
-   */
-
-	}, {
-		key: 'consume_from_server',
-		value: function consume_from_server(arg_operands) {
-			this.enter_group('consume_on_server');
-
-			var promise = null;
-
-			var service = this.get_service();
-			(0, _assert2.default)(_typr2.default.isObject(service) && service.is_service, context + ':consume:bad service object');
-
-			// TODO: QUESTION, should we always use the same producer for each consumer and register it to consumer.producer?
-			// YES: less search, we need to work on the same producer during the step
-			// NO: what about producer failure or overload
-			var strategy = null;
-			var provider = service.get_a_provider(strategy);
-			(0, _assert2.default)(_typr2.default.isObject(provider), context + ':consume:bad service provider object');
-
-			var host = provider.get_host();
-			var port = provider.get_port();
-
-			// LOCAL SAME SERVER
-			if ((0, _is_remote.is_locale)(host, port)) {
-				this.info('svc consumer is on the same local server (host, port)');
-
-				promise = this.consume_same_local_server(provider, arg_operands);
-
-				this.leave_group('consume_on_server');
-				return promise;
-			}
-
-			// LOCAL OTHER SERVER
-			if ((0, _is_remote.is_locale)(host)) {
-				this.info('svc consumer is on an other local server (host, port)');
-
-				promise = this.consume_other_local_server(provider, arg_operands);
-
-				this.leave_group('consume_on_server');
-				return promise;
-			}
-
-			// REMOTE SERVER
-			if ((0, _is_remote.is_remote)(host)) {
-				this.info('svc consumer is on a remote server (host, port)');
-
-				promise = this.consume_other_remote_server(provider, arg_operands);
-
-				this.leave_group('consume_on_server');
-				return promise;
-			}
-
-			promise = Promise.resolve(undefined);
-			this.leave_group('consume_on_server: failure');
-			return promise;
-		}
-
-		/**
-   * Consume a service on the same local server (same host, same port)
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_same_local_server',
-		value: function consume_same_local_server(arg_provider, arg_operands) {
-			return this.consume_local(arg_operands);
-		}
-
-		/**
-   * Consume a service on an other local server (same host, other port)
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_other_local_server',
-		value: function consume_other_local_server(arg_provider, arg_operands) {
-			return this.consume_local(arg_operands);
-		}
-
-		/**
-   * Consume a service on an other remote server (other host)
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_other_remote_server',
-		value: function consume_other_remote_server(arg_provider, arg_operands) {
-			return this.consume_remote(arg_provider, arg_operands);
-		}
-
-		/**
-   * Consume a service from a browser
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_from_browser',
-		value: function consume_from_browser(arg_operands) {
-			return this.consume_remote(arg_operands);
-		}
-
-		/**
-   * Consume a service on the same host
-   * @abstract
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_local',
-		value: function consume_local(arg_provider, arg_operands) {
-			return Promise.resolve(undefined);
-		}
-
-		/**
-   * Consume a service on a remote host
-   * @abstract
-   * @param {object} arg_provider - service provider
-   * @param {array} arg_operands - consumer operands
-   * @returns {Promise} - promise of service results
-   */
-
-	}, {
-		key: 'consume_remote',
-		value: function consume_remote(arg_provider, arg_operands) {
-			return Promise.resolve(undefined);
-		}
-	}]);
-
-	return ServiceConsumer;
-}(_instance2.default);
-
-exports.default = ServiceConsumer;
-
-
-},{"../../base/instance":9,"../../utils/is_browser":111,"../../utils/is_remote":112,"assert":117,"typr":509}],70:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _service_provider = require('./service_provider');
-
-var _service_provider2 = _interopRequireDefault(_service_provider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-// import assert from 'assert'
-
-var context = 'common/services/base/service_exec_provider';
-
-/**
- * Service provider class for executable provider.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ServiceExecProvider = function (_ServiceProvider) {
-	_inherits(ServiceExecProvider, _ServiceProvider);
-
-	/**
-  * Create a service provider.
-  * @param {string} arg_provider_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ServiceExecProvider(arg_provider_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, ServiceExecProvider);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceExecProvider).call(this, arg_provider_name, arg_service_instance, arg_context ? arg_context : context));
-
-		_this.is_serviceexec_provider = true;
-		return _this;
-	}
-
-	/**
-  * Activate a service feature for an application for a specific provider.
-  * @param {Application} arg_application - application instance
-  * @param {Server} arg_server - server instance to bind the service
-  * @param {object} arg_app_svc_cfg - service configuration for activation on application (unused)
-  * @returns {nothing}
-  */
-
-
-	_createClass(ServiceExecProvider, [{
-		key: 'activate_self',
-		value: function activate_self(arg_application, arg_server, arg_app_svc_cfg) {
-			var exec_cfg = { 'routes': this.get_setting('routes').toJS(), 'server': arg_server, 'unused': arg_app_svc_cfg };
-			this.exec.prepare(exec_cfg);
-			this.exec.execute(arg_application);
-		}
-	}]);
-
-	return ServiceExecProvider;
-}(_service_provider2.default);
-
-exports.default = ServiceExecProvider;
-
-
-},{"./service_provider":71}],71:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _instance = require('../../base/instance');
-
-var _instance2 = _interopRequireDefault(_instance);
-
-var _is_browser = require('../../utils/is_browser');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/services/base/service_provider';
-
-/**
- * Service provider base class.
- * @abstract
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ServiceProvider = function (_Instance) {
-	_inherits(ServiceProvider, _Instance);
-
-	/**
-  * Create a service provider.
-  * @param {string} arg_provider_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ServiceProvider(arg_provider_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, ServiceProvider);
-
-		(0, _assert2.default)(_typr2.default.isString(arg_provider_name), context + ':bad provider name string');
-		(0, _assert2.default)(_typr2.default.isObject(arg_service_instance) && arg_service_instance.is_service, context + ':bad service object');
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceProvider).call(this, 'svc_providers', 'ServiceProvider', arg_provider_name, arg_service_instance.get_settings(), arg_context ? arg_context : context));
-
-		_this.is_service_provider = true;
-		_this.service = arg_service_instance;
-		_this.server = null;
-		return _this;
-	}
-
-	/**
-  * Load settings
-  * @abstract
-  * @returns {nothing}
-  */
-
-
-	_createClass(ServiceProvider, [{
-		key: 'load',
-		value: function load() {}
-
-		/**
-   * Activate a service feature for an application
-   * @param {Application} arg_application - application instance
-   * @param {Server} arg_server - server instance to bind the service
-   * @param {object} arg_app_svc_cfg - service configuration for activation on application (unused)
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'activate',
-		value: function activate(arg_application, arg_server, arg_app_svc_cfg) {
-			(0, _assert2.default)(_typr2.default.isObject(arg_application), context + ':bad application object');
-			(0, _assert2.default)(_typr2.default.isObject(arg_server) && arg_server.is_server, context + ':bad server object');
-			// assert(T.isObject(arg_app_svc_cfg), context + ':bad app svc config object')
-
-			(0, _assert2.default)(this.server == null, context + ': already activated');
-			(0, _assert2.default)(this.application == null, context + ': already activated');
-
-			(0, _assert2.default)((0, _is_browser.is_server)(), context + ':service activation is only available on server');
-
-			if (_typr2.default.isFunction(this.activate_self)) {
-				this.activate_self(arg_application, arg_server, arg_app_svc_cfg);
-			}
-
-			this.server = arg_server;
-			this.application = arg_application;
-			this.application_server = arg_application.get_name() + '-' + arg_server.get_name();
-		}
-
-		/**
-   * Activate a service feature for an application for a specific provider.
-   * @param {Application} arg_application - application instance
-   * @param {Server} arg_server - server instance to bind the service
-   * @param {object} arg_app_svc_cfg - service configuration for activation on application (unused)
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'activate_self',
-		value: function activate_self(arg_application, arg_server, arg_app_svc_cfg) {
-			var exec_cfg = { 'routes': this.get_setting('routes').toJS(), 'server': arg_server, 'unused': arg_app_svc_cfg };
-
-			if (_typr2.default.isObject(this.exec)) {
-				this.exec.prepare(exec_cfg);
-				this.exec.execute(arg_application);
-			}
-		}
-
-		/**
-   * Produce service datas on request
-   * @returns {Promise} - promise of results
-   */
-
-	}, {
-		key: 'produce',
-		value: function produce() {
-			return Promise.resolve(undefined);
-		}
-
-		/**
-   * Get host name of service server
-   * @returns {string} - service host name
-   */
-
-	}, {
-		key: 'get_host',
-		value: function get_host() {
-			return this.server.server_host;
-		}
-
-		/**
-   * Get host port of service server
-   * @returns {number} - service host port
-   */
-
-	}, {
-		key: 'get_port',
-		value: function get_port() {
-			return this.server.server_port;
-		}
-	}]);
-
-	return ServiceProvider;
-}(_instance2.default);
-
-exports.default = ServiceProvider;
-
-
-},{"../../base/instance":9,"../../utils/is_browser":111,"assert":117,"typr":509}],72:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _base_service = require('../base/base_service');
-
-var _base_service2 = _interopRequireDefault(_base_service);
-
-var _crud_svc_provider = require('./crud_svc_provider');
-
-var _crud_svc_provider2 = _interopRequireDefault(_crud_svc_provider);
-
-var _crud_svc_consumer = require('./crud_svc_consumer');
-
-var _crud_svc_consumer2 = _interopRequireDefault(_crud_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import T from 'typr'
-// import assert from 'assert'
-
-var context = 'common/services/crud/crud_service';
-
-/**
- * Crud service class for CRUD routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var CrudService = function (_BaseService) {
-	_inherits(CrudService, _BaseService);
-
-	/**
-  * Create a crud service.
-  * @param {string} arg_svc_name - service name
-  * @param {object} arg_service_settings - service settings
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function CrudService(arg_svc_name, arg_service_settings, arg_context) {
-		_classCallCheck(this, CrudService);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CrudService).call(this, arg_svc_name, arg_service_settings, arg_context ? arg_context : context));
-
-		_this.is_crud_service = true;
-		return _this;
-	}
-
-	/**
-  * Create a service provider.
-  * @param {string} arg_name - provider name
-  * @param {Service} arg_service - service instance
-  * @returns {ServiceProvider} - service provider instance
-  */
-
-
-	_createClass(CrudService, [{
-		key: 'create_provider',
-		value: function create_provider(arg_name, arg_service) {
-			// TODO: why not this in place of arg_service
-			return new _crud_svc_provider2.default(arg_name, arg_service);
-		}
-
-		/**
-   * Create a service consumer.
-   * @returns {ServiceConsumer} - service consumer instance
-   */
-
-	}, {
-		key: 'create_consumer',
-		value: function create_consumer() {
-			return new _crud_svc_consumer2.default(this.get_name() + '_consumer_' + this.get_id(), this);
-		}
-	}]);
-
-	return CrudService;
-}(_base_service2.default);
-
-exports.default = CrudService;
-
-
-},{"../base/base_service":67,"./crud_svc_consumer":73,"./crud_svc_provider":74}],73:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _routes_svc_consumer = require('../base/routes_svc_consumer');
-
-var _routes_svc_consumer2 = _interopRequireDefault(_routes_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/crud/crud_svc_consumer';
-
-/**
- * Service consumer class for CRUD routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var CrudSvcConsumer = function (_RoutesServiceConsume) {
-	_inherits(CrudSvcConsumer, _RoutesServiceConsume);
-
-	/**
-  * Create a service consumer for CRUD routes.
-  * @param {string} arg_consumer_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function CrudSvcConsumer(arg_consumer_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, CrudSvcConsumer);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CrudSvcConsumer).call(this, arg_consumer_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(arg_service_instance.is_crud_service, context + ':constructor:bad crud service instance');
-		return _this;
-	}
-
-	return CrudSvcConsumer;
-}(_routes_svc_consumer2.default);
-
-exports.default = CrudSvcConsumer;
-
-
-},{"../base/routes_svc_consumer":68,"assert":117}],74:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _executable_route_model_crud = require('../../executables/executable_route_model_crud');
-
-var _executable_route_model_crud2 = _interopRequireDefault(_executable_route_model_crud);
-
-var _service_exec_provider = require('../base/service_exec_provider');
-
-var _service_exec_provider2 = _interopRequireDefault(_service_exec_provider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/crud/crud_svc_provider';
-
-/**
- * Crud service provider class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var CrudSvcProvider = function (_ServiceExecProvider) {
-	_inherits(CrudSvcProvider, _ServiceExecProvider);
-
-	/**
-  * Create a crud service provider.
-  * @param {string} arg_provider_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function CrudSvcProvider(arg_provider_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, CrudSvcProvider);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CrudSvcProvider).call(this, arg_provider_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(_this.service.is_crud_service, context + ':bad crud service');
-
-		_this.exec = new _executable_route_model_crud2.default();
-		_this.server = null;
-		_this.application = null;
-		_this.application_server = null;
-		return _this;
-	}
-
-	/**
-  * Produce service datas on request (not implemented)
-  * @returns {Promise} - promise of results
-  */
-
-
-	_createClass(CrudSvcProvider, [{
-		key: 'produce',
-		value: function produce() {
-			return Promise.resolve(undefined);
-		}
-	}]);
-
-	return CrudSvcProvider;
-}(_service_exec_provider2.default);
-
-exports.default = CrudSvcProvider;
-
-
-},{"../../executables/executable_route_model_crud":27,"../base/service_exec_provider":70,"assert":117}],75:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _base_service = require('../base/base_service');
-
-var _base_service2 = _interopRequireDefault(_base_service);
-
-var _mw_svc_provider = require('./mw_svc_provider');
-
-var _mw_svc_provider2 = _interopRequireDefault(_mw_svc_provider);
-
-var _mw_svc_consumer = require('./mw_svc_consumer');
-
-var _mw_svc_consumer2 = _interopRequireDefault(_mw_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import T from 'typr'
-// import assert from 'assert'
-
-var context = 'common/services/middleware/mw_service';
-
-/**
- * Midleware service class for middleware routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var MidlewareService = function (_BaseService) {
-	_inherits(MidlewareService, _BaseService);
-
-	/**
-  * Create a middleware service.
-  * @param {string} arg_svc_name - service name
-  * @param {object} arg_service_settings - service settings
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function MidlewareService(arg_svc_name, arg_service_settings, arg_context) {
-		_classCallCheck(this, MidlewareService);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MidlewareService).call(this, arg_svc_name, arg_service_settings, arg_context ? arg_context : context));
-
-		_this.is_mw_service = true;
-		return _this;
-	}
-
-	/**
-  * Create a service provider.
-  * @param {string} arg_name - provider name
-  * @param {Service} arg_service - service instance
-  * @returns {ServiceProvider} - service provider instance
-  */
-
-
-	_createClass(MidlewareService, [{
-		key: 'create_provider',
-		value: function create_provider(arg_name, arg_service) {
-			// TODO: why not this in place of arg_service
-			return new _mw_svc_provider2.default(arg_name, arg_service);
-		}
-
-		/**
-   * Create a service consumer.
-   * @returns {ServiceConsumer} - service consumer instance
-   */
-
-	}, {
-		key: 'create_consumer',
-		value: function create_consumer() {
-			return new _mw_svc_consumer2.default(this.get_name() + '_consumer_' + this.get_id(), this);
-		}
-	}]);
-
-	return MidlewareService;
-}(_base_service2.default);
-
-exports.default = MidlewareService;
-
-
-},{"../base/base_service":67,"./mw_svc_consumer":76,"./mw_svc_provider":77}],76:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _routes_svc_consumer = require('../base/routes_svc_consumer');
-
-var _routes_svc_consumer2 = _interopRequireDefault(_routes_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/middleware/mw_svc_consumer';
-
-/**
- * Service consumer class for middleware routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var MiddlewareSvcConsumer = function (_RoutesServiceConsume) {
-	_inherits(MiddlewareSvcConsumer, _RoutesServiceConsume);
-
-	/**
-  * Create a service consumer for middleware routes.
-  * @param {string} arg_consumer_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function MiddlewareSvcConsumer(arg_consumer_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, MiddlewareSvcConsumer);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MiddlewareSvcConsumer).call(this, arg_consumer_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(arg_service_instance.is_mw_service, context + ':constructor:bad mw service instance');
-		return _this;
-	}
-
-	return MiddlewareSvcConsumer;
-}(_routes_svc_consumer2.default);
-
-exports.default = MiddlewareSvcConsumer;
-
-
-},{"../base/routes_svc_consumer":68,"assert":117}],77:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _executable_route_middleware = require('../../executables/executable_route_middleware');
-
-var _executable_route_middleware2 = _interopRequireDefault(_executable_route_middleware);
-
-var _service_exec_provider = require('../base/service_exec_provider');
-
-var _service_exec_provider2 = _interopRequireDefault(_service_exec_provider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/middleware/mw_svc_provider';
-
-/**
- * Middleware service provider class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var MiddlewareSvcProvider = function (_ServiceExecProvider) {
-	_inherits(MiddlewareSvcProvider, _ServiceExecProvider);
-
-	/**
-  * Create a middleware service provider.
-  * @param {string} arg_provider_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function MiddlewareSvcProvider(arg_provider_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, MiddlewareSvcProvider);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MiddlewareSvcProvider).call(this, arg_provider_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(_this.service.is_mw_service, context + ':bad mw service');
-
-		_this.exec = new _executable_route_middleware2.default();
-		_this.server = null;
-		_this.application = null;
-		_this.application_server = null;
-		return _this;
-	}
-
-	/**
-  * Produce service datas on request (not implemented)
-  * @returns {Promise} - promise of results
-  */
-
-
-	_createClass(MiddlewareSvcProvider, [{
-		key: 'produce',
-		value: function produce() {
-			return Promise.resolve(undefined);
-		}
-	}]);
-
-	return MiddlewareSvcProvider;
-}(_service_exec_provider2.default);
-
-exports.default = MiddlewareSvcProvider;
-
-
-},{"../../executables/executable_route_middleware":26,"../base/service_exec_provider":70,"assert":117}],78:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _base_service = require('../base/base_service');
-
-var _base_service2 = _interopRequireDefault(_base_service);
-
-var _resources_svc_provider = require('./resources_svc_provider');
-
-var _resources_svc_provider2 = _interopRequireDefault(_resources_svc_provider);
-
-var _resources_svc_consumer = require('./resources_svc_consumer');
-
-var _resources_svc_consumer2 = _interopRequireDefault(_resources_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import T from 'typr'
-// import assert from 'assert'
-
-var context = 'common/services/resources/resources_service';
-
-/**
- * Resources service class for resources routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ResourcesService = function (_BaseService) {
-	_inherits(ResourcesService, _BaseService);
-
-	/**
-  * Create a resources service.
-  * @param {string} arg_svc_name - service name
-  * @param {object} arg_service_settings - service settings
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ResourcesService(arg_svc_name, arg_service_settings, arg_context) {
-		_classCallCheck(this, ResourcesService);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ResourcesService).call(this, arg_svc_name, arg_service_settings, arg_context ? arg_context : context));
-
-		_this.is_resources_service = true;
-		return _this;
-	}
-
-	/**
-  * Create a service provider.
-  * @param {string} arg_name - provider name
-  * @param {Service} arg_service - service instance
-  * @returns {ServiceProvider} - service provider instance
-  */
-
-
-	_createClass(ResourcesService, [{
-		key: 'create_provider',
-		value: function create_provider(arg_name, arg_service) {
-			// TODO: why not this in place of arg_service
-			return new _resources_svc_provider2.default(arg_name, arg_service);
-		}
-
-		/**
-   * Create a service consumer.
-   * @returns {ServiceConsumer} - service consumer instance
-   */
-
-	}, {
-		key: 'create_consumer',
-		value: function create_consumer() {
-			return new _resources_svc_consumer2.default(this.get_name() + '_consumer_' + this.get_id(), this);
-		}
-	}]);
-
-	return ResourcesService;
-}(_base_service2.default);
-
-exports.default = ResourcesService;
-
-
-},{"../base/base_service":67,"./resources_svc_consumer":79,"./resources_svc_provider":80}],79:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _routes_svc_consumer = require('../base/routes_svc_consumer');
-
-var _routes_svc_consumer2 = _interopRequireDefault(_routes_svc_consumer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/resources/resources_svc_consumer';
-
-/**
- * Service consumer class for resources routes.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ResourcesSvcConsumer = function (_RoutesServiceConsume) {
-	_inherits(ResourcesSvcConsumer, _RoutesServiceConsume);
-
-	/**
-  * Create a service consumer for resources routes.
-  * @param {string} arg_consumer_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ResourcesSvcConsumer(arg_consumer_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, ResourcesSvcConsumer);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ResourcesSvcConsumer).call(this, arg_consumer_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(arg_service_instance.is_resources_service, context + ':constructor:bad resources service instance');
-		return _this;
-	}
-
-	return ResourcesSvcConsumer;
-}(_routes_svc_consumer2.default);
-
-exports.default = ResourcesSvcConsumer;
-
-
-},{"../base/routes_svc_consumer":68,"assert":117}],80:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _executable_route_get_resource = require('../../executables/executable_route_get_resource');
-
-var _executable_route_get_resource2 = _interopRequireDefault(_executable_route_get_resource);
-
-var _service_exec_provider = require('../base/service_exec_provider');
-
-var _service_exec_provider2 = _interopRequireDefault(_service_exec_provider);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-
-
-var context = 'common/services/resources/resources_svc_provider';
-
-/**
- * Resources service provider class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var ResourcesSvcProvider = function (_ServiceExecProvider) {
-	_inherits(ResourcesSvcProvider, _ServiceExecProvider);
-
-	/**
-  * Create a resources service provider.
-  * @param {string} arg_provider_name - consumer name
-  * @param {Service} arg_service_instance - service instance
-  * @param {string} arg_context - logging context label
-  * @returns {nothing}
-  */
-
-	function ResourcesSvcProvider(arg_provider_name, arg_service_instance, arg_context) {
-		_classCallCheck(this, ResourcesSvcProvider);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ResourcesSvcProvider).call(this, arg_provider_name, arg_service_instance, arg_context ? arg_context : context));
-
-		(0, _assert2.default)(_this.service.is_resources_service, context + ':bad resources service');
-
-		_this.exec = new _executable_route_get_resource2.default();
-		_this.server = null;
-		_this.application = null;
-		_this.application_server = null;
-		return _this;
-	}
-
-	/**
-  * Produce service datas on request (not implemented)
-  * @returns {Promise} - promise of results
-  */
-
-
-	_createClass(ResourcesSvcProvider, [{
-		key: 'produce',
-		value: function produce() {
-			return Promise.resolve(undefined);
-		}
-	}]);
-
-	return ResourcesSvcProvider;
-}(_service_exec_provider2.default);
-
-exports.default = ResourcesSvcProvider;
-
-
-},{"../../executables/executable_route_get_resource":25,"../base/service_exec_provider":70,"assert":117}],81:[function(require,module,exports){
+},{"./bus_server":58,"assert":102,"simplebus":489,"typr":494}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14568,20 +12524,20 @@ var dispatch_store_config_remove_value = exports.dispatch_store_config_remove_va
 	return arg_store.dispatch(create_store_config_remove_value(arg_path));
 };
 
-/*
-export const dispatch_store_config_get_value    = function(arg_path)
-{
-	console.log(arg_path, 'arg_path')
-	let action = create_store_config_get_value(arg_path)
-	console.log(action, 'action')
-	
-	console.log(dispatch, 'dispatch')
-	return dispatch(action)
-}
+/*
+export const dispatch_store_config_get_value    = function(arg_path)
+{
+	console.log(arg_path, 'arg_path')
+	let action = create_store_config_get_value(arg_path)
+	console.log(action, 'action')
+	
+	console.log(dispatch, 'dispatch')
+	return dispatch(action)
+}
 */
 
 
-},{"../create_action_creator":94}],82:[function(require,module,exports){
+},{"../create_action_creator":79}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14667,7 +12623,7 @@ function remove_value(state, arg_path, arg_value) {
 }
 
 
-},{"../../base/runtime":17,"./loaders/load_config":84,"immutable":470,"typr":509}],83:[function(require,module,exports){
+},{"../../base/runtime":15,"./loaders/load_config":69,"immutable":455,"typr":494}],68:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14703,7 +12659,7 @@ var default_config = exports.default_config = {
 };
 
 
-},{}],84:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14750,9 +12706,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var context = 'common/store/config/loaders/load_config';
 
-/**
- * Load the 'config' key of the final state
- * Pure function: (Plain Object) => (new Plain Object)
+/**
+ * Load the 'config' key of the final state
+ * Pure function: (Plain Object) => (new Plain Object)
  */
 function load_config(arg_state, arg_initial_config, arg_base_dir, arg_trace) {
 	var logs = new _logger_console2.default(arg_trace ? arg_trace : false);
@@ -14930,7 +12886,7 @@ function load_config(arg_state, arg_initial_config, arg_base_dir, arg_trace) {
 exports.default = load_config;
 
 
-},{"../../../loggers/logger_console":30,"./default_config_app":83,"./load_config_apps":85,"./load_config_modules":87,"./load_config_nodes":88,"./load_config_plugins":89,"./load_config_security":90,"assert":117,"path":333,"typr":509}],85:[function(require,module,exports){
+},{"../../../loggers/logger_console":21,"./default_config_app":68,"./load_config_apps":70,"./load_config_modules":72,"./load_config_nodes":73,"./load_config_plugins":74,"./load_config_security":75,"assert":102,"path":318,"typr":494}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14946,9 +12902,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var context = 'common/store/config/loaders/load_config_apps';
 // let error_msg_bad_config = context + ':bad config'
 
-/**
- * Load the 'config.applications' key of the final state
- * Pure function: (Plain Object) => (mutated Plain Object)
+/**
+ * Load the 'config.applications' key of the final state
+ * Pure function: (Plain Object) => (mutated Plain Object)
  */
 
 // import assert from 'assert'
@@ -14981,7 +12937,7 @@ function load_config_apps(logs, arg_config, arg_config_modules, arg_config_plugi
 exports.default = load_config_apps;
 
 
-},{"./load_config_apps_app":86}],86:[function(require,module,exports){
+},{"./load_config_apps_app":71}],71:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15033,9 +12989,9 @@ var error_msg_plugin_not_found = context + ':bad config - config.applications.*.
 var error_msg_module_not_found = context + ':bad config - config.applications.*.modules.* not found in config.modules';
 var error_msg_resource_not_found = context + ':bad config - config.applications.*.resources.* not found in config.resources';
 
-/**
- * Load the 'config.applications.*' keys of the final state
- * Pure function: (Plain Object) => (mutated Plain Object)
+/**
+ * Load the 'config.applications.*' keys of the final state
+ * Pure function: (Plain Object) => (mutated Plain Object)
  */
 function load_config_apps_app(logs, arg_app_config, arg_config_modules, arg_config_plugins, arg_config_resources, arg_base_dir) {
 	logs.info(context, 'loading config.applications.[app]');
@@ -15113,7 +13069,7 @@ function load_config_apps_app(logs, arg_app_config, arg_config_modules, arg_conf
 exports.default = load_config_apps_app;
 
 
-},{"../../../parser/parser":38,"assert":117,"path":333,"typr":509}],87:[function(require,module,exports){
+},{"../../../parser/parser":29,"assert":102,"path":318,"typr":494}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15254,7 +13210,7 @@ function load_config_modules(logs, arg_modules_config, arg_base_dir) {
 exports.default = load_config_modules;
 
 
-},{"../../../parser/parser":38,"assert":117,"path":333,"typr":509}],88:[function(require,module,exports){
+},{"../../../parser/parser":29,"assert":102,"path":318,"typr":494}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15341,7 +13297,7 @@ function load_config_node_servers(logs, arg_servers_config, arg_node_name, arg_h
 exports.default = load_config_nodes;
 
 
-},{"assert":117,"typr":509}],89:[function(require,module,exports){
+},{"assert":102,"typr":494}],74:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15391,7 +13347,7 @@ function load_config_plugins(logs, arg_plugins_config /*, arg_base_dir*/) {
 exports.default = load_config_plugins;
 
 
-},{"assert":117,"typr":509}],90:[function(require,module,exports){
+},{"assert":102,"typr":494}],75:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15499,7 +13455,7 @@ function load_config_security(logs, arg_security_config, arg_base_dir) {
 exports.default = load_config_security;
 
 
-},{"../../../parser/parser":38,"./load_config_security_authentication":91,"./load_config_security_authorization":92,"assert":117,"path":333,"typr":509}],91:[function(require,module,exports){
+},{"../../../parser/parser":29,"./load_config_security_authentication":76,"./load_config_security_authorization":77,"assert":102,"path":318,"typr":494}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15523,24 +13479,24 @@ function load_config_security_authentication(logs, arg_auth_config /*, arg_base_
 
 	try {
 		// CHECK SECURITY
-		/*assert(T.isObject(arg_auth_config), error_msg_bad_config)
-  assert(T.isBoolean(arg_auth_config.enabled), error_msg_bad_enabled)
-  assert(T.isString(arg_auth_config.mode), error_msg_bad_mode)
-  assert(T.isObject(arg_auth_config.alt), error_msg_bad_alt)
-  
-  // CHECK SECURITY
-  if (arg_auth_config.mode === 'database')
-  {
-  	assert(T.isString(arg_auth_config.model), error_msg_bad_model)
-  	assert(T.isString(arg_auth_config.role), error_msg_bad_role)
-  	assert(T.isString(arg_auth_config.username), error_msg_bad_username)
-  	
-  	// CHECK CONNEXIONS
-  	// arg_security_config.connexions.forEach( (connexion)=> { assert(T.isString(connexion), error_msg_bad_connexion) } )
-  }
-  else
-  {
-  	assert(false, error_msg_bad_mode)
+		/*assert(T.isObject(arg_auth_config), error_msg_bad_config)
+  assert(T.isBoolean(arg_auth_config.enabled), error_msg_bad_enabled)
+  assert(T.isString(arg_auth_config.mode), error_msg_bad_mode)
+  assert(T.isObject(arg_auth_config.alt), error_msg_bad_alt)
+  
+  // CHECK SECURITY
+  if (arg_auth_config.mode === 'database')
+  {
+  	assert(T.isString(arg_auth_config.model), error_msg_bad_model)
+  	assert(T.isString(arg_auth_config.role), error_msg_bad_role)
+  	assert(T.isString(arg_auth_config.username), error_msg_bad_username)
+  	
+  	// CHECK CONNEXIONS
+  	// arg_security_config.connexions.forEach( (connexion)=> { assert(T.isString(connexion), error_msg_bad_connexion) } )
+  }
+  else
+  {
+  	assert(false, error_msg_bad_mode)
   }*/
 	} catch (e) {
 		arg_auth_config = { error: { context: context, exception: e } };
@@ -15552,7 +13508,7 @@ function load_config_security_authentication(logs, arg_auth_config /*, arg_base_
 exports.default = load_config_security_authentication;
 
 
-},{}],92:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15579,24 +13535,24 @@ function load_config_security_authorization(logs, arg_auth_config /*, arg_base_d
 
 	try {
 		// CHECK SECURITY
-		/*	assert(T.isObject(arg_auth_config), error_msg_bad_config)
-  	assert(T.isBoolean(arg_auth_config.enabled), error_msg_bad_enabled)
-  	assert(T.isString(arg_auth_config.mode), error_msg_bad_mode)
-  	assert(T.isObject(arg_auth_config.alt), error_msg_bad_alt)
-  	
-  	// CHECK SECURITY
-  	if (arg_auth_config.mode === 'database')
-  	{
-  		assert(T.isString(arg_auth_config.model), error_msg_bad_model)
-  		assert(T.isString(arg_auth_config.role), error_msg_bad_role)
-  		assert(T.isString(arg_auth_config.username), error_msg_bad_username)
-  		
-  		// CHECK CONNEXIONS
-  		// arg_security_config.connexions.forEach( (connexion)=> { assert(T.isString(connexion), error_msg_bad_connexion) } )
-  	}
-  	else
-  	{
-  		assert(false, error_msg_bad_mode)
+		/*	assert(T.isObject(arg_auth_config), error_msg_bad_config)
+  	assert(T.isBoolean(arg_auth_config.enabled), error_msg_bad_enabled)
+  	assert(T.isString(arg_auth_config.mode), error_msg_bad_mode)
+  	assert(T.isObject(arg_auth_config.alt), error_msg_bad_alt)
+  	
+  	// CHECK SECURITY
+  	if (arg_auth_config.mode === 'database')
+  	{
+  		assert(T.isString(arg_auth_config.model), error_msg_bad_model)
+  		assert(T.isString(arg_auth_config.role), error_msg_bad_role)
+  		assert(T.isString(arg_auth_config.username), error_msg_bad_username)
+  		
+  		// CHECK CONNEXIONS
+  		// arg_security_config.connexions.forEach( (connexion)=> { assert(T.isString(connexion), error_msg_bad_connexion) } )
+  	}
+  	else
+  	{
+  		assert(false, error_msg_bad_mode)
   	}*/
 	} catch (e) {
 		arg_auth_config = { error: { context: context, exception: e } };
@@ -15608,7 +13564,7 @@ function load_config_security_authorization(logs, arg_auth_config /*, arg_base_d
 exports.default = load_config_security_authorization;
 
 
-},{}],93:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15647,7 +13603,7 @@ function config_reducer() {
 exports.default = config_reducer;
 
 
-},{"./actions":81,"./core":82}],94:[function(require,module,exports){
+},{"./actions":66,"./core":67}],79:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15687,7 +13643,7 @@ function create_action_creator(type) {
 }
 
 
-},{"../utils/uid":114}],95:[function(require,module,exports){
+},{"../utils/uid":98}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15757,27 +13713,27 @@ function create_store(arg_initial_state) {
   return (0, _redux.createStore)(_reducers2.default, arg_initial_state);
 }
 
-/* export default function create_store(arg_initial_state)
-{
-  const store = createStoreWithMiddleware(store_reducers, arg_initial_state)
-  
-  // HOT MODULE REPLACEMENT OPT-IN
-  if (module.hot)
-  {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers',
-      () => {
-        const nextReducer = require('./reducers')
-        store.replaceReducer(nextReducer)
-      }
-    )
-  }
-
-  return store
+/* export default function create_store(arg_initial_state)
+{
+  const store = createStoreWithMiddleware(store_reducers, arg_initial_state)
+  
+  // HOT MODULE REPLACEMENT OPT-IN
+  if (module.hot)
+  {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./reducers',
+      () => {
+        const nextReducer = require('./reducers')
+        store.replaceReducer(nextReducer)
+      }
+    )
+  }
+
+  return store
 }*/
 
 
-},{"./reducers":97,"redux":498,"redux-logger":491}],96:[function(require,module,exports){
+},{"./reducers":82,"redux":483,"redux-logger":476}],81:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15810,7 +13766,7 @@ var runtime = exports.runtime = st.runtime;
 exports.default = { store: store, config: config, runtime: runtime };
 
 
-},{"./store":108,"./store_config":109,"./store_runtime":110}],97:[function(require,module,exports){
+},{"./store":93,"./store_config":94,"./store_runtime":95}],82:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15846,7 +13802,7 @@ var store_reducers = (0, _redux.combineReducers)({
 exports.default = store_reducers;
 
 
-},{"./config/reducer":93,"./runtime/reducer":107,"redux":498,"redux-undo":492}],98:[function(require,module,exports){
+},{"./config/reducer":78,"./runtime/reducer":92,"redux":483,"redux-undo":477}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15891,7 +13847,7 @@ var dispatch_store_runtime_remove_value = exports.dispatch_store_runtime_remove_
 };
 
 
-},{"../create_action_creator":94,"redux":498}],99:[function(require,module,exports){
+},{"../create_action_creator":79,"redux":483}],84:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15936,7 +13892,7 @@ var dispatch_store_runtime_apps_disable = exports.dispatch_store_runtime_apps_di
 };
 
 
-},{"../../create_action_creator":94,"redux":498}],100:[function(require,module,exports){
+},{"../../create_action_creator":79,"redux":483}],85:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16014,7 +13970,7 @@ function app_check_not_safe(arg_app_config) {
 }
 
 
-},{"assert":117,"typr":509}],101:[function(require,module,exports){
+},{"assert":102,"typr":494}],86:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16063,7 +14019,7 @@ function app_disable(state, arg_name) {
 }
 
 
-},{"./core_client":102,"./core_server":103}],102:[function(require,module,exports){
+},{"./core_client":87,"./core_server":88}],87:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16090,7 +14046,7 @@ function app_enable(state, arg_name) {}
 function app_disable(state, arg_name) {}
 
 
-},{}],103:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16170,7 +14126,7 @@ function app_enable(state, arg_name) {}
 function app_disable(state, arg_name) {}
 
 
-},{"../../../store/index":96,"./app_check":100,"immutable":470}],104:[function(require,module,exports){
+},{"../../../store/index":81,"./app_check":85,"immutable":455}],89:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16242,7 +14198,7 @@ function remove_value(state, arg_path, arg_value) {
 }
 
 
-},{"./loaders/load_runtime":106,"immutable":470,"typr":509}],105:[function(require,module,exports){
+},{"./loaders/load_runtime":91,"immutable":455,"typr":494}],90:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16284,48 +14240,48 @@ var default_runtime = {
 	}
 };
 
-/*
-		applications:
-			// mutable runtime values (copy of initial config)
-			
-			app_name:{
-				// runtime config
-				used_views:[],    // list of id
-				used_models:[],   // list of id
-				used_menubars:[], // list of id
-				used_menus:[],    // list of id
-				used_plugins:[],  // list of id
-				used_loggers:[],  // list of id
-				used_services:[]  // list of id
-			}
-		}
+/*
+		applications:
+			// mutable runtime values (copy of initial config)
+			
+			app_name:{
+				// runtime config
+				used_views:[],    // list of id
+				used_models:[],   // list of id
+				used_menubars:[], // list of id
+				used_menus:[],    // list of id
+				used_plugins:[],  // list of id
+				used_loggers:[],  // list of id
+				used_services:[]  // list of id
+			}
+		}
 */
 
-/*
-	Instance AAA:{
-		dependancies:{
-			views:[], // list of instance id
-			models:[] // list of instance id
-		}
-		config:{
-			// copy of state.config.... instance initial definition
-			// runtime values are mutable
-			type:
-			class_name:
-			name:
-			id:=name
-			...
-		}
-		state:{
-			// other runtime values
-		}
-	}
+/*
+	Instance AAA:{
+		dependancies:{
+			views:[], // list of instance id
+			models:[] // list of instance id
+		}
+		config:{
+			// copy of state.config.... instance initial definition
+			// runtime values are mutable
+			type:
+			class_name:
+			name:
+			id:=name
+			...
+		}
+		state:{
+			// other runtime values
+		}
+	}
 */
 
 exports.default = default_runtime;
 
 
-},{}],106:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16353,9 +14309,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var context = 'common/store/runtime/loaders/load_runtime';
 // let error_msg_bad_config = context + ':bad config'
 
-/**
- * Load the 'runtime' key of the final state
- * Pure function: (Plain Object) => (new Plain Object)
+/**
+ * Load the 'runtime' key of the final state
+ * Pure function: (Plain Object) => (new Plain Object)
  */
 function load_runtime(arg_state, arg_initial_config, arg_trace) {
 	var logs = new _logger_console2.default(arg_trace ? arg_trace : false);
@@ -16379,7 +14335,7 @@ function load_runtime(arg_state, arg_initial_config, arg_trace) {
 exports.default = load_runtime;
 
 
-},{"../../../loggers/logger_console":30,"./default_runtime":105,"assert":117,"typr":509}],107:[function(require,module,exports){
+},{"../../../loggers/logger_console":21,"./default_runtime":90,"assert":102,"typr":494}],92:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16445,7 +14401,7 @@ function runtime_reducer() {
 }
 
 
-},{"./actions":98,"./applications/actions":99,"./applications/core":101,"./core":104}],108:[function(require,module,exports){
+},{"./actions":83,"./applications/actions":84,"./applications/core":86,"./core":89}],93:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16480,7 +14436,7 @@ store.has_collection = function (arg_name) {
 exports.default = { store: store, config: config, runtime: runtime };
 
 
-},{"./create_store":95}],109:[function(require,module,exports){
+},{"./create_store":80}],94:[function(require,module,exports){
 'use strict';
 
 var _store = require('./store');
@@ -16619,7 +14575,7 @@ _store.config.get_logger = function (arg_name) {
 };
 
 
-},{"./config/actions":81,"./store":108}],110:[function(require,module,exports){
+},{"./config/actions":66,"./store":93}],95:[function(require,module,exports){
 'use strict';
 
 var _store = require('./store');
@@ -16679,7 +14635,7 @@ _store.runtime.get_application = function (arg_name) {
 // runtime.set_server = (arg_server) => { server = arg_server }
 
 
-},{"./runtime/actions":98,"./store":108}],111:[function(require,module,exports){
+},{"./runtime/actions":83,"./store":93}],96:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16703,33 +14659,7 @@ function is_browser() {
 exports.default = { is_server: is_server, is_browser: is_browser };
 
 
-},{}],112:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.is_remote = is_remote;
-exports.is_locale = is_locale;
-
-var _net = require('net');
-
-var _net2 = _interopRequireDefault(_net);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function is_remote(arg_host, arg_port) {
-	return _net2.default.localAddress != arg_host && (arg_port ? _net2.default.localPort != arg_port : true);
-}
-
-function is_locale(arg_host, arg_port) {
-	return !is_remote(arg_host);
-}
-
-exports.default = { is_remote: is_remote, is_locale: is_locale };
-
-
-},{"net":116}],113:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16767,7 +14697,7 @@ module.exports = to_boolean;
 exports.default = to_boolean;
 
 
-},{}],114:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16781,7 +14711,103 @@ function uid() {
 }
 
 
-},{}],115:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
+(function (__dirname){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _services_plugin = require('../../common/plugins/services_plugin');
+
+var _services_plugin2 = _interopRequireDefault(_services_plugin);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var default_plugins_map = {
+	'middleware': '../common/services/middleware/mw_service',
+	'metrics': '../common/services/metrics/metrics_service',
+	'rest_api_models_query': '../common/services/crud/crud_service',
+	'rest_api_models_modifier': '../common/services/crud/crud_service',
+	'rest_api_resources_query': '../common/services/resource/resources_service',
+	'html_assets': '../common/services/assets/assets_service'
+};
+
+var context = 'plugins/default/services_default_plugin';
+
+/**
+ * Plugin class for default services.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var DefaultServicesPlugin = function (_ServicesPlugin) {
+	_inherits(DefaultServicesPlugin, _ServicesPlugin);
+
+	function DefaultServicesPlugin(arg_manager) {
+		_classCallCheck(this, DefaultServicesPlugin);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(DefaultServicesPlugin).call(this, arg_manager, 'DefaultServices', '1.0.0'));
+	}
+
+	_createClass(DefaultServicesPlugin, [{
+		key: 'create',
+		value: function create(arg_class_name, arg_name, arg_settings, arg_state) {
+			(0, _assert2.default)(_typr2.default.isString(arg_class_name), context + ':create:bad class string');
+			(0, _assert2.default)(_typr2.default.isString(arg_name), context + ':create:bad name string');
+			(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':create:bad settings object');
+
+			var found = arg_class_name in default_plugins_map;
+			(0, _assert2.default)(found, context + ':create:feature name not found');
+
+			var feature = default_plugins_map[arg_class_name];
+
+			var class_object = feature;
+			if (_typr2.default.isString(feature)) {
+				class_object = this.load_feature_class(__dirname + '/../' + feature);
+			}
+
+			(0, _assert2.default)(_typr2.default.isFunction(class_object), context + ':create:bad feature class object');
+
+			// console.log(arg_class_name, context + ':create:class')
+
+			var i = new class_object(arg_name, arg_settings, arg_state);
+			// console.log(i, context + ':create:instance')
+
+			return i;
+		}
+	}, {
+		key: 'has',
+		value: function has(arg_class_name) {
+			return arg_class_name in default_plugins_map;
+		}
+	}]);
+
+	return DefaultServicesPlugin;
+}(_services_plugin2.default);
+
+exports.default = DefaultServicesPlugin;
+
+
+}).call(this,"/dist\\plugins\\default")
+},{"../../common/plugins/services_plugin":37,"assert":102,"typr":494}],100:[function(require,module,exports){
 (function (global){
 (function() {
 var _slice = Array.prototype.slice;
@@ -20182,9 +18208,9 @@ if (typeof define !== "undefined" && define !== null && define.amd != null) {
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],116:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 
-},{}],117:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -20545,9 +18571,9 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":364}],118:[function(require,module,exports){
-arguments[4][116][0].apply(exports,arguments)
-},{"dup":116}],119:[function(require,module,exports){
+},{"util/":349}],103:[function(require,module,exports){
+arguments[4][101][0].apply(exports,arguments)
+},{"dup":101}],104:[function(require,module,exports){
 'use strict';
 
 
@@ -20651,7 +18677,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],120:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -20685,7 +18711,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],121:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 module.exports = {
 
   /* Allowed flush values; see deflate() and inflate() below for details */
@@ -20734,7 +18760,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],122:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -20777,7 +18803,7 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],123:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 'use strict';
 
 var utils   = require('../utils/common');
@@ -22544,7 +20570,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":119,"./adler32":120,"./crc32":122,"./messages":127,"./trees":128}],124:[function(require,module,exports){
+},{"../utils/common":104,"./adler32":105,"./crc32":107,"./messages":112,"./trees":113}],109:[function(require,module,exports){
 'use strict';
 
 // See state defs from inflate.js
@@ -22872,7 +20898,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],125:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 'use strict';
 
 
@@ -24377,7 +22403,7 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":119,"./adler32":120,"./crc32":122,"./inffast":124,"./inftrees":126}],126:[function(require,module,exports){
+},{"../utils/common":104,"./adler32":105,"./crc32":107,"./inffast":109,"./inftrees":111}],111:[function(require,module,exports){
 'use strict';
 
 
@@ -24706,7 +22732,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":119}],127:[function(require,module,exports){
+},{"../utils/common":104}],112:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -24721,7 +22747,7 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],128:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 'use strict';
 
 
@@ -25655,8 +23681,8 @@ function send_all_trees(s, lcodes, dcodes, blcodes)
   //        "too many codes");
   //Tracev((stderr, "\nbl counts: "));
   send_bits(s, lcodes-257, 5); /* not +255 as stated in appnote.txt */
- instead of `console.error()`.
- send_bits(s, blcodes-4,  4); /* not -3 as stated in appnote.txt */
+  send_bits(s, dcodes-1,   5);
+  send_bits(s, blcodes-4,  4); /* not -3 as stated in appnote.txt */
   for (rank = 0; rank < blcodes; rank++) {
     //Tracev((stderr, "\nbl code %2d ", bl_order[rank]));
     send_bits(s, s.bl_tree[bl_order[rank]*2 + 1]/*.Len*/, 3);
@@ -25922,7 +23948,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":119}],129:[function(require,module,exports){
+},{"../utils/common":104}],114:[function(require,module,exports){
 'use strict';
 
 
@@ -25953,7 +23979,7 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],130:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 (function (process,Buffer){
 var msg = require('pako/lib/zlib/messages');
 var zstream = require('pako/lib/zlib/zstream');
@@ -26193,7 +24219,7 @@ Zlib.prototype._error = function(status) {
 exports.Zlib = Zlib;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":334,"buffer":132,"pako/lib/zlib/constants":121,"pako/lib/zlib/deflate.js":123,"pako/lib/zlib/inflate.js":125,"pako/lib/zlib/messages":127,"pako/lib/zlib/zstream":129}],131:[function(require,module,exports){
+},{"_process":319,"buffer":117,"pako/lib/zlib/constants":106,"pako/lib/zlib/deflate.js":108,"pako/lib/zlib/inflate.js":110,"pako/lib/zlib/messages":112,"pako/lib/zlib/zstream":114}],116:[function(require,module,exports){
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -26807,7 +24833,7 @@ util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./binding":130,"_process":334,"_stream_transform":351,"assert":117,"buffer":132,"util":364}],132:[function(require,module,exports){
+},{"./binding":115,"_process":319,"_stream_transform":336,"assert":102,"buffer":117,"util":349}],117:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -28267,7 +26293,7 @@ function blitBuffer (src, dst, offset, length) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":133,"ieee754":134,"isarray":135}],133:[function(require,module,exports){
+},{"base64-js":118,"ieee754":119,"isarray":120}],118:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -28378,7 +26404,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],134:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -28464,14 +26490,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],135:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],136:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 module.exports={
   "O_RDONLY": 0,
   "O_WRONLY": 1,
@@ -28682,7 +26708,7 @@ module.exports={
   "UV_UDP_REUSEADDR": 4
 }
 
-},{}],137:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -28761,7 +26787,7 @@ var publicEncrypt = require('public-encrypt')
   }
 })
 
-},{"browserify-cipher":138,"browserify-sign":168,"browserify-sign/algos":167,"create-ecdh":235,"create-hash":261,"create-hmac":274,"diffie-hellman":275,"pbkdf2":282,"public-encrypt":283,"randombytes":328}],138:[function(require,module,exports){
+},{"browserify-cipher":123,"browserify-sign":153,"browserify-sign/algos":152,"create-ecdh":220,"create-hash":246,"create-hmac":259,"diffie-hellman":260,"pbkdf2":267,"public-encrypt":268,"randombytes":313}],123:[function(require,module,exports){
 var ebtk = require('evp_bytestokey')
 var aes = require('browserify-aes/browser')
 var DES = require('browserify-des')
@@ -28836,7 +26862,7 @@ function getCiphers () {
 }
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-aes/browser":141,"browserify-aes/modes":145,"browserify-des":156,"browserify-des/modes":157,"evp_bytestokey":166}],139:[function(require,module,exports){
+},{"browserify-aes/browser":126,"browserify-aes/modes":130,"browserify-des":141,"browserify-des/modes":142,"evp_bytestokey":151}],124:[function(require,module,exports){
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -29017,7 +27043,7 @@ AES.prototype._doCryptBlock = function (M, keySchedule, SUB_MIX, SBOX) {
 exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],140:[function(require,module,exports){
+},{"buffer":117}],125:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -29118,7 +27144,7 @@ function xorTest (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":139,"./ghash":144,"buffer":132,"buffer-xor":153,"cipher-base":154,"inherits":330}],141:[function(require,module,exports){
+},{"./aes":124,"./ghash":129,"buffer":117,"buffer-xor":138,"cipher-base":139,"inherits":315}],126:[function(require,module,exports){
 var ciphers = require('./encrypter')
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
@@ -29131,7 +27157,7 @@ function getCiphers () {
 }
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"./decrypter":142,"./encrypter":143,"./modes":145}],142:[function(require,module,exports){
+},{"./decrypter":127,"./encrypter":128,"./modes":130}],127:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -29272,7 +27298,7 @@ exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":139,"./authCipher":140,"./modes":145,"./modes/cbc":146,"./modes/cfb":147,"./modes/cfb1":148,"./modes/cfb8":149,"./modes/ctr":150,"./modes/ecb":151,"./modes/ofb":152,"./streamCipher":155,"buffer":132,"cipher-base":154,"evp_bytestokey":166,"inherits":330}],143:[function(require,module,exports){
+},{"./aes":124,"./authCipher":125,"./modes":130,"./modes/cbc":131,"./modes/cfb":132,"./modes/cfb1":133,"./modes/cfb8":134,"./modes/ctr":135,"./modes/ecb":136,"./modes/ofb":137,"./streamCipher":140,"buffer":117,"cipher-base":139,"evp_bytestokey":151,"inherits":315}],128:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -29398,7 +27424,7 @@ exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":139,"./authCipher":140,"./modes":145,"./modes/cbc":146,"./modes/cfb":147,"./modes/cfb1":148,"./modes/cfb8":149,"./modes/ctr":150,"./modes/ecb":151,"./modes/ofb":152,"./streamCipher":155,"buffer":132,"cipher-base":154,"evp_bytestokey":166,"inherits":330}],144:[function(require,module,exports){
+},{"./aes":124,"./authCipher":125,"./modes":130,"./modes/cbc":131,"./modes/cfb":132,"./modes/cfb1":133,"./modes/cfb8":134,"./modes/ctr":135,"./modes/ecb":136,"./modes/ofb":137,"./streamCipher":140,"buffer":117,"cipher-base":139,"evp_bytestokey":151,"inherits":315}],129:[function(require,module,exports){
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -29500,7 +27526,7 @@ function xor (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],145:[function(require,module,exports){
+},{"buffer":117}],130:[function(require,module,exports){
 exports['aes-128-ecb'] = {
   cipher: 'AES',
   key: 128,
@@ -29673,7 +27699,7 @@ exports['aes-256-gcm'] = {
   type: 'auth'
 }
 
-},{}],146:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 var xor = require('buffer-xor')
 
 exports.encrypt = function (self, block) {
@@ -29692,7 +27718,7 @@ exports.decrypt = function (self, block) {
   return xor(out, pad)
 }
 
-},{"buffer-xor":153}],147:[function(require,module,exports){
+},{"buffer-xor":138}],132:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -29727,7 +27753,7 @@ function encryptStart (self, data, decrypt) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"buffer-xor":153}],148:[function(require,module,exports){
+},{"buffer":117,"buffer-xor":138}],133:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -29765,7 +27791,7 @@ function shiftIn (buffer, value) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],149:[function(require,module,exports){
+},{"buffer":117}],134:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -29784,7 +27810,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],150:[function(require,module,exports){
+},{"buffer":117}],135:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -29819,7 +27845,7 @@ exports.encrypt = function (self, chunk) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"buffer-xor":153}],151:[function(require,module,exports){
+},{"buffer":117,"buffer-xor":138}],136:[function(require,module,exports){
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -29827,7 +27853,7 @@ exports.decrypt = function (self, block) {
   return self._cipher.decryptBlock(block)
 }
 
-},{}],152:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -29847,7 +27873,7 @@ exports.encrypt = function (self, chunk) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"buffer-xor":153}],153:[function(require,module,exports){
+},{"buffer":117,"buffer-xor":138}],138:[function(require,module,exports){
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -29861,7 +27887,7 @@ module.exports = function xor (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],154:[function(require,module,exports){
+},{"buffer":117}],139:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -29955,7 +27981,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"inherits":330,"stream":353,"string_decoder":360}],155:[function(require,module,exports){
+},{"buffer":117,"inherits":315,"stream":338,"string_decoder":345}],140:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -29984,7 +28010,7 @@ StreamCipher.prototype._final = function () {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":139,"buffer":132,"cipher-base":154,"inherits":330}],156:[function(require,module,exports){
+},{"./aes":124,"buffer":117,"cipher-base":139,"inherits":315}],141:[function(require,module,exports){
 (function (Buffer){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -30031,7 +28057,7 @@ DES.prototype._final = function () {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"cipher-base":158,"des.js":159,"inherits":330}],157:[function(require,module,exports){
+},{"buffer":117,"cipher-base":143,"des.js":144,"inherits":315}],142:[function(require,module,exports){
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -30057,9 +28083,9 @@ exports['des-ede'] = {
   iv: 0
 }
 
-},{}],158:[function(require,module,exports){
-arguments[4][154][0].apply(exports,arguments)
-},{"buffer":132,"dup":154,"inherits":330,"stream":353,"string_decoder":360}],159:[function(require,module,exports){
+},{}],143:[function(require,module,exports){
+arguments[4][139][0].apply(exports,arguments)
+},{"buffer":117,"dup":139,"inherits":315,"stream":338,"string_decoder":345}],144:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -30068,7 +28094,7 @@ exports.DES = require('./des/des');
 exports.CBC = require('./des/cbc');
 exports.EDE = require('./des/ede');
 
-},{"./des/cbc":160,"./des/cipher":161,"./des/des":162,"./des/ede":163,"./des/utils":164}],160:[function(require,module,exports){
+},{"./des/cbc":145,"./des/cipher":146,"./des/des":147,"./des/ede":148,"./des/utils":149}],145:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -30135,7 +28161,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"inherits":330,"minimalistic-assert":165}],161:[function(require,module,exports){
+},{"inherits":315,"minimalistic-assert":150}],146:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -30278,7 +28304,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":165}],162:[function(require,module,exports){
+},{"minimalistic-assert":150}],147:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -30423,7 +28449,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"../des":159,"inherits":330,"minimalistic-assert":165}],163:[function(require,module,exports){
+},{"../des":144,"inherits":315,"minimalistic-assert":150}],148:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -30480,7 +28506,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"../des":159,"inherits":330,"minimalistic-assert":165}],164:[function(require,module,exports){
+},{"../des":144,"inherits":315,"minimalistic-assert":150}],149:[function(require,module,exports){
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -30738,7 +28764,7 @@ exports.padSplit = function padSplit(num, size, group) {
   return out.join(' ');
 };
 
-},{}],165:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 module.exports = assert;
 
 function assert(val, msg) {
@@ -30751,7 +28777,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],166:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -30823,7 +28849,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"create-hash/md5":263}],167:[function(require,module,exports){
+},{"buffer":117,"create-hash/md5":248}],152:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 exports['RSA-SHA224'] = exports.sha224WithRSAEncryption = {
@@ -30899,7 +28925,7 @@ exports['RSA-MD5'] = exports.md5WithRSAEncryption = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],168:[function(require,module,exports){
+},{"buffer":117}],153:[function(require,module,exports){
 (function (Buffer){
 var _algos = require('./algos')
 var createHash = require('create-hash')
@@ -31006,7 +29032,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./algos":167,"./sign":233,"./verify":234,"buffer":132,"create-hash":261,"inherits":330,"stream":353}],169:[function(require,module,exports){
+},{"./algos":152,"./sign":218,"./verify":219,"buffer":117,"create-hash":246,"inherits":315,"stream":338}],154:[function(require,module,exports){
 'use strict'
 exports['1.3.132.0.10'] = 'secp256k1'
 
@@ -31020,7 +29046,7 @@ exports['1.3.132.0.34'] = 'p384'
 
 exports['1.3.132.0.35'] = 'p521'
 
-},{}],170:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 (function (module, exports) {
   'use strict';
 
@@ -34441,7 +32467,7 @@ exports['1.3.132.0.35'] = 'p521'
   };
 })(typeof module === 'undefined' || module, this);
 
-},{}],171:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -34485,7 +32511,7 @@ function getr(priv) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":170,"buffer":132,"randombytes":328}],172:[function(require,module,exports){
+},{"bn.js":155,"buffer":117,"randombytes":313}],157:[function(require,module,exports){
 'use strict';
 
 var elliptic = exports;
@@ -34501,7 +32527,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":195,"./elliptic/curve":175,"./elliptic/curves":178,"./elliptic/ec":179,"./elliptic/eddsa":182,"./elliptic/hmac-drbg":185,"./elliptic/utils":187,"brorand":188}],173:[function(require,module,exports){
+},{"../package.json":180,"./elliptic/curve":160,"./elliptic/curves":163,"./elliptic/ec":164,"./elliptic/eddsa":167,"./elliptic/hmac-drbg":170,"./elliptic/utils":172,"brorand":173}],158:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -34854,7 +32880,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":172,"bn.js":170}],174:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":155}],159:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -35266,7 +33292,7 @@ Point.prototype.eq = function eq(other) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":172,"../curve":175,"bn.js":170,"inherits":330}],175:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":155,"inherits":315}],160:[function(require,module,exports){
 'use strict';
 
 var curve = exports;
@@ -35276,7 +33302,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":173,"./edwards":174,"./mont":176,"./short":177}],176:[function(require,module,exports){
+},{"./base":158,"./edwards":159,"./mont":161,"./short":162}],161:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -35454,7 +33480,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":172,"../curve":175,"bn.js":170,"inherits":330}],177:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":155,"inherits":315}],162:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -36365,7 +34391,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":172,"../curve":175,"bn.js":170,"inherits":330}],178:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":155,"inherits":315}],163:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -36572,7 +34598,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":172,"./precomputed/secp256k1":186,"hash.js":189}],179:[function(require,module,exports){
+},{"../elliptic":157,"./precomputed/secp256k1":171,"hash.js":174}],164:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -36796,7 +34822,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"../../elliptic":172,"./key":180,"./signature":181,"bn.js":170}],180:[function(require,module,exports){
+},{"../../elliptic":157,"./key":165,"./signature":166,"bn.js":155}],165:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -36905,7 +34931,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"bn.js":170}],181:[function(require,module,exports){
+},{"bn.js":155}],166:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -37042,7 +35068,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":172,"bn.js":170}],182:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":155}],167:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -37162,7 +35188,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"../../elliptic":172,"./key":183,"./signature":184,"hash.js":189}],183:[function(require,module,exports){
+},{"../../elliptic":157,"./key":168,"./signature":169,"hash.js":174}],168:[function(require,module,exports){
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -37260,7 +35286,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":172}],184:[function(require,module,exports){
+},{"../../elliptic":157}],169:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -37328,7 +35354,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"../../elliptic":172,"bn.js":170}],185:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":155}],170:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -37444,7 +35470,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"../elliptic":172,"hash.js":189}],186:[function(require,module,exports){
+},{"../elliptic":157,"hash.js":174}],171:[function(require,module,exports){
 module.exports = {
   doubles: {
     step: 4,
@@ -38226,7 +36252,7 @@ module.exports = {
   }
 };
 
-},{}],187:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -38401,7 +36427,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":170}],188:[function(require,module,exports){
+},{"bn.js":155}],173:[function(require,module,exports){
 var r;
 
 module.exports = function rand(len) {
@@ -38460,7 +36486,7 @@ if (typeof window === 'object') {
   }
 }
 
-},{}],189:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -38477,7 +36503,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":190,"./hash/hmac":191,"./hash/ripemd":192,"./hash/sha":193,"./hash/utils":194}],190:[function(require,module,exports){
+},{"./hash/common":175,"./hash/hmac":176,"./hash/ripemd":177,"./hash/sha":178,"./hash/utils":179}],175:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -38570,7 +36596,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"../hash":189}],191:[function(require,module,exports){
+},{"../hash":174}],176:[function(require,module,exports){
 var hmac = exports;
 
 var hash = require('../hash');
@@ -38620,7 +36646,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"../hash":189}],192:[function(require,module,exports){
+},{"../hash":174}],177:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -38766,7 +36792,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"../hash":189}],193:[function(require,module,exports){
+},{"../hash":174}],178:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -39332,7 +37358,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../hash":189}],194:[function(require,module,exports){
+},{"../hash":174}],179:[function(require,module,exports){
 var utils = exports;
 var inherits = require('inherits');
 
@@ -39591,7 +37617,7 @@ function shr64_lo(ah, al, num) {
 };
 exports.shr64_lo = shr64_lo;
 
-},{"inherits":330}],195:[function(require,module,exports){
+},{"inherits":315}],180:[function(require,module,exports){
 module.exports={
   "name": "elliptic",
   "version": "6.2.3",
@@ -39666,7 +37692,7 @@ module.exports={
   "readme": "ERROR: No README data found!"
 }
 
-},{}],196:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -39680,7 +37706,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],197:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -39799,7 +37825,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":200}],198:[function(require,module,exports){
+},{"asn1.js":185}],183:[function(require,module,exports){
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -39833,7 +37859,7 @@ module.exports = function (okey, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"browserify-aes":217,"buffer":132,"evp_bytestokey":232}],199:[function(require,module,exports){
+},{"browserify-aes":202,"buffer":117,"evp_bytestokey":217}],184:[function(require,module,exports){
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -39938,7 +37964,7 @@ function decrypt (data, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aesid.json":196,"./asn1":197,"./fixProc":198,"browserify-aes":217,"buffer":132,"pbkdf2":282}],200:[function(require,module,exports){
+},{"./aesid.json":181,"./asn1":182,"./fixProc":183,"browserify-aes":202,"buffer":117,"pbkdf2":267}],185:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -39949,7 +37975,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"./asn1/api":201,"./asn1/base":203,"./asn1/constants":207,"./asn1/decoders":209,"./asn1/encoders":212,"bn.js":170}],201:[function(require,module,exports){
+},{"./asn1/api":186,"./asn1/base":188,"./asn1/constants":192,"./asn1/decoders":194,"./asn1/encoders":197,"bn.js":155}],186:[function(require,module,exports){
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -40010,7 +38036,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":200,"inherits":330,"vm":365}],202:[function(require,module,exports){
+},{"../asn1":185,"inherits":315,"vm":350}],187:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -40047,8 +38073,9 @@ DecoderBuffer.prototype.restore = function restore(save) {
 
 DecoderBuffer.prototype.isEmpty = function isEmpty() {
   return this.offset === this.length;
-= function(){};
-prototype.readUInt8 = function readUInt8(fail) {
+};
+
+DecoderBuffer.prototype.readUInt8 = function readUInt8(fail) {
   if (this.offset + 1 <= this.length)
     return this.base.readUInt8(this.offset++, true);
   else
@@ -40127,7 +38154,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":203,"buffer":132,"inherits":330}],203:[function(require,module,exports){
+},{"../base":188,"buffer":117,"inherits":315}],188:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -40135,7 +38162,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./buffer":202,"./node":204,"./reporter":205}],204:[function(require,module,exports){
+},{"./buffer":187,"./node":189,"./reporter":190}],189:[function(require,module,exports){
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var DecoderBuffer = require('../base').DecoderBuffer;
@@ -40758,7 +38785,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":203,"minimalistic-assert":214}],205:[function(require,module,exports){
+},{"../base":188,"minimalistic-assert":199}],190:[function(require,module,exports){
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -40862,7 +38889,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":330}],206:[function(require,module,exports){
+},{"inherits":315}],191:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -40906,7 +38933,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":207}],207:[function(require,module,exports){
+},{"../constants":192}],192:[function(require,module,exports){
 var constants = exports;
 
 // Helper
@@ -40927,7 +38954,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":206}],208:[function(require,module,exports){
+},{"./der":191}],193:[function(require,module,exports){
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -41250,13 +39277,13 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":200,"inherits":330}],209:[function(require,module,exports){
+},{"../../asn1":185,"inherits":315}],194:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-},{"./der":208,"./pem":210}],210:[function(require,module,exports){
+},{"./der":193,"./pem":195}],195:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -41308,7 +39335,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"../../asn1":200,"./der":208,"buffer":132,"inherits":330}],211:[function(require,module,exports){
+},{"../../asn1":185,"./der":193,"buffer":117,"inherits":315}],196:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -41604,13 +39631,13 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":200,"buffer":132,"inherits":330}],212:[function(require,module,exports){
+},{"../../asn1":185,"buffer":117,"inherits":315}],197:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-},{"./der":211,"./pem":213}],213:[function(require,module,exports){
+},{"./der":196,"./pem":198}],198:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -41635,45 +39662,45 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"../../asn1":200,"./der":211,"buffer":132,"inherits":330}],214:[function(require,module,exports){
-arguments[4][165][0].apply(exports,arguments)
-},{"dup":165}],215:[function(require,module,exports){
-arguments[4][139][0].apply(exports,arguments)
-},{"buffer":132,"dup":139}],216:[function(require,module,exports){
-arguments[4][140][0].apply(exports,arguments)
-},{"./aes":215,"./ghash":220,"buffer":132,"buffer-xor":229,"cipher-base":230,"dup":140,"inherits":330}],217:[function(require,module,exports){
-arguments[4][141][0].apply(exports,arguments)
-},{"./decrypter":218,"./encrypter":219,"./modes":221,"dup":141}],218:[function(require,module,exports){
-arguments[4][142][0].apply(exports,arguments)
-},{"./aes":215,"./authCipher":216,"./modes":221,"./modes/cbc":222,"./modes/cfb":223,"./modes/cfb1":224,"./modes/cfb8":225,"./modes/ctr":226,"./modes/ecb":227,"./modes/ofb":228,"./streamCipher":231,"buffer":132,"cipher-base":230,"dup":142,"evp_bytestokey":232,"inherits":330}],219:[function(require,module,exports){
-arguments[4][143][0].apply(exports,arguments)
-},{"./aes":215,"./authCipher":216,"./modes":221,"./modes/cbc":222,"./modes/cfb":223,"./modes/cfb1":224,"./modes/cfb8":225,"./modes/ctr":226,"./modes/ecb":227,"./modes/ofb":228,"./streamCipher":231,"buffer":132,"cipher-base":230,"dup":143,"evp_bytestokey":232,"inherits":330}],220:[function(require,module,exports){
-arguments[4][144][0].apply(exports,arguments)
-},{"buffer":132,"dup":144}],221:[function(require,module,exports){
-arguments[4][145][0].apply(exports,arguments)
-},{"dup":145}],222:[function(require,module,exports){
-arguments[4][146][0].apply(exports,arguments)
-},{"buffer-xor":229,"dup":146}],223:[function(require,module,exports){
-arguments[4][147][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":229,"dup":147}],224:[function(require,module,exports){
-arguments[4][148][0].apply(exports,arguments)
-},{"buffer":132,"dup":148}],225:[function(require,module,exports){
-arguments[4][149][0].apply(exports,arguments)
-},{"buffer":132,"dup":149}],226:[function(require,module,exports){
+},{"../../asn1":185,"./der":196,"buffer":117,"inherits":315}],199:[function(require,module,exports){
 arguments[4][150][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":229,"dup":150}],227:[function(require,module,exports){
+},{"dup":150}],200:[function(require,module,exports){
+arguments[4][124][0].apply(exports,arguments)
+},{"buffer":117,"dup":124}],201:[function(require,module,exports){
+arguments[4][125][0].apply(exports,arguments)
+},{"./aes":200,"./ghash":205,"buffer":117,"buffer-xor":214,"cipher-base":215,"dup":125,"inherits":315}],202:[function(require,module,exports){
+arguments[4][126][0].apply(exports,arguments)
+},{"./decrypter":203,"./encrypter":204,"./modes":206,"dup":126}],203:[function(require,module,exports){
+arguments[4][127][0].apply(exports,arguments)
+},{"./aes":200,"./authCipher":201,"./modes":206,"./modes/cbc":207,"./modes/cfb":208,"./modes/cfb1":209,"./modes/cfb8":210,"./modes/ctr":211,"./modes/ecb":212,"./modes/ofb":213,"./streamCipher":216,"buffer":117,"cipher-base":215,"dup":127,"evp_bytestokey":217,"inherits":315}],204:[function(require,module,exports){
+arguments[4][128][0].apply(exports,arguments)
+},{"./aes":200,"./authCipher":201,"./modes":206,"./modes/cbc":207,"./modes/cfb":208,"./modes/cfb1":209,"./modes/cfb8":210,"./modes/ctr":211,"./modes/ecb":212,"./modes/ofb":213,"./streamCipher":216,"buffer":117,"cipher-base":215,"dup":128,"evp_bytestokey":217,"inherits":315}],205:[function(require,module,exports){
+arguments[4][129][0].apply(exports,arguments)
+},{"buffer":117,"dup":129}],206:[function(require,module,exports){
+arguments[4][130][0].apply(exports,arguments)
+},{"dup":130}],207:[function(require,module,exports){
+arguments[4][131][0].apply(exports,arguments)
+},{"buffer-xor":214,"dup":131}],208:[function(require,module,exports){
+arguments[4][132][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":214,"dup":132}],209:[function(require,module,exports){
+arguments[4][133][0].apply(exports,arguments)
+},{"buffer":117,"dup":133}],210:[function(require,module,exports){
+arguments[4][134][0].apply(exports,arguments)
+},{"buffer":117,"dup":134}],211:[function(require,module,exports){
+arguments[4][135][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":214,"dup":135}],212:[function(require,module,exports){
+arguments[4][136][0].apply(exports,arguments)
+},{"dup":136}],213:[function(require,module,exports){
+arguments[4][137][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":214,"dup":137}],214:[function(require,module,exports){
+arguments[4][138][0].apply(exports,arguments)
+},{"buffer":117,"dup":138}],215:[function(require,module,exports){
+arguments[4][139][0].apply(exports,arguments)
+},{"buffer":117,"dup":139,"inherits":315,"stream":338,"string_decoder":345}],216:[function(require,module,exports){
+arguments[4][140][0].apply(exports,arguments)
+},{"./aes":200,"buffer":117,"cipher-base":215,"dup":140,"inherits":315}],217:[function(require,module,exports){
 arguments[4][151][0].apply(exports,arguments)
-},{"dup":151}],228:[function(require,module,exports){
-arguments[4][152][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":229,"dup":152}],229:[function(require,module,exports){
-arguments[4][153][0].apply(exports,arguments)
-},{"buffer":132,"dup":153}],230:[function(require,module,exports){
-arguments[4][154][0].apply(exports,arguments)
-},{"buffer":132,"dup":154,"inherits":330,"stream":353,"string_decoder":360}],231:[function(require,module,exports){
-arguments[4][155][0].apply(exports,arguments)
-},{"./aes":215,"buffer":132,"cipher-base":230,"dup":155,"inherits":330}],232:[function(require,module,exports){
-arguments[4][166][0].apply(exports,arguments)
-},{"buffer":132,"create-hash/md5":263,"dup":166}],233:[function(require,module,exports){
+},{"buffer":117,"create-hash/md5":248,"dup":151}],218:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -41862,7 +39889,7 @@ module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":169,"bn.js":170,"browserify-rsa":171,"buffer":132,"create-hmac":274,"elliptic":172,"parse-asn1":199}],234:[function(require,module,exports){
+},{"./curves":154,"bn.js":155,"browserify-rsa":156,"buffer":117,"create-hmac":259,"elliptic":157,"parse-asn1":184}],219:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var curves = require('./curves')
@@ -41969,7 +39996,7 @@ function checkValue (b, q) {
 module.exports = verify
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":169,"bn.js":170,"buffer":132,"elliptic":172,"parse-asn1":199}],235:[function(require,module,exports){
+},{"./curves":154,"bn.js":155,"buffer":117,"elliptic":157,"parse-asn1":184}],220:[function(require,module,exports){
 (function (Buffer){
 var elliptic = require('elliptic');
 var BN = require('bn.js');
@@ -42095,57 +40122,57 @@ function formatReturnValue(bn, enc, len) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":236,"buffer":132,"elliptic":237}],236:[function(require,module,exports){
+},{"bn.js":221,"buffer":117,"elliptic":222}],221:[function(require,module,exports){
+arguments[4][155][0].apply(exports,arguments)
+},{"dup":155}],222:[function(require,module,exports){
+arguments[4][157][0].apply(exports,arguments)
+},{"../package.json":245,"./elliptic/curve":225,"./elliptic/curves":228,"./elliptic/ec":229,"./elliptic/eddsa":232,"./elliptic/hmac-drbg":235,"./elliptic/utils":237,"brorand":238,"dup":157}],223:[function(require,module,exports){
+arguments[4][158][0].apply(exports,arguments)
+},{"../../elliptic":222,"bn.js":221,"dup":158}],224:[function(require,module,exports){
+arguments[4][159][0].apply(exports,arguments)
+},{"../../elliptic":222,"../curve":225,"bn.js":221,"dup":159,"inherits":315}],225:[function(require,module,exports){
+arguments[4][160][0].apply(exports,arguments)
+},{"./base":223,"./edwards":224,"./mont":226,"./short":227,"dup":160}],226:[function(require,module,exports){
+arguments[4][161][0].apply(exports,arguments)
+},{"../../elliptic":222,"../curve":225,"bn.js":221,"dup":161,"inherits":315}],227:[function(require,module,exports){
+arguments[4][162][0].apply(exports,arguments)
+},{"../../elliptic":222,"../curve":225,"bn.js":221,"dup":162,"inherits":315}],228:[function(require,module,exports){
+arguments[4][163][0].apply(exports,arguments)
+},{"../elliptic":222,"./precomputed/secp256k1":236,"dup":163,"hash.js":239}],229:[function(require,module,exports){
+arguments[4][164][0].apply(exports,arguments)
+},{"../../elliptic":222,"./key":230,"./signature":231,"bn.js":221,"dup":164}],230:[function(require,module,exports){
+arguments[4][165][0].apply(exports,arguments)
+},{"bn.js":221,"dup":165}],231:[function(require,module,exports){
+arguments[4][166][0].apply(exports,arguments)
+},{"../../elliptic":222,"bn.js":221,"dup":166}],232:[function(require,module,exports){
+arguments[4][167][0].apply(exports,arguments)
+},{"../../elliptic":222,"./key":233,"./signature":234,"dup":167,"hash.js":239}],233:[function(require,module,exports){
+arguments[4][168][0].apply(exports,arguments)
+},{"../../elliptic":222,"dup":168}],234:[function(require,module,exports){
+arguments[4][169][0].apply(exports,arguments)
+},{"../../elliptic":222,"bn.js":221,"dup":169}],235:[function(require,module,exports){
 arguments[4][170][0].apply(exports,arguments)
-},{"dup":170}],237:[function(require,module,exports){
+},{"../elliptic":222,"dup":170,"hash.js":239}],236:[function(require,module,exports){
+arguments[4][171][0].apply(exports,arguments)
+},{"dup":171}],237:[function(require,module,exports){
 arguments[4][172][0].apply(exports,arguments)
-},{"../package.json":260,"./elliptic/curve":240,"./elliptic/curves":243,"./elliptic/ec":244,"./elliptic/eddsa":247,"./elliptic/hmac-drbg":250,"./elliptic/utils":252,"brorand":253,"dup":172}],238:[function(require,module,exports){
+},{"bn.js":221,"dup":172}],238:[function(require,module,exports){
 arguments[4][173][0].apply(exports,arguments)
-},{"../../elliptic":237,"bn.js":236,"dup":173}],239:[function(require,module,exports){
+},{"dup":173}],239:[function(require,module,exports){
 arguments[4][174][0].apply(exports,arguments)
-},{"../../elliptic":237,"../curve":240,"bn.js":236,"dup":174,"inherits":330}],240:[function(require,module,exports){
+},{"./hash/common":240,"./hash/hmac":241,"./hash/ripemd":242,"./hash/sha":243,"./hash/utils":244,"dup":174}],240:[function(require,module,exports){
 arguments[4][175][0].apply(exports,arguments)
-},{"./base":238,"./edwards":239,"./mont":241,"./short":242,"dup":175}],241:[function(require,module,exports){
+},{"../hash":239,"dup":175}],241:[function(require,module,exports){
 arguments[4][176][0].apply(exports,arguments)
-},{"../../elliptic":237,"../curve":240,"bn.js":236,"dup":176,"inherits":330}],242:[function(require,module,exports){
+},{"../hash":239,"dup":176}],242:[function(require,module,exports){
 arguments[4][177][0].apply(exports,arguments)
-},{"../../elliptic":237,"../curve":240,"bn.js":236,"dup":177,"inherits":330}],243:[function(require,module,exports){
+},{"../hash":239,"dup":177}],243:[function(require,module,exports){
 arguments[4][178][0].apply(exports,arguments)
-},{"../elliptic":237,"./precomputed/secp256k1":251,"dup":178,"hash.js":254}],244:[function(require,module,exports){
+},{"../hash":239,"dup":178}],244:[function(require,module,exports){
 arguments[4][179][0].apply(exports,arguments)
-},{"../../elliptic":237,"./key":245,"./signature":246,"bn.js":236,"dup":179}],245:[function(require,module,exports){
+},{"dup":179,"inherits":315}],245:[function(require,module,exports){
 arguments[4][180][0].apply(exports,arguments)
-},{"bn.js":236,"dup":180}],246:[function(require,module,exports){
-arguments[4][181][0].apply(exports,arguments)
-},{"../../elliptic":237,"bn.js":236,"dup":181}],247:[function(require,module,exports){
-arguments[4][182][0].apply(exports,arguments)
-},{"../../elliptic":237,"./key":248,"./signature":249,"dup":182,"hash.js":254}],248:[function(require,module,exports){
-arguments[4][183][0].apply(exports,arguments)
-},{"../../elliptic":237,"dup":183}],249:[function(require,module,exports){
-arguments[4][184][0].apply(exports,arguments)
-},{"../../elliptic":237,"bn.js":236,"dup":184}],250:[function(require,module,exports){
-arguments[4][185][0].apply(exports,arguments)
-},{"../elliptic":237,"dup":185,"hash.js":254}],251:[function(require,module,exports){
-arguments[4][186][0].apply(exports,arguments)
-},{"dup":186}],252:[function(require,module,exports){
-arguments[4][187][0].apply(exports,arguments)
-},{"bn.js":236,"dup":187}],253:[function(require,module,exports){
-arguments[4][188][0].apply(exports,arguments)
-},{"dup":188}],254:[function(require,module,exports){
-arguments[4][189][0].apply(exports,arguments)
-},{"./hash/common":255,"./hash/hmac":256,"./hash/ripemd":257,"./hash/sha":258,"./hash/utils":259,"dup":189}],255:[function(require,module,exports){
-arguments[4][190][0].apply(exports,arguments)
-},{"../hash":254,"dup":190}],256:[function(require,module,exports){
-arguments[4][191][0].apply(exports,arguments)
-},{"../hash":254,"dup":191}],257:[function(require,module,exports){
-arguments[4][192][0].apply(exports,arguments)
-},{"../hash":254,"dup":192}],258:[function(require,module,exports){
-arguments[4][193][0].apply(exports,arguments)
-},{"../hash":254,"dup":193}],259:[function(require,module,exports){
-arguments[4][194][0].apply(exports,arguments)
-},{"dup":194,"inherits":330}],260:[function(require,module,exports){
-arguments[4][195][0].apply(exports,arguments)
-},{"dup":195}],261:[function(require,module,exports){
+},{"dup":180}],246:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var inherits = require('inherits')
@@ -42201,7 +40228,7 @@ module.exports = function createHash (alg) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./md5":263,"buffer":132,"cipher-base":264,"inherits":330,"ripemd160":265,"sha.js":267}],262:[function(require,module,exports){
+},{"./md5":248,"buffer":117,"cipher-base":249,"inherits":315,"ripemd160":250,"sha.js":252}],247:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var intSize = 4;
@@ -42238,7 +40265,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 }
 exports.hash = hash;
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],263:[function(require,module,exports){
+},{"buffer":117}],248:[function(require,module,exports){
 'use strict';
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
@@ -42395,9 +40422,9 @@ function bit_rol(num, cnt)
 module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
-},{"./helpers":262}],264:[function(require,module,exports){
-arguments[4][154][0].apply(exports,arguments)
-},{"buffer":132,"dup":154,"inherits":330,"stream":353,"string_decoder":360}],265:[function(require,module,exports){
+},{"./helpers":247}],249:[function(require,module,exports){
+arguments[4][139][0].apply(exports,arguments)
+},{"buffer":117,"dup":139,"inherits":315,"stream":338,"string_decoder":345}],250:[function(require,module,exports){
 (function (Buffer){
 /*
 CryptoJS v3.1.2
@@ -42611,7 +40638,7 @@ function ripemd160 (message) {
 module.exports = ripemd160
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],266:[function(require,module,exports){
+},{"buffer":117}],251:[function(require,module,exports){
 (function (Buffer){
 // prototype class for hash functions
 function Hash (blockSize, finalSize) {
@@ -42684,7 +40711,7 @@ Hash.prototype._update = function () {
 module.exports = Hash
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132}],267:[function(require,module,exports){
+},{"buffer":117}],252:[function(require,module,exports){
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -42701,7 +40728,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":268,"./sha1":269,"./sha224":270,"./sha256":271,"./sha384":272,"./sha512":273}],268:[function(require,module,exports){
+},{"./sha":253,"./sha1":254,"./sha224":255,"./sha256":256,"./sha384":257,"./sha512":258}],253:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -42798,7 +40825,7 @@ Sha.prototype._hash = function () {
 module.exports = Sha
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"buffer":132,"inherits":330}],269:[function(require,module,exports){
+},{"./hash":251,"buffer":117,"inherits":315}],254:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -42900,7 +40927,7 @@ Sha1.prototype._hash = function () {
 module.exports = Sha1
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"buffer":132,"inherits":330}],270:[function(require,module,exports){
+},{"./hash":251,"buffer":117,"inherits":315}],255:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -42956,7 +40983,7 @@ Sha224.prototype._hash = function () {
 module.exports = Sha224
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"./sha256":271,"buffer":132,"inherits":330}],271:[function(require,module,exports){
+},{"./hash":251,"./sha256":256,"buffer":117,"inherits":315}],256:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -43094,7 +41121,7 @@ Sha256.prototype._hash = function () {
 module.exports = Sha256
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"buffer":132,"inherits":330}],272:[function(require,module,exports){
+},{"./hash":251,"buffer":117,"inherits":315}],257:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -43154,7 +41181,7 @@ Sha384.prototype._hash = function () {
 module.exports = Sha384
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"./sha512":273,"buffer":132,"inherits":330}],273:[function(require,module,exports){
+},{"./hash":251,"./sha512":258,"buffer":117,"inherits":315}],258:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -43417,7 +41444,7 @@ Sha512.prototype._hash = function () {
 module.exports = Sha512
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":266,"buffer":132,"inherits":330}],274:[function(require,module,exports){
+},{"./hash":251,"buffer":117,"inherits":315}],259:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var createHash = require('create-hash/browser');
@@ -43489,7 +41516,7 @@ module.exports = function createHmac(alg, key) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"create-hash/browser":261,"inherits":330,"stream":353}],275:[function(require,module,exports){
+},{"buffer":117,"create-hash/browser":246,"inherits":315,"stream":338}],260:[function(require,module,exports){
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -43535,7 +41562,7 @@ exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffi
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
 }).call(this,require("buffer").Buffer)
-},{"./lib/dh":276,"./lib/generatePrime":277,"./lib/primes.json":278,"buffer":132}],276:[function(require,module,exports){
+},{"./lib/dh":261,"./lib/generatePrime":262,"./lib/primes.json":263,"buffer":117}],261:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -43703,7 +41730,7 @@ function formatReturnValue(bn, enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":277,"bn.js":279,"buffer":132,"miller-rabin":280,"randombytes":328}],277:[function(require,module,exports){
+},{"./generatePrime":262,"bn.js":264,"buffer":117,"miller-rabin":265,"randombytes":313}],262:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -43810,7 +41837,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"bn.js":279,"miller-rabin":280,"randombytes":328}],278:[function(require,module,exports){
+},{"bn.js":264,"miller-rabin":265,"randombytes":313}],263:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -43845,9 +41872,9 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],279:[function(require,module,exports){
-arguments[4][170][0].apply(exports,arguments)
-},{"dup":170}],280:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
+arguments[4][155][0].apply(exports,arguments)
+},{"dup":155}],265:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -43962,9 +41989,9 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":279,"brorand":281}],281:[function(require,module,exports){
-arguments[4][188][0].apply(exports,arguments)
-},{"dup":188}],282:[function(require,module,exports){
+},{"bn.js":264,"brorand":266}],266:[function(require,module,exports){
+arguments[4][173][0].apply(exports,arguments)
+},{"dup":173}],267:[function(require,module,exports){
 (function (Buffer){
 var createHmac = require('create-hmac')
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -44048,7 +42075,7 @@ function pbkdf2Sync (password, salt, iterations, keylen, digest) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"create-hmac":274}],283:[function(require,module,exports){
+},{"buffer":117,"create-hmac":259}],268:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -44059,7 +42086,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./privateDecrypt":324,"./publicEncrypt":325}],284:[function(require,module,exports){
+},{"./privateDecrypt":309,"./publicEncrypt":310}],269:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -44078,85 +42105,85 @@ function i2ops(c) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"create-hash":261}],285:[function(require,module,exports){
-arguments[4][170][0].apply(exports,arguments)
-},{"dup":170}],286:[function(require,module,exports){
-arguments[4][171][0].apply(exports,arguments)
-},{"bn.js":285,"buffer":132,"dup":171,"randombytes":328}],287:[function(require,module,exports){
-arguments[4][196][0].apply(exports,arguments)
-},{"dup":196}],288:[function(require,module,exports){
-arguments[4][197][0].apply(exports,arguments)
-},{"asn1.js":291,"dup":197}],289:[function(require,module,exports){
-arguments[4][198][0].apply(exports,arguments)
-},{"browserify-aes":308,"buffer":132,"dup":198,"evp_bytestokey":323}],290:[function(require,module,exports){
-arguments[4][199][0].apply(exports,arguments)
-},{"./aesid.json":287,"./asn1":288,"./fixProc":289,"browserify-aes":308,"buffer":132,"dup":199,"pbkdf2":282}],291:[function(require,module,exports){
-arguments[4][200][0].apply(exports,arguments)
-},{"./asn1/api":292,"./asn1/base":294,"./asn1/constants":298,"./asn1/decoders":300,"./asn1/encoders":303,"bn.js":285,"dup":200}],292:[function(require,module,exports){
-arguments[4][201][0].apply(exports,arguments)
-},{"../asn1":291,"dup":201,"inherits":330,"vm":365}],293:[function(require,module,exports){
-arguments[4][202][0].apply(exports,arguments)
-},{"../base":294,"buffer":132,"dup":202,"inherits":330}],294:[function(require,module,exports){
-arguments[4][203][0].apply(exports,arguments)
-},{"./buffer":293,"./node":295,"./reporter":296,"dup":203}],295:[function(require,module,exports){
-arguments[4][204][0].apply(exports,arguments)
-},{"../base":294,"dup":204,"minimalistic-assert":305}],296:[function(require,module,exports){
-arguments[4][205][0].apply(exports,arguments)
-},{"dup":205,"inherits":330}],297:[function(require,module,exports){
-arguments[4][206][0].apply(exports,arguments)
-},{"../constants":298,"dup":206}],298:[function(require,module,exports){
-arguments[4][207][0].apply(exports,arguments)
-},{"./der":297,"dup":207}],299:[function(require,module,exports){
-arguments[4][208][0].apply(exports,arguments)
-},{"../../asn1":291,"dup":208,"inherits":330}],300:[function(require,module,exports){
-arguments[4][209][0].apply(exports,arguments)
-},{"./der":299,"./pem":301,"dup":209}],301:[function(require,module,exports){
-arguments[4][210][0].apply(exports,arguments)
-},{"../../asn1":291,"./der":299,"buffer":132,"dup":210,"inherits":330}],302:[function(require,module,exports){
-arguments[4][211][0].apply(exports,arguments)
-},{"../../asn1":291,"buffer":132,"dup":211,"inherits":330}],303:[function(require,module,exports){
-arguments[4][212][0].apply(exports,arguments)
-},{"./der":302,"./pem":304,"dup":212}],304:[function(require,module,exports){
-arguments[4][213][0].apply(exports,arguments)
-},{"../../asn1":291,"./der":302,"buffer":132,"dup":213,"inherits":330}],305:[function(require,module,exports){
-arguments[4][165][0].apply(exports,arguments)
-},{"dup":165}],306:[function(require,module,exports){
-arguments[4][139][0].apply(exports,arguments)
-},{"buffer":132,"dup":139}],307:[function(require,module,exports){
-arguments[4][140][0].apply(exports,arguments)
-},{"./aes":306,"./ghash":311,"buffer":132,"buffer-xor":320,"cipher-base":321,"dup":140,"inherits":330}],308:[function(require,module,exports){
-arguments[4][141][0].apply(exports,arguments)
-},{"./decrypter":309,"./encrypter":310,"./modes":312,"dup":141}],309:[function(require,module,exports){
-arguments[4][142][0].apply(exports,arguments)
-},{"./aes":306,"./authCipher":307,"./modes":312,"./modes/cbc":313,"./modes/cfb":314,"./modes/cfb1":315,"./modes/cfb8":316,"./modes/ctr":317,"./modes/ecb":318,"./modes/ofb":319,"./streamCipher":322,"buffer":132,"cipher-base":321,"dup":142,"evp_bytestokey":323,"inherits":330}],310:[function(require,module,exports){
-arguments[4][143][0].apply(exports,arguments)
-},{"./aes":306,"./authCipher":307,"./modes":312,"./modes/cbc":313,"./modes/cfb":314,"./modes/cfb1":315,"./modes/cfb8":316,"./modes/ctr":317,"./modes/ecb":318,"./modes/ofb":319,"./streamCipher":322,"buffer":132,"cipher-base":321,"dup":143,"evp_bytestokey":323,"inherits":330}],311:[function(require,module,exports){
-arguments[4][144][0].apply(exports,arguments)
-},{"buffer":132,"dup":144}],312:[function(require,module,exports){
-arguments[4][145][0].apply(exports,arguments)
-},{"dup":145}],313:[function(require,module,exports){
-arguments[4][146][0].apply(exports,arguments)
-},{"buffer-xor":320,"dup":146}],314:[function(require,module,exports){
-arguments[4][147][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":320,"dup":147}],315:[function(require,module,exports){
-arguments[4][148][0].apply(exports,arguments)
-},{"buffer":132,"dup":148}],316:[function(require,module,exports){
-arguments[4][149][0].apply(exports,arguments)
-},{"buffer":132,"dup":149}],317:[function(require,module,exports){
-arguments[4][150][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":320,"dup":150}],318:[function(require,module,exports){
-arguments[4][151][0].apply(exports,arguments)
-},{"dup":151}],319:[function(require,module,exports){
-arguments[4][152][0].apply(exports,arguments)
-},{"buffer":132,"buffer-xor":320,"dup":152}],320:[function(require,module,exports){
-arguments[4][153][0].apply(exports,arguments)
-},{"buffer":132,"dup":153}],321:[function(require,module,exports){
-arguments[4][154][0].apply(exports,arguments)
-},{"buffer":132,"dup":154,"inherits":330,"stream":353,"string_decoder":360}],322:[function(require,module,exports){
+},{"buffer":117,"create-hash":246}],270:[function(require,module,exports){
 arguments[4][155][0].apply(exports,arguments)
-},{"./aes":306,"buffer":132,"cipher-base":321,"dup":155,"inherits":330}],323:[function(require,module,exports){
-arguments[4][166][0].apply(exports,arguments)
-},{"buffer":132,"create-hash/md5":263,"dup":166}],324:[function(require,module,exports){
+},{"dup":155}],271:[function(require,module,exports){
+arguments[4][156][0].apply(exports,arguments)
+},{"bn.js":270,"buffer":117,"dup":156,"randombytes":313}],272:[function(require,module,exports){
+arguments[4][181][0].apply(exports,arguments)
+},{"dup":181}],273:[function(require,module,exports){
+arguments[4][182][0].apply(exports,arguments)
+},{"asn1.js":276,"dup":182}],274:[function(require,module,exports){
+arguments[4][183][0].apply(exports,arguments)
+},{"browserify-aes":293,"buffer":117,"dup":183,"evp_bytestokey":308}],275:[function(require,module,exports){
+arguments[4][184][0].apply(exports,arguments)
+},{"./aesid.json":272,"./asn1":273,"./fixProc":274,"browserify-aes":293,"buffer":117,"dup":184,"pbkdf2":267}],276:[function(require,module,exports){
+arguments[4][185][0].apply(exports,arguments)
+},{"./asn1/api":277,"./asn1/base":279,"./asn1/constants":283,"./asn1/decoders":285,"./asn1/encoders":288,"bn.js":270,"dup":185}],277:[function(require,module,exports){
+arguments[4][186][0].apply(exports,arguments)
+},{"../asn1":276,"dup":186,"inherits":315,"vm":350}],278:[function(require,module,exports){
+arguments[4][187][0].apply(exports,arguments)
+},{"../base":279,"buffer":117,"dup":187,"inherits":315}],279:[function(require,module,exports){
+arguments[4][188][0].apply(exports,arguments)
+},{"./buffer":278,"./node":280,"./reporter":281,"dup":188}],280:[function(require,module,exports){
+arguments[4][189][0].apply(exports,arguments)
+},{"../base":279,"dup":189,"minimalistic-assert":290}],281:[function(require,module,exports){
+arguments[4][190][0].apply(exports,arguments)
+},{"dup":190,"inherits":315}],282:[function(require,module,exports){
+arguments[4][191][0].apply(exports,arguments)
+},{"../constants":283,"dup":191}],283:[function(require,module,exports){
+arguments[4][192][0].apply(exports,arguments)
+},{"./der":282,"dup":192}],284:[function(require,module,exports){
+arguments[4][193][0].apply(exports,arguments)
+},{"../../asn1":276,"dup":193,"inherits":315}],285:[function(require,module,exports){
+arguments[4][194][0].apply(exports,arguments)
+},{"./der":284,"./pem":286,"dup":194}],286:[function(require,module,exports){
+arguments[4][195][0].apply(exports,arguments)
+},{"../../asn1":276,"./der":284,"buffer":117,"dup":195,"inherits":315}],287:[function(require,module,exports){
+arguments[4][196][0].apply(exports,arguments)
+},{"../../asn1":276,"buffer":117,"dup":196,"inherits":315}],288:[function(require,module,exports){
+arguments[4][197][0].apply(exports,arguments)
+},{"./der":287,"./pem":289,"dup":197}],289:[function(require,module,exports){
+arguments[4][198][0].apply(exports,arguments)
+},{"../../asn1":276,"./der":287,"buffer":117,"dup":198,"inherits":315}],290:[function(require,module,exports){
+arguments[4][150][0].apply(exports,arguments)
+},{"dup":150}],291:[function(require,module,exports){
+arguments[4][124][0].apply(exports,arguments)
+},{"buffer":117,"dup":124}],292:[function(require,module,exports){
+arguments[4][125][0].apply(exports,arguments)
+},{"./aes":291,"./ghash":296,"buffer":117,"buffer-xor":305,"cipher-base":306,"dup":125,"inherits":315}],293:[function(require,module,exports){
+arguments[4][126][0].apply(exports,arguments)
+},{"./decrypter":294,"./encrypter":295,"./modes":297,"dup":126}],294:[function(require,module,exports){
+arguments[4][127][0].apply(exports,arguments)
+},{"./aes":291,"./authCipher":292,"./modes":297,"./modes/cbc":298,"./modes/cfb":299,"./modes/cfb1":300,"./modes/cfb8":301,"./modes/ctr":302,"./modes/ecb":303,"./modes/ofb":304,"./streamCipher":307,"buffer":117,"cipher-base":306,"dup":127,"evp_bytestokey":308,"inherits":315}],295:[function(require,module,exports){
+arguments[4][128][0].apply(exports,arguments)
+},{"./aes":291,"./authCipher":292,"./modes":297,"./modes/cbc":298,"./modes/cfb":299,"./modes/cfb1":300,"./modes/cfb8":301,"./modes/ctr":302,"./modes/ecb":303,"./modes/ofb":304,"./streamCipher":307,"buffer":117,"cipher-base":306,"dup":128,"evp_bytestokey":308,"inherits":315}],296:[function(require,module,exports){
+arguments[4][129][0].apply(exports,arguments)
+},{"buffer":117,"dup":129}],297:[function(require,module,exports){
+arguments[4][130][0].apply(exports,arguments)
+},{"dup":130}],298:[function(require,module,exports){
+arguments[4][131][0].apply(exports,arguments)
+},{"buffer-xor":305,"dup":131}],299:[function(require,module,exports){
+arguments[4][132][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":305,"dup":132}],300:[function(require,module,exports){
+arguments[4][133][0].apply(exports,arguments)
+},{"buffer":117,"dup":133}],301:[function(require,module,exports){
+arguments[4][134][0].apply(exports,arguments)
+},{"buffer":117,"dup":134}],302:[function(require,module,exports){
+arguments[4][135][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":305,"dup":135}],303:[function(require,module,exports){
+arguments[4][136][0].apply(exports,arguments)
+},{"dup":136}],304:[function(require,module,exports){
+arguments[4][137][0].apply(exports,arguments)
+},{"buffer":117,"buffer-xor":305,"dup":137}],305:[function(require,module,exports){
+arguments[4][138][0].apply(exports,arguments)
+},{"buffer":117,"dup":138}],306:[function(require,module,exports){
+arguments[4][139][0].apply(exports,arguments)
+},{"buffer":117,"dup":139,"inherits":315,"stream":338,"string_decoder":345}],307:[function(require,module,exports){
+arguments[4][140][0].apply(exports,arguments)
+},{"./aes":291,"buffer":117,"cipher-base":306,"dup":140,"inherits":315}],308:[function(require,module,exports){
+arguments[4][151][0].apply(exports,arguments)
+},{"buffer":117,"create-hash/md5":248,"dup":151}],309:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -44267,7 +42294,7 @@ function compare(a, b){
   return dif;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":284,"./withPublic":326,"./xor":327,"bn.js":285,"browserify-rsa":286,"buffer":132,"create-hash":261,"parse-asn1":290}],325:[function(require,module,exports){
+},{"./mgf":269,"./withPublic":311,"./xor":312,"bn.js":270,"browserify-rsa":271,"buffer":117,"create-hash":246,"parse-asn1":275}],310:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -44365,7 +42392,7 @@ function nonZero(len, crypto) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":284,"./withPublic":326,"./xor":327,"bn.js":285,"browserify-rsa":286,"buffer":132,"create-hash":261,"parse-asn1":290,"randombytes":328}],326:[function(require,module,exports){
+},{"./mgf":269,"./withPublic":311,"./xor":312,"bn.js":270,"browserify-rsa":271,"buffer":117,"create-hash":246,"parse-asn1":275,"randombytes":313}],311:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -44378,7 +42405,7 @@ function withPublic(paddedMsg, key) {
 
 module.exports = withPublic;
 }).call(this,require("buffer").Buffer)
-},{"bn.js":285,"buffer":132}],327:[function(require,module,exports){
+},{"bn.js":270,"buffer":117}],312:[function(require,module,exports){
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -44387,7 +42414,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],328:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 (function (process,global,Buffer){
 'use strict'
 
@@ -44427,7 +42454,7 @@ function randomBytes (size, cb) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"_process":334,"buffer":132}],329:[function(require,module,exports){
+},{"_process":319,"buffer":117}],314:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -44727,7 +42754,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],330:[function(require,module,exports){
+},{}],315:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -44752,7 +42779,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],331:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 /**
  * Determine if an object is Buffer
  *
@@ -44771,7 +42798,7 @@ module.exports = function (obj) {
     ))
 }
 
-},{}],332:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -44818,7 +42845,7 @@ exports.tmpdir = exports.tmpDir = function () {
 
 exports.EOL = '\n';
 
-},{}],333:[function(require,module,exports){
+},{}],318:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -45046,7 +43073,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":334}],334:[function(require,module,exports){
+},{"_process":319}],319:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -45139,7 +43166,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],335:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -45676,7 +43703,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],336:[function(require,module,exports){
+},{}],321:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -45762,7 +43789,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],337:[function(require,module,exports){
+},{}],322:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -45849,16 +43876,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],338:[function(require,module,exports){
+},{}],323:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":336,"./encode":337}],339:[function(require,module,exports){
+},{"./decode":321,"./encode":322}],324:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":340}],340:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":325}],325:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -45934,7 +43961,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":342,"./_stream_writable":344,"core-util-is":345,"inherits":330,"process-nextick-args":347}],341:[function(require,module,exports){
+},{"./_stream_readable":327,"./_stream_writable":329,"core-util-is":330,"inherits":315,"process-nextick-args":332}],326:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -45961,7 +43988,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":343,"core-util-is":345,"inherits":330}],342:[function(require,module,exports){
+},{"./_stream_transform":328,"core-util-is":330,"inherits":315}],327:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -46844,7 +44871,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":340,"_process":334,"buffer":132,"core-util-is":345,"events":329,"inherits":330,"isarray":346,"process-nextick-args":347,"string_decoder/":360,"util":118}],343:[function(require,module,exports){
+},{"./_stream_duplex":325,"_process":319,"buffer":117,"core-util-is":330,"events":314,"inherits":315,"isarray":331,"process-nextick-args":332,"string_decoder/":345,"util":103}],328:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -47025,7 +45052,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":340,"core-util-is":345,"inherits":330}],344:[function(require,module,exports){
+},{"./_stream_duplex":325,"core-util-is":330,"inherits":315}],329:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -47544,7 +45571,7 @@ function CorkedRequest(state) {
   };
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":340,"_process":334,"buffer":132,"core-util-is":345,"events":329,"inherits":330,"process-nextick-args":347,"util-deprecate":348}],345:[function(require,module,exports){
+},{"./_stream_duplex":325,"_process":319,"buffer":117,"core-util-is":330,"events":314,"inherits":315,"process-nextick-args":332,"util-deprecate":333}],330:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -47655,9 +45682,9 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
-},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":331}],346:[function(require,module,exports){
-arguments[4][135][0].apply(exports,arguments)
-},{"dup":135}],347:[function(require,module,exports){
+},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":316}],331:[function(require,module,exports){
+arguments[4][120][0].apply(exports,arguments)
+},{"dup":120}],332:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -47681,7 +45708,7 @@ function nextTick(fn) {
 }
 
 }).call(this,require('_process'))
-},{"_process":334}],348:[function(require,module,exports){
+},{"_process":319}],333:[function(require,module,exports){
 (function (global){
 
 /**
@@ -47752,10 +45779,10 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],349:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":341}],350:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":326}],335:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -47769,13 +45796,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":340,"./lib/_stream_passthrough.js":341,"./lib/_stream_readable.js":342,"./lib/_stream_transform.js":343,"./lib/_stream_writable.js":344}],351:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":325,"./lib/_stream_passthrough.js":326,"./lib/_stream_readable.js":327,"./lib/_stream_transform.js":328,"./lib/_stream_writable.js":329}],336:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":343}],352:[function(require,module,exports){
+},{"./lib/_stream_transform.js":328}],337:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":344}],353:[function(require,module,exports){
+},{"./lib/_stream_writable.js":329}],338:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -47904,7 +45931,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":329,"inherits":330,"readable-stream/duplex.js":339,"readable-stream/passthrough.js":349,"readable-stream/readable.js":350,"readable-stream/transform.js":351,"readable-stream/writable.js":352}],354:[function(require,module,exports){
+},{"events":314,"inherits":315,"readable-stream/duplex.js":324,"readable-stream/passthrough.js":334,"readable-stream/readable.js":335,"readable-stream/transform.js":336,"readable-stream/writable.js":337}],339:[function(require,module,exports){
 (function (global){
 var ClientRequest = require('./lib/request')
 var extend = require('xtend')
@@ -47986,7 +46013,7 @@ http.METHODS = [
 	'UNSUBSCRIBE'
 ]
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/request":356,"builtin-status-codes":358,"url":361,"xtend":367}],355:[function(require,module,exports){
+},{"./lib/request":341,"builtin-status-codes":343,"url":346,"xtend":352}],340:[function(require,module,exports){
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
@@ -48030,7 +46057,7 @@ function isFunction (value) {
 xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],356:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 (function (process,global,Buffer){
 // var Base64 = require('Base64')
 var capability = require('./capability')
@@ -48312,7 +46339,7 @@ var unsafeHeaders = [
 ]
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":355,"./response":357,"_process":334,"buffer":132,"inherits":330,"stream":353,"to-arraybuffer":359}],357:[function(require,module,exports){
+},{"./capability":340,"./response":342,"_process":319,"buffer":117,"inherits":315,"stream":338,"to-arraybuffer":344}],342:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -48494,7 +46521,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./capability":355,"_process":334,"buffer":132,"inherits":330,"stream":353}],358:[function(require,module,exports){
+},{"./capability":340,"_process":319,"buffer":117,"inherits":315,"stream":338}],343:[function(require,module,exports){
 module.exports = {
   "100": "Continue",
   "101": "Switching Protocols",
@@ -48559,7 +46586,7 @@ module.exports = {
   "511": "Network Authentication Required"
 }
 
-},{}],359:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 
 module.exports = function (buf) {
@@ -48588,7 +46615,7 @@ module.exports = function (buf) {
 	}
 }
 
-},{"buffer":132}],360:[function(require,module,exports){
+},{"buffer":117}],345:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -48811,7 +46838,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":132}],361:[function(require,module,exports){
+},{"buffer":117}],346:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -49545,7 +47572,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":362,"punycode":335,"querystring":338}],362:[function(require,module,exports){
+},{"./util":347,"punycode":320,"querystring":323}],347:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -49563,14 +47590,14 @@ module.exports = {
   }
 };
 
-},{}],363:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],364:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -50160,7 +48187,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":363,"_process":334,"inherits":330}],365:[function(require,module,exports){
+},{"./support/isBuffer":348,"_process":319,"inherits":315}],350:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -50300,7 +48327,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":366}],366:[function(require,module,exports){
+},{"indexof":351}],351:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -50311,7 +48338,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],367:[function(require,module,exports){
+},{}],352:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -50332,7 +48359,7 @@ function extend() {
     return target
 }
 
-},{}],368:[function(require,module,exports){
+},{}],353:[function(require,module,exports){
 (function (Buffer){
 /*!
  * compression
@@ -50611,7 +48638,7 @@ function shouldTransform(req, res) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"accepts":369,"buffer":132,"bytes":378,"compressible":379,"debug":382,"on-headers":385,"vary":386,"zlib":131}],369:[function(require,module,exports){
+},{"accepts":354,"buffer":117,"bytes":363,"compressible":364,"debug":367,"on-headers":370,"vary":371,"zlib":116}],354:[function(require,module,exports){
 /*!
  * accepts
  * Copyright(c) 2014 Jonathan Ong
@@ -50844,7 +48871,7 @@ function validMime(type) {
   return typeof type === 'string';
 }
 
-},{"mime-types":370,"negotiator":373}],370:[function(require,module,exports){
+},{"mime-types":355,"negotiator":358}],355:[function(require,module,exports){
 /*!
  * mime-types
  * Copyright(c) 2014 Jonathan Ong
@@ -51034,7 +49061,7 @@ function populateMaps(extensions, types) {
   })
 }
 
-},{"mime-db":372,"path":333}],371:[function(require,module,exports){
+},{"mime-db":357,"path":318}],356:[function(require,module,exports){
 module.exports={
   "application/1d-interleaved-parityfec": {
     "source": "iana"
@@ -53772,8 +51799,7 @@ module.exports={
   "application/vnd.ms-wmdrm.meter-resp": {
     "source": "iana"
   },
-rs` is unspecified, all
-d.document.macroenabled.12": {
+  "application/vnd.ms-word.document.macroenabled.12": {
     "source": "iana",
     "extensions": ["docm"]
   },
@@ -57612,7 +55638,7 @@ d.document.macroenabled.12": {
   }
 }
 
-},{}],372:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 /*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
@@ -57625,7 +55651,7 @@ d.document.macroenabled.12": {
 
 module.exports = require('./db.json')
 
-},{"./db.json":371}],373:[function(require,module,exports){
+},{"./db.json":356}],358:[function(require,module,exports){
 /*!
  * negotiator
  * Copyright(c) 2012 Federico Romero
@@ -57751,7 +55777,7 @@ function loadModule(moduleName) {
   return module;
 }
 
-},{"./lib/charset":374,"./lib/encoding":375,"./lib/language":376,"./lib/mediaType":377}],374:[function(require,module,exports){
+},{"./lib/charset":359,"./lib/encoding":360,"./lib/language":361,"./lib/mediaType":362}],359:[function(require,module,exports){
 /**
  * negotiator
  * Copyright(c) 2012 Isaac Z. Schlueter
@@ -57922,7 +55948,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],375:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 /**
  * negotiator
  * Copyright(c) 2012 Isaac Z. Schlueter
@@ -58108,7 +56134,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],376:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 /**
  * negotiator
  * Copyright(c) 2012 Isaac Z. Schlueter
@@ -58289,7 +56315,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],377:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
 /**
  * negotiator
  * Copyright(c) 2012 Isaac Z. Schlueter
@@ -58585,7 +56611,7 @@ function splitParameters(str) {
   return parameters;
 }
 
-},{}],378:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 /*!
  * bytes
  * Copyright(c) 2012-2014 TJ Holowaychuk
@@ -58728,7 +56754,7 @@ function parse(val) {
   return map[unit] * floatValue;
 }
 
-},{}],379:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
 /*!
  * compressible
  * Copyright(c) 2013 Jonathan Ong
@@ -58788,11 +56814,11 @@ function compressible(type) {
     : undefined
 }
 
-},{"mime-db":381}],380:[function(require,module,exports){
-arguments[4][371][0].apply(exports,arguments)
-},{"dup":371}],381:[function(require,module,exports){
-arguments[4][372][0].apply(exports,arguments)
-},{"./db.json":380,"dup":372}],382:[function(require,module,exports){
+},{"mime-db":366}],365:[function(require,module,exports){
+arguments[4][356][0].apply(exports,arguments)
+},{"dup":356}],366:[function(require,module,exports){
+arguments[4][357][0].apply(exports,arguments)
+},{"./db.json":365,"dup":357}],367:[function(require,module,exports){
 
 /**
  * This is the web browser implementation of `debug()`.
@@ -58962,7 +56988,7 @@ function localstorage(){
   } catch (e) {}
 }
 
-},{"./debug":383}],383:[function(require,module,exports){
+},{"./debug":368}],368:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -59161,7 +57187,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":384}],384:[function(require,module,exports){
+},{"ms":369}],369:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -59288,7 +57314,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-},{}],385:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 /*!
  * on-headers
  * Copyright(c) 2014 Douglas Christopher Wilson
@@ -59383,7 +57409,7 @@ function setWriteHeadHeaders(statusCode) {
   return args
 }
 
-},{}],386:[function(require,module,exports){
+},{}],371:[function(require,module,exports){
 /*!
  * vary
  * Copyright(c) 2014-2015 Douglas Christopher Wilson
@@ -59509,7 +57535,7 @@ function vary(res, field) {
   }
 }
 
-},{}],387:[function(require,module,exports){
+},{}],372:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -59711,7 +57737,7 @@ Controller.prototype.milestone = function(name, callback) {
 
 module.exports = Controller;
 
-},{"../Endpoint":394,"../Errors":395,"bluebird":398,"lodash":400}],388:[function(require,module,exports){
+},{"../Endpoint":379,"../Errors":380,"bluebird":383,"lodash":385}],373:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -59773,7 +57799,7 @@ Create.prototype.write = function(req, res, context) {
 
 module.exports = Create;
 
-},{"./base":387,"lodash":400,"util":364}],389:[function(require,module,exports){
+},{"./base":372,"lodash":385,"util":349}],374:[function(require,module,exports){
 'use strict';
 
 var util = require('util'),
@@ -59822,7 +57848,7 @@ Delete.prototype.write = function(req, res, context) {
 
 module.exports = Delete;
 
-},{"../Errors":395,"./base":387,"util":364}],390:[function(require,module,exports){
+},{"../Errors":380,"./base":372,"util":349}],375:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -59834,7 +57860,7 @@ module.exports = {
   base: require('./base.js')
 };
 
-},{"./base.js":387,"./create.js":388,"./delete.js":389,"./list.js":391,"./read.js":392,"./update.js":393}],391:[function(require,module,exports){
+},{"./base.js":372,"./create.js":373,"./delete.js":374,"./list.js":376,"./read.js":377,"./update.js":378}],376:[function(require,module,exports){
 'use strict';
 
 var util = require('util'),
@@ -59976,7 +58002,7 @@ List.prototype.fetch = function(req, res, context) {
 
 module.exports = List;
 
-},{"../Errors":395,"./base":387,"lodash":400,"util":364}],392:[function(require,module,exports){
+},{"../Errors":380,"./base":372,"lodash":385,"util":349}],377:[function(require,module,exports){
 'use strict';
 
 var util = require('util'),
@@ -60031,7 +58057,7 @@ Read.prototype.fetch = function(req, res, context) {
 
 module.exports = Read;
 
-},{"../Errors":395,"./base":387,"util":364}],393:[function(require,module,exports){
+},{"../Errors":380,"./base":372,"util":349}],378:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -60105,7 +58131,7 @@ Update.prototype.write = function(req, res, context) {
 
 module.exports = Update;
 
-},{"./base":387,"./read":392,"lodash":400,"util":364}],394:[function(require,module,exports){
+},{"./base":372,"./read":377,"lodash":385,"util":349}],379:[function(require,module,exports){
 'use strict';
 
 var Endpoint = function(endpoint) {
@@ -60118,7 +58144,7 @@ var Endpoint = function(endpoint) {
 
 module.exports = Endpoint;
 
-},{}],395:[function(require,module,exports){
+},{}],380:[function(require,module,exports){
 'use strict';
 
 var util = require('util');
@@ -60164,7 +58190,7 @@ module.exports = {
     ForbiddenError: ForbiddenError,
     RequestCompleted: RequestCompleted
 };
-},{"util":364}],396:[function(require,module,exports){
+},{"util":349}],381:[function(require,module,exports){
 'use strict';
 
 var Controllers = require('./Controllers'),
@@ -60301,7 +58327,7 @@ Resource.prototype.use = function(middleware) {
 
 module.exports = Resource;
 
-},{"./Controllers":390,"lodash":400}],397:[function(require,module,exports){
+},{"./Controllers":375,"lodash":385}],382:[function(require,module,exports){
 'use strict';
 
 var Resource = require('./Resource'),
@@ -60377,7 +58403,7 @@ var epilogue = {
 
 module.exports = epilogue;
 
-},{"./Controllers":390,"./Endpoint":394,"./Errors":395,"./Resource":396,"inflection":399,"lodash":400,"merge-defaults":401}],398:[function(require,module,exports){
+},{"./Controllers":375,"./Endpoint":379,"./Errors":380,"./Resource":381,"inflection":384,"lodash":385,"merge-defaults":386}],383:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
@@ -65267,7 +63293,7 @@ module.exports = ret;
 },{"./es5.js":14}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":334}],399:[function(require,module,exports){
+},{"_process":319}],384:[function(require,module,exports){
 /*!
  * inflection
  * Copyright(c) 2011 Ben Lin <ben@dreamerslab.com>
@@ -66346,7 +64372,7 @@ module.exports = ret;
   return inflector;
 }));
 
-},{}],400:[function(require,module,exports){
+},{}],385:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -68583,8 +66609,10 @@ module.exports = ret;
         var data = matchData[index];
         if ((noCustomizer && data[2])
               ? data[1] !== object[data[0]]
-   * Invokes `interceptor` with the `value` as the first argument and then
-       }
+              : !(data[0] in object)
+            ) {
+          return false;
+        }
       }
       while (++index < length) {
         data = matchData[index];
@@ -78699,7 +76727,7 @@ module.exports = ret;
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],401:[function(require,module,exports){
+},{}],386:[function(require,module,exports){
 var _ = require('lodash');
 
 /**
@@ -78739,7 +76767,7 @@ module.exports = _.partialRight(_.merge, function recursiveDefaults (dest,src) {
 //   }
 //   else return _.merge(a, b, deep);
 // });
-},{"lodash":402}],402:[function(require,module,exports){
+},{"lodash":387}],387:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -82879,7 +80907,7 @@ module.exports = _.partialRight(_.merge, function recursiveDefaults (dest,src) {
      * @returns {Array} Returns a new array of filtered values.
      * @example
      *
-    * _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+     * _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
      * // => [1, 3, 4]
      */
     function difference(array) {
@@ -85529,7 +83557,7 @@ module.exports = _.partialRight(_.merge, function recursiveDefaults (dest,src) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],403:[function(require,module,exports){
+},{}],388:[function(require,module,exports){
 var fs = require('fs');
 
 module.exports = function(icon){
@@ -85550,7 +83578,7 @@ module.exports = function(icon){
 };
 
 
-},{"fs":116}],404:[function(require,module,exports){
+},{"fs":101}],389:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -85563,7 +83591,7 @@ module.exports = function(icon){
 
 module.exports = require('./lib/express');
 
-},{"./lib/express":406}],405:[function(require,module,exports){
+},{"./lib/express":391}],390:[function(require,module,exports){
 (function (process){
 /*!
  * express
@@ -86210,7 +84238,7 @@ function tryRender(view, options, callback) {
 }
 
 }).call(this,require('_process'))
-},{"./middleware/init":407,"./middleware/query":408,"./router":411,"./utils":414,"./view":415,"_process":334,"array-flatten":425,"debug":430,"depd":433,"finalhandler":436,"http":354,"methods":440,"path":333,"utils-merge":468}],406:[function(require,module,exports){
+},{"./middleware/init":392,"./middleware/query":393,"./router":396,"./utils":399,"./view":400,"_process":319,"array-flatten":410,"debug":415,"depd":418,"finalhandler":421,"http":339,"methods":425,"path":318,"utils-merge":453}],391:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -86315,7 +84343,7 @@ exports.static = require('serve-static');
   });
 });
 
-},{"./application":405,"./middleware/query":408,"./request":409,"./response":410,"./router":411,"./router/route":413,"events":329,"merge-descriptors":439,"serve-static":462}],407:[function(require,module,exports){
+},{"./application":390,"./middleware/query":393,"./request":394,"./response":395,"./router":396,"./router/route":398,"events":314,"merge-descriptors":424,"serve-static":447}],392:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -86353,7 +84381,7 @@ exports.init = function(app){
 };
 
 
-},{}],408:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -86406,7 +84434,7 @@ module.exports = function query(options) {
   };
 };
 
-},{"parseurl":443,"qs":448}],409:[function(require,module,exports){
+},{"parseurl":428,"qs":433}],394:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -86897,7 +84925,7 @@ function defineGetter(obj, name, getter) {
   });
 };
 
-},{"accepts":416,"depd":433,"fresh":438,"http":354,"net":116,"parseurl":443,"proxy-addr":445,"range-parser":452,"type-is":463}],410:[function(require,module,exports){
+},{"accepts":401,"depd":418,"fresh":423,"http":339,"net":101,"parseurl":428,"proxy-addr":430,"range-parser":437,"type-is":448}],395:[function(require,module,exports){
 (function (Buffer){
 /*!
  * express
@@ -87954,7 +85982,7 @@ function sendfile(res, file, options, callback) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./utils":414,"buffer":132,"content-disposition":426,"cookie":429,"cookie-signature":428,"depd":433,"escape-html":434,"http":354,"on-finished":441,"path":333,"send":453,"utils-merge":468,"vary":469}],411:[function(require,module,exports){
+},{"./utils":399,"buffer":117,"content-disposition":411,"cookie":414,"cookie-signature":413,"depd":418,"escape-html":419,"http":339,"on-finished":426,"path":318,"send":438,"utils-merge":453,"vary":454}],396:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -88601,7 +86629,7 @@ function wrap(old, fn) {
   };
 }
 
-},{"./layer":412,"./route":413,"array-flatten":425,"debug":430,"depd":433,"methods":440,"parseurl":443,"utils-merge":468}],412:[function(require,module,exports){
+},{"./layer":397,"./route":398,"array-flatten":410,"debug":415,"depd":418,"methods":425,"parseurl":428,"utils-merge":453}],397:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -88779,7 +86807,7 @@ function decode_param(val) {
   }
 }
 
-},{"debug":430,"path-to-regexp":444}],413:[function(require,module,exports){
+},{"debug":415,"path-to-regexp":429}],398:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -88991,7 +87019,7 @@ methods.forEach(function(method){
   };
 });
 
-},{"./layer":412,"array-flatten":425,"debug":430,"methods":440}],414:[function(require,module,exports){
+},{"./layer":397,"array-flatten":410,"debug":415,"methods":425}],399:[function(require,module,exports){
 (function (Buffer){
 /*!
  * express
@@ -89295,7 +87323,7 @@ function newObject() {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"array-flatten":425,"buffer":132,"content-disposition":426,"content-type":427,"depd":433,"etag":435,"path":333,"proxy-addr":445,"qs":448,"querystring":338,"send":453}],415:[function(require,module,exports){
+},{"array-flatten":410,"buffer":117,"content-disposition":411,"content-type":412,"depd":418,"etag":420,"path":318,"proxy-addr":430,"qs":433,"querystring":323,"send":438}],400:[function(require,module,exports){
 /*!
  * express
  * Copyright(c) 2009-2013 TJ Holowaychuk
@@ -89470,15 +87498,15 @@ function tryStat(path) {
   }
 }
 
-},{"./utils":414,"debug":430,"fs":116,"path":333}],416:[function(require,module,exports){
-arguments[4][369][0].apply(exports,arguments)
-},{"dup":369,"mime-types":417,"negotiator":420}],417:[function(require,module,exports){
-arguments[4][370][0].apply(exports,arguments)
-},{"dup":370,"mime-db":419,"path":333}],418:[function(require,module,exports){
-arguments[4][371][0].apply(exports,arguments)
-},{"dup":371}],419:[function(require,module,exports){
-arguments[4][372][0].apply(exports,arguments)
-},{"./db.json":418,"dup":372}],420:[function(require,module,exports){
+},{"./utils":399,"debug":415,"fs":101,"path":318}],401:[function(require,module,exports){
+arguments[4][354][0].apply(exports,arguments)
+},{"dup":354,"mime-types":402,"negotiator":405}],402:[function(require,module,exports){
+arguments[4][355][0].apply(exports,arguments)
+},{"dup":355,"mime-db":404,"path":318}],403:[function(require,module,exports){
+arguments[4][356][0].apply(exports,arguments)
+},{"dup":356}],404:[function(require,module,exports){
+arguments[4][357][0].apply(exports,arguments)
+},{"./db.json":403,"dup":357}],405:[function(require,module,exports){
 
 var preferredCharsets = require('./lib/charset');
 var preferredEncodings = require('./lib/encoding');
@@ -89542,7 +87570,7 @@ Negotiator.prototype.preferredLanguages = Negotiator.prototype.languages;
 Negotiator.prototype.preferredMediaType = Negotiator.prototype.mediaType;
 Negotiator.prototype.preferredMediaTypes = Negotiator.prototype.mediaTypes;
 
-},{"./lib/charset":421,"./lib/encoding":422,"./lib/language":423,"./lib/mediaType":424}],421:[function(require,module,exports){
+},{"./lib/charset":406,"./lib/encoding":407,"./lib/language":408,"./lib/mediaType":409}],406:[function(require,module,exports){
 module.exports = preferredCharsets;
 preferredCharsets.preferredCharsets = preferredCharsets;
 
@@ -89646,7 +87674,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],422:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 module.exports = preferredEncodings;
 preferredEncodings.preferredEncodings = preferredEncodings;
 
@@ -89766,7 +87794,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],423:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 module.exports = preferredLanguages;
 preferredLanguages.preferredLanguages = preferredLanguages;
 
@@ -89880,7 +87908,7 @@ function isQuality(spec) {
   return spec.q > 0;
 }
 
-},{}],424:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 /**
  * negotiator
  * Copyright(c) 2012 Isaac Z. Schlueter
@@ -90061,7 +88089,7 @@ function splitMediaTypes(accept) {
   return accepts;
 }
 
-},{}],425:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 'use strict'
 
 /**
@@ -90127,7 +88155,7 @@ function arrayFlatten (array, depth) {
   return flattenWithDepth(array, [], depth)
 }
 
-},{}],426:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 (function (Buffer){
 /*!
  * content-disposition
@@ -90576,7 +88604,7 @@ function ContentDisposition(type, parameters) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"path":333}],427:[function(require,module,exports){
+},{"buffer":117,"path":318}],412:[function(require,module,exports){
 /*!
  * content-type
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -90792,7 +88820,7 @@ function ContentType(type) {
   this.type = type
 }
 
-},{}],428:[function(require,module,exports){
+},{}],413:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -90845,171 +88873,171 @@ function sha1(str){
   return crypto.createHash('sha1').update(str).digest('hex');
 }
 
-},{"crypto":137}],429:[function(require,module,exports){
-/*!
- * cookie
- * Copyright(c) 2012-2014 Roman Shtylman
- * Copyright(c) 2015 Douglas Christopher Wilson
- * MIT Licensed
- */
-
-/**
- * Module exports.
- * @public
- */
-
-exports.parse = parse;
-exports.serialize = serialize;
-
-/**
- * Module variables.
- * @private
- */
-
-var decode = decodeURIComponent;
-var encode = encodeURIComponent;
-
-/**
- * RegExp to match field-content in RFC 7230 sec 3.2
- *
- * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
- * field-vchar   = VCHAR / obs-text
- * obs-text      = %x80-FF
- */
-
-var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
-
-/**
- * Parse a cookie header.
- *
- * Parse the given cookie header string into an object
- * The object has the various cookies as keys(names) => values
- *
- * @param {string} str
- * @param {object} [options]
- * @return {object}
- * @public
- */
-
-function parse(str, options) {
-  if (typeof str !== 'string') {
-    throw new TypeError('argument str must be a string');
-  }
-
-  var obj = {}
-  var opt = options || {};
-  var pairs = str.split(/; */);
-  var dec = opt.decode || decode;
-
-  pairs.forEach(function(pair) {
-    var eq_idx = pair.indexOf('=')
-
-    // skip things that don't look like key=value
-    if (eq_idx < 0) {
-      return;
-    }
-
-    var key = pair.substr(0, eq_idx).trim()
-    var val = pair.substr(++eq_idx, pair.length).trim();
-
-    // quoted values
-    if ('"' == val[0]) {
-      val = val.slice(1, -1);
-    }
-
-    // only assign once
-    if (undefined == obj[key]) {
-      obj[key] = tryDecode(val, dec);
-    }
-  });
-
-  return obj;
-}
-
-/**
- * Serialize data into a cookie header.
- *
- * Serialize the a name value pair into a cookie string suitable for
- * http headers. An optional options object specified cookie parameters.
- *
- * serialize('foo', 'bar', { httpOnly: true })
- *   => "foo=bar; httpOnly"
- *
- * @param {string} name
- * @param {string} val
- * @param {object} [options]
- * @return {string}
- * @public
- */
-
-function serialize(name, val, options) {
-  var opt = options || {};
-  var enc = opt.encode || encode;
-
-  if (!fieldContentRegExp.test(name)) {
-    throw new TypeError('argument name is invalid');
-  }
-
-  var value = enc(val);
-
-  if (value && !fieldContentRegExp.test(value)) {
-    throw new TypeError('argument val is invalid');
-  }
-
-  var pairs = [name + '=' + value];
-
-  if (null != opt.maxAge) {
-    var maxAge = opt.maxAge - 0;
-    if (isNaN(maxAge)) throw new Error('maxAge should be a Number');
-    pairs.push('Max-Age=' + maxAge);
-  }
-
-  if (opt.domain) {
-    if (!fieldContentRegExp.test(opt.domain)) {
-      throw new TypeError('option domain is invalid');
-    }
-
-    pairs.push('Domain=' + opt.domain);
-  }
-
-  if (opt.path) {
-    if (!fieldContentRegExp.test(opt.path)) {
-      throw new TypeError('option path is invalid');
-    }
-
-    pairs.push('Path=' + opt.path);
-  }
-
-  if (opt.expires) pairs.push('Expires=' + opt.expires.toUTCString());
-  if (opt.httpOnly) pairs.push('HttpOnly');
-  if (opt.secure) pairs.push('Secure');
-
-  return pairs.join('; ');
-}
-
-/**
- * Try decoding a string using a decoding function.
- *
- * @param {string} str
- * @param {function} decode
- * @private
- */
-
-function tryDecode(str, decode) {
-  try {
-    return decode(str);
-  } catch (e) {
-    return str;
-  }
-}
+},{"crypto":122}],414:[function(require,module,exports){
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
 
-},{}],430:[function(require,module,exports){
-arguments[4][382][0].apply(exports,arguments)
-},{"./debug":431,"dup":382}],431:[function(require,module,exports){
-arguments[4][383][0].apply(exports,arguments)
-},{"dup":383,"ms":432}],432:[function(require,module,exports){
-arguments[4][384][0].apply(exports,arguments)
-},{"dup":384}],433:[function(require,module,exports){
+/**
+ * Module exports.
+ * @public
+ */
+
+exports.parse = parse;
+exports.serialize = serialize;
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var decode = decodeURIComponent;
+var encode = encodeURIComponent;
+
+/**
+ * RegExp to match field-content in RFC 7230 sec 3.2
+ *
+ * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
+ * field-vchar   = VCHAR / obs-text
+ * obs-text      = %x80-FF
+ */
+
+var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
+
+/**
+ * Parse a cookie header.
+ *
+ * Parse the given cookie header string into an object
+ * The object has the various cookies as keys(names) => values
+ *
+ * @param {string} str
+ * @param {object} [options]
+ * @return {object}
+ * @public
+ */
+
+function parse(str, options) {
+  if (typeof str !== 'string') {
+    throw new TypeError('argument str must be a string');
+  }
+
+  var obj = {}
+  var opt = options || {};
+  var pairs = str.split(/; */);
+  var dec = opt.decode || decode;
+
+  pairs.forEach(function(pair) {
+    var eq_idx = pair.indexOf('=')
+
+    // skip things that don't look like key=value
+    if (eq_idx < 0) {
+      return;
+    }
+
+    var key = pair.substr(0, eq_idx).trim()
+    var val = pair.substr(++eq_idx, pair.length).trim();
+
+    // quoted values
+    if ('"' == val[0]) {
+      val = val.slice(1, -1);
+    }
+
+    // only assign once
+    if (undefined == obj[key]) {
+      obj[key] = tryDecode(val, dec);
+    }
+  });
+
+  return obj;
+}
+
+/**
+ * Serialize data into a cookie header.
+ *
+ * Serialize the a name value pair into a cookie string suitable for
+ * http headers. An optional options object specified cookie parameters.
+ *
+ * serialize('foo', 'bar', { httpOnly: true })
+ *   => "foo=bar; httpOnly"
+ *
+ * @param {string} name
+ * @param {string} val
+ * @param {object} [options]
+ * @return {string}
+ * @public
+ */
+
+function serialize(name, val, options) {
+  var opt = options || {};
+  var enc = opt.encode || encode;
+
+  if (!fieldContentRegExp.test(name)) {
+    throw new TypeError('argument name is invalid');
+  }
+
+  var value = enc(val);
+
+  if (value && !fieldContentRegExp.test(value)) {
+    throw new TypeError('argument val is invalid');
+  }
+
+  var pairs = [name + '=' + value];
+
+  if (null != opt.maxAge) {
+    var maxAge = opt.maxAge - 0;
+    if (isNaN(maxAge)) throw new Error('maxAge should be a Number');
+    pairs.push('Max-Age=' + maxAge);
+  }
+
+  if (opt.domain) {
+    if (!fieldContentRegExp.test(opt.domain)) {
+      throw new TypeError('option domain is invalid');
+    }
+
+    pairs.push('Domain=' + opt.domain);
+  }
+
+  if (opt.path) {
+    if (!fieldContentRegExp.test(opt.path)) {
+      throw new TypeError('option path is invalid');
+    }
+
+    pairs.push('Path=' + opt.path);
+  }
+
+  if (opt.expires) pairs.push('Expires=' + opt.expires.toUTCString());
+  if (opt.httpOnly) pairs.push('HttpOnly');
+  if (opt.secure) pairs.push('Secure');
+
+  return pairs.join('; ');
+}
+
+/**
+ * Try decoding a string using a decoding function.
+ *
+ * @param {string} str
+ * @param {function} decode
+ * @private
+ */
+
+function tryDecode(str, decode) {
+  try {
+    return decode(str);
+  } catch (e) {
+    return str;
+  }
+}
+
+},{}],415:[function(require,module,exports){
+arguments[4][367][0].apply(exports,arguments)
+},{"./debug":416,"dup":367}],416:[function(require,module,exports){
+arguments[4][368][0].apply(exports,arguments)
+},{"dup":368,"ms":417}],417:[function(require,module,exports){
+arguments[4][369][0].apply(exports,arguments)
+},{"dup":369}],418:[function(require,module,exports){
 /*!
  * depd
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -91090,7 +89118,7 @@ function wrapproperty(obj, prop, message) {
   return
 }
 
-},{}],434:[function(require,module,exports){
+},{}],419:[function(require,module,exports){
 /*!
  * escape-html
  * Copyright(c) 2012-2013 TJ Holowaychuk
@@ -91170,7 +89198,7 @@ function escapeHtml(string) {
     : html;
 }
 
-},{}],435:[function(require,module,exports){
+},{}],420:[function(require,module,exports){
 (function (Buffer){
 /*!
  * etag
@@ -91306,7 +89334,7 @@ function stattag(stat) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"crypto":137,"fs":116}],436:[function(require,module,exports){
+},{"buffer":117,"crypto":122,"fs":101}],421:[function(require,module,exports){
 (function (process,Buffer){
 /*!
  * finalhandler
@@ -91461,7 +89489,7 @@ function send(req, res, status, body) {
 }
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":334,"buffer":132,"debug":430,"escape-html":434,"http":354,"on-finished":441,"unpipe":437}],437:[function(require,module,exports){
+},{"_process":319,"buffer":117,"debug":415,"escape-html":419,"http":339,"on-finished":426,"unpipe":422}],422:[function(require,module,exports){
 /*!
  * unpipe
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -91532,7 +89560,7 @@ function unpipe(stream) {
   }
 }
 
-},{}],438:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 
 /**
  * Expose `fresh()`.
@@ -91591,7 +89619,7 @@ function fresh(req, res) {
   return !! (etagMatches && notModified);
 }
 
-},{}],439:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 /*!
  * merge-descriptors
  * Copyright(c) 2014 Jonathan Ong
@@ -91653,7 +89681,7 @@ function merge(dest, src, redefine) {
   return dest
 }
 
-},{}],440:[function(require,module,exports){
+},{}],425:[function(require,module,exports){
 /*!
  * methods
  * Copyright(c) 2013-2014 TJ Holowaychuk
@@ -91724,7 +89752,7 @@ function getBasicNodeMethods() {
   ];
 }
 
-},{"http":118}],441:[function(require,module,exports){
+},{"http":103}],426:[function(require,module,exports){
 (function (process){
 /*!
  * on-finished
@@ -91924,7 +89952,7 @@ function patchAssignSocket(res, callback) {
 }
 
 }).call(this,require('_process'))
-},{"_process":334,"ee-first":442}],442:[function(require,module,exports){
+},{"_process":319,"ee-first":427}],427:[function(require,module,exports){
 /*!
  * ee-first
  * Copyright(c) 2014 Jonathan Ong
@@ -92021,7 +90049,7 @@ function listener(event, done) {
   }
 }
 
-},{}],443:[function(require,module,exports){
+},{}],428:[function(require,module,exports){
 /*!
  * parseurl
  * Copyright(c) 2014 Jonathan Ong
@@ -92161,7 +90189,7 @@ function fresh(url, parsedUrl) {
     && parsedUrl._raw === url
 }
 
-},{"url":361}],444:[function(require,module,exports){
+},{"url":346}],429:[function(require,module,exports){
 /**
  * Expose `pathtoRegexp`.
  */
@@ -92292,7 +90320,7 @@ function pathtoRegexp(path, keys, options) {
   return new RegExp(path, flags);
 };
 
-},{}],445:[function(require,module,exports){
+},{}],430:[function(require,module,exports){
 /*!
  * proxy-addr
  * Copyright(c) 2014 Douglas Christopher Wilson
@@ -92641,7 +90669,7 @@ function trustSingle(subnet) {
   };
 }
 
-},{"forwarded":446,"ipaddr.js":447}],446:[function(require,module,exports){
+},{"forwarded":431,"ipaddr.js":432}],431:[function(require,module,exports){
 /*!
  * forwarded
  * Copyright(c) 2014 Douglas Christopher Wilson
@@ -92678,7 +90706,7 @@ function forwarded(req) {
   return addrs
 }
 
-},{}],447:[function(require,module,exports){
+},{}],432:[function(require,module,exports){
 (function() {
   var expandIPv6, ipaddr, ipv4Part, ipv4Regexes, ipv6Part, ipv6Regexes, matchCIDR, root;
 
@@ -93147,7 +91175,7 @@ function forwarded(req) {
 
 }).call(this);
 
-},{}],448:[function(require,module,exports){
+},{}],433:[function(require,module,exports){
 // Load modules
 
 var Stringify = require('./stringify');
@@ -93164,7 +91192,7 @@ module.exports = {
     parse: Parse
 };
 
-},{"./parse":449,"./stringify":450}],449:[function(require,module,exports){
+},{"./parse":434,"./stringify":435}],434:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -93352,7 +91380,7 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
-},{"./utils":451}],450:[function(require,module,exports){
+},{"./utils":436}],435:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -93475,7 +91503,7 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
-},{"./utils":451}],451:[function(require,module,exports){
+},{"./utils":436}],436:[function(require,module,exports){
 // Load modules
 
 
@@ -93667,7 +91695,7 @@ exports.isBuffer = function (obj) {
               obj.constructor.isBuffer(obj));
 };
 
-},{}],452:[function(require,module,exports){
+},{}],437:[function(require,module,exports){
 /*!
  * range-parser
  * Copyright(c) 2012-2014 TJ Holowaychuk
@@ -93732,7 +91760,7 @@ function rangeParser(size, str) {
   return valid ? arr : -1;
 }
 
-},{}],453:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 (function (Buffer){
 /*!
  * send
@@ -94556,7 +92584,7 @@ function normalizeList(val, name) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"debug":430,"depd":433,"destroy":454,"escape-html":434,"etag":435,"events":329,"fresh":438,"fs":116,"http-errors":455,"mime":457,"ms":459,"on-finished":441,"path":333,"range-parser":452,"statuses":461,"stream":353}],454:[function(require,module,exports){
+},{"buffer":117,"debug":415,"depd":418,"destroy":439,"escape-html":419,"etag":420,"events":314,"fresh":423,"fs":101,"http-errors":440,"mime":442,"ms":444,"on-finished":426,"path":318,"range-parser":437,"statuses":446,"stream":338}],439:[function(require,module,exports){
 /*!
  * destroy
  * Copyright(c) 2014 Jonathan Ong
@@ -94633,7 +92661,7 @@ function onOpenClose() {
   }
 }
 
-},{"fs":116,"stream":353}],455:[function(require,module,exports){
+},{"fs":101,"stream":338}],440:[function(require,module,exports){
 
 var statuses = require('statuses');
 var inherits = require('inherits');
@@ -94755,9 +92783,9 @@ codes.forEach(function (code) {
 // backwards-compatibility
 exports["I'mateapot"] = exports.ImATeapot
 
-},{"inherits":456,"statuses":461}],456:[function(require,module,exports){
-arguments[4][330][0].apply(exports,arguments)
-},{"dup":330}],457:[function(require,module,exports){
+},{"inherits":441,"statuses":446}],441:[function(require,module,exports){
+arguments[4][315][0].apply(exports,arguments)
+},{"dup":315}],442:[function(require,module,exports){
 (function (process){
 var path = require('path');
 var fs = require('fs');
@@ -94869,12 +92897,12 @@ mime.charsets = {
 module.exports = mime;
 
 }).call(this,require('_process'))
-},{"./types.json":458,"_process":334,"fs":116,"path":333}],458:[function(require,module,exports){
+},{"./types.json":443,"_process":319,"fs":101,"path":318}],443:[function(require,module,exports){
 module.exports={"application/andrew-inset":["ez"],"application/applixware":["aw"],"application/atom+xml":["atom"],"application/atomcat+xml":["atomcat"],"application/atomsvc+xml":["atomsvc"],"application/ccxml+xml":["ccxml"],"application/cdmi-capability":["cdmia"],"application/cdmi-container":["cdmic"],"application/cdmi-domain":["cdmid"],"application/cdmi-object":["cdmio"],"application/cdmi-queue":["cdmiq"],"application/cu-seeme":["cu"],"application/dash+xml":["mdp"],"application/davmount+xml":["davmount"],"application/docbook+xml":["dbk"],"application/dssc+der":["dssc"],"application/dssc+xml":["xdssc"],"application/ecmascript":["ecma"],"application/emma+xml":["emma"],"application/epub+zip":["epub"],"application/exi":["exi"],"application/font-tdpfr":["pfr"],"application/font-woff":["woff"],"application/font-woff2":["woff2"],"application/gml+xml":["gml"],"application/gpx+xml":["gpx"],"application/gxf":["gxf"],"application/hyperstudio":["stk"],"application/inkml+xml":["ink","inkml"],"application/ipfix":["ipfix"],"application/java-archive":["jar"],"application/java-serialized-object":["ser"],"application/java-vm":["class"],"application/javascript":["js"],"application/json":["json","map"],"application/json5":["json5"],"application/jsonml+json":["jsonml"],"application/lost+xml":["lostxml"],"application/mac-binhex40":["hqx"],"application/mac-compactpro":["cpt"],"application/mads+xml":["mads"],"application/marc":["mrc"],"application/marcxml+xml":["mrcx"],"application/mathematica":["ma","nb","mb"],"application/mathml+xml":["mathml"],"application/mbox":["mbox"],"application/mediaservercontrol+xml":["mscml"],"application/metalink+xml":["metalink"],"application/metalink4+xml":["meta4"],"application/mets+xml":["mets"],"application/mods+xml":["mods"],"application/mp21":["m21","mp21"],"application/mp4":["mp4s","m4p"],"application/msword":["doc","dot"],"application/mxf":["mxf"],"application/octet-stream":["bin","dms","lrf","mar","so","dist","distz","pkg","bpk","dump","elc","deploy","buffer"],"application/oda":["oda"],"application/oebps-package+xml":["opf"],"application/ogg":["ogx"],"application/omdoc+xml":["omdoc"],"application/onenote":["onetoc","onetoc2","onetmp","onepkg"],"application/oxps":["oxps"],"application/patch-ops-error+xml":["xer"],"application/pdf":["pdf"],"application/pgp-encrypted":["pgp"],"application/pgp-signature":["asc","sig"],"application/pics-rules":["prf"],"application/pkcs10":["p10"],"application/pkcs7-mime":["p7m","p7c"],"application/pkcs7-signature":["p7s"],"application/pkcs8":["p8"],"application/pkix-attr-cert":["ac"],"application/pkix-cert":["cer"],"application/pkix-crl":["crl"],"application/pkix-pkipath":["pkipath"],"application/pkixcmp":["pki"],"application/pls+xml":["pls"],"application/postscript":["ai","eps","ps"],"application/prs.cww":["cww"],"application/pskc+xml":["pskcxml"],"application/rdf+xml":["rdf"],"application/reginfo+xml":["rif"],"application/relax-ng-compact-syntax":["rnc"],"application/resource-lists+xml":["rl"],"application/resource-lists-diff+xml":["rld"],"application/rls-services+xml":["rs"],"application/rpki-ghostbusters":["gbr"],"application/rpki-manifest":["mft"],"application/rpki-roa":["roa"],"application/rsd+xml":["rsd"],"application/rss+xml":["rss"],"application/rtf":["rtf"],"application/sbml+xml":["sbml"],"application/scvp-cv-request":["scq"],"application/scvp-cv-response":["scs"],"application/scvp-vp-request":["spq"],"application/scvp-vp-response":["spp"],"application/sdp":["sdp"],"application/set-payment-initiation":["setpay"],"application/set-registration-initiation":["setreg"],"application/shf+xml":["shf"],"application/smil+xml":["smi","smil"],"application/sparql-query":["rq"],"application/sparql-results+xml":["srx"],"application/srgs":["gram"],"application/srgs+xml":["grxml"],"application/sru+xml":["sru"],"application/ssdl+xml":["ssdl"],"application/ssml+xml":["ssml"],"application/tei+xml":["tei","teicorpus"],"application/thraud+xml":["tfi"],"application/timestamped-data":["tsd"],"application/vnd.3gpp.pic-bw-large":["plb"],"application/vnd.3gpp.pic-bw-small":["psb"],"application/vnd.3gpp.pic-bw-var":["pvb"],"application/vnd.3gpp2.tcap":["tcap"],"application/vnd.3m.post-it-notes":["pwn"],"application/vnd.accpac.simply.aso":["aso"],"application/vnd.accpac.simply.imp":["imp"],"application/vnd.acucobol":["acu"],"application/vnd.acucorp":["atc","acutc"],"application/vnd.adobe.air-application-installer-package+zip":["air"],"application/vnd.adobe.formscentral.fcdt":["fcdt"],"application/vnd.adobe.fxp":["fxp","fxpl"],"application/vnd.adobe.xdp+xml":["xdp"],"application/vnd.adobe.xfdf":["xfdf"],"application/vnd.ahead.space":["ahead"],"application/vnd.airzip.filesecure.azf":["azf"],"application/vnd.airzip.filesecure.azs":["azs"],"application/vnd.amazon.ebook":["azw"],"application/vnd.americandynamics.acc":["acc"],"application/vnd.amiga.ami":["ami"],"application/vnd.android.package-archive":["apk"],"application/vnd.anser-web-certificate-issue-initiation":["cii"],"application/vnd.anser-web-funds-transfer-initiation":["fti"],"application/vnd.antix.game-component":["atx"],"application/vnd.apple.installer+xml":["mpkg"],"application/vnd.apple.mpegurl":["m3u8"],"application/vnd.aristanetworks.swi":["swi"],"application/vnd.astraea-software.iota":["iota"],"application/vnd.audiograph":["aep"],"application/vnd.blueice.multipass":["mpm"],"application/vnd.bmi":["bmi"],"application/vnd.businessobjects":["rep"],"application/vnd.chemdraw+xml":["cdxml"],"application/vnd.chipnuts.karaoke-mmd":["mmd"],"application/vnd.cinderella":["cdy"],"application/vnd.claymore":["cla"],"application/vnd.cloanto.rp9":["rp9"],"application/vnd.clonk.c4group":["c4g","c4d","c4f","c4p","c4u"],"application/vnd.cluetrust.cartomobile-config":["c11amc"],"application/vnd.cluetrust.cartomobile-config-pkg":["c11amz"],"application/vnd.commonspace":["csp"],"application/vnd.contact.cmsg":["cdbcmsg"],"application/vnd.cosmocaller":["cmc"],"application/vnd.crick.clicker":["clkx"],"application/vnd.crick.clicker.keyboard":["clkk"],"application/vnd.crick.clicker.palette":["clkp"],"application/vnd.crick.clicker.template":["clkt"],"application/vnd.crick.clicker.wordbank":["clkw"],"application/vnd.criticaltools.wbs+xml":["wbs"],"application/vnd.ctc-posml":["pml"],"application/vnd.cups-ppd":["ppd"],"application/vnd.curl.car":["car"],"application/vnd.curl.pcurl":["pcurl"],"application/vnd.dart":["dart"],"application/vnd.data-vision.rdz":["rdz"],"application/vnd.dece.data":["uvf","uvvf","uvd","uvvd"],"application/vnd.dece.ttml+xml":["uvt","uvvt"],"application/vnd.dece.unspecified":["uvx","uvvx"],"application/vnd.dece.zip":["uvz","uvvz"],"application/vnd.denovo.fcselayout-link":["fe_launch"],"application/vnd.dna":["dna"],"application/vnd.dolby.mlp":["mlp"],"application/vnd.dpgraph":["dpg"],"application/vnd.dreamfactory":["dfac"],"application/vnd.ds-keypoint":["kpxx"],"application/vnd.dvb.ait":["ait"],"application/vnd.dvb.service":["svc"],"application/vnd.dynageo":["geo"],"application/vnd.ecowin.chart":["mag"],"application/vnd.enliven":["nml"],"application/vnd.epson.esf":["esf"],"application/vnd.epson.msf":["msf"],"application/vnd.epson.quickanime":["qam"],"application/vnd.epson.salt":["slt"],"application/vnd.epson.ssf":["ssf"],"application/vnd.eszigno3+xml":["es3","et3"],"application/vnd.ezpix-album":["ez2"],"application/vnd.ezpix-package":["ez3"],"application/vnd.fdf":["fdf"],"application/vnd.fdsn.mseed":["mseed"],"application/vnd.fdsn.seed":["seed","dataless"],"application/vnd.flographit":["gph"],"application/vnd.fluxtime.clip":["ftc"],"application/vnd.framemaker":["fm","frame","maker","book"],"application/vnd.frogans.fnc":["fnc"],"application/vnd.frogans.ltf":["ltf"],"application/vnd.fsc.weblaunch":["fsc"],"application/vnd.fujitsu.oasys":["oas"],"application/vnd.fujitsu.oasys2":["oa2"],"application/vnd.fujitsu.oasys3":["oa3"],"application/vnd.fujitsu.oasysgp":["fg5"],"application/vnd.fujitsu.oasysprs":["bh2"],"application/vnd.fujixerox.ddd":["ddd"],"application/vnd.fujixerox.docuworks":["xdw"],"application/vnd.fujixerox.docuworks.binder":["xbd"],"application/vnd.fuzzysheet":["fzs"],"application/vnd.genomatix.tuxedo":["txd"],"application/vnd.geogebra.file":["ggb"],"application/vnd.geogebra.tool":["ggt"],"application/vnd.geometry-explorer":["gex","gre"],"application/vnd.geonext":["gxt"],"application/vnd.geoplan":["g2w"],"application/vnd.geospace":["g3w"],"application/vnd.gmx":["gmx"],"application/vnd.google-earth.kml+xml":["kml"],"application/vnd.google-earth.kmz":["kmz"],"application/vnd.grafeq":["gqf","gqs"],"application/vnd.groove-account":["gac"],"application/vnd.groove-help":["ghf"],"application/vnd.groove-identity-message":["gim"],"application/vnd.groove-injector":["grv"],"application/vnd.groove-tool-message":["gtm"],"application/vnd.groove-tool-template":["tpl"],"application/vnd.groove-vcard":["vcg"],"application/vnd.hal+xml":["hal"],"application/vnd.handheld-entertainment+xml":["zmm"],"application/vnd.hbci":["hbci"],"application/vnd.hhe.lesson-player":["les"],"application/vnd.hp-hpgl":["hpgl"],"application/vnd.hp-hpid":["hpid"],"application/vnd.hp-hps":["hps"],"application/vnd.hp-jlyt":["jlt"],"application/vnd.hp-pcl":["pcl"],"application/vnd.hp-pclxl":["pclxl"],"application/vnd.ibm.minipay":["mpy"],"application/vnd.ibm.modcap":["afp","listafp","list3820"],"application/vnd.ibm.rights-management":["irm"],"application/vnd.ibm.secure-container":["sc"],"application/vnd.iccprofile":["icc","icm"],"application/vnd.igloader":["igl"],"application/vnd.immervision-ivp":["ivp"],"application/vnd.immervision-ivu":["ivu"],"application/vnd.insors.igm":["igm"],"application/vnd.intercon.formnet":["xpw","xpx"],"application/vnd.intergeo":["i2g"],"application/vnd.intu.qbo":["qbo"],"application/vnd.intu.qfx":["qfx"],"application/vnd.ipunplugged.rcprofile":["rcprofile"],"application/vnd.irepository.package+xml":["irp"],"application/vnd.is-xpr":["xpr"],"application/vnd.isac.fcs":["fcs"],"application/vnd.jam":["jam"],"application/vnd.jcp.javame.midlet-rms":["rms"],"application/vnd.jisp":["jisp"],"application/vnd.joost.joda-archive":["joda"],"application/vnd.kahootz":["ktz","ktr"],"application/vnd.kde.karbon":["karbon"],"application/vnd.kde.kchart":["chrt"],"application/vnd.kde.kformula":["kfo"],"application/vnd.kde.kivio":["flw"],"application/vnd.kde.kontour":["kon"],"application/vnd.kde.kpresenter":["kpr","kpt"],"application/vnd.kde.kspread":["ksp"],"application/vnd.kde.kword":["kwd","kwt"],"application/vnd.kenameaapp":["htke"],"application/vnd.kidspiration":["kia"],"application/vnd.kinar":["kne","knp"],"application/vnd.koan":["skp","skd","skt","skm"],"application/vnd.kodak-descriptor":["sse"],"application/vnd.las.las+xml":["lasxml"],"application/vnd.llamagraphics.life-balance.desktop":["lbd"],"application/vnd.llamagraphics.life-balance.exchange+xml":["lbe"],"application/vnd.lotus-1-2-3":["123"],"application/vnd.lotus-approach":["apr"],"application/vnd.lotus-freelance":["pre"],"application/vnd.lotus-notes":["nsf"],"application/vnd.lotus-organizer":["org"],"application/vnd.lotus-screencam":["scm"],"application/vnd.lotus-wordpro":["lwp"],"application/vnd.macports.portpkg":["portpkg"],"application/vnd.mcd":["mcd"],"application/vnd.medcalcdata":["mc1"],"application/vnd.mediastation.cdkey":["cdkey"],"application/vnd.mfer":["mwf"],"application/vnd.mfmp":["mfm"],"application/vnd.micrografx.flo":["flo"],"application/vnd.micrografx.igx":["igx"],"application/vnd.mif":["mif"],"application/vnd.mobius.daf":["daf"],"application/vnd.mobius.dis":["dis"],"application/vnd.mobius.mbk":["mbk"],"application/vnd.mobius.mqy":["mqy"],"application/vnd.mobius.msl":["msl"],"application/vnd.mobius.plc":["plc"],"application/vnd.mobius.txf":["txf"],"application/vnd.mophun.application":["mpn"],"application/vnd.mophun.certificate":["mpc"],"application/vnd.mozilla.xul+xml":["xul"],"application/vnd.ms-artgalry":["cil"],"application/vnd.ms-cab-compressed":["cab"],"application/vnd.ms-excel":["xls","xlm","xla","xlc","xlt","xlw"],"application/vnd.ms-excel.addin.macroenabled.12":["xlam"],"application/vnd.ms-excel.sheet.binary.macroenabled.12":["xlsb"],"application/vnd.ms-excel.sheet.macroenabled.12":["xlsm"],"application/vnd.ms-excel.template.macroenabled.12":["xltm"],"application/vnd.ms-fontobject":["eot"],"application/vnd.ms-htmlhelp":["chm"],"application/vnd.ms-ims":["ims"],"application/vnd.ms-lrm":["lrm"],"application/vnd.ms-officetheme":["thmx"],"application/vnd.ms-pki.seccat":["cat"],"application/vnd.ms-pki.stl":["stl"],"application/vnd.ms-powerpoint":["ppt","pps","pot"],"application/vnd.ms-powerpoint.addin.macroenabled.12":["ppam"],"application/vnd.ms-powerpoint.presentation.macroenabled.12":["pptm"],"application/vnd.ms-powerpoint.slide.macroenabled.12":["sldm"],"application/vnd.ms-powerpoint.slideshow.macroenabled.12":["ppsm"],"application/vnd.ms-powerpoint.template.macroenabled.12":["potm"],"application/vnd.ms-project":["mpp","mpt"],"application/vnd.ms-word.document.macroenabled.12":["docm"],"application/vnd.ms-word.template.macroenabled.12":["dotm"],"application/vnd.ms-works":["wps","wks","wcm","wdb"],"application/vnd.ms-wpl":["wpl"],"application/vnd.ms-xpsdocument":["xps"],"application/vnd.mseq":["mseq"],"application/vnd.musician":["mus"],"application/vnd.muvee.style":["msty"],"application/vnd.mynfc":["taglet"],"application/vnd.neurolanguage.nlu":["nlu"],"application/vnd.nitf":["ntf","nitf"],"application/vnd.noblenet-directory":["nnd"],"application/vnd.noblenet-sealer":["nns"],"application/vnd.noblenet-web":["nnw"],"application/vnd.nokia.n-gage.data":["ngdat"],"application/vnd.nokia.radio-preset":["rpst"],"application/vnd.nokia.radio-presets":["rpss"],"application/vnd.novadigm.edm":["edm"],"application/vnd.novadigm.edx":["edx"],"application/vnd.novadigm.ext":["ext"],"application/vnd.oasis.opendocument.chart":["odc"],"application/vnd.oasis.opendocument.chart-template":["otc"],"application/vnd.oasis.opendocument.database":["odb"],"application/vnd.oasis.opendocument.formula":["odf"],"application/vnd.oasis.opendocument.formula-template":["odft"],"application/vnd.oasis.opendocument.graphics":["odg"],"application/vnd.oasis.opendocument.graphics-template":["otg"],"application/vnd.oasis.opendocument.image":["odi"],"application/vnd.oasis.opendocument.image-template":["oti"],"application/vnd.oasis.opendocument.presentation":["odp"],"application/vnd.oasis.opendocument.presentation-template":["otp"],"application/vnd.oasis.opendocument.spreadsheet":["ods"],"application/vnd.oasis.opendocument.spreadsheet-template":["ots"],"application/vnd.oasis.opendocument.text":["odt"],"application/vnd.oasis.opendocument.text-master":["odm"],"application/vnd.oasis.opendocument.text-template":["ott"],"application/vnd.oasis.opendocument.text-web":["oth"],"application/vnd.olpc-sugar":["xo"],"application/vnd.oma.dd2+xml":["dd2"],"application/vnd.openofficeorg.extension":["oxt"],"application/vnd.openxmlformats-officedocument.presentationml.presentation":["pptx"],"application/vnd.openxmlformats-officedocument.presentationml.slide":["sldx"],"application/vnd.openxmlformats-officedocument.presentationml.slideshow":["ppsx"],"application/vnd.openxmlformats-officedocument.presentationml.template":["potx"],"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":["xlsx"],"application/vnd.openxmlformats-officedocument.spreadsheetml.template":["xltx"],"application/vnd.openxmlformats-officedocument.wordprocessingml.document":["docx"],"application/vnd.openxmlformats-officedocument.wordprocessingml.template":["dotx"],"application/vnd.osgeo.mapguide.package":["mgp"],"application/vnd.osgi.dp":["dp"],"application/vnd.osgi.subsystem":["esa"],"application/vnd.palm":["pdb","pqa","oprc"],"application/vnd.pawaafile":["paw"],"application/vnd.pg.format":["str"],"application/vnd.pg.osasli":["ei6"],"application/vnd.picsel":["efif"],"application/vnd.pmi.widget":["wg"],"application/vnd.pocketlearn":["plf"],"application/vnd.powerbuilder6":["pbd"],"application/vnd.previewsystems.box":["box"],"application/vnd.proteus.magazine":["mgz"],"application/vnd.publishare-delta-tree":["qps"],"application/vnd.pvi.ptid1":["ptid"],"application/vnd.quark.quarkxpress":["qxd","qxt","qwd","qwt","qxl","qxb"],"application/vnd.realvnc.bed":["bed"],"application/vnd.recordare.musicxml":["mxl"],"application/vnd.recordare.musicxml+xml":["musicxml"],"application/vnd.rig.cryptonote":["cryptonote"],"application/vnd.rim.cod":["cod"],"application/vnd.rn-realmedia":["rm"],"application/vnd.rn-realmedia-vbr":["rmvb"],"application/vnd.route66.link66+xml":["link66"],"application/vnd.sailingtracker.track":["st"],"application/vnd.seemail":["see"],"application/vnd.sema":["sema"],"application/vnd.semd":["semd"],"application/vnd.semf":["semf"],"application/vnd.shana.informed.formdata":["ifm"],"application/vnd.shana.informed.formtemplate":["itp"],"application/vnd.shana.informed.interchange":["iif"],"application/vnd.shana.informed.package":["ipk"],"application/vnd.simtech-mindmapper":["twd","twds"],"application/vnd.smaf":["mmf"],"application/vnd.smart.teacher":["teacher"],"application/vnd.solent.sdkm+xml":["sdkm","sdkd"],"application/vnd.spotfire.dxp":["dxp"],"application/vnd.spotfire.sfs":["sfs"],"application/vnd.stardivision.calc":["sdc"],"application/vnd.stardivision.draw":["sda"],"application/vnd.stardivision.impress":["sdd"],"application/vnd.stardivision.math":["smf"],"application/vnd.stardivision.writer":["sdw","vor"],"application/vnd.stardivision.writer-global":["sgl"],"application/vnd.stepmania.package":["smzip"],"application/vnd.stepmania.stepchart":["sm"],"application/vnd.sun.xml.calc":["sxc"],"application/vnd.sun.xml.calc.template":["stc"],"application/vnd.sun.xml.draw":["sxd"],"application/vnd.sun.xml.draw.template":["std"],"application/vnd.sun.xml.impress":["sxi"],"application/vnd.sun.xml.impress.template":["sti"],"application/vnd.sun.xml.math":["sxm"],"application/vnd.sun.xml.writer":["sxw"],"application/vnd.sun.xml.writer.global":["sxg"],"application/vnd.sun.xml.writer.template":["stw"],"application/vnd.sus-calendar":["sus","susp"],"application/vnd.svd":["svd"],"application/vnd.symbian.install":["sis","sisx"],"application/vnd.syncml+xml":["xsm"],"application/vnd.syncml.dm+wbxml":["bdm"],"application/vnd.syncml.dm+xml":["xdm"],"application/vnd.tao.intent-module-archive":["tao"],"application/vnd.tcpdump.pcap":["pcap","cap","dmp"],"application/vnd.tmobile-livetv":["tmo"],"application/vnd.trid.tpt":["tpt"],"application/vnd.triscape.mxs":["mxs"],"application/vnd.trueapp":["tra"],"application/vnd.ufdl":["ufd","ufdl"],"application/vnd.uiq.theme":["utz"],"application/vnd.umajin":["umj"],"application/vnd.unity":["unityweb"],"application/vnd.uoml+xml":["uoml"],"application/vnd.vcx":["vcx"],"application/vnd.visio":["vsd","vst","vss","vsw"],"application/vnd.visionary":["vis"],"application/vnd.vsf":["vsf"],"application/vnd.wap.wbxml":["wbxml"],"application/vnd.wap.wmlc":["wmlc"],"application/vnd.wap.wmlscriptc":["wmlsc"],"application/vnd.webturbo":["wtb"],"application/vnd.wolfram.player":["nbp"],"application/vnd.wordperfect":["wpd"],"application/vnd.wqd":["wqd"],"application/vnd.wt.stf":["stf"],"application/vnd.xara":["xar"],"application/vnd.xfdl":["xfdl"],"application/vnd.yamaha.hv-dic":["hvd"],"application/vnd.yamaha.hv-script":["hvs"],"application/vnd.yamaha.hv-voice":["hvp"],"application/vnd.yamaha.openscoreformat":["osf"],"application/vnd.yamaha.openscoreformat.osfpvg+xml":["osfpvg"],"application/vnd.yamaha.smaf-audio":["saf"],"application/vnd.yamaha.smaf-phrase":["spf"],"application/vnd.yellowriver-custom-menu":["cmp"],"application/vnd.zul":["zir","zirz"],"application/vnd.zzazz.deck+xml":["zaz"],"application/voicexml+xml":["vxml"],"application/widget":["wgt"],"application/winhlp":["hlp"],"application/wsdl+xml":["wsdl"],"application/wspolicy+xml":["wspolicy"],"application/x-7z-compressed":["7z"],"application/x-abiword":["abw"],"application/x-ace-compressed":["ace"],"application/x-apple-diskimage":["dmg"],"application/x-authorware-bin":["aab","x32","u32","vox"],"application/x-authorware-map":["aam"],"application/x-authorware-seg":["aas"],"application/x-bcpio":["bcpio"],"application/x-bittorrent":["torrent"],"application/x-blorb":["blb","blorb"],"application/x-bzip":["bz"],"application/x-bzip2":["bz2","boz"],"application/x-cbr":["cbr","cba","cbt","cbz","cb7"],"application/x-cdlink":["vcd"],"application/x-cfs-compressed":["cfs"],"application/x-chat":["chat"],"application/x-chess-pgn":["pgn"],"application/x-chrome-extension":["crx"],"application/x-conference":["nsc"],"application/x-cpio":["cpio"],"application/x-csh":["csh"],"application/x-debian-package":["deb","udeb"],"application/x-dgc-compressed":["dgc"],"application/x-director":["dir","dcr","dxr","cst","cct","cxt","w3d","fgd","swa"],"application/x-doom":["wad"],"application/x-dtbncx+xml":["ncx"],"application/x-dtbook+xml":["dtb"],"application/x-dtbresource+xml":["res"],"application/x-dvi":["dvi"],"application/x-envoy":["evy"],"application/x-eva":["eva"],"application/x-font-bdf":["bdf"],"application/x-font-ghostscript":["gsf"],"application/x-font-linux-psf":["psf"],"application/x-font-otf":["otf"],"application/x-font-pcf":["pcf"],"application/x-font-snf":["snf"],"application/x-font-ttf":["ttf","ttc"],"application/x-font-type1":["pfa","pfb","pfm","afm"],"application/x-freearc":["arc"],"application/x-futuresplash":["spl"],"application/x-gca-compressed":["gca"],"application/x-glulx":["ulx"],"application/x-gnumeric":["gnumeric"],"application/x-gramps-xml":["gramps"],"application/x-gtar":["gtar"],"application/x-hdf":["hdf"],"application/x-install-instructions":["install"],"application/x-iso9660-image":["iso"],"application/x-java-jnlp-file":["jnlp"],"application/x-latex":["latex"],"application/x-lua-bytecode":["luac"],"application/x-lzh-compressed":["lzh","lha"],"application/x-mie":["mie"],"application/x-mobipocket-ebook":["prc","mobi"],"application/x-ms-application":["application"],"application/x-ms-shortcut":["lnk"],"application/x-ms-wmd":["wmd"],"application/x-ms-wmz":["wmz"],"application/x-ms-xbap":["xbap"],"application/x-msaccess":["mdb"],"application/x-msbinder":["obd"],"application/x-mscardfile":["crd"],"application/x-msclip":["clp"],"application/x-msdownload":["exe","dll","com","bat","msi"],"application/x-msmediaview":["mvb","m13","m14"],"application/x-msmetafile":["wmf","wmz","emf","emz"],"application/x-msmoney":["mny"],"application/x-mspublisher":["pub"],"application/x-msschedule":["scd"],"application/x-msterminal":["trm"],"application/x-mswrite":["wri"],"application/x-netcdf":["nc","cdf"],"application/x-nzb":["nzb"],"application/x-pkcs12":["p12","pfx"],"application/x-pkcs7-certificates":["p7b","spc"],"application/x-pkcs7-certreqresp":["p7r"],"application/x-rar-compressed":["rar"],"application/x-research-info-systems":["ris"],"application/x-sh":["sh"],"application/x-shar":["shar"],"application/x-shockwave-flash":["swf"],"application/x-silverlight-app":["xap"],"application/x-sql":["sql"],"application/x-stuffit":["sit"],"application/x-stuffitx":["sitx"],"application/x-subrip":["srt"],"application/x-sv4cpio":["sv4cpio"],"application/x-sv4crc":["sv4crc"],"application/x-t3vm-image":["t3"],"application/x-tads":["gam"],"application/x-tar":["tar"],"application/x-tcl":["tcl"],"application/x-tex":["tex"],"application/x-tex-tfm":["tfm"],"application/x-texinfo":["texinfo","texi"],"application/x-tgif":["obj"],"application/x-ustar":["ustar"],"application/x-wais-source":["src"],"application/x-web-app-manifest+json":["webapp"],"application/x-x509-ca-cert":["der","crt"],"application/x-xfig":["fig"],"application/x-xliff+xml":["xlf"],"application/x-xpinstall":["xpi"],"application/x-xz":["xz"],"application/x-zmachine":["z1","z2","z3","z4","z5","z6","z7","z8"],"application/xaml+xml":["xaml"],"application/xcap-diff+xml":["xdf"],"application/xenc+xml":["xenc"],"application/xhtml+xml":["xhtml","xht"],"application/xml":["xml","xsl","xsd"],"application/xml-dtd":["dtd"],"application/xop+xml":["xop"],"application/xproc+xml":["xpl"],"application/xslt+xml":["xslt"],"application/xspf+xml":["xspf"],"application/xv+xml":["mxml","xhvml","xvml","xvm"],"application/yang":["yang"],"application/yin+xml":["yin"],"application/zip":["zip"],"audio/adpcm":["adp"],"audio/basic":["au","snd"],"audio/midi":["mid","midi","kar","rmi"],"audio/mp4":["mp4a","m4a"],"audio/mpeg":["mpga","mp2","mp2a","mp3","m2a","m3a"],"audio/ogg":["oga","ogg","spx"],"audio/s3m":["s3m"],"audio/silk":["sil"],"audio/vnd.dece.audio":["uva","uvva"],"audio/vnd.digital-winds":["eol"],"audio/vnd.dra":["dra"],"audio/vnd.dts":["dts"],"audio/vnd.dts.hd":["dtshd"],"audio/vnd.lucent.voice":["lvp"],"audio/vnd.ms-playready.media.pya":["pya"],"audio/vnd.nuera.ecelp4800":["ecelp4800"],"audio/vnd.nuera.ecelp7470":["ecelp7470"],"audio/vnd.nuera.ecelp9600":["ecelp9600"],"audio/vnd.rip":["rip"],"audio/webm":["weba"],"audio/x-aac":["aac"],"audio/x-aiff":["aif","aiff","aifc"],"audio/x-caf":["caf"],"audio/x-flac":["flac"],"audio/x-matroska":["mka"],"audio/x-mpegurl":["m3u"],"audio/x-ms-wax":["wax"],"audio/x-ms-wma":["wma"],"audio/x-pn-realaudio":["ram","ra"],"audio/x-pn-realaudio-plugin":["rmp"],"audio/x-wav":["wav"],"audio/xm":["xm"],"chemical/x-cdx":["cdx"],"chemical/x-cif":["cif"],"chemical/x-cmdf":["cmdf"],"chemical/x-cml":["cml"],"chemical/x-csml":["csml"],"chemical/x-xyz":["xyz"],"font/opentype":["otf"],"image/bmp":["bmp"],"image/cgm":["cgm"],"image/g3fax":["g3"],"image/gif":["gif"],"image/ief":["ief"],"image/jpeg":["jpeg","jpg","jpe"],"image/ktx":["ktx"],"image/png":["png"],"image/prs.btif":["btif"],"image/sgi":["sgi"],"image/svg+xml":["svg","svgz"],"image/tiff":["tiff","tif"],"image/vnd.adobe.photoshop":["psd"],"image/vnd.dece.graphic":["uvi","uvvi","uvg","uvvg"],"image/vnd.djvu":["djvu","djv"],"image/vnd.dvb.subtitle":["sub"],"image/vnd.dwg":["dwg"],"image/vnd.dxf":["dxf"],"image/vnd.fastbidsheet":["fbs"],"image/vnd.fpx":["fpx"],"image/vnd.fst":["fst"],"image/vnd.fujixerox.edmics-mmr":["mmr"],"image/vnd.fujixerox.edmics-rlc":["rlc"],"image/vnd.ms-modi":["mdi"],"image/vnd.ms-photo":["wdp"],"image/vnd.net-fpx":["npx"],"image/vnd.wap.wbmp":["wbmp"],"image/vnd.xiff":["xif"],"image/webp":["webp"],"image/x-3ds":["3ds"],"image/x-cmu-raster":["ras"],"image/x-cmx":["cmx"],"image/x-freehand":["fh","fhc","fh4","fh5","fh7"],"image/x-icon":["ico"],"image/x-mrsid-image":["sid"],"image/x-pcx":["pcx"],"image/x-pict":["pic","pct"],"image/x-portable-anymap":["pnm"],"image/x-portable-bitmap":["pbm"],"image/x-portable-graymap":["pgm"],"image/x-portable-pixmap":["ppm"],"image/x-rgb":["rgb"],"image/x-tga":["tga"],"image/x-xbitmap":["xbm"],"image/x-xpixmap":["xpm"],"image/x-xwindowdump":["xwd"],"message/rfc822":["eml","mime"],"model/iges":["igs","iges"],"model/mesh":["msh","mesh","silo"],"model/vnd.collada+xml":["dae"],"model/vnd.dwf":["dwf"],"model/vnd.gdl":["gdl"],"model/vnd.gtw":["gtw"],"model/vnd.mts":["mts"],"model/vnd.vtu":["vtu"],"model/vrml":["wrl","vrml"],"model/x3d+binary":["x3db","x3dbz"],"model/x3d+vrml":["x3dv","x3dvz"],"model/x3d+xml":["x3d","x3dz"],"text/cache-manifest":["appcache","manifest"],"text/calendar":["ics","ifb"],"text/coffeescript":["coffee"],"text/css":["css"],"text/csv":["csv"],"text/hjson":["hjson"],"text/html":["html","htm"],"text/jade":["jade"],"text/jsx":["jsx"],"text/less":["less"],"text/n3":["n3"],"text/plain":["txt","text","conf","def","list","log","in","ini"],"text/prs.lines.tag":["dsc"],"text/richtext":["rtx"],"text/sgml":["sgml","sgm"],"text/stylus":["stylus","styl"],"text/tab-separated-values":["tsv"],"text/troff":["t","tr","roff","man","me","ms"],"text/turtle":["ttl"],"text/uri-list":["uri","uris","urls"],"text/vcard":["vcard"],"text/vnd.curl":["curl"],"text/vnd.curl.dcurl":["dcurl"],"text/vnd.curl.mcurl":["mcurl"],"text/vnd.curl.scurl":["scurl"],"text/vnd.dvb.subtitle":["sub"],"text/vnd.fly":["fly"],"text/vnd.fmi.flexstor":["flx"],"text/vnd.graphviz":["gv"],"text/vnd.in3d.3dml":["3dml"],"text/vnd.in3d.spot":["spot"],"text/vnd.sun.j2me.app-descriptor":["jad"],"text/vnd.wap.wml":["wml"],"text/vnd.wap.wmlscript":["wmls"],"text/vtt":["vtt"],"text/x-asm":["s","asm"],"text/x-c":["c","cc","cxx","cpp","h","hh","dic"],"text/x-component":["htc"],"text/x-fortran":["f","for","f77","f90"],"text/x-handlebars-template":["hbs"],"text/x-java-source":["java"],"text/x-lua":["lua"],"text/x-markdown":["markdown","md","mkd"],"text/x-nfo":["nfo"],"text/x-opml":["opml"],"text/x-pascal":["p","pas"],"text/x-sass":["sass"],"text/x-scss":["scss"],"text/x-setext":["etx"],"text/x-sfv":["sfv"],"text/x-uuencode":["uu"],"text/x-vcalendar":["vcs"],"text/x-vcard":["vcf"],"text/yaml":["yaml","yml"],"video/3gpp":["3gp"],"video/3gpp2":["3g2"],"video/h261":["h261"],"video/h263":["h263"],"video/h264":["h264"],"video/jpeg":["jpgv"],"video/jpm":["jpm","jpgm"],"video/mj2":["mj2","mjp2"],"video/mp2t":["ts"],"video/mp4":["mp4","mp4v","mpg4"],"video/mpeg":["mpeg","mpg","mpe","m1v","m2v"],"video/ogg":["ogv"],"video/quicktime":["qt","mov"],"video/vnd.dece.hd":["uvh","uvvh"],"video/vnd.dece.mobile":["uvm","uvvm"],"video/vnd.dece.pd":["uvp","uvvp"],"video/vnd.dece.sd":["uvs","uvvs"],"video/vnd.dece.video":["uvv","uvvv"],"video/vnd.dvb.file":["dvb"],"video/vnd.fvt":["fvt"],"video/vnd.mpegurl":["mxu","m4u"],"video/vnd.ms-playready.media.pyv":["pyv"],"video/vnd.uvvu.mp4":["uvu","uvvu"],"video/vnd.vivo":["viv"],"video/webm":["webm"],"video/x-f4v":["f4v"],"video/x-fli":["fli"],"video/x-flv":["flv"],"video/x-m4v":["m4v"],"video/x-matroska":["mkv","mk3d","mks"],"video/x-mng":["mng"],"video/x-ms-asf":["asf","asx"],"video/x-ms-vob":["vob"],"video/x-ms-wm":["wm"],"video/x-ms-wmv":["wmv"],"video/x-ms-wmx":["wmx"],"video/x-ms-wvx":["wvx"],"video/x-msvideo":["avi"],"video/x-sgi-movie":["movie"],"video/x-smv":["smv"],"x-conference/x-cooltalk":["ice"]}
 
-},{}],459:[function(require,module,exports){
-arguments[4][384][0].apply(exports,arguments)
-},{"dup":384}],460:[function(require,module,exports){
+},{}],444:[function(require,module,exports){
+arguments[4][369][0].apply(exports,arguments)
+},{"dup":369}],445:[function(require,module,exports){
 module.exports={
   "100": "Continue",
   "101": "Switching Protocols",
@@ -94939,7 +92967,7 @@ module.exports={
   "510": "Not Extended",
   "511": "Network Authentication Required"
 }
-},{}],461:[function(require,module,exports){
+},{}],446:[function(require,module,exports){
 
 var codes = require('./codes.json');
 
@@ -95001,7 +93029,7 @@ function status(code) {
   return n;
 }
 
-},{"./codes.json":460}],462:[function(require,module,exports){
+},{"./codes.json":445}],447:[function(require,module,exports){
 (function (Buffer){
 /*!
  * serve-static
@@ -95192,7 +93220,7 @@ function createRedirectDirectoryListener() {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"escape-html":434,"parseurl":443,"path":333,"send":453,"url":361}],463:[function(require,module,exports){
+},{"buffer":117,"escape-html":419,"parseurl":428,"path":318,"send":438,"url":346}],448:[function(require,module,exports){
 /*!
  * type-is
  * Copyright(c) 2014 Jonathan Ong
@@ -95456,7 +93484,7 @@ function tryNormalizeType(value) {
   }
 }
 
-},{"media-typer":464,"mime-types":465}],464:[function(require,module,exports){
+},{"media-typer":449,"mime-types":450}],449:[function(require,module,exports){
 /*!
  * media-typer
  * Copyright(c) 2014 Douglas Christopher Wilson
@@ -95728,13 +93756,13 @@ function splitType(string) {
   return obj
 }
 
-},{}],465:[function(require,module,exports){
-arguments[4][370][0].apply(exports,arguments)
-},{"dup":370,"mime-db":467,"path":333}],466:[function(require,module,exports){
-arguments[4][371][0].apply(exports,arguments)
-},{"dup":371}],467:[function(require,module,exports){
-arguments[4][372][0].apply(exports,arguments)
-},{"./db.json":466,"dup":372}],468:[function(require,module,exports){
+},{}],450:[function(require,module,exports){
+arguments[4][355][0].apply(exports,arguments)
+},{"dup":355,"mime-db":452,"path":318}],451:[function(require,module,exports){
+arguments[4][356][0].apply(exports,arguments)
+},{"dup":356}],452:[function(require,module,exports){
+arguments[4][357][0].apply(exports,arguments)
+},{"./db.json":451,"dup":357}],453:[function(require,module,exports){
 /**
  * Merge object b with object a.
  *
@@ -95759,7 +93787,7 @@ exports = module.exports = function(a, b){
   return a;
 };
 
-},{}],469:[function(require,module,exports){
+},{}],454:[function(require,module,exports){
 /*!
  * vary
  * Copyright(c) 2014-2015 Douglas Christopher Wilson
@@ -95878,7 +93906,7 @@ function vary(res, field) {
   }
 }
 
-},{}],470:[function(require,module,exports){
+},{}],455:[function(require,module,exports){
 /**
  *  Copyright (c) 2014-2015, Facebook, Inc.
  *  All rights reserved.
@@ -97731,7 +95759,8 @@ function vary(res, field) {
     if (node.keyHash === keyHash) {
       return new HashCollisionNode(ownerID, keyHash, [node.entry, entry]);
     }
-   var idx1 = (shift === 0 ? node.keyHash : node.keyHash >>> shift) & MASK;
+
+    var idx1 = (shift === 0 ? node.keyHash : node.keyHash >>> shift) & MASK;
     var idx2 = (shift === 0 ? keyHash : keyHash >>> shift) & MASK;
 
     var newNode;
@@ -100860,7 +98889,7 @@ function vary(res, field) {
   return Immutable;
 
 }));
-},{}],471:[function(require,module,exports){
+},{}],456:[function(require,module,exports){
 (function (process){
 
 exports.parse = exports.decode = decode
@@ -101054,7 +99083,7 @@ function unsafe (val, doUnesc) {
 }
 
 }).call(this,require('_process'))
-},{"_process":334}],472:[function(require,module,exports){
+},{"_process":319}],457:[function(require,module,exports){
 'use strict';
 
 var fs = require('graceful-fs');
@@ -101094,7 +99123,7 @@ module.exports = {
     fs.writeFileSync(dest, data);
   }
 };
-},{"./json":474,"graceful-fs":476}],473:[function(require,module,exports){
+},{"./json":459,"graceful-fs":461}],458:[function(require,module,exports){
 'use strict';
 
 var lodash = require('lodash');
@@ -101237,7 +99266,7 @@ function low(source) {
 }
 
 module.exports = low;
-},{"is-promise":479,"lodash":488}],474:[function(require,module,exports){
+},{"is-promise":464,"lodash":473}],459:[function(require,module,exports){
 'use strict';
 
 var jph = require('json-parse-helpfulerror');
@@ -101248,7 +99277,7 @@ module.exports = {
     return JSON.stringify(obj, null, 2);
   }
 };
-},{"json-parse-helpfulerror":480}],475:[function(require,module,exports){
+},{"json-parse-helpfulerror":465}],460:[function(require,module,exports){
 'use strict'
 
 var fs = require('fs')
@@ -101271,7 +99300,7 @@ function clone (obj) {
   return copy
 }
 
-},{"fs":116}],476:[function(require,module,exports){
+},{"fs":101}],461:[function(require,module,exports){
 (function (process){
 var fs = require('fs')
 var polyfills = require('./polyfills.js')
@@ -101528,7 +99557,7 @@ function retry () {
 }
 
 }).call(this,require('_process'))
-},{"./fs.js":475,"./legacy-streams.js":477,"./polyfills.js":478,"_process":334,"assert":117,"fs":116,"util":364}],477:[function(require,module,exports){
+},{"./fs.js":460,"./legacy-streams.js":462,"./polyfills.js":463,"_process":319,"assert":102,"fs":101,"util":349}],462:[function(require,module,exports){
 (function (process){
 var Stream = require('stream').Stream
 
@@ -101650,7 +99679,7 @@ function legacy (fs) {
 }
 
 }).call(this,require('_process'))
-},{"_process":334,"stream":353}],478:[function(require,module,exports){
+},{"_process":319,"stream":338}],463:[function(require,module,exports){
 (function (process){
 var fs = require('./fs.js')
 var constants = require('constants')
@@ -101906,14 +99935,14 @@ function chownErOk (er) {
 }
 
 }).call(this,require('_process'))
-},{"./fs.js":475,"_process":334,"constants":136}],479:[function(require,module,exports){
+},{"./fs.js":460,"_process":319,"constants":121}],464:[function(require,module,exports){
 module.exports = isPromise;
 
 function isPromise(obj) {
   return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
 
-},{}],480:[function(require,module,exports){
+},{}],465:[function(require,module,exports){
 'use strict';
 
 var jju = require('jju');
@@ -101936,7 +99965,7 @@ function parse(text, reviver) {
 
 exports.parse = parse;
 
-},{"jju":481}],481:[function(require,module,exports){
+},{"jju":466}],466:[function(require,module,exports){
 
 module.exports.__defineGetter__('parse', function() {
 	return require('./lib/parse').parse
@@ -101970,7 +99999,7 @@ module.exports.__defineGetter__('utils', function() {
 }
 **/
 
-},{"./lib/analyze":482,"./lib/document":483,"./lib/parse":484,"./lib/stringify":485,"./lib/utils":487}],482:[function(require,module,exports){
+},{"./lib/analyze":467,"./lib/document":468,"./lib/parse":469,"./lib/stringify":470,"./lib/utils":472}],467:[function(require,module,exports){
 /*
  * Author: Alex Kocharin <alex@kocharin.ru>
  * GIT: https://github.com/rlidwka/jju
@@ -102064,7 +100093,7 @@ module.exports.analyze = function analyzeJSON(input, options) {
 }
 
 
-},{"./parse":484}],483:[function(require,module,exports){
+},{"./parse":469}],468:[function(require,module,exports){
 /*
  * Author: Alex Kocharin <alex@kocharin.ru>
  * GIT: https://github.com/rlidwka/jju
@@ -102551,7 +100580,7 @@ module.exports.update = function updateJSON(source, new_value, options) {
 }
 
 
-},{"./analyze":482,"./parse":484,"./stringify":485,"assert":117}],484:[function(require,module,exports){
+},{"./analyze":467,"./parse":469,"./stringify":470,"assert":102}],469:[function(require,module,exports){
 /*
  * Author: Alex Kocharin <alex@kocharin.ru>
  * GIT: https://github.com/rlidwka/jju
@@ -103318,7 +101347,7 @@ module.exports.tokenize = function tokenizeJSON(input, options) {
 }
 
 
-},{"./unicode":486}],485:[function(require,module,exports){
+},{"./unicode":471}],470:[function(require,module,exports){
 /*
  * Author: Alex Kocharin <alex@kocharin.ru>
  * GIT: https://github.com/rlidwka/jju
@@ -103703,7 +101732,7 @@ module.exports.stringify = function stringifyJSON(object, options, _space) {
 }
 
 
-},{"./unicode":486}],486:[function(require,module,exports){
+},{"./unicode":471}],471:[function(require,module,exports){
 
 // This is autogenerated with esprima tools, see:
 // https://github.com/ariya/esprima/blob/master/esprima.js
@@ -103776,7 +101805,7 @@ module.exports.NonAsciiIdentifierStart = /[\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u
 
 module.exports.NonAsciiIdentifierPart = /[\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0300-\u0374\u0376\u0377\u037A-\u037D\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u0483-\u0487\u048A-\u0527\u0531-\u0556\u0559\u0561-\u0587\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u05D0-\u05EA\u05F0-\u05F2\u0610-\u061A\u0620-\u0669\u066E-\u06D3\u06D5-\u06DC\u06DF-\u06E8\u06EA-\u06FC\u06FF\u0710-\u074A\u074D-\u07B1\u07C0-\u07F5\u07FA\u0800-\u082D\u0840-\u085B\u08A0\u08A2-\u08AC\u08E4-\u08FE\u0900-\u0963\u0966-\u096F\u0971-\u0977\u0979-\u097F\u0981-\u0983\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BC-\u09C4\u09C7\u09C8\u09CB-\u09CE\u09D7\u09DC\u09DD\u09DF-\u09E3\u09E6-\u09F1\u0A01-\u0A03\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A59-\u0A5C\u0A5E\u0A66-\u0A75\u0A81-\u0A83\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABC-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AD0\u0AE0-\u0AE3\u0AE6-\u0AEF\u0B01-\u0B03\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3C-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B56\u0B57\u0B5C\u0B5D\u0B5F-\u0B63\u0B66-\u0B6F\u0B71\u0B82\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD0\u0BD7\u0BE6-\u0BEF\u0C01-\u0C03\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C33\u0C35-\u0C39\u0C3D-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C58\u0C59\u0C60-\u0C63\u0C66-\u0C6F\u0C82\u0C83\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBC-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CDE\u0CE0-\u0CE3\u0CE6-\u0CEF\u0CF1\u0CF2\u0D02\u0D03\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D-\u0D44\u0D46-\u0D48\u0D4A-\u0D4E\u0D57\u0D60-\u0D63\u0D66-\u0D6F\u0D7A-\u0D7F\u0D82\u0D83\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DF2\u0DF3\u0E01-\u0E3A\u0E40-\u0E4E\u0E50-\u0E59\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB9\u0EBB-\u0EBD\u0EC0-\u0EC4\u0EC6\u0EC8-\u0ECD\u0ED0-\u0ED9\u0EDC-\u0EDF\u0F00\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E-\u0F47\u0F49-\u0F6C\u0F71-\u0F84\u0F86-\u0F97\u0F99-\u0FBC\u0FC6\u1000-\u1049\u1050-\u109D\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u135D-\u135F\u1380-\u138F\u13A0-\u13F4\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16EE-\u16F0\u1700-\u170C\u170E-\u1714\u1720-\u1734\u1740-\u1753\u1760-\u176C\u176E-\u1770\u1772\u1773\u1780-\u17D3\u17D7\u17DC\u17DD\u17E0-\u17E9\u180B-\u180D\u1810-\u1819\u1820-\u1877\u1880-\u18AA\u18B0-\u18F5\u1900-\u191C\u1920-\u192B\u1930-\u193B\u1946-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u19D0-\u19D9\u1A00-\u1A1B\u1A20-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AA7\u1B00-\u1B4B\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1BF3\u1C00-\u1C37\u1C40-\u1C49\u1C4D-\u1C7D\u1CD0-\u1CD2\u1CD4-\u1CF6\u1D00-\u1DE6\u1DFC-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u200C\u200D\u203F\u2040\u2054\u2071\u207F\u2090-\u209C\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2160-\u2188\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D7F-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2DE0-\u2DFF\u2E2F\u3005-\u3007\u3021-\u302F\u3031-\u3035\u3038-\u303C\u3041-\u3096\u3099\u309A\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312D\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FCC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA62B\uA640-\uA66F\uA674-\uA67D\uA67F-\uA697\uA69F-\uA6F1\uA717-\uA71F\uA722-\uA788\uA78B-\uA78E\uA790-\uA793\uA7A0-\uA7AA\uA7F8-\uA827\uA840-\uA873\uA880-\uA8C4\uA8D0-\uA8D9\uA8E0-\uA8F7\uA8FB\uA900-\uA92D\uA930-\uA953\uA960-\uA97C\uA980-\uA9C0\uA9CF-\uA9D9\uAA00-\uAA36\uAA40-\uAA4D\uAA50-\uAA59\uAA60-\uAA76\uAA7A\uAA7B\uAA80-\uAAC2\uAADB-\uAADD\uAAE0-\uAAEF\uAAF2-\uAAF6\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uABC0-\uABEA\uABEC\uABED\uABF0-\uABF9\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE00-\uFE0F\uFE20-\uFE26\uFE33\uFE34\uFE4D-\uFE4F\uFE70-\uFE74\uFE76-\uFEFC\uFF10-\uFF19\uFF21-\uFF3A\uFF3F\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]/
 
-},{}],487:[function(require,module,exports){
+},{}],472:[function(require,module,exports){
 var FS  = require('fs')
 var jju = require('../')
 
@@ -103824,7 +101853,7 @@ module.exports.middleware = function() {
 }
 
 
-},{"../":481,"fs":116,"jju":481}],488:[function(require,module,exports){
+},{"../":466,"fs":101,"jju":466}],473:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -119741,7 +117770,7 @@ module.exports.middleware = function() {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],489:[function(require,module,exports){
+},{}],474:[function(require,module,exports){
 /**
  * Node.js module for Forge.
  *
@@ -119835,7 +117864,7 @@ define([
 });
 })();
 
-},{}],490:[function(require,module,exports){
+},{}],475:[function(require,module,exports){
 (function (Buffer){
 //     uuid.js
 //
@@ -120111,7 +118140,7 @@ define([
 })('undefined' !== typeof window ? window : null);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":132,"crypto":137}],491:[function(require,module,exports){
+},{"buffer":117,"crypto":122}],476:[function(require,module,exports){
 "use strict";
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -120340,7 +118369,7 @@ function createLogger() {
 }
 
 module.exports = createLogger;
-},{}],492:[function(require,module,exports){
+},{}],477:[function(require,module,exports){
 // debug output
 'use strict';
 
@@ -120634,7 +118663,7 @@ function excludeAction() {
 
 // /excludeAction
 // old present state is in the future now
-},{}],493:[function(require,module,exports){
+},{}],478:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -120692,7 +118721,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":496}],494:[function(require,module,exports){
+},{"./compose":481}],479:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -120744,7 +118773,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],495:[function(require,module,exports){
+},{}],480:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -120874,7 +118903,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":497,"./utils/warning":499,"_process":334,"lodash/isPlainObject":503}],496:[function(require,module,exports){
+},{"./createStore":482,"./utils/warning":484,"_process":319,"lodash/isPlainObject":488}],481:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -120904,7 +118933,7 @@ function compose() {
     }, last.apply(undefined, arguments));
   };
 }
-},{}],497:[function(require,module,exports){
+},{}],482:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -121121,7 +119150,7 @@ function createStore(reducer, initialState, enhancer) {
     replaceReducer: replaceReducer
   };
 }
-},{"lodash/isPlainObject":503}],498:[function(require,module,exports){
+},{"lodash/isPlainObject":488}],483:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -121170,7 +119199,7 @@ exports.bindActionCreators = _bindActionCreators2["default"];
 exports.applyMiddleware = _applyMiddleware2["default"];
 exports.compose = _compose2["default"];
 }).call(this,require('_process'))
-},{"./applyMiddleware":493,"./bindActionCreators":494,"./combineReducers":495,"./compose":496,"./createStore":497,"./utils/warning":499,"_process":334}],499:[function(require,module,exports){
+},{"./applyMiddleware":478,"./bindActionCreators":479,"./combineReducers":480,"./compose":481,"./createStore":482,"./utils/warning":484,"_process":319}],484:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -121195,7 +119224,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],500:[function(require,module,exports){
+},{}],485:[function(require,module,exports){
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeGetPrototype = Object.getPrototypeOf;
 
@@ -121212,7 +119241,7 @@ function getPrototype(value) {
 
 module.exports = getPrototype;
 
-},{}],501:[function(require,module,exports){
+},{}],486:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -121234,7 +119263,7 @@ function isHostObject(value) {
 
 module.exports = isHostObject;
 
-},{}],502:[function(require,module,exports){
+},{}],487:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -121265,7 +119294,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],503:[function(require,module,exports){
+},{}],488:[function(require,module,exports){
 var getPrototype = require('./_getPrototype'),
     isHostObject = require('./_isHostObject'),
     isObjectLike = require('./isObjectLike');
@@ -121337,720 +119366,720 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"./_getPrototype":500,"./_isHostObject":501,"./isObjectLike":502}],504:[function(require,module,exports){
+},{"./_getPrototype":485,"./_isHostObject":486,"./isObjectLike":487}],489:[function(require,module,exports){
 (function (process){
-
-var simpleremote = require('simpleremote'),
-    simplefunc = require('simplefunc');
-
-function Bus(size) 
-{
-	var messages = [];
-	var subscriptions = [];
-	
-	this.post = function(message) {
-		messages.push(message);
-        
-        if (size && messages.length > size)
-            messages.shift();
-        
-		subscriptions.forEach(function(sub) {
-			if (sub.predicate == null || sub.predicate(message))
-				setImmediate(function() { sub.callback(message)});
-		});
-	}
-	
-	this.subscribe = function(predicate, callback) {
-		if (predicate && typeof predicate == 'object')
-			predicate = makeObjectPredicate(predicate);
-			
-		subscriptions.push({ predicate: predicate, callback: callback });
-		
-		messages.forEach(function(msg) {
-			if (predicate == null || predicate(msg)) 
-                process.nextTick(function() { callback(msg); });
-		});
-	}
-}
-
-function makeObjectPredicate(obj)
-{
-	return function(msg) {
-		for (var name in obj)
-			if (typeof obj[name] == 'function') {
-				if (!obj[name](msg[name],msg))
-					return false;
-			}
-			else if (msg[name] != obj[name])
-				return false;
-				
-		return true;
-	};
-}
-
-function RemoteServer(bus, clients) {
-    this.post = function (msg) {
-        bus.post(msg);
-    }
-    
-    this.subscribe = function (predicate, clientid, subid) {
-        bus.subscribe(simplefunc.decode(predicate), function(msg) {
-            clients[clientid].post(msg, subid);
-        });
-    }
-}
-
-function Server(bus, port, host) {
-    var server;
-    var clients = [];
-    var nclient = 0;
-    
-    this.start = function () {
-        server = simpleremote.createRemoteServer(new RemoteServer(bus, clients));
-
-        server.on('remote', function (newclient) {
-            var id = ++nclient;
-            registerClient(id, newclient);
-            newclient.setId(id);
-        });
-
-        server.listen(port, host);
-    }
-    
-    this.stop = function () {
-        if (server) {
-            server.close();
-            server = null;
-        }
-    }
-    
-    function registerClient(id, client) {
-        clients[id] = client;
-    }
-    
-    function unregisterClient(id) {
-        delete clients[id];
-    }
-}
-
-function RemoteClient(fn, callbacks)
-{
-    this.setId = function (id) {
-        this.id = id;
-        if (fn)
-            fn();
-    }
-    
-    this.post = function (msg, subid) {
-        callbacks[subid].apply(null, [msg]);
-    }
-}
-
-function Client(port, host) {
-    var client;
-    var remoteclient;
-    var remotebus;
-    var callbacks = [];
-    var ncallback = 0;
-    
-    this.start = function (fn) {
-        remoteclient = new RemoteClient(fn, callbacks);
-        client = simpleremote.createRemoteClient(remoteclient);
-        client.on('remote', function (bus) {
-            remotebus = bus;
-        });
-        client.connect(port, host);
-    }
-    
-    this.post = function (msg, cb) {
-        remotebus.post(msg, function (err, result) {
-            if (cb) cb(err, result);
-        });
-    }
-    
-    this.stop = function () {
-        if (client) {
-            client.end();
-            client = null;
-        }
-    }
-
-    this.on = function() {
-        client.on.apply(client, arguments);
-    }
-    
-    this.subscribe = function (predicate, callback) {
-        var subid = ++ncallback;
-        callbacks[subid] = callback;        
-        remotebus.subscribe(simplefunc.encode(predicate), remoteclient.id, subid);
-        return subid;
-    }
-}
-
-exports.createBus = function(size) { return new Bus(size); }
-
-exports.createServer = function (bus, port, host) { return new Server(bus, port, host); }
-
+
+var simpleremote = require('simpleremote'),
+    simplefunc = require('simplefunc');
+
+function Bus(size) 
+{
+	var messages = [];
+	var subscriptions = [];
+	
+	this.post = function(message) {
+		messages.push(message);
+        
+        if (size && messages.length > size)
+            messages.shift();
+        
+		subscriptions.forEach(function(sub) {
+			if (sub.predicate == null || sub.predicate(message))
+				setImmediate(function() { sub.callback(message)});
+		});
+	}
+	
+	this.subscribe = function(predicate, callback) {
+		if (predicate && typeof predicate == 'object')
+			predicate = makeObjectPredicate(predicate);
+			
+		subscriptions.push({ predicate: predicate, callback: callback });
+		
+		messages.forEach(function(msg) {
+			if (predicate == null || predicate(msg)) 
+                process.nextTick(function() { callback(msg); });
+		});
+	}
+}
+
+function makeObjectPredicate(obj)
+{
+	return function(msg) {
+		for (var name in obj)
+			if (typeof obj[name] == 'function') {
+				if (!obj[name](msg[name],msg))
+					return false;
+			}
+			else if (msg[name] != obj[name])
+				return false;
+				
+		return true;
+	};
+}
+
+function RemoteServer(bus, clients) {
+    this.post = function (msg) {
+        bus.post(msg);
+    }
+    
+    this.subscribe = function (predicate, clientid, subid) {
+        bus.subscribe(simplefunc.decode(predicate), function(msg) {
+            clients[clientid].post(msg, subid);
+        });
+    }
+}
+
+function Server(bus, port, host) {
+    var server;
+    var clients = [];
+    var nclient = 0;
+    
+    this.start = function () {
+        server = simpleremote.createRemoteServer(new RemoteServer(bus, clients));
+
+        server.on('remote', function (newclient) {
+            var id = ++nclient;
+            registerClient(id, newclient);
+            newclient.setId(id);
+        });
+
+        server.listen(port, host);
+    }
+    
+    this.stop = function () {
+        if (server) {
+            server.close();
+            server = null;
+        }
+    }
+    
+    function registerClient(id, client) {
+        clients[id] = client;
+    }
+    
+    function unregisterClient(id) {
+        delete clients[id];
+    }
+}
+
+function RemoteClient(fn, callbacks)
+{
+    this.setId = function (id) {
+        this.id = id;
+        if (fn)
+            fn();
+    }
+    
+    this.post = function (msg, subid) {
+        callbacks[subid].apply(null, [msg]);
+    }
+}
+
+function Client(port, host) {
+    var client;
+    var remoteclient;
+    var remotebus;
+    var callbacks = [];
+    var ncallback = 0;
+    
+    this.start = function (fn) {
+        remoteclient = new RemoteClient(fn, callbacks);
+        client = simpleremote.createRemoteClient(remoteclient);
+        client.on('remote', function (bus) {
+            remotebus = bus;
+        });
+        client.connect(port, host);
+    }
+    
+    this.post = function (msg, cb) {
+        remotebus.post(msg, function (err, result) {
+            if (cb) cb(err, result);
+        });
+    }
+    
+    this.stop = function () {
+        if (client) {
+            client.end();
+            client = null;
+        }
+    }
+
+    this.on = function() {
+        client.on.apply(client, arguments);
+    }
+    
+    this.subscribe = function (predicate, callback) {
+        var subid = ++ncallback;
+        callbacks[subid] = callback;        
+        remotebus.subscribe(simplefunc.encode(predicate), remoteclient.id, subid);
+        return subid;
+    }
+}
+
+exports.createBus = function(size) { return new Bus(size); }
+
+exports.createServer = function (bus, port, host) { return new Server(bus, port, host); }
+
 exports.createClient = function (port, host) { return new Client(port, host); }
 }).call(this,require('_process'))
-},{"_process":334,"simplefunc":505,"simpleremote":506}],505:[function(require,module,exports){
-
-'use strict';
-
-var simplefunc = (function () {
-    function encode(obj) {
-        if (!obj)
-            return obj;
-            
-        if (typeof obj === 'function')
-            return encodeFunction(obj);
-
-        if (typeof obj === 'object')
-            return encodeObject(obj);
-
-        return obj;
-    };
-
-    function decode(obj) {
-        if (!obj)
-            return obj;
-            
-        if (typeof obj === 'object') {
-            if (obj._fn)
-                return Function.constructor.apply(Function, obj._fn);
-
-            if (obj._obj && obj._fns) {
-                var result = obj._obj;
-
-                for (var n in obj._fns)
-                    result[n] = Function.constructor.apply(Function, obj._fns[n]);
-
-                return result;
-            }
-        }
-
-        return obj;
-    };
-
-    function encodeObject(obj) {
-        var result = { _obj: { }, _fns: { } };
-        var nfuncs = 0;
-
-        for (var n in obj) {
-            if (typeof obj[n] === 'function') {
-                var fn = encodeFunction(obj[n]);
-                result._fns[n] = fn._fn;
-                nfuncs++;
-            }
-            else
-                result._obj[n] = obj[n];
-        }
-
-        if (!nfuncs)
-            return obj;
-
-        return result;
-    };
-
-    function encodeFunction(func) {
-        var text = func.toString();
-        var p1 = text.indexOf('(');
-        var p2 = text.indexOf(')');
-        var args = text.substring(p1 + 1, p2).trim().split(',');
-        p1 = text.indexOf('{');
-        p2 = text.lastIndexOf('}');
-        var code = text.substring(p1 + 1, p2).trim();
-
-        if (args.length) {
-            for (var n in args)
-                args[n] = args[n].trim();
-
-            args.push(code);
-
-            return { _fn: args };
-        }
-
-        return { _fn: [code] };
-    }
-
-    return {
-        encode: encode,
-        decode: decode,
-        toJson: function (obj) { return JSON.stringify(encode(obj)); },
-        fromJson: function (json) { return decode(JSON.parse(json)); }
-    }
-})();
-
-if (typeof window === 'undefined') {
-	module.exports = simplefunc;
-}
+},{"_process":319,"simplefunc":490,"simpleremote":491}],490:[function(require,module,exports){
 
-},{}],506:[function(require,module,exports){
+'use strict';
+
+var simplefunc = (function () {
+    function encode(obj) {
+        if (!obj)
+            return obj;
+            
+        if (typeof obj === 'function')
+            return encodeFunction(obj);
+
+        if (typeof obj === 'object')
+            return encodeObject(obj);
+
+        return obj;
+    };
+
+    function decode(obj) {
+        if (!obj)
+            return obj;
+            
+        if (typeof obj === 'object') {
+            if (obj._fn)
+                return Function.constructor.apply(Function, obj._fn);
+
+            if (obj._obj && obj._fns) {
+                var result = obj._obj;
+
+                for (var n in obj._fns)
+                    result[n] = Function.constructor.apply(Function, obj._fns[n]);
+
+                return result;
+            }
+        }
+
+        return obj;
+    };
+
+    function encodeObject(obj) {
+        var result = { _obj: { }, _fns: { } };
+        var nfuncs = 0;
+
+        for (var n in obj) {
+            if (typeof obj[n] === 'function') {
+                var fn = encodeFunction(obj[n]);
+                result._fns[n] = fn._fn;
+                nfuncs++;
+            }
+            else
+                result._obj[n] = obj[n];
+        }
+
+        if (!nfuncs)
+            return obj;
+
+        return result;
+    };
+
+    function encodeFunction(func) {
+        var text = func.toString();
+        var p1 = text.indexOf('(');
+        var p2 = text.indexOf(')');
+        var args = text.substring(p1 + 1, p2).trim().split(',');
+        p1 = text.indexOf('{');
+        p2 = text.lastIndexOf('}');
+        var code = text.substring(p1 + 1, p2).trim();
+
+        if (args.length) {
+            for (var n in args)
+                args[n] = args[n].trim();
+
+            args.push(code);
+
+            return { _fn: args };
+        }
+
+        return { _fn: [code] };
+    }
+
+    return {
+        encode: encode,
+        decode: decode,
+        toJson: function (obj) { return JSON.stringify(encode(obj)); },
+        fromJson: function (json) { return decode(JSON.parse(json)); }
+    }
+})();
+
+if (typeof window === 'undefined') {
+	module.exports = simplefunc;
+}
+
+},{}],491:[function(require,module,exports){
 (function (process){
-
-var simplemessages = require('simplemessages'),
-    events = require('events'),
-    net = require('net'),
-    util = require('util');
-    
-function Remote(obj, asyncs)
-{
-    events.EventEmitter.call(this);
-    var self = this;
-    
-    this.processMessage = function(msg, channel) {
-        try {
-            var value, target, isasync;
-            
-            if (isRemote(msg)) {
-                value = unmarshall(msg.methods, channel, msg.refid);
-                this.emit('remote', value);
-                return;
-            }
-            
-            if (isCall(msg)) {
-                if (msg.refid) {
-                    target = obj.getElement(msg.refid);
-                    isasync = obj.isAsync(msg.name);
-                }
-                else {
-                    target = obj;
-                    if (asyncs && asyncs.indexOf(msg.name) >= 0)
-                        isasync = true;
-                }
-
-                if (isasync) {
-                    var args = msg.args ? msg.args : [];
-                    if (hasReply(msg))
-                        args.push(function (err, value) {
-                            if (err)
-                                channel.write( { resid: msg.resid, err: err } );
-                            else
-                                channel.write( { resid: msg.resid, value: value } );
-                        });
-                    else
-                        args.push(function (err, msg) { });
-
-                    target[msg.name].apply(target, args);
-                } 
-                else {
-                    value = target[msg.name].apply(target, msg.args);
-                        
-                    if (hasReply(msg))
-                        channel.write( { resid: msg.resid, value: value } );
-                }
-                    
-                return;
-            }
-            
-            if (isResponse(msg)) {
-                value = msg.value;
-                
-                if (isRemote(value))
-                    value = unmarshall(value.methods, channel, value.refid);
-                
-                var cb = responsescb[msg.resid];
-                delete responsescb[msg.resid];
-                
-                if (cb.length == 2)
-                    if (msg.err)
-                        cb(msg.err);
-                    else
-                        cb(null, value);
-                else
-                    cb(value);
-                    
-                return;
-            }
-            
-            this.emit('message', msg);
-        }
-        catch (ex) {
-            if (isCall(msg) && hasReply(msg))
-                channel.write( { resid: msg.resid, err: ex.toString() } );
-        }
-    }
-}
-
-util.inherits(Remote, process.EventEmitter);
-
-function RemoteServer(obj, asyncs)
-{
-    Remote.call(this, obj, asyncs);
-    var reference;
-    var self = this;
-    
-    if (obj)
-        reference = marshall(obj);
-    
-	var server = simplemessages.createServer(function(channel) {
-        if (reference)
-            channel.write(reference);
-        
-		channel.on('data', function(msg) {
-            self.processMessage(msg, channel);
-		});
-        
-		channel.on('end', function() { self.emit('end'); });
-		channel.on('close', function() { self.emit('close'); });
-		channel.on('error', function(err) { /*self.emit('error', err);*/ });
-	});
-    
-	this.listen = function(port, host) {
-        server.listen(port, host);
-    }
-    
-    this.close = function() {
-        server.close();
-    }
-}
-
-util.inherits(RemoteServer, Remote);
-
-function isRemote(msg)
-{
-    return msg != null && msg.methods != null;
-}
-
-function isCall(msg)
-{
-    return msg != null && msg.name != null;
-}
-
-function isResponse(msg)
-{
-    return msg != null && msg.resid != null;
-}
-
-function hasReply(msg)
-{
-    return msg != null && msg.resid != null;
-}
-
-function RemoteClient(obj, asyncs) {
-    Remote.call(this, obj, asyncs);
-    var self = this;
-    var channel;
-    var reference;
-    
-    if (obj)
-        reference = marshall(obj);
-    
-    this.connect = function(port, host) {
-        channel = simplemessages.createClient(port, host, function() { if (reference) channel.write(reference); });
-        
-        channel.on('data', function(msg) {
-            self.processMessage(msg, channel);
-        });
-        
-        channel.on('end', function() { self.emit('end'); });
-        channel.on('error', function(err) { self.emit('error', err); });
-        channel.on('close', function() { self.emit('close'); });
-    }
-    
-    this.end = function()
-    {
-        if (channel)
-            channel.end();
-    }
-}
-
-util.inherits(RemoteClient, Remote);
-
-var maxresid = 0;
-var responsescb = {};
-
-function marshall(obj)
-{
-    var methods = [];
-    
-    for (var n in obj)
-        if (typeof obj[n] == 'function')
-            methods.push(n);
-    
-    return { methods: methods };
-}
-
-function unmarshall(methods, channel, refid)
-{
-    var obj = {};
-    
-    if (refid)
-        obj.refid = refid;
-    
-    for (var n in methods) {
-        var mthname = methods[n];
-        obj[mthname] = makeFunction(mthname, channel);
-    }
-    
-    function makeFunction(mthname, channel) {
-        return function() { 
-            var args = asArray(arguments);
-            var responseid;
-          
-            // last argument is a callback
-            
-            if (args && args.length > 0 && typeof args[args.length-1] == 'function')
-            {
-                maxresid++;
-                responseid = maxresid;
-                responsescb[responseid] = args[args.length-1];
-                args = args.slice(0, args.length-1);
-            }
-            
-            var msg = {
-                name: mthname,
-                args: args
-            };
-            
-            if (responseid)
-                msg.resid = responseid;
-                
-            if (this.refid)
-                msg.refid = this.refid;
-            
-            channel.write(msg); 
-        }
-    }
-    
-    return obj;
-}
-
-// Hack: function receives an array-like object but apply expects an array
-
-function asArray(obj)
-{
-    if (Array.isArray(obj))
-        return obj;
-        
-    var result = [];
-    
-    for (var n in obj)
-        result[parseInt(n)] = obj[n];
-        
-    return result;
-}
-
-function Registry(obj, asyncs)
-{
-    this.getReference = function(name) {
-        if (obj[name] == null)
-            return null;
-            
-        var reference = marshall(obj[name]);
-        reference.refid = name;
-        
-        return reference;
-    };
-    
-    this.getElement = function (name) {
-        return obj[name];
-    };
-
-    this.isAsync = function (mthname) {
-        if (!asyncs)
-            return false;
-
-        return asyncs.indexOf(mthname) >= 0;
-    }
-}
-
-exports.createRemoteServer = function(obj, asyncs) {
-    return new RemoteServer(obj, asyncs);
-}
-
-exports.createRemoteClient = function(obj, asyncs) {
-    return new RemoteClient(obj, asyncs);
-}
-
-exports.createRegistry = function(obj, asyncs) {
-    return new Registry(obj, asyncs);
-}
-
-exports.marshall = marshall;
-
+
+var simplemessages = require('simplemessages'),
+    events = require('events'),
+    net = require('net'),
+    util = require('util');
+    
+function Remote(obj, asyncs)
+{
+    events.EventEmitter.call(this);
+    var self = this;
+    
+    this.processMessage = function(msg, channel) {
+        try {
+            var value, target, isasync;
+            
+            if (isRemote(msg)) {
+                value = unmarshall(msg.methods, channel, msg.refid);
+                this.emit('remote', value);
+                return;
+            }
+            
+            if (isCall(msg)) {
+                if (msg.refid) {
+                    target = obj.getElement(msg.refid);
+                    isasync = obj.isAsync(msg.name);
+                }
+                else {
+                    target = obj;
+                    if (asyncs && asyncs.indexOf(msg.name) >= 0)
+                        isasync = true;
+                }
+
+                if (isasync) {
+                    var args = msg.args ? msg.args : [];
+                    if (hasReply(msg))
+                        args.push(function (err, value) {
+                            if (err)
+                                channel.write( { resid: msg.resid, err: err } );
+                            else
+                                channel.write( { resid: msg.resid, value: value } );
+                        });
+                    else
+                        args.push(function (err, msg) { });
+
+                    target[msg.name].apply(target, args);
+                } 
+                else {
+                    value = target[msg.name].apply(target, msg.args);
+                        
+                    if (hasReply(msg))
+                        channel.write( { resid: msg.resid, value: value } );
+                }
+                    
+                return;
+            }
+            
+            if (isResponse(msg)) {
+                value = msg.value;
+                
+                if (isRemote(value))
+                    value = unmarshall(value.methods, channel, value.refid);
+                
+                var cb = responsescb[msg.resid];
+                delete responsescb[msg.resid];
+                
+                if (cb.length == 2)
+                    if (msg.err)
+                        cb(msg.err);
+                    else
+                        cb(null, value);
+                else
+                    cb(value);
+                    
+                return;
+            }
+            
+            this.emit('message', msg);
+        }
+        catch (ex) {
+            if (isCall(msg) && hasReply(msg))
+                channel.write( { resid: msg.resid, err: ex.toString() } );
+        }
+    }
+}
+
+util.inherits(Remote, process.EventEmitter);
+
+function RemoteServer(obj, asyncs)
+{
+    Remote.call(this, obj, asyncs);
+    var reference;
+    var self = this;
+    
+    if (obj)
+        reference = marshall(obj);
+    
+	var server = simplemessages.createServer(function(channel) {
+        if (reference)
+            channel.write(reference);
+        
+		channel.on('data', function(msg) {
+            self.processMessage(msg, channel);
+		});
+        
+		channel.on('end', function() { self.emit('end'); });
+		channel.on('close', function() { self.emit('close'); });
+		channel.on('error', function(err) { /*self.emit('error', err);*/ });
+	});
+    
+	this.listen = function(port, host) {
+        server.listen(port, host);
+    }
+    
+    this.close = function() {
+        server.close();
+    }
+}
+
+util.inherits(RemoteServer, Remote);
+
+function isRemote(msg)
+{
+    return msg != null && msg.methods != null;
+}
+
+function isCall(msg)
+{
+    return msg != null && msg.name != null;
+}
+
+function isResponse(msg)
+{
+    return msg != null && msg.resid != null;
+}
+
+function hasReply(msg)
+{
+    return msg != null && msg.resid != null;
+}
+
+function RemoteClient(obj, asyncs) {
+    Remote.call(this, obj, asyncs);
+    var self = this;
+    var channel;
+    var reference;
+    
+    if (obj)
+        reference = marshall(obj);
+    
+    this.connect = function(port, host) {
+        channel = simplemessages.createClient(port, host, function() { if (reference) channel.write(reference); });
+        
+        channel.on('data', function(msg) {
+            self.processMessage(msg, channel);
+        });
+        
+        channel.on('end', function() { self.emit('end'); });
+        channel.on('error', function(err) { self.emit('error', err); });
+        channel.on('close', function() { self.emit('close'); });
+    }
+    
+    this.end = function()
+    {
+        if (channel)
+            channel.end();
+    }
+}
+
+util.inherits(RemoteClient, Remote);
+
+var maxresid = 0;
+var responsescb = {};
+
+function marshall(obj)
+{
+    var methods = [];
+    
+    for (var n in obj)
+        if (typeof obj[n] == 'function')
+            methods.push(n);
+    
+    return { methods: methods };
+}
+
+function unmarshall(methods, channel, refid)
+{
+    var obj = {};
+    
+    if (refid)
+        obj.refid = refid;
+    
+    for (var n in methods) {
+        var mthname = methods[n];
+        obj[mthname] = makeFunction(mthname, channel);
+    }
+    
+    function makeFunction(mthname, channel) {
+        return function() { 
+            var args = asArray(arguments);
+            var responseid;
+          
+            // last argument is a callback
+            
+            if (args && args.length > 0 && typeof args[args.length-1] == 'function')
+            {
+                maxresid++;
+                responseid = maxresid;
+                responsescb[responseid] = args[args.length-1];
+                args = args.slice(0, args.length-1);
+            }
+            
+            var msg = {
+                name: mthname,
+                args: args
+            };
+            
+            if (responseid)
+                msg.resid = responseid;
+                
+            if (this.refid)
+                msg.refid = this.refid;
+            
+            channel.write(msg); 
+        }
+    }
+    
+    return obj;
+}
+
+// Hack: function receives an array-like object but apply expects an array
+
+function asArray(obj)
+{
+    if (Array.isArray(obj))
+        return obj;
+        
+    var result = [];
+    
+    for (var n in obj)
+        result[parseInt(n)] = obj[n];
+        
+    return result;
+}
+
+function Registry(obj, asyncs)
+{
+    this.getReference = function(name) {
+        if (obj[name] == null)
+            return null;
+            
+        var reference = marshall(obj[name]);
+        reference.refid = name;
+        
+        return reference;
+    };
+    
+    this.getElement = function (name) {
+        return obj[name];
+    };
+
+    this.isAsync = function (mthname) {
+        if (!asyncs)
+            return false;
+
+        return asyncs.indexOf(mthname) >= 0;
+    }
+}
+
+exports.createRemoteServer = function(obj, asyncs) {
+    return new RemoteServer(obj, asyncs);
+}
+
+exports.createRemoteClient = function(obj, asyncs) {
+    return new RemoteClient(obj, asyncs);
+}
+
+exports.createRegistry = function(obj, asyncs) {
+    return new Registry(obj, asyncs);
+}
+
+exports.marshall = marshall;
+
 
 }).call(this,require('_process'))
-},{"_process":334,"events":329,"net":116,"simplemessages":507,"util":364}],507:[function(require,module,exports){
-
-var net = require('net'),
-    util = require('util'),
-    os = require('objectstream');
-
-function Server(fn)
-{
-    var server;
-    
-    server = net.createServer(function(socket) {
-        fn(os.createStream(socket));
-    });
-    
-    this.listen = function(port, domain) {
-        server.listen(port, domain);
-    };
-    
-    this.close = function() { server.close(); }
-}
-
-exports.createServer = function(fn) {
-    return new Server(fn);
-}
-
-exports.createClient = function(port, host, connect)
-{
-    var socket;
-
-    if (typeof port === 'object') {
-        socket = port;
-        port = undefined;
-    }
-
-    if (typeof host === 'function') {
-        connect = host;
-        host = undefined;
-    }
-
-    if (!socket)
-        socket = net.connect(port, host);
-
-    var stream = os.createStream(socket);
-
-    if (connect)
-        socket.on('connect', connect);
-
-    return stream;
-}
-
+},{"_process":319,"events":314,"net":101,"simplemessages":492,"util":349}],492:[function(require,module,exports){
 
-},{"net":116,"objectstream":508,"util":364}],508:[function(require,module,exports){
+var net = require('net'),
+    util = require('util'),
+    os = require('objectstream');
+
+function Server(fn)
+{
+    var server;
+    
+    server = net.createServer(function(socket) {
+        fn(os.createStream(socket));
+    });
+    
+    this.listen = function(port, domain) {
+        server.listen(port, domain);
+    };
+    
+    this.close = function() { server.close(); }
+}
+
+exports.createServer = function(fn) {
+    return new Server(fn);
+}
+
+exports.createClient = function(port, host, connect)
+{
+    var socket;
+
+    if (typeof port === 'object') {
+        socket = port;
+        port = undefined;
+    }
+
+    if (typeof host === 'function') {
+        connect = host;
+        host = undefined;
+    }
+
+    if (!socket)
+        socket = net.connect(port, host);
+
+    var stream = os.createStream(socket);
+
+    if (connect)
+        socket.on('connect', connect);
+
+    return stream;
+}
+
+
+},{"net":101,"objectstream":493,"util":349}],493:[function(require,module,exports){
 (function (process){
-
-'use strict'
-
-var util = require('util');
-
-var EventEmitter = process.EventEmitter;
-
-function ObjectDeserializeStream(stream) {
-	EventEmitter.call(this);
-    var buffer = '';
-    var self = this;
-
-    stream.on('data', function (data) {
-        buffer += data.toString();
-
-        for (var p = buffer.indexOf('\n'); p >= 0; p = buffer.indexOf('\n')) {
-            var line = buffer.substring(0, p);
-
-            if (line && line[line.length-1] == '\r')
-                line = line.substring(0, line.length - 1);
-
-            buffer = buffer.substring(p + 1);
-
-            if (!line)
-                continue;
-
-            try {
-                var obj = JSON.parse(line);
-                self.emit('data', obj);
-            }
-            catch (err) {
-                self.emit('error', err);
-                throw err;
-            }
-        }
-    });
-
-    stream.on('end', function () { self.emit('end'); });
-    stream.on('close', function () { self.emit('close'); });
-    stream.on('error', function (err) { self.emit('error', err); });
-}
-
-util.inherits(ObjectDeserializeStream, EventEmitter);
-
-function ObjectSerializeStream(stream) {
-	EventEmitter.call(this);
-    var self = this;
-
-    this.write = function (obj) {
-        try {
-            var json = JSON.stringify(obj);
-
-            if (!stream.writable)
-                throw "socket is invalid";
-                
-            stream.write(json + '\n');
-        }
-        catch (err) {
-            this.emit('error', err);
-            throw err;
-        }
-    };
-
-    this.end = function () {
-        try {
-            stream.end();
-        }
-        catch (err) {
-            this.emit('error', err);
-        }
-    };
-
-    // for http://nodejs.org/api/stream.html#stream_event_drain
-    // http://nodejs.org/api/events.html#events_emitter_once_event_listener
-    this.once = function (name, fn) {
-        stream.once(name, fn);
-    };
-
-    stream.on('error', function (err) { self.emit('error', err); });
-    stream.on('drain', function () { self.emit('drain'); });
-    stream.on('finish', function () { self.emit('finish'); });
-    stream.on('pipe', function (src) { self.emit('pipe', src); });
-    stream.on('unpipe', function (src) { self.emit('unpipe', src); });
-}
-
-util.inherits(ObjectSerializeStream, EventEmitter);
-
-function ObjectStream(readstream, writestream) {
-    writestream = writestream || readstream;
-
-	EventEmitter.call(this);
-    var self = this;
-
-    var input = new ObjectDeserializeStream(readstream);
-    input.on('data', function (data) { self.emit('data', data); });
-    input.on('error', function (err) { self.emit('error', err); });
-    input.on('end', function () { self.emit('end'); });
-
-    var output = new ObjectSerializeStream(writestream);
-    output.on('close', function () { self.emit('close'); });
-    output.on('error', function (err) { self.emit('error', err); });
-    output.on('drain', function () { self.emit('drain'); });
-
-    this.write = function (obj) {
-        if (writestream.writable)
-            output.write(obj); 
-    }
-    
-    this.end = function () { output.end(); }
-}
-
-util.inherits(ObjectStream, EventEmitter);
-
-module.exports = {
-    createStream: function (readstream, writestream) { return new ObjectStream(readstream, writestream); },
-    createSerializeStream: function (stream) { return new ObjectSerializeStream(stream); },
-    createDeserializeStream: function (stream) { return new ObjectDeserializeStream(stream); }
-};
-
+
+'use strict'
+
+var util = require('util');
+
+var EventEmitter = process.EventEmitter;
+
+function ObjectDeserializeStream(stream) {
+	EventEmitter.call(this);
+    var buffer = '';
+    var self = this;
+
+    stream.on('data', function (data) {
+        buffer += data.toString();
+
+        for (var p = buffer.indexOf('\n'); p >= 0; p = buffer.indexOf('\n')) {
+            var line = buffer.substring(0, p);
+
+            if (line && line[line.length-1] == '\r')
+                line = line.substring(0, line.length - 1);
+
+            buffer = buffer.substring(p + 1);
+
+            if (!line)
+                continue;
+
+            try {
+                var obj = JSON.parse(line);
+                self.emit('data', obj);
+            }
+            catch (err) {
+                self.emit('error', err);
+                throw err;
+            }
+        }
+    });
+
+    stream.on('end', function () { self.emit('end'); });
+    stream.on('close', function () { self.emit('close'); });
+    stream.on('error', function (err) { self.emit('error', err); });
+}
+
+util.inherits(ObjectDeserializeStream, EventEmitter);
+
+function ObjectSerializeStream(stream) {
+	EventEmitter.call(this);
+    var self = this;
+
+    this.write = function (obj) {
+        try {
+            var json = JSON.stringify(obj);
+
+            if (!stream.writable)
+                throw "socket is invalid";
+                
+            stream.write(json + '\n');
+        }
+        catch (err) {
+            this.emit('error', err);
+            throw err;
+        }
+    };
+
+    this.end = function () {
+        try {
+            stream.end();
+        }
+        catch (err) {
+            this.emit('error', err);
+        }
+    };
+
+    // for http://nodejs.org/api/stream.html#stream_event_drain
+    // http://nodejs.org/api/events.html#events_emitter_once_event_listener
+    this.once = function (name, fn) {
+        stream.once(name, fn);
+    };
+
+    stream.on('error', function (err) { self.emit('error', err); });
+    stream.on('drain', function () { self.emit('drain'); });
+    stream.on('finish', function () { self.emit('finish'); });
+    stream.on('pipe', function (src) { self.emit('pipe', src); });
+    stream.on('unpipe', function (src) { self.emit('unpipe', src); });
+}
+
+util.inherits(ObjectSerializeStream, EventEmitter);
+
+function ObjectStream(readstream, writestream) {
+    writestream = writestream || readstream;
+
+	EventEmitter.call(this);
+    var self = this;
+
+    var input = new ObjectDeserializeStream(readstream);
+    input.on('data', function (data) { self.emit('data', data); });
+    input.on('error', function (err) { self.emit('error', err); });
+    input.on('end', function () { self.emit('end'); });
+
+    var output = new ObjectSerializeStream(writestream);
+    output.on('close', function () { self.emit('close'); });
+    output.on('error', function (err) { self.emit('error', err); });
+    output.on('drain', function () { self.emit('drain'); });
+
+    this.write = function (obj) {
+        if (writestream.writable)
+            output.write(obj); 
+    }
+    
+    this.end = function () { output.end(); }
+}
+
+util.inherits(ObjectStream, EventEmitter);
+
+module.exports = {
+    createStream: function (readstream, writestream) { return new ObjectStream(readstream, writestream); },
+    createSerializeStream: function (stream) { return new ObjectSerializeStream(stream); },
+    createDeserializeStream: function (stream) { return new ObjectDeserializeStream(stream); }
+};
+
 
 }).call(this,require('_process'))
-},{"_process":334,"util":364}],509:[function(require,module,exports){
+},{"_process":319,"util":349}],494:[function(require,module,exports){
 module.exports = /*process.env.TYPR_COV
   ? require('./lib-cov/typr.js')
   :*/ require('./lib/typr.js');
 
-},{"./lib/typr.js":510}],510:[function(require,module,exports){
+},{"./lib/typr.js":495}],495:[function(require,module,exports){
 var toStr = Object.prototype.toString
   , t = {};
 
@@ -122085,7 +120114,7 @@ t.hasKeys = function (o) {
 
 module.exports = t;
 
-},{}],511:[function(require,module,exports){
+},{}],496:[function(require,module,exports){
 /*
  * winston.js: Top-level include defining Winston.
  *
@@ -122252,7 +120281,7 @@ Object.defineProperty(winston, 'default', {
   }
 });
 
-},{"./winston/common":512,"./winston/config":513,"./winston/container":517,"./winston/exception":518,"./winston/logger":519,"./winston/transports":520,"./winston/transports/transport":521,"pkginfo":534}],512:[function(require,module,exports){
+},{"./winston/common":497,"./winston/config":498,"./winston/container":502,"./winston/exception":503,"./winston/logger":504,"./winston/transports":505,"./winston/transports/transport":506,"pkginfo":519}],497:[function(require,module,exports){
 (function (Buffer){
 /*
  * common.js: Internal helper and utility functions for winston
@@ -122739,7 +120768,7 @@ exports.stringArrayToSet = function (strArray, errMsg) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./config":513,"buffer":132,"crypto":137,"cycle":533,"fs":116,"stream":353,"string_decoder":360,"util":364}],513:[function(require,module,exports){
+},{"./config":498,"buffer":117,"crypto":122,"cycle":518,"fs":101,"stream":338,"string_decoder":345,"util":349}],498:[function(require,module,exports){
 /*
  * config.js: Default settings for all levels that winston knows about
  *
@@ -122803,7 +120832,7 @@ function mixin (target) {
   return target;
 };
 
-},{"./config/cli-config":514,"./config/npm-config":515,"./config/syslog-config":516,"colors/safe":532}],514:[function(require,module,exports){
+},{"./config/cli-config":499,"./config/npm-config":500,"./config/syslog-config":501,"colors/safe":517}],499:[function(require,module,exports){
 /*
  * cli-config.js: Config that conform to commonly used CLI logging levels.
  *
@@ -122839,7 +120868,7 @@ cliConfig.colors = {
   warn: 'yellow',
   error: 'red'
 };
-},{}],515:[function(require,module,exports){
+},{}],500:[function(require,module,exports){
 /*
  * npm-config.js: Config that conform to npm logging levels.
  *
@@ -122867,7 +120896,7 @@ npmConfig.colors = {
   warn: 'yellow',
   error: 'red'
 };
-},{}],516:[function(require,module,exports){
+},{}],501:[function(require,module,exports){
 /*
  * syslog-config.js: Config that conform to syslog logging levels.
  *
@@ -122899,7 +120928,7 @@ syslogConfig.colors = {
   info: 'green',
   debug: 'blue',
 };
-},{}],517:[function(require,module,exports){
+},{}],502:[function(require,module,exports){
 /*
  * container.js: Inversion of control container for winston logger instances
  *
@@ -123028,7 +121057,7 @@ Container.prototype._delete = function (id) {
 }
 
 
-},{"../winston":511,"./common":512,"util":364}],518:[function(require,module,exports){
+},{"../winston":496,"./common":497,"util":349}],503:[function(require,module,exports){
 (function (process){
 /*
  * exception.js: Utility methods for gathing information about uncaughtExceptions.
@@ -123088,7 +121117,7 @@ exception.getTrace = function (err) {
 };
 
 }).call(this,require('_process'))
-},{"_process":334,"os":332,"stack-trace":535}],519:[function(require,module,exports){
+},{"_process":319,"os":317,"stack-trace":520}],504:[function(require,module,exports){
 (function (process){
 /*
  * logger.js: Core logger object used by winston.
@@ -123793,7 +121822,7 @@ Logger.prototype._onError = function (transport, err) {
 };
 
 }).call(this,require('_process'))
-},{"./common":512,"./config":513,"./exception":518,"_process":334,"async":522,"events":329,"stream":353,"util":364}],520:[function(require,module,exports){
+},{"./common":497,"./config":498,"./exception":503,"_process":319,"async":507,"events":314,"stream":338,"util":349}],505:[function(require,module,exports){
 (function (__dirname){
 /*
  * transports.js: Set of all transports Winston knows about
@@ -123830,7 +121859,7 @@ fs.readdirSync(path.join(__dirname, 'transports')).forEach(function (file) {
   });
 });
 }).call(this,"/node_modules\\winston\\lib\\winston")
-},{"./common":512,"fs":116,"path":333}],521:[function(require,module,exports){
+},{"./common":497,"fs":101,"path":318}],506:[function(require,module,exports){
 /*
  * transport.js: Base Transport object for all Winston transports.
  *
@@ -123967,7 +121996,7 @@ Transport.prototype.logException = function (msg, meta, callback) {
   this.log(self.exceptionsLevel, msg, meta, function () { });
 };
 
-},{"events":329,"util":364}],522:[function(require,module,exports){
+},{"events":314,"util":349}],507:[function(require,module,exports){
 (function (process,global){
 /*!
  * async
@@ -125254,7 +123283,7 @@ Transport.prototype.logException = function (msg, meta, callback) {
 }());
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":334}],523:[function(require,module,exports){
+},{"_process":319}],508:[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -125431,7 +123460,7 @@ for (var map in colors.maps) {
 }
 
 defineProps(colors, init());
-},{"./custom/trap":524,"./custom/zalgo":525,"./maps/america":526,"./maps/rainbow":527,"./maps/random":528,"./maps/zebra":529,"./styles":530,"./system/supports-colors":531}],524:[function(require,module,exports){
+},{"./custom/trap":509,"./custom/zalgo":510,"./maps/america":511,"./maps/rainbow":512,"./maps/random":513,"./maps/zebra":514,"./styles":515,"./system/supports-colors":516}],509:[function(require,module,exports){
 module['exports'] = function runTheTrap (text, options) {
   var result = "";
   text = text || "Run the trap, drop the bass";
@@ -125478,7 +123507,7 @@ module['exports'] = function runTheTrap (text, options) {
 
 }
 
-},{}],525:[function(require,module,exports){
+},{}],510:[function(require,module,exports){
 // please no
 module['exports'] = function zalgo(text, options) {
   text = text || "   he is here   ";
@@ -125584,7 +123613,7 @@ module['exports'] = function zalgo(text, options) {
   return heComes(text);
 }
 
-},{}],526:[function(require,module,exports){
+},{}],511:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function() {
@@ -125597,7 +123626,7 @@ module['exports'] = (function() {
     }
   }
 })();
-},{"../colors":523}],527:[function(require,module,exports){
+},{"../colors":508}],512:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function () {
@@ -125612,7 +123641,7 @@ module['exports'] = (function () {
 })();
 
 
-},{"../colors":523}],528:[function(require,module,exports){
+},{"../colors":508}],513:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function () {
@@ -125621,13 +123650,13 @@ module['exports'] = (function () {
     return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
   };
 })();
-},{"../colors":523}],529:[function(require,module,exports){
+},{"../colors":508}],514:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = function (letter, i, exploded) {
   return i % 2 === 0 ? letter : colors.inverse(letter);
 };
-},{"../colors":523}],530:[function(require,module,exports){
+},{"../colors":508}],515:[function(require,module,exports){
 /*
 The MIT License (MIT)
 
@@ -125705,7 +123734,7 @@ Object.keys(codes).forEach(function (key) {
   style.open = '\u001b[' + val[0] + 'm';
   style.close = '\u001b[' + val[1] + 'm';
 });
-},{}],531:[function(require,module,exports){
+},{}],516:[function(require,module,exports){
 (function (process){
 /*
 The MIT License (MIT)
@@ -125769,7 +123798,7 @@ module.exports = (function () {
   return false;
 })();
 }).call(this,require('_process'))
-},{"_process":334}],532:[function(require,module,exports){
+},{"_process":319}],517:[function(require,module,exports){
 //
 // Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
 //
@@ -125779,7 +123808,7 @@ module.exports = (function () {
 //
 var colors = require('./lib/colors');
 module['exports'] = colors;
-},{"./lib/colors":523}],533:[function(require,module,exports){
+},{"./lib/colors":508}],518:[function(require,module,exports){
 /*
     cycle.js
     2013-02-19
@@ -125951,7 +123980,7 @@ cycle.retrocycle = function retrocycle($) {
     return $;
 };
 
-},{}],534:[function(require,module,exports){
+},{}],519:[function(require,module,exports){
 (function (__dirname){
 /*
  * pkginfo.js: Top-level include for the pkginfo module
@@ -126090,7 +124119,7 @@ pkginfo(module, {
   target: pkginfo
 });
 }).call(this,"/node_modules\\winston\\node_modules\\pkginfo\\lib")
-},{"fs":116,"path":333}],535:[function(require,module,exports){
+},{"fs":101,"path":318}],520:[function(require,module,exports){
 exports.get = function(belowFn) {
   var oldLimit = Error.stackTraceLimit;
   Error.stackTraceLimit = Infinity;
@@ -126203,7 +124232,7 @@ exports._createParsedCallSite = function(properties) {
   return callSite;
 };
 
-},{}],536:[function(require,module,exports){
+},{}],521:[function(require,module,exports){
 module.exports={
   "name": "devapt",
   "version": "1.0.0",
@@ -126248,6 +124277,7 @@ module.exports={
     "babel-core": "^6.7.4",
     "baconjs": "^0.7.84",
     "bunyan": "^1.5.1",
+    "chokidar": "^1.4.3",
     "commander": "^2.9.0",
     "compression": "^1.6.1",
     "epilogue": "^0.5.2",
@@ -126332,8 +124362,6 @@ var _assert = require('assert');
 
 var _assert2 = _interopRequireDefault(_assert);
 
-var _immutable = require('immutable');
-
 var _loggable = require('../common/base/loggable');
 
 var _loggable2 = _interopRequireDefault(_loggable);
@@ -126357,28 +124385,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { fromJS } from 'immutable'
 
 var context = 'browser/runtime';
 
-/**
- * DEFAULT RUNTIME SETTINGS
+/**
+ * DEFAULT RUNTIME SETTINGS
  */
-var default_settings = {};
+// const default_settings = {}
 
-var test_build = 'kkkk';
+var test_build = 'lll';
+console.log(test_build, 'livereload check');
 
-/**
- * @file client runtime class - main library interface.
- * @author Luc BORIES
- * @license Apache-2.0
+/**
+ * @file client runtime class - main library interface.
+ * @author Luc BORIES
+ * @license Apache-2.0
  */
 
 var ClientRuntime = function (_Loggable) {
 	_inherits(ClientRuntime, _Loggable);
 
-	/**
-  * Create a client Runtime instance.
-  * @returns {nothing}
+	/**
+  * Create a client Runtime instance.
+  * @returns {nothing}
   */
 
 	function ClientRuntime() {
@@ -126398,10 +124428,10 @@ var ClientRuntime = function (_Loggable) {
 		return _this;
 	}
 
-	/**
-  * Load runtime settings.
-  * @param {object} arg_settings - runtime settings
-  * @returns {object} promise
+	/**
+  * Load runtime settings.
+  * @param {object} arg_settings - runtime settings
+  * @returns {object} promise
   */
 
 
@@ -126419,11 +124449,11 @@ var ClientRuntime = function (_Loggable) {
 			// this.separate_level_1()
 		}
 
-		/**
-   * Register a remote service.
-   * @param {string} arg_svc_name - service name
-   * @param {object} arg_svc_settings - service settiings
-   * @returns {nothing}
+		/**
+   * Register a remote service.
+   * @param {string} arg_svc_name - service name
+   * @param {object} arg_svc_settings - service settiings
+   * @returns {nothing}
    */
 
 	}, {
@@ -126442,10 +124472,10 @@ var ClientRuntime = function (_Loggable) {
 			// this.leave_group('register_service')
 		}
 
-		/**
-   * Get a service by its name.
-   * @param {string} arg_name - service name
-   * @returns {Service}
+		/**
+   * Get a service by its name.
+   * @param {string} arg_name - service name
+   * @returns {Service}
    */
 
 	}, {
@@ -126453,6 +124483,17 @@ var ClientRuntime = function (_Loggable) {
 		value: function service(arg_name) {
 			// console.info('getting/creating service', arg_name)
 			return arg_name in this.services ? this.services[arg_name] : undefined;
+		}
+
+		/**
+   * Emit a ping request through SocketIO
+   */
+
+	}, {
+		key: 'ping',
+		value: function ping() {
+			var socketio = io();
+			socketio.emit('ping');
 		}
 	}]);
 
@@ -126462,17 +124503,6 @@ var ClientRuntime = function (_Loggable) {
 exports.default = ClientRuntime;
 
 
-},{"../common/base/loggable":10,"../common/loggers/logger_manager":31,"./logger_svc":2,"./service":3,"assert":117,"immutable":470,"typr":509}]},{},[1]);
+},{"../common/base/loggable":10,"../common/loggers/logger_manager":22,"./logger_svc":2,"./service":3,"assert":102,"typr":494}]},{},[1]);
 
 //# sourceMappingURL=devapt-browser.js.map
-ap
-
-
-
-
-
-
-
-
-
-

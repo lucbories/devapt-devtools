@@ -29,6 +29,7 @@
 					"port":8081,
 					"protocole":"http",
 					"middlewares":[],
+					"use_socketio":true,
 					
 					"security": {
 						"authentication": {
