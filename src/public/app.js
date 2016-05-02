@@ -87,9 +87,10 @@ function test_socket_2(runtime)
 		}
 	)
 	
-	
 	svc.subscribe()
-	svc_socket.on('post',
+	
+	const metrics_post_stream = svc.post()
+	metrics_post_stream.onValue(
 		(data) => {
 			console.log('receive /' + svc_name + '/post:', data)
 		}

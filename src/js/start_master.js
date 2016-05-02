@@ -31,7 +31,7 @@ const optional_trace_settings = {
 		*		- load security setting
 		*/
 		"RuntimeStage1":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -40,7 +40,7 @@ const optional_trace_settings = {
 		* 		- create services
 		*/
 		"RuntimeStage2":{
-			"enabled":false
+			"enabled":true
 		},
 		
 		/**
@@ -76,13 +76,23 @@ const runtime_settings = {
 	
 	'master':{
 		'name':'NodeA',
-		'host':'localhost',
-		'port':5000
+		
+		'msg_bus':{
+			'type':'server',
+			'host':'localhost',
+			'port':5000
+		},
+		'logs_bus':{
+			'type':'local'
+		},
+		'metrics_bus':{
+			'type':'local'
+		}
 	},
 	
 	'base_dir': path.join(__dirname, '..'),
 	
-	"settings_provider": {
+	'settings_provider': {
 		'source':'local_file',
 		'relative_path':'resources/world.json'
 	},
@@ -95,11 +105,17 @@ const runtime_settings = {
 // LOAD RUNTIME AND PLUGINS
 runtime.load(runtime_settings)
 .then(
-	(/*result*/) => {
-		const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
-		const plugin = new Foundation6(plugins_mgr)
-
-		plugins_mgr.load_at_first(plugin)
+	(result) => {
+		if (result)
+		{
+			const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
+			const plugin = new Foundation6(plugins_mgr)
+			
+			plugins_mgr.load_at_first(plugin)
+			return
+		}
+		
+		console.log('runtime.load failure')
 	},
 	
 	(reason) => {

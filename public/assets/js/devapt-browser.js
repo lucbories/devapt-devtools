@@ -162,6 +162,9 @@ var DEFAULT_OPS = [{
 	name: 'get',
 	operands: []
 }, {
+	name: 'post',
+	operands: []
+}, {
 	name: 'subscribe',
 	operands: []
 },
@@ -1545,7 +1548,7 @@ var Instance = function (_Settingsable) {
 		// Loggable.static_info(context, 'Instance.constructor(%s,%s,%s)', arg_collection, arg_class, arg_name)
 
 		(0, _assert2.default)(_typr2.default.isString(arg_collection) && arg_collection.length > 0, context + ':bad collection string');
-		(0, _assert2.default)(NOT_STORED_COLLECTIONS.indexOf(arg_collection) > -1 || _index.store.has_collection(arg_collection), context + ':bad collection');
+		(0, _assert2.default)(NOT_STORED_COLLECTIONS.indexOf(arg_collection) > -1 || _index.store.has_collection(arg_collection), context + ':bad collection for ' + arg_collection);
 		(0, _assert2.default)(_typr2.default.isString(arg_class) && arg_class.length > 0, context + ':bad class [' + arg_class + ']');
 		(0, _assert2.default)(_typr2.default.isString(arg_name) && arg_name.length > 0, context + ':bad name [' + arg_name + ']');
 
@@ -2484,7 +2487,7 @@ var Module = function (_Instance) {
 exports.default = Module;
 
 
-},{"../resources/database":38,"../resources/menu":39,"../resources/menubar":40,"../resources/model_sequelize":42,"../resources/view":43,"../store/index":81,"./collection":5,"./instance":9,"./resource":14,"assert":102,"typr":494}],13:[function(require,module,exports){
+},{"../resources/database":42,"../resources/menu":43,"../resources/menubar":44,"../resources/model_sequelize":46,"../resources/view":47,"../store/index":81,"./collection":5,"./instance":9,"./resource":14,"assert":102,"typr":494}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3103,7 +3106,7 @@ var runtime_singleton = new Runtime();
 exports.default = runtime_singleton;
 
 
-},{"../datas/providers/json_provider":19,"../loggers/logger_manager":22,"../runtime/index":44,"./collection":5,"./context":6,"./registered_service":13,"./security":16,"./settingsable":17,"./transaction":18,"assert":102,"immutable":455,"typr":494}],16:[function(require,module,exports){
+},{"../datas/providers/json_provider":19,"../loggers/logger_manager":22,"../runtime/index":48,"./collection":5,"./context":6,"./registered_service":13,"./security":16,"./settingsable":17,"./transaction":18,"assert":102,"immutable":455,"typr":494}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3389,7 +3392,7 @@ var Security = function (_Errorable) {
 exports.default = Security;
 
 
-},{"../security/authentication_manager":52,"../security/authorization_manager":56,"./errorable":7,"assert":102,"immutable":455,"typr":494}],17:[function(require,module,exports){
+},{"../security/authentication_manager":56,"../security/authorization_manager":60,"./errorable":7,"assert":102,"immutable":455,"typr":494}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3429,7 +3432,7 @@ var Settingsable = function (_Loggable) {
 	/**
   * Create a Settingsable instance.
   * @extends Loggable
-  * @param {object} arg_settings - instance settings map.
+  * @param {Immutable.Map} arg_settings - instance settings map.
   * @param {string} arg_log_context - trace context string.
   * @returns {nothing}
   */
@@ -3448,7 +3451,7 @@ var Settingsable = function (_Loggable) {
 
 	/**
   * Set instance settings.
-  * @param {object} arg_settings - instance settings map.
+  * @param {Immutable.Map} arg_settings - instance settings map.
   * @returns {nothing}
   */
 
@@ -3461,7 +3464,7 @@ var Settingsable = function (_Loggable) {
 
 		/**
    * Get instance settings.
-   * @returns {object}
+   * @returns {Immutable.Map}
    */
 
 	}, {
@@ -4107,7 +4110,7 @@ Transaction.ONE = TYPE_ONE;
 Transaction.EVERY = TYPE_EVERY;
 
 
-},{"../metrics/metric_duration":24,"../metrics/metric_host":25,"../store/index":81,"./instance":9,"assert":102,"typr":494}],19:[function(require,module,exports){
+},{"../metrics/metric_duration":28,"../metrics/metric_host":29,"../store/index":81,"./instance":9,"assert":102,"typr":494}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -5212,6 +5215,742 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _baconjs = require('baconjs');
+
+var _baconjs2 = _interopRequireDefault(_baconjs);
+
+var _settingsable = require('../base/settingsable');
+
+var _settingsable2 = _interopRequireDefault(_settingsable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/messaging/bus_client';
+
+/**
+ * @file Base class for message bus client.
+ * 
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var BusClient = function (_Settingsable) {
+	_inherits(BusClient, _Settingsable);
+
+	/**
+  * Create a bus client.
+  * @param {string} arg_name - instance name.
+  * @param {object} arg_settings - settings.
+  * @param {string} arg_log_context - trace context.
+  * @returns {nothing}
+  */
+
+	function BusClient(arg_name, arg_settings, arg_log_context) {
+		_classCallCheck(this, BusClient);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BusClient).call(this, arg_settings, arg_log_context ? arg_log_context : context));
+
+		(0, _assert2.default)(_typr2.default.isString(arg_name), context + ':bad bus client name string');
+
+		_this.$name = arg_name;
+		_this.is_bus_client = true;
+
+		_this.server_type = _this.get_setting('type', 'server'); // values: local, server
+		_this.server_host = _this.get_setting('host', 'localhost');
+		_this.server_port = _this.get_setting('port', 8081);
+
+		(0, _assert2.default)(_typr2.default.isString(_this.server_type) & (_this.server_type == 'local' || _this.server_type == 'server'), context + ':bad server type string');
+		(0, _assert2.default)(_typr2.default.isString(_this.server_host), context + ':bad server host string');
+		(0, _assert2.default)(_typr2.default.isString(_this.server_port) || _typr2.default.isNumber(_this.server_port), context + ':bad server port string or number');
+
+		_this.msg_bus_client = undefined;
+		_this.msg_bus_server = undefined;
+		_this.msg_bus_stream = new _baconjs2.default.Bus();
+		return _this;
+	}
+
+	/**
+  * Get instance unique name.
+  * @returns {string}
+  */
+
+
+	_createClass(BusClient, [{
+		key: 'get_name',
+		value: function get_name() {
+			return this.$name;
+		}
+
+		/**
+   * Set server.
+   * @param {Simplebus.Server}
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'set_bus_server',
+		value: function set_bus_server(arg_msg_bus_server) {
+			(0, _assert2.default)(_typr2.default.isObject(arg_msg_bus_server) && _typr2.default.isFunction(arg_msg_bus_server.post) && _typr2.default.isFunction(arg_msg_bus_server.subscribe), context + ':set_bus_server:bad server object');
+			this.msg_bus_server = arg_msg_bus_server;
+		}
+
+		/**
+   * Get received messages stream.
+   * @returns {Baconjs.Bus}
+   */
+
+	}, {
+		key: 'get_stream',
+		value: function get_stream() {
+			return this.msg_bus_stream;
+		}
+
+		/**
+   * Send a message to an other client.
+   * @abstract
+   * @param {string} arg_node_name - recipient node name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'send_msg',
+		value: function send_msg() /*arg_node_name, arg_payload*/{}
+
+		/**
+   * Send a message to the metrics server.
+   * @param {string} arg_metric_type - type of metrics.
+   * @param {object} arg_metrics - metrics plain object.
+   * @returns {nothing}
+   */
+		// send_metrics(arg_metric_type, arg_metrics)
+		// {
+		// 	assert( T.isString(arg_metric_type), context + ':send_metrics:bad metrics type string')
+		// 	assert( T.isArray(arg_metrics) || T.isObject(arg_metrics), context + ':send_metrics:bad metrics object or array')
+
+		// 	const metrics = T.isArray(arg_metrics) ? arg_metrics : [arg_metrics]
+		// 	const count = metrics.length
+
+		// 	// TODO Manage a buffer of metrics and send every N metrics
+
+		// 	this.send_msg('metrics_server', { is_metrics_message:true, 'metric':arg_metric_type, 'metrics': metrics, 'metrics_count':count } )
+		// }
+
+		/**
+   * Process a received message.
+   * @abstract
+   * @param {string} arg_sender - sender node/server name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'receive_msg',
+		value: function receive_msg(arg_sender, arg_payload) {
+			(0, _assert2.default)(_typr2.default.isString(arg_sender), context + ':receive_msg:bad sender string');
+			(0, _assert2.default)(_typr2.default.isObject(arg_payload), context + ':receive_msg:bad payload object');
+
+			this.info('receiving a message from ' + arg_sender);
+			// console.log(arg_payload, 'arg_payload')
+
+			// if (this.bus_server && arg_sender != this.get_name())
+			// {
+			// 	this.send_msg(arg_sender, 'ACK msg reception')
+			// }
+		}
+	}]);
+
+	return BusClient;
+}(_settingsable2.default);
+
+exports.default = BusClient;
+
+
+},{"../base/settingsable":17,"assert":102,"baconjs":100,"typr":494}],25:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _instance = require('../base/instance');
+
+var _instance2 = _interopRequireDefault(_instance);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/messaging/bus_server';
+
+/**
+ * @file Bus server base class.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var BusServer = function (_Instance) {
+	_inherits(BusServer, _Instance);
+
+	/**
+  * Create a server instance.
+  * @extends Server
+  * @abstract
+  * @param {string} arg_name - server name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
+  */
+
+	function BusServer(arg_name, arg_settings, arg_context) {
+		_classCallCheck(this, BusServer);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BusServer).call(this, arg_name, 'BusServer', arg_settings, arg_context ? arg_context : context));
+
+		_this.is_bus_server = true;
+
+		_this.server_type = _this.get_setting('type', 'server'); // values: local, server
+		_this.server_host = _this.get_setting('host', 'localhost');
+		_this.server_port = _this.get_setting('port', 8081);
+		(0, _assert2.default)(_typr2.default.isString(_this.server_host), context + ':build_server:bad host string');
+		(0, _assert2.default)(_typr2.default.isString(_this.server_port) || _typr2.default.isNumber(_this.server_port), context + ':build_server:bad port string or number');
+		return _this;
+	}
+
+	/**
+  * Build server.
+  * @returns {nothing}
+  */
+
+
+	_createClass(BusServer, [{
+		key: 'build_server',
+		value: function build_server() {
+			this.enter_group('build_server');
+
+			console.error(context + ':build_server:not yet implemented');
+
+			this.leave_group('build_server');
+		}
+
+		/**
+   * Enable server (start it).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'enable',
+		value: function enable() {
+			this.enter_group('enable Bus server');
+
+			console.error(context + ':enable:not yet implemented');
+
+			this.leave_group('enable Bus server');
+		}
+
+		/**
+   * Disable server (stop it).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'disable',
+		value: function disable() {
+			this.enter_group('disable Bus server');
+
+			console.error(context + ':disable:not yet implemented');
+
+			this.leave_group('disable Bus server');
+		}
+
+		/**
+   * Post a message on the bus.
+   * @param {object} arg_msg - message payload.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'post',
+		value: function post() /*arg_msg*/{
+			console.error(context + ':post:not yet implemented');
+		}
+
+		/**
+   * Subscribe to messages of the bus.
+   * @param {string|object} arg_filter - messages criteria for filtering.
+   * @param {function} arg_handler - subscription callback as f(msg).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'subscribe',
+		value: function subscribe() /*arg_filter, arg_handler*/{
+			console.error(context + ':subscribe:not yet implemented');
+		}
+
+		/**
+   * Create a bus client.
+   * @param {string} arg_name - client name
+   * @returns {BusClient}
+   */
+
+	}, {
+		key: 'create_client',
+		value: function create_client(arg_name) {
+			console.error(context + ':create_client:not yet implemented:' + arg_name);
+
+			return undefined;
+		}
+
+		// SOCKET SERVER EVENT HANDLERS
+
+	}], [{
+		key: 'on_server_connection',
+		value: function on_server_connection() {
+			console.log(context + ':connection on bus server');
+		}
+	}, {
+		key: 'on_server_close',
+		value: function on_server_close() {
+			console.log(context + ':close on bus server');
+		}
+	}, {
+		key: 'on_server_error',
+		value: function on_server_error() {
+			console.log(context + ':error on bus server');
+		}
+	}, {
+		key: 'on_server_listening',
+		value: function on_server_listening() {
+			console.log(context + ':listening on bus server');
+		}
+
+		// SOCKET CLIENT EVENT HANDLERS
+
+	}, {
+		key: 'on_client_connect',
+		value: function on_client_connect() {
+			console.log(context + ':connect on bus client');
+		}
+	}, {
+		key: 'on_client_data',
+		value: function on_client_data() {
+			console.log(context + ':data on bus client');
+		}
+	}, {
+		key: 'on_client_error',
+		value: function on_client_error(e) {
+			console.log(context + ':error on bus client', e);
+		}
+	}, {
+		key: 'on_client_close',
+		value: function on_client_close() {
+			console.log(context + ':close on bus client');
+		}
+	}, {
+		key: 'on_client_end',
+		value: function on_client_end() {
+			console.log(context + ':end on bus client');
+		}
+	}, {
+		key: 'on_client_timeout',
+		value: function on_client_timeout() {
+			console.log(context + ':timeout on bus client');
+		}
+	}]);
+
+	return BusServer;
+}(_instance2.default);
+
+exports.default = BusServer;
+
+
+},{"../base/instance":9,"assert":102,"typr":494}],26:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typr = require('typr');
+
+var _typr2 = _interopRequireDefault(_typr);
+
+var _assert = require('assert');
+
+var _assert2 = _interopRequireDefault(_assert);
+
+var _simplebus = require('simplebus');
+
+var _simplebus2 = _interopRequireDefault(_simplebus);
+
+var _bus_client = require('./bus_client');
+
+var _bus_client2 = _interopRequireDefault(_bus_client);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var context = 'common/messaging/simplebus_client';
+
+/**
+ * @file Base class for message bus client.
+ * 
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var SimpleBusClient = function (_BusClient) {
+	_inherits(SimpleBusClient, _BusClient);
+
+	/**
+  * Create a bus client.
+  * @param {string} arg_name - instance name.
+  * @param {string} arg_log_context - trace context.
+  * @param {LoggerManager} arg_logger_manager - logger manager object (optional).
+  * @returns {nothing}
+  */
+
+	function SimpleBusClient(arg_name, arg_log_context, arg_logger_manager) {
+		_classCallCheck(this, SimpleBusClient);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleBusClient).call(this, arg_name, arg_log_context, arg_logger_manager));
+
+		_this.is_simplebus_client = true;
+
+		_this.init_client();
+		return _this;
+	}
+
+	/**
+  * Create a simplebus client.
+  * @returns {nothing}
+  */
+
+
+	_createClass(SimpleBusClient, [{
+		key: 'init_client',
+		value: function init_client() {
+			var self = this;
+
+			// CREATE CLIENT OBJECT
+			if (this.msg_server_type == 'local') {
+				this.msg_bus_client = _simplebus2.default.createClient();
+			} else {
+				this.msg_bus_client = _simplebus2.default.createClient(this.msg_server_host, this.msg_server_port);
+			}
+
+			// START CLIENT
+			this.msg_bus_client.start(function () {
+				self.msg_bus_client.subscribe({ 'target': this.$name }, function (arg_msg) {
+					(0, _assert2.default)(_typr2.default.isObject(arg_msg) && _typr2.default.isObject(arg_msg.payload), context + ':subscribe:bad payload object');
+
+					self.info('receiving a message from ' + arg_msg.sender);
+					self.msg_bus_stream.post(arg_msg);
+				});
+
+				self.info('Messages bus client is started');
+			});
+
+			// SET SOCKET CLIENT HANDLERS
+			self.msg_bus_client.on('connect', self.on_client_connect);
+			self.msg_bus_client.on('close', self.on_client_close);
+			self.msg_bus_client.on('data', self.on_client_data);
+			self.msg_bus_client.on('end', self.on_client_end);
+			self.msg_bus_client.on('error', self.on_client_error);
+			self.msg_bus_client.on('timeout', self.on_client_timeout);
+		}
+
+		/**
+   * Send a message to an other client.
+   * @abstract
+   * @param {string} arg_node_name - recipient node name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'send_msg',
+		value: function send_msg(arg_recipient_name, arg_payload) {
+			this.info('sending a message to [' + arg_recipient_name + ']');
+
+			// CHECK ARGS
+			if (_typr2.default.isString(arg_payload)) {
+				arg_payload = { msg: arg_payload };
+			}
+			(0, _assert2.default)(_typr2.default.isString(arg_recipient_name), context + ':send_msg:bad node name string');
+			(0, _assert2.default)(_typr2.default.isObject(arg_payload), context + ':send_msg:bad payload object');
+
+			// A BUS SERVER EXISTS
+			if (this.msg_bus_server) {
+				this.msg_bus_server.post({ 'target': arg_recipient_name, 'sender': this.get_name(), 'payload': arg_payload });
+				return;
+			}
+
+			// A BUS CLIENT EXISTS
+			if (this.bus_client) {
+				this.msg_bus_client.post({ 'target': arg_recipient_name, 'sender': this.get_name(), 'payload': arg_payload });
+				return;
+			}
+
+			this.error('no client nor server !');
+		}
+	}], [{
+		key: 'on_client_connect',
+		value: function on_client_connect() {
+			console.log(context + ':connect on bus client');
+		}
+	}, {
+		key: 'on_client_data',
+		value: function on_client_data() {
+			console.log(context + ':data on bus client');
+		}
+	}, {
+		key: 'on_client_error',
+		value: function on_client_error(e) {
+			console.log(context + ':error on bus client', e);
+		}
+	}, {
+		key: 'on_client_close',
+		value: function on_client_close() {
+			console.log(context + ':close on bus client');
+		}
+	}, {
+		key: 'on_client_end',
+		value: function on_client_end() {
+			console.log(context + ':end on bus client');
+		}
+	}, {
+		key: 'on_client_timeout',
+		value: function on_client_timeout() {
+			console.log(context + ':timeout on bus client');
+		}
+	}]);
+
+	return SimpleBusClient;
+}(_bus_client2.default);
+
+exports.default = SimpleBusClient;
+
+
+},{"./bus_client":24,"assert":102,"simplebus":489,"typr":494}],27:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _simplebus = require('simplebus');
+
+var _simplebus2 = _interopRequireDefault(_simplebus);
+
+var _bus_server = require('./bus_server');
+
+var _bus_server2 = _interopRequireDefault(_bus_server);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import T from 'typr'
+// import assert from 'assert'
+
+var context = 'common/messaging/simplebus_server';
+
+/**
+ * @file SimpleBus server class.
+ * @author Luc BORIES
+ * @license Apache-2.0
+ */
+
+var SimpleBusServer = function (_BusServer) {
+	_inherits(SimpleBusServer, _BusServer);
+
+	/**
+  * Create a server instance.
+  * @extends BusServer
+  * @param {string} arg_name - server name
+  * @param {object} arg_settings - plugin settings map
+  * @param {string} arg_log_context - trace context string.
+  * @returns {nothing}
+  */
+
+	function SimpleBusServer(arg_name, arg_settings, arg_context) {
+		_classCallCheck(this, SimpleBusServer);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleBusServer).call(this, arg_name, arg_settings, arg_context ? arg_context : context));
+
+		_this.is_simplebus_server = true;
+		return _this;
+	}
+
+	/**
+  * Build server.
+  * @returns {nothing}
+  */
+
+
+	_createClass(SimpleBusServer, [{
+		key: 'build_server',
+		value: function build_server() {
+			this.enter_group('build_server');
+
+			var host = this.server_host;
+			var port = this.server_port;
+			var size = this.get_setting('size', 1000);
+
+			console.log(context + ':build_server %s:%s of size %s', host, port, size);
+
+			this.bus = _simplebus2.default.createBus(size);
+
+			if (this.server_type == 'server') {
+				this.server = _simplebus2.default.createServer(this.bus, port, host);
+			}
+
+			// SET SOCKET SERVER HANDLERS
+			// TODO server.on doesn't exist
+			// this.server.on('connection', BusServer.on_server_connection)
+			// this.server.on('close', BusServer.on_client_close)
+			// this.server.on('error', BusServer.on_client_error)
+			// this.server.on('listening', BusServer.on_client_listening)
+
+			this.leave_group('build_server');
+		}
+
+		/**
+   * Enable server (start it).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'enable',
+		value: function enable() {
+			this.enter_group('enable Bus server');
+
+			this.server.start();
+
+			this.leave_group('enable Bus server');
+		}
+
+		/**
+   * Disable server (stop it).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'disable',
+		value: function disable() {
+			this.enter_group('disable Bus server');
+
+			this.server.stop();
+
+			this.leave_group('disable Bus server');
+		}
+
+		/**
+   * Post a message on the bus.
+   * @param {object} arg_msg - message payload.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'post',
+		value: function post(arg_msg) {
+			this.bus.post(arg_msg);
+		}
+
+		/**
+   * Subscribe to messages of the bus.
+   * @param {string|object} arg_filter - messages criteria for filtering.
+   * @param {function} arg_handler - subscription callback as f(msg).
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'subscribe',
+		value: function subscribe(arg_filter, arg_handler) {
+			this.bus.subscribe(arg_filter, arg_handler);
+		}
+
+		// SOCKET SERVER EVENT HANDLERS
+
+	}], [{
+		key: 'on_server_connection',
+		value: function on_server_connection() {
+			console.log(context + ':connection on bus server');
+		}
+	}, {
+		key: 'on_server_close',
+		value: function on_server_close() {
+			console.log(context + ':close on bus server');
+		}
+	}, {
+		key: 'on_server_error',
+		value: function on_server_error() {
+			console.log(context + ':error on bus server');
+		}
+	}, {
+		key: 'on_server_listening',
+		value: function on_server_listening() {
+			console.log(context + ':listening on bus server');
+		}
+	}]);
+
+	return SimpleBusServer;
+}(_bus_server2.default);
+
+exports.default = SimpleBusServer;
+
+
+},{"./bus_server":25,"simplebus":489}],28:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _metric = require('../base/metric');
 
 var _metric2 = _interopRequireDefault(_metric);
@@ -5305,7 +6044,7 @@ var MetricDuration = function (_Metric) {
 exports.default = MetricDuration;
 
 
-},{"../base/metric":11}],25:[function(require,module,exports){
+},{"../base/metric":11}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -5389,7 +6128,7 @@ var MetricHost = function (_Metric) {
 exports.default = MetricHost;
 
 
-},{"../base/metric":11}],26:[function(require,module,exports){
+},{"../base/metric":11}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5704,7 +6443,7 @@ exports.default = MetricHttp;
 
 
 }).call(this,require('_process'))
-},{"../../../package.json":521,"../base/metric":11,"_process":319,"assert":102,"node-uuid":475,"typr":494}],27:[function(require,module,exports){
+},{"../../../package.json":521,"../base/metric":11,"_process":319,"assert":102,"node-uuid":475,"typr":494}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -5879,7 +6618,7 @@ var MetricHttpReducer = function () {
 exports.default = MetricHttpReducer;
 
 
-},{"./metric_http_state":28,"assert":102,"typr":494}],28:[function(require,module,exports){
+},{"./metric_http_state":32,"assert":102,"typr":494}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5949,7 +6688,7 @@ var MetricHttpState = function () {
 exports.default = MetricHttpState;
 
 
-},{}],29:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6110,7 +6849,7 @@ var parser = {
 exports.default = parser;
 
 
-},{"fs":101,"ini":456}],30:[function(require,module,exports){
+},{"fs":101,"ini":456}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6253,7 +6992,7 @@ var FeaturesManager = function (_PluginsManager) {
 exports.default = FeaturesManager;
 
 
-},{"./plugins_manager":34,"assert":102,"typr":494}],31:[function(require,module,exports){
+},{"./plugins_manager":38,"assert":102,"typr":494}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6416,7 +7155,7 @@ var FeaturesPlugin = function (_Plugin) {
 exports.default = FeaturesPlugin;
 
 
-},{"../base/runtime":15,"./plugin":32,"assert":102,"typr":494}],32:[function(require,module,exports){
+},{"../base/runtime":15,"./plugin":36,"assert":102,"typr":494}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6537,7 +7276,7 @@ var Plugin = function (_Instance) {
 exports.default = Plugin;
 
 
-},{"../base/instance":9,"assert":102,"typr":494}],33:[function(require,module,exports){
+},{"../base/instance":9,"assert":102,"typr":494}],37:[function(require,module,exports){
 (function (__dirname){
 'use strict';
 
@@ -6635,7 +7374,7 @@ exports.default = PluginsFactory;
 
 
 }).call(this,"/dist\\common\\plugins")
-},{"../../plugins/default/services_default_plugin":99,"../plugins/rendering_manager":35,"../plugins/services_manager":36,"assert":102,"typr":494}],34:[function(require,module,exports){
+},{"../../plugins/default/services_default_plugin":99,"../plugins/rendering_manager":39,"../plugins/services_manager":40,"assert":102,"typr":494}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6952,7 +7691,7 @@ var PluginsManager = function (_Errorable) {
 exports.default = PluginsManager;
 
 
-},{"../base/collection":5,"../base/errorable":7,"../base/runtime":15,"assert":102,"typr":494}],35:[function(require,module,exports){
+},{"../base/collection":5,"../base/errorable":7,"../base/runtime":15,"assert":102,"typr":494}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7098,7 +7837,7 @@ var RenderingManager = function (_FeaturesManager) {
 exports.default = RenderingManager;
 
 
-},{"./features_manager":30,"assert":102,"typr":494}],36:[function(require,module,exports){
+},{"./features_manager":34,"assert":102,"typr":494}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7169,7 +7908,7 @@ var ServicesManager = function (_FeaturesManager) {
 exports.default = ServicesManager;
 
 
-},{"./features_manager":30}],37:[function(require,module,exports){
+},{"./features_manager":34}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7225,7 +7964,7 @@ var ServicesPlugin = function (_FeaturesPlugin) {
 exports.default = ServicesPlugin;
 
 
-},{"./features_plugin":31}],38:[function(require,module,exports){
+},{"./features_plugin":35}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7382,7 +8121,7 @@ var Database = function (_Resource) {
 exports.default = Database;
 
 
-},{"../base/resource":14,"assert":102,"sequelize":101,"typr":494}],39:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"sequelize":101,"typr":494}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7452,7 +8191,7 @@ var Menu = function (_Resource) {
 exports.default = Menu;
 
 
-},{"../base/resource":14,"assert":102,"typr":494}],40:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7522,7 +8261,7 @@ var Menubar = function (_Resource) {
 exports.default = Menubar;
 
 
-},{"../base/resource":14,"assert":102,"typr":494}],41:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7650,7 +8389,7 @@ var Model = function (_Resource) {
 exports.default = Model;
 
 
-},{"../base/resource":14,"../base/runtime":15,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],42:[function(require,module,exports){
+},{"../base/resource":14,"../base/runtime":15,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8121,7 +8860,7 @@ var ModelSequelize = function (_Model) {
 exports.default = ModelSequelize;
 
 
-},{"../base/runtime":15,"../resources/model":41,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],43:[function(require,module,exports){
+},{"../base/runtime":15,"../resources/model":45,"../utils/to_boolean":97,"assert":102,"epilogue":382,"sequelize":101,"typr":494}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8191,7 +8930,7 @@ var View = function (_Resource) {
 exports.default = View;
 
 
-},{"../base/resource":14,"assert":102,"typr":494}],44:[function(require,module,exports){
+},{"../base/resource":14,"assert":102,"typr":494}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8233,7 +8972,7 @@ exports.RuntimeStage4Executable = _runtime_stage4_executable2.default;
 exports.RuntimeStage5Executable = _runtime_stage5_executable2.default;
 
 
-},{"./runtime_stage0_executable":46,"./runtime_stage1_executable":47,"./runtime_stage2_executable":48,"./runtime_stage3_executable":49,"./runtime_stage4_executable":50,"./runtime_stage5_executable":51}],45:[function(require,module,exports){
+},{"./runtime_stage0_executable":50,"./runtime_stage1_executable":51,"./runtime_stage2_executable":52,"./runtime_stage3_executable":53,"./runtime_stage4_executable":54,"./runtime_stage5_executable":55}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8327,7 +9066,7 @@ var RuntimeExecutable = function (_Executable) {
 exports.default = RuntimeExecutable;
 
 
-},{"../base/executable":8,"assert":102,"typr":494}],46:[function(require,module,exports){
+},{"../base/executable":8,"assert":102,"typr":494}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8417,7 +9156,7 @@ var RuntimeStage0Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage0Executable;
 
 
-},{"../servers/node":62,"./runtime_executable":45,"assert":102}],47:[function(require,module,exports){
+},{"../servers/node":63,"./runtime_executable":49,"assert":102}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8572,7 +9311,7 @@ var RuntimeStage1Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage1Executable;
 
 
-},{"../datas/providers/json_provider":19,"../store/config/actions":66,"../store/index":81,"./runtime_executable":45,"typr":494}],48:[function(require,module,exports){
+},{"../datas/providers/json_provider":19,"../store/config/actions":66,"../store/index":81,"./runtime_executable":49,"typr":494}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8714,7 +9453,7 @@ var RuntimeStage2Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage2Executable;
 
 
-},{"../plugins/plugins_factory":33,"../store/index":81,"./runtime_executable":45,"assert":102,"typr":494}],49:[function(require,module,exports){
+},{"../plugins/plugins_factory":37,"../store/index":81,"./runtime_executable":49,"assert":102,"typr":494}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8948,7 +9687,7 @@ var RuntimeStage3Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage3Executable;
 
 
-},{"../base/module":12,"../resources/database":38,"../store/index":81,"./runtime_executable":45,"assert":102}],50:[function(require,module,exports){
+},{"../base/module":12,"../resources/database":42,"../store/index":81,"./runtime_executable":49,"assert":102}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9041,7 +9780,7 @@ var RuntimeStage4Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage4Executable;
 
 
-},{"../base/application":4,"../store/index":81,"./runtime_executable":45}],51:[function(require,module,exports){
+},{"../base/application":4,"../store/index":81,"./runtime_executable":49}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9113,7 +9852,7 @@ var RuntimeStage5Executable = function (_RuntimeExecutable) {
 exports.default = RuntimeStage5Executable;
 
 
-},{"./runtime_executable":45}],52:[function(require,module,exports){
+},{"./runtime_executable":49}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9185,8 +9924,6 @@ var AuthenticationManager = function (_PluginsManager) {
 
 		_this.authentication_is_enabled = true;
 		_this.authentication_mode = null;
-
-		console.log(_this.is_trace_enabled, 'this.is_trace_enabled');
 		return _this;
 	}
 
@@ -9567,7 +10304,7 @@ var AuthenticationManager = function (_PluginsManager) {
 exports.default = AuthenticationManager;
 
 
-},{"../plugins/plugins_manager":34,"./authentication_plugin_url":54,"assert":102,"node-forge":474,"typr":494}],53:[function(require,module,exports){
+},{"../plugins/plugins_manager":38,"./authentication_plugin_url":58,"assert":102,"node-forge":474,"typr":494}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9761,7 +10498,7 @@ var AuthenticationPlugin = function (_Plugin) {
 exports.default = AuthenticationPlugin;
 
 
-},{"../plugins/plugin":32}],54:[function(require,module,exports){
+},{"../plugins/plugin":36}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10129,7 +10866,7 @@ var AuthenticationPluginURL = function (_AuthenticationPlugin) {
 exports.default = AuthenticationPluginURL;
 
 
-},{"../base/runtime":15,"./authentication_plugin":53,"assert":102,"lowdb":458,"lowdb/file-sync":457,"path":318,"typr":494}],55:[function(require,module,exports){
+},{"../base/runtime":15,"./authentication_plugin":57,"assert":102,"lowdb":458,"lowdb/file-sync":457,"path":318,"typr":494}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10311,7 +11048,7 @@ var AuthenticationWrapper = function (_Settingsable) {
 exports.default = AuthenticationWrapper;
 
 
-},{"../base/runtime":15,"../base/settingsable":17,"assert":102,"typr":494}],56:[function(require,module,exports){
+},{"../base/runtime":15,"../base/settingsable":17,"assert":102,"typr":494}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10482,491 +11219,7 @@ var AuthorizationManager = function (_PluginsManager) {
 exports.default = AuthorizationManager;
 
 
-},{"../plugins/plugins_manager":34,"assert":102,"typr":494}],57:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _instance = require('../base/instance');
-
-var _instance2 = _interopRequireDefault(_instance);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/servers/bus_client_instance';
-
-/**
- * @file Base class for message bus client instances.
- * 
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var BusClientInstance = function (_Instance) {
-	_inherits(BusClientInstance, _Instance);
-
-	/**
-  * Create a bus client instance.
-  * @extends Instance
-  * @param {string} arg_collection - collection name.
-  * @param {string} arg_class - class name.
-  * @param {string} arg_name - instance name.
-  * @param {object} arg_settings - settings plain object
-  * @param {string} arg_context - log context.
-  * @returns {nothing}
-  */
-
-	function BusClientInstance(arg_collection, arg_class, arg_name, arg_settings, arg_context) {
-		_classCallCheck(this, BusClientInstance);
-
-		if (!_typr2.default.isObject(arg_settings)) {
-			console.error(arg_collection, arg_class, arg_name, arg_settings, arg_context, 'arg_collection, arg_class, arg_name, arg_settings, arg_context');
-		}
-		(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad bus clientsettings object');
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BusClientInstance).call(this, arg_collection, arg_class, arg_name, arg_settings, arg_context ? arg_context : context));
-
-		_this.is_bus_instance = true;
-		return _this;
-	}
-
-	/**
-  * Initialize bus client.
-  * @param {string} arg_host - bus server host.
-  * @param {string} arg_port - bus server port.
-  * @returns {nothing}
-  */
-
-
-	_createClass(BusClientInstance, [{
-		key: 'init_bus_client',
-		value: function init_bus_client(arg_host, arg_port) {
-			this.enter_group('init_bus_client');
-
-			var BusServer = require('../servers/simplebus_server').default;
-			this.bus_client = BusServer.create_client(this, arg_host, arg_port);
-			this.bus_server_class = BusServer;
-			this.bus_server_host = arg_host;
-			this.bus_server_port = arg_port;
-
-			this.leave_group('init_bus_client');
-		}
-
-		/**
-   * Register instance to master node (nothing to do here).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'register_to_master',
-		value: function register_to_master() {
-			this.enter_group('register_to_master');
-
-			this.leave_group('register_to_master');
-		}
-
-		/**
-   * Send a message to a node.
-   * @param {string} arg_node_name - recipient node name.
-   * @param {object} arg_payload - message payload plain object.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'send_msg',
-		value: function send_msg(arg_node_name, arg_payload) {
-			if (_typr2.default.isString(arg_payload)) {
-				arg_payload = { msg: arg_payload };
-			}
-			(0, _assert2.default)(_typr2.default.isString(arg_node_name), context + ':send_msg:bad node name string');
-			(0, _assert2.default)(_typr2.default.isObject(arg_payload), context + ':send_msg:bad payload object');
-
-			this.info('sending a message to [' + arg_node_name + ']');
-
-			if (this.bus_server) {
-				this.bus_server.post({ 'target': arg_node_name, 'sender': this.get_name(), 'payload': arg_payload });
-			} else {
-				if (this.bus_client) {
-					this.bus_client.post({ 'target': arg_node_name, 'sender': this.get_name(), 'payload': arg_payload });
-				}
-			}
-		}
-
-		/**
-   * Send a message to the metrics server.
-   * @param {string} arg_metric_type - type of metrics.
-   * @param {object} arg_metrics - metrics plain object.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'send_metrics',
-		value: function send_metrics(arg_metric_type, arg_metrics) {
-			(0, _assert2.default)(_typr2.default.isString(arg_metric_type), context + ':send_metrics:bad metrics type string');
-			(0, _assert2.default)(_typr2.default.isArray(arg_metrics) || _typr2.default.isObject(arg_metrics), context + ':send_metrics:bad metrics object or array');
-
-			var metrics = _typr2.default.isArray(arg_metrics) ? arg_metrics : [arg_metrics];
-			var count = metrics.length;
-
-			// TODO Manage a buffer of metrics and send every N metrics
-
-			this.send_msg('metrics_server', { is_metrics_message: true, 'metric': arg_metric_type, 'metrics': metrics, 'metrics_count': count });
-		}
-
-		/**
-   * Process a received message.
-   * @abstract
-   * @param {string} arg_sender - sender node/server name.
-   * @param {object} arg_payload - message payload plain object.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'receive_msg',
-		value: function receive_msg(arg_sender, arg_payload) {
-			(0, _assert2.default)(_typr2.default.isString(arg_sender), context + ':receive_msg:bad sender string');
-			(0, _assert2.default)(_typr2.default.isObject(arg_payload), context + ':receive_msg:bad payload object');
-
-			this.info('receiving a message from ' + arg_sender);
-			// console.log(arg_payload, 'arg_payload')
-
-			if (this.bus_server && arg_sender != this.get_name()) {
-				this.send_msg(arg_sender, 'ACK msg reception');
-			}
-		}
-	}]);
-
-	return BusClientInstance;
-}(_instance2.default);
-
-exports.default = BusClientInstance;
-
-
-},{"../base/instance":9,"../servers/simplebus_server":65,"assert":102,"typr":494}],58:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _server = require('./server');
-
-var _server2 = _interopRequireDefault(_server);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import T from 'typr'
-// import assert from 'assert'
-
-var context = 'common/servers/bus_server';
-
-/**
- * @file Bus server base class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var BusServer = function (_Server) {
-	_inherits(BusServer, _Server);
-
-	/**
-  * Create a server instance.
-  * @extends Server
-  * @abstract
-  * @param {string} arg_name - server name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
-  */
-
-	function BusServer(arg_name, arg_settings, arg_context) {
-		_classCallCheck(this, BusServer);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BusServer).call(this, arg_name, 'BusServer', arg_settings, arg_context ? arg_context : context));
-
-		_this.is_bus_server = true;
-		return _this;
-	}
-
-	/**
-  * Build server.
-  * @returns {nothing}
-  */
-
-
-	_createClass(BusServer, [{
-		key: 'build_server',
-		value: function build_server() {
-			this.enter_group('build_server');
-
-			console.error(context + ':build_server:not yet implemented');
-
-			this.leave_group('build_server');
-		}
-
-		/**
-   * Enable server (start it).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'enable',
-		value: function enable() {
-			this.enter_group('enable Bus server');
-
-			console.error(context + ':enable:not yet implemented');
-
-			this.leave_group('enable Bus server');
-		}
-
-		/**
-   * Disable server (stop it).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'disable',
-		value: function disable() {
-			this.enter_group('disable Bus server');
-
-			console.error(context + ':disable:not yet implemented');
-
-			this.leave_group('disable Bus server');
-		}
-
-		/**
-   * Post a message on the bus.
-   * @param {object} arg_msg - message payload.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'post',
-		value: function post(arg_msg) {
-			console.error(context + ':post:not yet implemented');
-		}
-
-		/**
-   * Subscribe to messages of the bus.
-   * @param {string|object} arg_filter - messages criteria for filtering.
-   * @param {function} arg_handler - subscription callback as f(msg).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'subscribe',
-		value: function subscribe(arg_filter, arg_handler) {
-			console.error(context + ':subscribe:not yet implemented');
-		}
-	}], [{
-		key: 'create_client',
-		value: function create_client(arg_node, arg_host, arg_port) {
-			console.error(context + ':create_client:not yet implemented');
-
-			return undefined;
-		}
-
-		// SOCKET SERVER EVENT HANDLERS
-
-	}, {
-		key: 'on_server_connection',
-		value: function on_server_connection() {
-			console.log(context + ':connection on bus server');
-		}
-	}, {
-		key: 'on_server_close',
-		value: function on_server_close() {
-			console.log(context + ':close on bus server');
-		}
-	}, {
-		key: 'on_server_error',
-		value: function on_server_error() {
-			console.log(context + ':error on bus server');
-		}
-	}, {
-		key: 'on_server_listening',
-		value: function on_server_listening() {
-			console.log(context + ':listening on bus server');
-		}
-
-		// SOCKET CLIENT EVENT HANDLERS
-
-	}, {
-		key: 'on_client_connect',
-		value: function on_client_connect() {
-			console.log(context + ':connect on bus client');
-		}
-	}, {
-		key: 'on_client_data',
-		value: function on_client_data() {
-			console.log(context + ':data on bus client');
-		}
-	}, {
-		key: 'on_client_error',
-		value: function on_client_error(e) {
-			console.log(context + ':error on bus client', e);
-		}
-	}, {
-		key: 'on_client_close',
-		value: function on_client_close() {
-			console.log(context + ':close on bus client');
-		}
-	}, {
-		key: 'on_client_end',
-		value: function on_client_end() {
-			console.log(context + ':end on bus client');
-		}
-	}, {
-		key: 'on_client_timeout',
-		value: function on_client_timeout() {
-			console.log(context + ':timeout on bus client');
-		}
-	}]);
-
-	return BusServer;
-}(_server2.default);
-
-exports.default = BusServer;
-
-
-},{"./server":64}],59:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _immutable = require('immutable');
-
-var _bus_client_instance = require('./bus_client_instance');
-
-var _bus_client_instance2 = _interopRequireDefault(_bus_client_instance);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/servers/bus_server_instance';
-
-/**
- * @file Base class for message bus server instances.
- * 
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var BusServerInstance = function (_BusClientInstance) {
-	_inherits(BusServerInstance, _BusClientInstance);
-
-	/**
-  * Create a bus server instance.
-  * @extends BusClientInstance
-  * @param {string} arg_collection - collection name.
-  * @param {string} arg_class - class name.
-  * @param {string} arg_name - instance name.
-  * @param {object} arg_settings - settings plain object
-  * @param {string} arg_context - log context.
-  * @returns {nothing}
-  */
-
-	function BusServerInstance(arg_collection, arg_class, arg_name, arg_settings, arg_context) {
-		_classCallCheck(this, BusServerInstance);
-
-		if (!_typr2.default.isObject(arg_settings)) {
-			console.error(arg_collection, arg_class, arg_name, arg_settings, arg_context, 'arg_collection, arg_class, arg_name, arg_settings, arg_context');
-		}
-		(0, _assert2.default)(_typr2.default.isObject(arg_settings), context + ':bad bus server settings object');
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BusServerInstance).call(this, arg_collection, arg_class ? arg_class.toString() : 'BusServerInstance', arg_name, arg_settings, arg_context ? arg_context : context));
-
-		_this.is_bus_instance = true;
-		return _this;
-	}
-
-	/**
-  * Initialize bus server.
-  * @param {string} arg_host - bus server host.
-  * @param {string} arg_port - bus server port.
-  * @returns {nothing}
-  */
-
-
-	_createClass(BusServerInstance, [{
-		key: 'init_bus_server',
-		value: function init_bus_server(arg_host, arg_port) {
-			this.enter_group('init_bus_server');
-
-			var BusServer = require('./simplebus_server').default;
-			// console.log(BusServer)
-
-			var self = this;
-			var node_server_cfg = {
-				'type': 'bus',
-				'host': arg_host,
-				'port': arg_port,
-				'protocole': 'msg',
-				'middlewares': []
-			};
-
-			this.bus_server = new BusServer(this.get_name() + '_bus_server', new _immutable.Map(node_server_cfg));
-			this.bus_server.load();
-			this.bus_server.enable();
-			this.bus_server.subscribe({ 'target': this.get_name() }, function (arg_msg) {
-				(0, _assert2.default)(_typr2.default.isObject(arg_msg) && _typr2.default.isObject(arg_msg.payload), context + ':subscribe:bad payload object');
-				self.receive_msg(arg_msg.sender, arg_msg.payload);
-			});
-			this.info('Messages bus server is started');
-
-			this.leave_group('init_bus_server');
-		}
-	}]);
-
-	return BusServerInstance;
-}(_bus_client_instance2.default);
-
-exports.default = BusServerInstance;
-
-
-},{"./bus_client_instance":57,"./simplebus_server":65,"assert":102,"immutable":455,"typr":494}],60:[function(require,module,exports){
+},{"../plugins/plugins_manager":38,"assert":102,"typr":494}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11145,7 +11398,7 @@ var ExpressServer = function (_Server) {
 exports.default = ExpressServer;
 
 
-},{"../base/runtime":15,"../metrics/metric_http":26,"./server":64,"assert":102,"compression":353,"express":389,"express-favicon":388,"http":339,"socket.io":101}],61:[function(require,module,exports){
+},{"../base/runtime":15,"../metrics/metric_http":30,"./server":65,"assert":102,"compression":353,"express":389,"express-favicon":388,"http":339,"socket.io":101}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11161,6 +11414,8 @@ var _typr2 = _interopRequireDefault(_typr);
 var _assert = require('assert');
 
 var _assert2 = _interopRequireDefault(_assert);
+
+var _immutable = require('immutable');
 
 var _server = require('./server');
 
@@ -11189,6 +11444,14 @@ var context = 'common/servers/metrics_server';
 var MetricsServer = function (_Server) {
 	_inherits(MetricsServer, _Server);
 
+	/**
+  * Create MetricsServer instance to process metrics records.
+  * @param {string} arg_name - server instance name
+  * @param {Immutable.Map} arg_settings - server instance settings
+  * @param {string} arg_context - logging context
+  * @returns {nothing}
+  */
+
 	function MetricsServer(arg_name, arg_settings, arg_context) {
 		_classCallCheck(this, MetricsServer);
 
@@ -11201,6 +11464,12 @@ var MetricsServer = function (_Server) {
 		return _this;
 	}
 
+	/**
+  * Build server.
+  * @returns {nothing}
+  */
+
+
 	_createClass(MetricsServer, [{
 		key: 'build_server',
 		value: function build_server() {
@@ -11208,8 +11477,51 @@ var MetricsServer = function (_Server) {
 
 			(0, _assert2.default)(this.server_protocole == 'bus', context + ':bad protocole for metric server [' + this.server_protocole + ']');
 
+			// CREATE MESSAGES BUS FOR METRICS
+			var default_bus_cfg = {
+				'type': 'bus',
+				'host': arg_host,
+				'port': arg_port,
+				'protocole': 'msg',
+				'middlewares': []
+			};
+			var metrics_bus_cfg = this.get_setting('metrics_bus', default_bus_cfg);
+			this.init_metrics_bus(metrics_bus_cfg);
+
 			this.leave_group('build_server');
 		}
+
+		/**
+   * Create and init messages bus server for metrics records.
+   * @param {object} arg_metrics_bus_cfg - messages bus settings.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'init_metrics_bus',
+		value: function init_metrics_bus(arg_metrics_bus_cfg) {
+			var BusServer = require('../messaging/simplebus_server').default;
+			// console.log(BusServer)
+
+			var self = this;
+
+			this.bus_server = new BusServer(this.get_name() + '_bus_server', new _immutable.Map(arg_metrics_bus_cfg));
+			this.bus_server.load();
+			this.bus_server.enable();
+			this.bus_server.subscribe({ 'target': this.get_name() }, function (arg_msg) {
+				(0, _assert2.default)(_typr2.default.isObject(arg_msg) && _typr2.default.isObject(arg_msg.payload), context + ':subscribe:bad payload object');
+				self.receive_msg(arg_msg.sender, arg_msg.payload);
+			});
+			this.info('Metrics messages bus server is started');
+		}
+
+		/**
+   * Process received message.
+   * @param {string} arg_sender - message emitter name.
+   * @param {object} arg_payload - message content.
+   * @returns {nothing}
+   */
+
 	}, {
 		key: 'receive_msg',
 		value: function receive_msg(arg_sender, arg_payload) {
@@ -11262,11 +11574,18 @@ var MetricsServer = function (_Server) {
 						this.http_state = this.http_reducer.reduce(this.http_state, arg_metrics);
 
 						// console.log(this.http_state, 'http state')
+						break;
 					}
 			}
 
 			this.leave_group('process_metric');
 		}
+
+		/**
+   * Get http state with all metrics.
+   * @returns {Object} - http state object.
+   */
+
 	}, {
 		key: 'get_http_metrics',
 		value: function get_http_metrics() {
@@ -11280,7 +11599,7 @@ var MetricsServer = function (_Server) {
 exports.default = MetricsServer;
 
 
-},{"../metrics/metric_http_reducer":27,"./server":64,"assert":102,"typr":494}],62:[function(require,module,exports){
+},{"../messaging/simplebus_server":27,"../metrics/metric_http_reducer":31,"./server":65,"assert":102,"immutable":455,"typr":494}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11307,9 +11626,17 @@ var _collection2 = _interopRequireDefault(_collection);
 
 var _server = require('../servers/server');
 
-var _bus_server_instance = require('../servers/bus_server_instance');
+var _instance = require('../base/instance');
 
-var _bus_server_instance2 = _interopRequireDefault(_bus_server_instance);
+var _instance2 = _interopRequireDefault(_instance);
+
+var _simplebus_server = require('../messaging/simplebus_server');
+
+var _simplebus_server2 = _interopRequireDefault(_simplebus_server);
+
+var _simplebus_client = require('../messaging/simplebus_client');
+
+var _simplebus_client2 = _interopRequireDefault(_simplebus_client);
 
 var _restify_server = require('../servers/restify_server');
 
@@ -11330,6 +11657,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import BusServerInstance from '../servers/bus_server_instance'
+
 // import VantageServer from '../servers/vantage_server'
 // import BusServer from '../servers/bus_server'
 
@@ -11352,8 +11681,8 @@ var STATE_UNREGISTERING = 'NODE_IS_UNREGISTERING_TO_MASTER';
  * @license Apache-2.0
  */
 
-var Node = function (_BusServerInstance) {
-	_inherits(Node, _BusServerInstance);
+var Node = function (_Instance) {
+	_inherits(Node, _Instance);
 
 	/**
   * Create a Node instance.
@@ -11375,6 +11704,7 @@ var Node = function (_BusServerInstance) {
 		_this.master_name = null;
 
 		_this.servers = new _collection2.default();
+		_this.msg_bus_server = undefined;
 
 		_this.switch_state(STATE_CREATED);
 		return _this;
@@ -11401,8 +11731,15 @@ var Node = function (_BusServerInstance) {
 			if (this.is_master) {
 				this.master_name = this.get_name();
 
-				this.init_bus_server(host, port);
-				this.bus_server.node = this;
+				var bus_settings = {
+					'type': 'server',
+					'host': host,
+					'port': port
+				};
+				this.msg_bus_server = new _simplebus_server2.default(this.get_name(), bus_settings, context);
+
+				// this.init_bus_server(host, port)
+				// this.bus_server.node = this
 
 				this.init_metrics_server(host, port);
 			}
@@ -11411,7 +11748,14 @@ var Node = function (_BusServerInstance) {
 			else {
 					this.master_name = master_cfg.name;
 
-					this.init_bus_client(host, port);
+					var _bus_settings = {
+						'type': 'server',
+						'host': host,
+						'port': port
+					};
+					this.msg_bus_client = new _simplebus_client2.default(this.get_name(), _bus_settings, context);
+
+					// this.init_bus_client(host, port)
 				}
 
 			this.leave_group('load()');
@@ -11700,12 +12044,12 @@ var Node = function (_BusServerInstance) {
 	}]);
 
 	return Node;
-}(_bus_server_instance2.default);
+}(_instance2.default);
 
 exports.default = Node;
 
 
-},{"../base/collection":5,"../servers/bus_server_instance":59,"../servers/express_server":60,"../servers/metrics_server":61,"../servers/restify_server":63,"../servers/server":64,"assert":102,"immutable":455,"typr":494}],63:[function(require,module,exports){
+},{"../base/collection":5,"../base/instance":9,"../messaging/simplebus_client":26,"../messaging/simplebus_server":27,"../servers/express_server":61,"../servers/metrics_server":62,"../servers/restify_server":64,"../servers/server":65,"assert":102,"immutable":455,"typr":494}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11847,7 +12191,7 @@ var RestifyServer = function (_Server) {
 exports.default = RestifyServer;
 
 
-},{"../metrics/metric_http":26,"./server":64,"assert":102,"restify":101}],64:[function(require,module,exports){
+},{"../metrics/metric_http":30,"./server":65,"assert":102,"restify":101}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11875,9 +12219,13 @@ var _collection = require('../base/collection');
 
 var _collection2 = _interopRequireDefault(_collection);
 
-var _bus_client_instance = require('./bus_client_instance');
+var _instance = require('../base/instance');
 
-var _bus_client_instance2 = _interopRequireDefault(_bus_client_instance);
+var _instance2 = _interopRequireDefault(_instance);
+
+var _simplebus_client = require('../messaging/simplebus_client');
+
+var _simplebus_client2 = _interopRequireDefault(_simplebus_client);
 
 var _authentication_wrapper = require('../security/authentication_wrapper');
 
@@ -11890,6 +12238,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import BusClientInstance from './bus_client_instance'
 
 var context = 'common/servers/server';
 
@@ -11911,8 +12260,8 @@ var ServerTypes = exports.ServerTypes = {
  * @license Apache-2.0
  */
 
-var Server = function (_BusClientInstance) {
-	_inherits(Server, _BusClientInstance);
+var Server = function (_Instance) {
+	_inherits(Server, _Instance);
 
 	/**
   * Create a server instance.
@@ -11927,11 +12276,13 @@ var Server = function (_BusClientInstance) {
 	function Server(arg_name, arg_class, arg_settings, arg_log_context) {
 		_classCallCheck(this, Server);
 
+		var log_context = arg_log_context ? arg_log_context : context;
+
 		if (!_typr2.default.isObject(arg_settings)) {
 			console.error(arg_class, arg_name, arg_settings, arg_log_context, 'arg_class, arg_name, arg_settings, arg_context');
 		}
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Server).call(this, 'servers', arg_class ? arg_class.toString() : 'Server', arg_name, arg_settings, arg_log_context ? arg_log_context : context));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Server).call(this, 'servers', arg_class ? arg_class.toString() : 'Server', arg_name, arg_settings, log_context));
 
 		_this.is_server = true;
 		_this.is_build = false;
@@ -11949,16 +12300,63 @@ var Server = function (_BusClientInstance) {
 
 		_this.authentication = new _authentication_wrapper2.default(arg_log_context ? arg_log_context : context);
 		// this.authorization = new AuthorizationWrapper(arg_log_context ? arg_log_context : context)
+
+		_this.msg_bus_client = undefined;
 		return _this;
 	}
 
-	/**
-  * Get security settings object into the server.
-  * @returns {object} - security settings
-  */
-
-
 	_createClass(Server, [{
+		key: 'init_bus_client',
+		value: function init_bus_client(arg_host, arg_port) {
+			var bus_settings = {
+				'type': 'server',
+				'host': arg_host,
+				'port': arg_port
+			};
+			this.msg_bus_client = new _simplebus_client2.default(this.get_name(), bus_settings, context);
+		}
+
+		/**
+   * Send a message to an other client.
+   * @abstract
+   * @param {string} arg_node_name - recipient node name.
+   * @param {object} arg_payload - message payload plain object.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'send_msg',
+		value: function send_msg(arg_node_name, arg_payload) {
+			this.msg_bus_client.send_msg(arg_node_name, arg_payload);
+		}
+
+		/**
+   * Send a message to the metrics server.
+   * @param {string} arg_metric_type - type of metrics.
+   * @param {object} arg_metrics - metrics plain object.
+   * @returns {nothing}
+   */
+
+	}, {
+		key: 'send_metrics',
+		value: function send_metrics(arg_metric_type, arg_metrics) {
+			(0, _assert2.default)(_typr2.default.isString(arg_metric_type), context + ':send_metrics:bad metrics type string');
+			(0, _assert2.default)(_typr2.default.isArray(arg_metrics) || _typr2.default.isObject(arg_metrics), context + ':send_metrics:bad metrics object or array');
+
+			var metrics = _typr2.default.isArray(arg_metrics) ? arg_metrics : [arg_metrics];
+			var count = metrics.length;
+
+			// TODO Manage a buffer of metrics and send every N metrics
+
+			this.msg_bus_client.send_msg('metrics_server', { is_metrics_message: true, 'metric': arg_metric_type, 'metrics': metrics, 'metrics_count': count });
+		}
+
+		/**
+   * Get security settings object into the server.
+   * @returns {object} - security settings
+   */
+
+	}, {
 		key: 'get_server_security_settings',
 		value: function get_server_security_settings() {
 			this.enter_group('get_security_settings');
@@ -12183,7 +12581,7 @@ var Server = function (_BusClientInstance) {
 	}]);
 
 	return Server;
-}(_bus_client_instance2.default);
+}(_instance2.default);
 
 /*
 https://engineering.gosquared.com/making-dashboard-faster
@@ -12240,252 +12638,7 @@ app.use(parallel([
 exports.default = Server;
 
 
-},{"../base/collection":5,"../security/authentication_wrapper":55,"../store/index":81,"./bus_client_instance":57,"assert":102,"immutable":455,"typr":494}],65:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typr = require('typr');
-
-var _typr2 = _interopRequireDefault(_typr);
-
-var _assert = require('assert');
-
-var _assert2 = _interopRequireDefault(_assert);
-
-var _simplebus = require('simplebus');
-
-var _simplebus2 = _interopRequireDefault(_simplebus);
-
-var _bus_server = require('./bus_server');
-
-var _bus_server2 = _interopRequireDefault(_bus_server);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var context = 'common/servers/simplebus_server';
-
-/**
- * @file SimpleBus server class.
- * @author Luc BORIES
- * @license Apache-2.0
- */
-
-var SimpleBusServer = function (_BusServer) {
-	_inherits(SimpleBusServer, _BusServer);
-
-	/**
-  * Create a server instance.
-  * @extends BusServer
-  * @param {string} arg_name - server name
-  * @param {object} arg_settings - plugin settings map
-  * @param {string} arg_log_context - trace context string.
-  * @returns {nothing}
-  */
-
-	function SimpleBusServer(arg_name, arg_settings, arg_context) {
-		_classCallCheck(this, SimpleBusServer);
-
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleBusServer).call(this, arg_name, arg_settings, arg_context ? arg_context : context));
-
-		_this.is_simplebus_server = true;
-		return _this;
-	}
-
-	/**
-  * Build server.
-  * @returns {nothing}
-  */
-
-
-	_createClass(SimpleBusServer, [{
-		key: 'build_server',
-		value: function build_server() {
-			this.enter_group('build_server');
-
-			var host = this.server_host;
-			var port = this.server_port;
-			var size = this.get_setting('size', 1000);
-
-			console.log('BusServer.build_server %s:%s of size %s', host, port, size);
-
-			this.bus = _simplebus2.default.createBus(size);
-			this.server = _simplebus2.default.createServer(this.bus, port, host);
-
-			// SET SOCKET SERVER HANDLERS
-			// TODO server.on doesn't exist
-			// this.server.on('connection', BusServer.on_server_connection)
-			// this.server.on('close', BusServer.on_client_close)
-			// this.server.on('error', BusServer.on_client_error)
-			// this.server.on('listening', BusServer.on_client_listening)
-
-			this.leave_group('build_server');
-		}
-
-		/**
-   * Enable server (start it).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'enable',
-		value: function enable() {
-			this.enter_group('enable Bus server');
-
-			this.server.start();
-
-			this.leave_group('enable Bus server');
-		}
-
-		/**
-   * Disable server (stop it).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'disable',
-		value: function disable() {
-			this.enter_group('disable Bus server');
-
-			this.server.stop();
-
-			this.leave_group('disable Bus server');
-		}
-
-		/**
-   * Post a message on the bus.
-   * @param {object} arg_msg - message payload.
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'post',
-		value: function post(arg_msg) {
-			this.bus.post(arg_msg);
-		}
-
-		/**
-   * Subscribe to messages of the bus.
-   * @param {string|object} arg_filter - messages criteria for filtering.
-   * @param {function} arg_handler - subscription callback as f(msg).
-   * @returns {nothing}
-   */
-
-	}, {
-		key: 'subscribe',
-		value: function subscribe(arg_filter, arg_handler) {
-			this.bus.subscribe(arg_filter, arg_handler);
-		}
-	}], [{
-		key: 'create_client',
-		value: function create_client(arg_node, arg_host, arg_port) {
-			var node_name = arg_node.get_name();
-			console.log('BusServer.create_client %s:%s for node %s', arg_host, arg_port, node_name);
-
-			var client = _simplebus2.default.createClient(arg_port, arg_host);
-
-			client.start(function () {
-				client.subscribe({ 'target': node_name }, function (arg_msg) {
-					// console.log(arg_msg, context + ':client.on_msg:enter')
-
-					(0, _assert2.default)(_typr2.default.isObject(arg_msg) && _typr2.default.isObject(arg_msg.payload), context + ':subscribe:bad payload object');
-					arg_node.receive_msg(arg_msg.sender, arg_msg.payload);
-
-					// console.log(context + ':client.on_msg:leave')
-				});
-
-				arg_node.info('Messages bus client is started');
-
-				if (arg_node.register_to_master) {
-					arg_node.register_to_master();
-				}
-			});
-
-			// SET SOCKET CLIENT HANDLERS
-			client.on('connect', _bus_server2.default.on_client_connect);
-			client.on('close', _bus_server2.default.on_client_close);
-			client.on('data', _bus_server2.default.on_client_data);
-			client.on('end', _bus_server2.default.on_client_end);
-			client.on('error', _bus_server2.default.on_client_error);
-			client.on('timeout', _bus_server2.default.on_client_timeout);
-
-			return client;
-		}
-
-		// SOCKET SERVER EVENT HANDLERS
-
-	}, {
-		key: 'on_server_connection',
-		value: function on_server_connection() {
-			console.log(context + ':connection on bus server');
-		}
-	}, {
-		key: 'on_server_close',
-		value: function on_server_close() {
-			console.log(context + ':close on bus server');
-		}
-	}, {
-		key: 'on_server_error',
-		value: function on_server_error() {
-			console.log(context + ':error on bus server');
-		}
-	}, {
-		key: 'on_server_listening',
-		value: function on_server_listening() {
-			console.log(context + ':listening on bus server');
-		}
-
-		// SOCKET CLIENT EVENT HANDLERS
-
-	}, {
-		key: 'on_client_connect',
-		value: function on_client_connect() {
-			console.log(context + ':connect on bus client');
-		}
-	}, {
-		key: 'on_client_data',
-		value: function on_client_data() {
-			console.log(context + ':data on bus client');
-		}
-	}, {
-		key: 'on_client_error',
-		value: function on_client_error(e) {
-			console.log(context + ':error on bus client', e);
-		}
-	}, {
-		key: 'on_client_close',
-		value: function on_client_close() {
-			console.log(context + ':close on bus client');
-		}
-	}, {
-		key: 'on_client_end',
-		value: function on_client_end() {
-			console.log(context + ':end on bus client');
-		}
-	}, {
-		key: 'on_client_timeout',
-		value: function on_client_timeout() {
-			console.log(context + ':timeout on bus client');
-		}
-	}]);
-
-	return SimpleBusServer;
-}(_bus_server2.default);
-
-exports.default = SimpleBusServer;
-
-
-},{"./bus_server":58,"assert":102,"simplebus":489,"typr":494}],66:[function(require,module,exports){
+},{"../base/collection":5,"../base/instance":9,"../messaging/simplebus_client":26,"../security/authentication_wrapper":59,"../store/index":81,"assert":102,"immutable":455,"typr":494}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13069,7 +13222,7 @@ function load_config_apps_app(logs, arg_app_config, arg_config_modules, arg_conf
 exports.default = load_config_apps_app;
 
 
-},{"../../../parser/parser":29,"assert":102,"path":318,"typr":494}],72:[function(require,module,exports){
+},{"../../../parser/parser":33,"assert":102,"path":318,"typr":494}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13210,7 +13363,7 @@ function load_config_modules(logs, arg_modules_config, arg_base_dir) {
 exports.default = load_config_modules;
 
 
-},{"../../../parser/parser":29,"assert":102,"path":318,"typr":494}],73:[function(require,module,exports){
+},{"../../../parser/parser":33,"assert":102,"path":318,"typr":494}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13455,7 +13608,7 @@ function load_config_security(logs, arg_security_config, arg_base_dir) {
 exports.default = load_config_security;
 
 
-},{"../../../parser/parser":29,"./load_config_security_authentication":76,"./load_config_security_authorization":77,"assert":102,"path":318,"typr":494}],76:[function(require,module,exports){
+},{"../../../parser/parser":33,"./load_config_security_authentication":76,"./load_config_security_authorization":77,"assert":102,"path":318,"typr":494}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14807,7 +14960,7 @@ exports.default = DefaultServicesPlugin;
 
 
 }).call(this,"/dist\\plugins\\default")
-},{"../../common/plugins/services_plugin":37,"assert":102,"typr":494}],100:[function(require,module,exports){
+},{"../../common/plugins/services_plugin":41,"assert":102,"typr":494}],100:[function(require,module,exports){
 (function (global){
 (function() {
 var _slice = Array.prototype.slice;
