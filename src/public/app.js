@@ -48,7 +48,7 @@ function test_socket_1(runtime)
 
 
 
-function test_socket_2(runtime)
+function test_socket_metrics(runtime)
 {
 	// TEST 1
 	const svc_name = 'metrics'
@@ -98,6 +98,44 @@ function test_socket_2(runtime)
 }
 
 
+function test_socket_logs(runtime)
+{
+	// TEST 1
+	const svc_name = 'logs'
+	runtime.register_service(svc_name, {})
+	
+	var svc = runtime.service(svc_name)
+	var svc_socket = svc.socket
+	// var svc_in = runtime.service(svc_name).get.in
+	
+	// SERVICE SOCKET OPERATIONS
+	svc_socket.on('disconnect',
+		(/*data*/) => {
+			console.log('receive /' + svc_name + '/disconnect:')
+			svc_socket.disconnect()
+		}
+	)
+	
+	svc_socket.on('end',
+		(/*data*/) => {
+			console.log('receive /' + svc_name + '/end:')
+			svc_socket.disconnect()
+		}
+	)
+	
+	
+	// SUBSCRIBE TO DATAS
+	svc.subscribe()
+	
+	const logs_post_stream = svc.post()
+	logs_post_stream.onValue(
+		(data) => {
+			console.log('receive /' + svc_name + '/post:', data)
+		}
+	)
+}
+
+
 $(document).ready(
 	function()
 	{
@@ -118,7 +156,8 @@ $(document).ready(
 		
 		
 		// test_socket_1(runtime)
-		test_socket_2(runtime)
+		test_socket_metrics(runtime)
+		test_socket_logs(runtime)
 		
 		
 		window.onbeforeunload = function(/*e*/)

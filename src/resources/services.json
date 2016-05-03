@@ -20,6 +20,10 @@
 			"type":"metrics"
 		},
 		
+		"logs":{
+			"type":"logs"
+		},
+		
 		"devtools_panel":{
 			"type":"middleware",
 			"routes":[
