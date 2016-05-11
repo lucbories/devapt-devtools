@@ -11,95 +11,99 @@ import Foundation6 from 'devapt-features-foundation6'
 const runtime = devapt.runtime
 
 
-const optional_trace_settings = {
-	// RUNTIME STAGES TRACE SETTINGS
-	"stages":{
-		"enabled":true, // TODO
+// const optional_trace_settings = {
+// 	// RUNTIME STAGES TRACE SETTINGS
+// 	"stages":{
+// 		"enabled":true, // TODO
 		
-		/**
-		* Runtime Stage 0 consists of:
-		* 		- create node
-		* 		- create bus or connect to bus
-		*/
-		"RuntimeStage0":{
-			"enabled":false
-		},
+// 		/**
+// 		* Runtime Stage 0 consists of:
+// 		* 		- create node
+// 		* 		- create bus or connect to bus
+// 		*/
+// 		"RuntimeStage0":{
+// 			"enabled":false
+// 		},
 		
-		/**
-		* Runtime Stage 1 consists of:
-		* 		- load master apps settings
-		*		- load security setting
-		*/
-		"RuntimeStage1":{
-			"enabled":true
-		},
+// 		/**
+// 		* Runtime Stage 1 consists of:
+// 		* 		- load master apps settings
+// 		*		- load security setting
+// 		*/
+// 		"RuntimeStage1":{
+// 			"enabled":true
+// 		},
 		
-		/**
-		* Runtime Stage 2 consists of:
-		* 		- create node servers
-		* 		- create services
-		*/
-		"RuntimeStage2":{
-			"enabled":true
-		},
+// 		/**
+// 		* Runtime Stage 2 consists of:
+// 		* 		- create node servers
+// 		* 		- create services
+// 		*/
+// 		"RuntimeStage2":{
+// 			"enabled":false
+// 		},
 		
-		/**
-		* Runtime Stage 3 consists of:
-		* 		- create connexions, modules and plugins
-		*/
-		"RuntimeStage3":{
-			"enabled":false
-		},
+// 		/**
+// 		* Runtime Stage 3 consists of:
+// 		* 		- create connexions, modules and plugins
+// 		*/
+// 		"RuntimeStage3":{
+// 			"enabled":false
+// 		},
 		
-		/**
-		* Runtime Stage 4 consists of:
-		* 		- create applications
-		*/
-		"RuntimeStage4":{
-			"enabled":false
-		},
+// 		/**
+// 		* Runtime Stage 4 consists of:
+// 		* 		- create applications
+// 		*/
+// 		"RuntimeStage4":{
+// 			"enabled":false
+// 		},
 		
-		/**
-		* Runtime Stage 5 consists of:
-		* 		- enable servers
-		*/
-		"RuntimeStage5":{
-			"enabled":false
-		}
-	}
-}
+// 		/**
+// 		* Runtime Stage 5 consists of:
+// 		* 		- enable servers
+// 		*/
+// 		"RuntimeStage5":{
+// 			"enabled":false
+// 		}
+// 	}
+// }
 
 
-const runtime_settings = {
-	'is_master':true,
-	'name':'NodeA',
+// const runtime_settings = {
+// 	'is_master':true,
+// 	'name':'NodeA',
 	
-	'master':{
-		'name':'NodeA',
+// 	'master':{
+// 		'name':'NodeA',
 		
-		'msg_bus':{
-			'type':'server',
-			'host':'localhost',
-			'port':5000
-		},
-		'logs_bus':{
-			'type':'local'
-		},
-		'metrics_bus':{
-			'type':'local'
-		}
-	},
+// 		'msg_bus':{
+// 			'type':'simplebus_server',
+// 			'host':'localhost',
+// 			'port':5000
+// 		},
+// 		'logs_bus':{
+// 			'type':'local'
+// 		},
+// 		'metrics_bus':{
+// 			'type':'local'
+// 		}
+// 	},
 	
-	'base_dir': path.join(__dirname, '..'),
+// 	'base_dir': path.join(__dirname, '..'),
 	
-	'settings_provider': {
-		'source':'local_file',
-		'relative_path':'resources/world.json'
-	},
+// 	'settings_provider': {
+// 		'source':'local_file',
+// 		'relative_path':'resources/world.json'
+// 	},
 	
-	'trace': optional_trace_settings
-}
+// 	'trace': optional_trace_settings
+// }
 
+
+const runtime_settings = require('../resources/nodes/nodeA.json')
+runtime_settings.base_dir = path.join(__dirname, '..')
+runtime_settings.is_master = true
 
 
 // LOAD RUNTIME AND PLUGINS

@@ -1,113 +1,44 @@
 
-import T from 'typr'
-import assert from 'assert'
 import devapt from 'devapt'
+import common_mw from '../common_mw'
+import MetricsTable from './metrics_table'
+import MetricsHttpTable from './metrics_http_table'
+import MetricsTree from './metrics_tree'
 
-import get_menubar_menus from '../menubar'
 
-
-
-const runtime = devapt.runtime
-// const config = devapt.config
-// const logs = devapt.logs
 const Render = devapt.Render
-const Component = devapt.Component
+const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', undefined)
+const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 
-const context = 'devtools/metrics/metrics_mw'
+const metrics_table = new MetricsTable('metrics_table', { render:renderer })
+const metrics_http_table = new MetricsHttpTable('metrics_http_table', { render:renderer })
+const metrics_tree = new MetricsTree('metrics_tree', { render:renderer })
 
-
-/*
-export default*/ class Metrics extends Component
-{
-	constructor(arg_name, arg_settings)
+const tabs_cfg = [
 	{
-        // UPDATE SETTINGS
-		arg_settings = T.isObject(arg_settings) ? arg_settings : {}
-		arg_settings.styles = []
-		arg_settings.headers = ['<meta keywords="metrics" />']
-		
-		super(arg_name, arg_settings)
-		
-		this.$type = 'Metrics'
-        
-        // GET RENDERER
-		const render = arg_settings.render ? arg_settings.render : null
-		assert( T.isObject(render) && render.is_render, context + ':bad render object')
-		this.renderer = render
-
-
-		// GET METRICS STATE
-		const metrics_server = runtime.node.metrics_server
-		const http_state = metrics_server.get_http_metrics().metrics
-
-		// CREATE STATE TREE
-		const settings = { state:{tree:http_state, label:'HTTP Metrics'} }
-		let tree = this.renderer.rendering_manager.create('Tree', this.name + '_state_tree', settings)
-		assert( T.isObject(tree) && tree.is_component, context + ':bad Tree component object')
-
-		this.add_child(tree)
-	}
-	
-	
-	// MUTABLE STATE
-	get_initial_state()
+		label:'Live details',
+		content_view:'metrics_table'
+	},
 	{
-		return {
-		}
-	}
-	
-	
-	// RENDERING
-	render()
+		label:'Topology',
+		content_html:'<strong>Topological view</strong>'
+	},
 	{
-		// console.log(this.state, 'state2')
-		assert( T.isObject(this.state), context + ':bad state object')
-		
-        // CREATE RENDERER
-        // const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1')
-        
-		
-    
-        // const html = renderer.page('main', {label:'Devapt Devtools - Metrics'})
-        //     .hbox('menus', null, {items:get_menubar_anchors('devtools'), label:'Devtools'})
-        //         .up()
-        //     .button('button1', null, {label:'refresh', action_url:'myurl'})
-        //         .up()
-        //     .add(tree)
-        //         .up()
-        //     .script('test', {
-        //         scripts:[],
-        //         scripts_urls:['js/vendor/browser.min.js'] }, null)
-        //     .up()
-        //     .render()
-		
-		// return html
-		return this.render_children()
+		label:'Tree',
+		content_view:'metrics_tree'
+	},
+	{
+		label:'Http table',
+		content_view:'metrics_http_table'
+	},
+	{
+		label:'Per Server',
+		content_html:'<strong>Server 1</strong>'
 	}
-}
+]
+const metrics_tabs = new Tabs('metrics_tabs', { render:renderer, state:{items:tabs_cfg, label:'Metrics Tabs'} })
+metrics_tabs.add_child(metrics_table)
+metrics_tabs.add_child(metrics_http_table)
+metrics_tabs.add_child(metrics_tree)
 
-
-export default function(req, res)
-{
-	const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', req)
-	const metrics = new Metrics('metrics', { render:renderer })
-	// const html = metrics.render()
-
-	// res.send(html)
-
-
-	const html = renderer.page('main', {request:req, label:'Devapt Devtools - Metrics'})
-	.menubar('menus', null, {items:get_menubar_menus(), app_url:'devtools', request:req, label:'Devtools'})
-	.up()
-	.button('button1', null, {label:'my GGG Button', action_url:'myurl'})
-	.up()
-	.add(metrics)
-	.up()
-	.script('test', {
-		scripts:[],
-		scripts_urls:['js/vendor/browser.min.js', 'js/devapt-browser.js', 'js/app.js'] }, null)
-	.up()
-	.render()
-
-	res.send(html)
-}
+export default common_mw(renderer, metrics_tabs, 'Devapt Devtools - Metrics', 'Devtools', 'devtools')

@@ -35,6 +35,14 @@
 					"route":"/metrics",
 					"mw_file":"js/metrics/metrics_mw.js"
 				},
+				{
+					"route":"/logs",
+					"mw_file":"js/logs/logs_mw.js"
+				},
+				{
+					"route":"/messages",
+					"mw_file":"js/messages/messages_mw.js"
+				},
                 
                 
 				{

@@ -168,6 +168,7 @@ gulp.task('build_public_js_bundle',
 			.ignore('restify')
 			.ignore('socket.io')
 			.external('client_runtime')
+			.external('ui')
 			.bundle()
 			.pipe( source(DST_PUBLIC_JS_BUNDLE) )
 			.pipe( buffer() )
