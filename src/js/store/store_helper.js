@@ -83,7 +83,7 @@ export default function make_middleware(arg_collection, arg_label, arg_title, ar
 		// TODO: credentials
 		const html = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', req)
 			.page('main', {label:'Devapt Devtools - Store / Config / ' + arg_title, headers:[]})
-				.menubar('menus', null, {items:get_menubar_menus(), app_url:'devtools', request:req, label:'Devtools'})
+				.menubar('menus', null, {items:get_menubar_menus(), app_url:'devtools', label:'Devtools'})
 				.up()
 				// .vbox('content', null, {label:'content'})
 				.button('button1', null, {label:'mybutton', action_url:'myurl'})

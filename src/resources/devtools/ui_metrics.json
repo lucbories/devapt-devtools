@@ -1,0 +1,612 @@
+{
+	"devapt.version.views.json":"3",
+	
+	"views":{
+		"metrics_tabs":{
+			"type":"Tabs",
+			"settings":{
+				"state":{
+					"label":"Metrics Tabs",
+					"has_vertical":true,
+					
+					"items":[
+						{
+							"label":"Http metrics details",
+							"content_view":"metrics_http_details"
+						},
+						{
+							"label":"Http metrics dashboard",
+							"content_view":"metrics_http_dashboard"
+						},
+						{
+							"label":"Http metrics tree",
+							"content_view":"metrics_http_tree"
+						},
+						{
+							"label":"Host metrics dashboard",
+							"content_view":"metrics_host_dashboard"
+						},
+						{
+							"label":"NodeJS metrics dashboard",
+							"content_view":"metrics_nodejs_dashboard"
+						},
+						{
+							"label":"Bus metrics dashboard",
+							"content_view":"metrics_bus_dashboard"
+						}
+					]
+				}
+			}
+		},
+		
+		"metrics_http_details_table":{
+			"type":"MetricsTable",
+			"settings":{
+				"state":{
+					"headers": ["protocole", "pid", "url", "server", "method", "status", "latency"],
+					"items": [],
+					"label":"Metrics table",
+					"show_label":false,
+					"show_headers":true,
+					"has_scroll":true,
+					
+					"strategy":{
+						"update_mode":"prepend",
+						"resize_mode":"remove_last",
+						"resize_max":10
+					},
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"metrics_http",
+								"method":"post",
+								"transform":{
+									"result_type":"array",
+									"flat_field_name":"metrics",
+									"flat_fields":[
+										{
+											"name":"pid",
+											"path":"pid"
+										},
+										{
+											"name":"url",
+											"path":["service", "url"]
+										},
+										{
+											"name":"server_name",
+											"path":["server", "server_name"]
+										},
+										{
+											"name":"method",
+											"path":["service", "method"]
+										},
+										{
+											"name":"status",
+											"path":["response", "status"]
+										},
+										{
+											"name":"latency",
+											"path":["latency"]
+										}
+									],
+									"fields":[
+										{
+											"name":"metric",
+											"path":["metric"]
+										}
+									]
+								},
+								"target_view":"metrics_http_details_table",
+								"target_method":"do_action_prepend"
+							}
+						],
+						"dom":[
+							{
+								"dom_selector":"#metrics_http_details thead th:first",
+								"dom_event":"click",
+								"transform":null,
+								"target_dom_selector":"#metrics_http_details thead th:last",
+								"target_method":"toggle"
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		"metrics_http_details":{
+			"type":"Component",
+			"children":["metrics_http_details_toolsbar", "metrics_http_details_table"],
+			"settings":{}
+		},
+		
+		"metrics_http_details_clear":{
+			"type":"Button",
+			"settings":{
+				"html_before":"<div class='row'><div class='small-2 columns'>",
+				"state": {
+					"label":"Clear",
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"metrics_http_details_clear",
+								"dom_event":"click",
+								"transform":null,
+								"target_view":"metrics_http_details",
+								"target_method":"do_action_clear_items"
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		"metrics_http_details_max":{
+			"type":"InputField",
+			"settings": {
+				"html_before":"</div><div class='small-2 columns'>",
+				"html_between":"</div><div class='small-3 columns'>",
+				"html_after":"</div><div class='small-5 columns'></div></div>",
+				"css_class_label":"text-right middle",
+				"format":"number",
+				"state": {
+					"label":"Max rows",
+					"placeholder":"enter an integer",
+					"value":100,
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"#metrics_http_details_max",
+								"dom_event":"change",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"resize_max",
+											"path":["target", "value"]
+										}
+									]
+								},
+								"target_view":"metrics_http_details",
+								"target_method":"do_action_set_resize_max"
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		"metrics_http_details_toolsbar":{
+			"type":"Component",
+			"children":["metrics_http_details_clear", "metrics_http_details_max"],
+			"settings":{}
+		},
+		
+		"metrics_http_dashboard":{
+			"type":"MetricsHttpTable",
+			"settings":{
+				"state":{
+					"headers": ["category", "measure", "value"],
+					"items": [],
+					"label":"Metrics Http dashboard",
+					"show_label":false,
+					"show_headers":true,
+					
+					"bindings":{
+						"services":[
+							{
+								"service":"metrics_http",
+								"method":"get",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"id_counter",
+											"path":"id_counter"
+										},
+										{
+											"name":"latency_min",
+											"path":"latency_min"
+										},
+										{
+											"name":"latency_mean",
+											"path":"latency_mean"
+										},
+										{
+											"name":"latency_max",
+											"path":"latency_max"
+										}
+									]
+								},
+								"target_view":"metrics_http_dashboard",
+								"target_method":"update_metrics",
+								"options":{
+									"method": { "poll_interval":3000, "poll_name":"metrics_http_table" }
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		"metrics_http_tree":{
+			"type":"MetricsTree",
+			"settings":{}
+		},
+		
+		
+		"metrics_bus_dashboard":{
+			"type":"Table",
+			"settings":{
+				"state":{
+					"browser_type":"OneRecordTable",
+					"headers": ["Bus", "Measure", "Value"],
+					"items": [],
+					"label":"Metrics Bus table",
+					"show_label":false,
+					"show_headers":true,
+					
+					"fields":[
+						"msg_count",
+						"msg_size",
+						"errors_count",
+						"subscribers_count"
+					],
+					
+					"labels":[
+						"COUNT",
+						"SIZE",
+						"ERRORS",
+						"SUBSCRIBERS"
+					],
+					
+					"records_key":"buses",
+					"record_key":"bus_name",
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"metrics_bus",
+								"method":"list",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"buses",
+											"path":["items"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_bus_dashboard",
+								"target_method":"update_records",
+								"options":{
+									"method": {
+										"poll_interval":5000,
+										"poll_name":"metrics_bus_dashboard_buses",
+										"args": null
+									}
+								}
+							},
+							{
+								"service":"metrics_bus",
+								"method":"get",
+								"transform":{
+									"result_type":"object",
+									"loop_on_keys":true,
+									"fields":[
+										{
+											"name":"bus_name",
+											"path":["aggregated", "bus_name"]
+										},
+										{
+											"name":"msg_count",
+											"path":["aggregated", "msg_count"]
+										},
+										{
+											"name":"msg_size",
+											"path":["aggregated", "msg_size"]
+										},
+										{
+											"name":"errors_count",
+											"path":["aggregated", "errors_count"]
+										},
+										{
+											"name":"subscribers_count",
+											"path":["aggregated", "subscribers_count"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_bus_dashboard",
+								"target_method":"update_values",
+								"options":{
+									"method": {
+										"poll_interval":3000,
+										"poll_name":"metrics_bus_dashboard_metrics",
+										"args": null
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		
+		"metrics_host_dashboard":{
+			"type":"Table",
+			"settings":{
+				"state":{
+					"browser_type":"OneRecordTable",
+					"headers": ["Hostname", "Measure", "Value"],
+					"items": [],
+					"label":"Metrics Host table",
+					"show_label":false,
+					"show_headers":true,
+					
+					"fields":[
+						"hostname",
+						"cpus_arch",
+						"cpus_count",
+						"cpus_user_mean",
+						"cpus_nice_mean",
+						"cpus_sys_mean",
+						"cpus_idle_mean",
+						"cpus_irq_mean"
+					],
+					
+					"labels":[
+						"HOSTNAME",
+						"CPUS ARCH",
+						"CPUS COUNT",
+						"CPUS USER",
+						"CPUS NICE",
+						"CPUS SYS",
+						"CPUS IDLE",
+						"CPUS IRQ"
+					],
+					
+					"records_key":"hostnames",
+					"record_key":"hostname",
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"metrics_host",
+								"method":"list",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"hostnames",
+											"path":["items"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_host_dashboard",
+								"target_method":"update_records",
+								"options":{
+									"method": {
+										"poll_interval":5000,
+										"poll_name":"metrics_host_dashboard_hostnames",
+										"args": null
+									}
+								}
+							},
+							{
+								"service":"metrics_host",
+								"method":"get",
+								"transform":{
+									"result_type":"object",
+									"loop_on_keys":true,
+									"fields":[
+										{
+											"name":"hostname",
+											"path":["aggregated", "hostname"]
+										},
+										
+										{
+											"name":"cpus_arch",
+											"path":["aggregated", "cpus_arch"]
+										},
+										
+										{
+											"name":"cpus_count",
+											"path":["aggregated", "cpus_count"]
+										},
+										
+										
+										{
+											"name":"cpus_user_mean",
+											"path":["aggregated", "cpus_user_mean"]
+										},
+										
+										{
+											"name":"cpus_nice_mean",
+											"path":["aggregated", "cpus_nice_mean"]
+										},
+										
+										{
+											"name":"cpus_sys_mean",
+											"path":["aggregated", "cpus_sys_mean"]
+										},
+										
+										{
+											"name":"cpus_idle_mean",
+											"path":["aggregated", "cpus_idle_mean"]
+										},
+										
+										{
+											"name":"cpus_irq_mean",
+											"path":["aggregated", "cpus_irq_mean"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_host_dashboard",
+								"target_method":"update_values",
+								"options":{
+									"method": {
+										"poll_interval":3000,
+										"poll_name":"metrics_host_dashboard_metrics",
+										"args": null
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		
+		
+		"metrics_nodejs_dashboard":{
+			"type":"Table",
+			"settings":{
+				"state":{
+					"browser_type":"OneRecordTable",
+					"headers": ["NodeJS Runtime", "Measure", "Value"],
+					"items": [],
+					"label":"Metrics NodeJs table",
+					"show_label":false,
+					"show_headers":true,
+					
+					"fields":[
+						"hostname",
+						"runtime_uid",
+						"process_arch",
+						"process_platform",
+						"process_uptime_mean",
+						"process_pid",
+						"process_version",
+						"process_memory_shared_mean",
+						"process_memory_head_total_mean",
+						"process_memory_heap_used_mean"
+					],
+					
+					"labels":[
+						"HOSTNAME",
+						"RUNTIME UID",
+						"ARCHITECTURE",
+						"PLATEFORME",
+						"UPTIME",
+						"PID",
+						"VERSION",
+						"MEMORY - SHARED",
+						"MEMORY - HEAP TOTAL",
+						"MEMORY - HEAP USED"
+					],
+					
+					"records_key":"runtimes",
+					"record_key":"runtime_uid",
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"metrics_nodejs",
+								"method":"list",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"runtimes",
+											"path":["items"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_nodejs_dashboard",
+								"target_method":"update_records",
+								"options":{
+									"method": {
+										"poll_interval":5000,
+										"poll_name":"metrics_host_dashboard_runtimes",
+										"args": null
+									}
+								}
+							},
+							{
+								"service":"metrics_nodejs",
+								"method":"get",
+								"transform":{
+									"result_type":"object",
+									"loop_on_keys":true,
+									"fields":[
+										{
+											"name":"hostname",
+											"path":["aggregated", "hostname"]
+										},
+										
+										{
+											"name":"runtime_uid",
+											"path":["aggregated", "runtime_uid"]
+										},
+										
+										
+										{
+											"name":"process_arch",
+											"path":["aggregated", "process_arch"]
+										},
+										
+										{
+											"name":"process_platform",
+											"path":["aggregated", "process_platform"]
+										},
+										
+										
+										{
+											"name":"process_uptime_mean",
+											"path":["aggregated", "process_uptime_mean"]
+										},
+										
+										
+										{
+											"name":"process_pid",
+											"path":["aggregated", "process_pid"]
+										},
+										
+										{
+											"name":"process_version",
+											"path":["aggregated", "process_version"]
+										},
+										
+										
+										{
+											"name":"process_memory_shared_mean",
+											"path":["aggregated", "process_memory_shared_mean"]
+										},
+										
+										{
+											"name":"process_memory_head_total_mean",
+											"path":["aggregated", "process_memory_head_total_mean"]
+										},
+										
+										{
+											"name":"process_memory_heap_used_mean",
+											"path":["aggregated", "process_memory_heap_used_mean"]
+										}
+									]
+								},
+								
+								"target_view":"metrics_nodejs_dashboard",
+								"target_method":"update_values",
+								"options":{
+									"method": {
+										"poll_interval":3000,
+										"poll_name":"metrics_nodejs_dashboard_metrics",
+										"args": null
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}

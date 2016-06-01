@@ -11,3 +11,7 @@ go.cmd
 dist
 tmp
 node_modules
+
+unused_*
+todo_*
+old_*

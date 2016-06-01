@@ -17,6 +17,11 @@ export default class MessagesTable extends Table
 {
 	constructor(arg_name, arg_settings)
 	{
+        // GET RENDERER
+		const render = arg_settings.render ? arg_settings.render : undefined
+		assert( T.isObject(render) && render.is_render, context + ':bad render object')
+		delete arg_settings.render
+		
         // UPDATE SETTINGS
 		arg_settings = T.isObject(arg_settings) ? arg_settings : {}
 		arg_settings.styles = []
@@ -30,9 +35,6 @@ export default class MessagesTable extends Table
 		
 		this.$type = 'MessagesTable'
         
-        // GET RENDERER
-		const render = arg_settings.render ? arg_settings.render : null
-		assert( T.isObject(render) && render.is_render, context + ':bad render object')
 		this.renderer = render
 	}
 	

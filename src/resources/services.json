@@ -16,8 +16,24 @@
 			]
 		},
 		
-		"metrics":{
-			"type":"metrics"
+		"metrics_http":{
+			"type":"metrics_http"
+		},
+		
+		"metrics_host":{
+			"type":"metrics_host"
+		},
+		
+		"metrics_nodejs":{
+			"type":"metrics_nodejs"
+		},
+		
+		"metrics_bus":{
+			"type":"metrics_bus"
+		},
+		
+		"topology":{
+			"type":"topology"
 		},
 		
 		"logs":{
@@ -28,8 +44,12 @@
 			"type":"middleware",
 			"routes":[
 				{
-					"route":"/topology",
-					"mw_file":"js/topology/topology_mw.js"
+					"route":"/topology/logical",
+					"mw_file":"js/topology/topology_logical_mw.js"
+				},
+				{
+					"route":"/topology/physical",
+					"mw_file":"js/topology/topology_physical_mw.js"
 				},
 				{
 					"route":"/metrics",
@@ -127,7 +147,7 @@
 				},
 				{
 					"route":"/plugins",
-					"plugins":["Foundation-6"],
+					"plugins":["Foundation-6", "Cytoscape"],
 					"adirectory":"public/assets/plugins"
 				}
 			],

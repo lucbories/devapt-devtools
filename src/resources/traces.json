@@ -3,12 +3,11 @@
 		"enabled":true,
 		
 		"modules":{
-			"common/executables/executable_route_assets":true,
 			".*":false
 		},
 		
 		"classes":{
-			".*":true
+			".*":false
 		},
 		
 		"instances":{

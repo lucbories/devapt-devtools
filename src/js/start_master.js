@@ -6,104 +6,17 @@ import chokidar from 'chokidar'
 
 import devapt from 'devapt'
 import Foundation6 from 'devapt-features-foundation6'
-
+import Cytoscape from 'devapt-features-cytoscape'
 
 const runtime = devapt.runtime
-
-
-// const optional_trace_settings = {
-// 	// RUNTIME STAGES TRACE SETTINGS
-// 	"stages":{
-// 		"enabled":true, // TODO
-		
-// 		/**
-// 		* Runtime Stage 0 consists of:
-// 		* 		- create node
-// 		* 		- create bus or connect to bus
-// 		*/
-// 		"RuntimeStage0":{
-// 			"enabled":false
-// 		},
-		
-// 		/**
-// 		* Runtime Stage 1 consists of:
-// 		* 		- load master apps settings
-// 		*		- load security setting
-// 		*/
-// 		"RuntimeStage1":{
-// 			"enabled":true
-// 		},
-		
-// 		/**
-// 		* Runtime Stage 2 consists of:
-// 		* 		- create node servers
-// 		* 		- create services
-// 		*/
-// 		"RuntimeStage2":{
-// 			"enabled":false
-// 		},
-		
-// 		/**
-// 		* Runtime Stage 3 consists of:
-// 		* 		- create connexions, modules and plugins
-// 		*/
-// 		"RuntimeStage3":{
-// 			"enabled":false
-// 		},
-		
-// 		/**
-// 		* Runtime Stage 4 consists of:
-// 		* 		- create applications
-// 		*/
-// 		"RuntimeStage4":{
-// 			"enabled":false
-// 		},
-		
-// 		/**
-// 		* Runtime Stage 5 consists of:
-// 		* 		- enable servers
-// 		*/
-// 		"RuntimeStage5":{
-// 			"enabled":false
-// 		}
-// 	}
-// }
-
-
-// const runtime_settings = {
-// 	'is_master':true,
-// 	'name':'NodeA',
-	
-// 	'master':{
-// 		'name':'NodeA',
-		
-// 		'msg_bus':{
-// 			'type':'simplebus_server',
-// 			'host':'localhost',
-// 			'port':5000
-// 		},
-// 		'logs_bus':{
-// 			'type':'local'
-// 		},
-// 		'metrics_bus':{
-// 			'type':'local'
-// 		}
-// 	},
-	
-// 	'base_dir': path.join(__dirname, '..'),
-	
-// 	'settings_provider': {
-// 		'source':'local_file',
-// 		'relative_path':'resources/world.json'
-// 	},
-	
-// 	'trace': optional_trace_settings
-// }
 
 
 const runtime_settings = require('../resources/nodes/nodeA.json')
 runtime_settings.base_dir = path.join(__dirname, '..')
 runtime_settings.is_master = true
+
+
+const DEBUG = true
 
 
 // LOAD RUNTIME AND PLUGINS
@@ -112,10 +25,22 @@ runtime.load(runtime_settings)
 	(result) => {
 		if (result)
 		{
-			const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
-			const plugin = new Foundation6(plugins_mgr)
+			// WATCH SRC FILES AND RELOAD
+			const SRC_DIR = __dirname
+			const SRC_DIR2 = path.join(__dirname, '../../../devapt/dist')
+			if (DEBUG)
+			{
+				watch(SRC_DIR)
+				watch(SRC_DIR2)
+			}
 			
-			plugins_mgr.load_at_first(plugin)
+			// PLUGINS
+			const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
+			const plugin1 = new Foundation6(plugins_mgr)
+			const plugin2 = new Cytoscape(plugins_mgr)
+			
+			plugins_mgr.load_at_first(plugin1)
+			plugins_mgr.load_at_first(plugin2)
 			return
 		}
 		
@@ -132,22 +57,70 @@ runtime.load(runtime_settings)
 	}
 )
 
+/*
+function objectEntries(obj)
+{
+	let index = 0
 
-	
+	// In ES6, you can use strings or symbols as property keys,
+	// Reflect.ownKeys() retrieves both
+	// const propKeys = Reflect.ownKeys(obj)
+	const propKeys = Object.keys(obj)
+
+	return {
+		[Symbol.iterator]() {
+			return this
+		},
+		next() {
+			if (index < propKeys.length) {
+				const key = propKeys[index]
+				index++
+				return { value: [key, obj[key]] }
+			} else {
+				return { done: true }
+			}
+		}
+	}
+}*/
+
 	
 /**
  * 
  */
 function reload_file(arg_file_path)
 {
-	if ( path.extname(arg_file_path) == '.js' )
+	const file_name = path.basename(arg_file_path)
+	const this_file_name = path.basename(__filename)
+	if (file_name == this_file_name)
 	{
-		const full_path = path.resolve(arg_file_path)
-		
+		console.info('Need to reload after change on ' + this_file_name)
+		return
+	}
+	
+	const exts = ['.js', '.json']
+	const ext = path.extname(arg_file_path)
+	const full_path = path.resolve(arg_file_path)
+	
+	if ((exts.indexOf(ext) > -1) && (full_path in require.cache))
+	{
 		console.info('Reloading: ' + full_path)
+		// console.log(require.cache[full_path].parent.children[0])
 		
 		delete require.cache[full_path]
 		require(full_path)
+		
+		// TODO: NEED TO RELOAD ALL FILES FOR WHICH THE CHANGE FILE IS A DEPENDENCY
+		
+		// for(let [file_path, file_obj] of objectEntries(require.cache) )
+		// {
+		// 	const file_name = path.basename(file_path)
+		// 	if (file_name != this_file_name)
+		// 	{
+		// 		delete require.cache[file_path]
+		// 		// require(file_path)
+		// 	}
+		// }
+		
 	}
 }
 
@@ -179,12 +152,6 @@ function unwatch(arg_watcher)
 	arg_watcher.close()
 }
 
-const should_trace = true
-const SRC_DIR = __dirname
-if (should_trace)
-{
-	watch(SRC_DIR)
-}
 
 
 // var server = null

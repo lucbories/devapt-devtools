@@ -16,8 +16,10 @@ export default function(arg_renderer, arg_main_view, arg_title, arg_label, arg_u
 		assert( T.isObject(arg_main_view) && arg_main_view.is_component, context + ':bad main view object')
 		
 		arg_renderer.request = req
-		const html = arg_renderer.page('main', {request:req, label:arg_title})
-		.menubar('menus', null, {items:get_menubar_menus(), app_url:arg_url, request:req, label:arg_label})
+		const html = arg_renderer.page('main', {title:arg_title})
+		.menubar('menus', null, {items:get_menubar_menus(), app_url:arg_url, label:arg_label})
+		.up()
+		.hbox('separator', null, undefined)
 		.up()
 		.add(arg_main_view)
 		.up()

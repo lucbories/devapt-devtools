@@ -31,7 +31,11 @@
 				"provides":{
 					"devtools_store": { "servers":["NodeALocal8080"] },
 					"devtools_panel": { "servers":["NodeALocal8081"] },
-					"metrics": { "servers":["NodeALocal8081"] },
+					"metrics_http": { "servers":["NodeALocal8081"] },
+					"metrics_host": { "servers":["NodeALocal8081"] },
+					"metrics_nodejs": { "servers":["NodeALocal8081"] },
+					"metrics_bus": { "servers":["NodeALocal8081"] },
+					"topology": { "servers":["NodeALocal8081"] },
 					"logs": { "servers":["NodeALocal8081"] }
 				},
 				"consumes":{

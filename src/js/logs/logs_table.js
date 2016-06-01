@@ -17,6 +17,11 @@ export default class LogsTable extends Table
 {
 	constructor(arg_name, arg_settings)
 	{
+        // GET RENDERER
+		const render = arg_settings.render ? arg_settings.render : undefined
+		assert( T.isObject(render) && render.is_render, context + ':bad render object')
+		delete arg_settings.render
+		
         // UPDATE SETTINGS
 		const js_bind = `
 			$(document).ready(
@@ -59,10 +64,6 @@ export default class LogsTable extends Table
 		// console.log(this.state, 'state for ' + this.get_name())
 		
 		this.$type = 'Table'
-        
-        // GET RENDERER
-		const render = arg_settings.render ? arg_settings.render : null
-		assert( T.isObject(render) && render.is_render, context + ':bad render object')
 		this.renderer = render
 	}
 	
