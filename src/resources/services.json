@@ -44,6 +44,11 @@
 			"type":"middleware",
 			"routes":[
 				{
+					"route":"/home",
+					"page_view":"metrics_tabs",
+					"page_menubar":"default_menubar"
+				},
+				{
 					"route":"/topology/logical",
 					"mw_file":"js/topology/topology_logical_mw.js"
 				},

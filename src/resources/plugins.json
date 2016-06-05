@@ -2,6 +2,12 @@
 	"plugins":{
 	},
 	
+	"todo_resources_classes":{
+		"MetricsHttpDetails":"./src/js/metrics/metrics_http_details",
+		"MetricsHttpDashboard":"./src/js/metrics/metrics_http_dashboard",
+		"MetricsHttpTree":"./src/js/metrics/metrics_http_tree"
+	},
+	
 	"plugins_save":{
 		"backend-foundation5":{
 			"js":"backend-foundation5/plugin",

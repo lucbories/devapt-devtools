@@ -8,6 +8,7 @@ import devapt from 'devapt'
 import Foundation6 from 'devapt-features-foundation6'
 import Cytoscape from 'devapt-features-cytoscape'
 
+
 const runtime = devapt.runtime
 
 
@@ -35,12 +36,19 @@ runtime.load(runtime_settings)
 			}
 			
 			// PLUGINS
+			console.info('load runtime rendering plugins')
+			
+			var DevtoolsRenderingPlugin = require('./devtools_rendering_plugin').default
+
 			const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
-			const plugin1 = new Foundation6(plugins_mgr)
-			const plugin2 = new Cytoscape(plugins_mgr)
+			const plugin1 = new DevtoolsRenderingPlugin(plugins_mgr)
+			const plugin2 = new Foundation6(plugins_mgr)
+			const plugin3 = new Cytoscape(plugins_mgr)
 			
 			plugins_mgr.load_at_first(plugin1)
 			plugins_mgr.load_at_first(plugin2)
+			plugins_mgr.load_at_first(plugin3)
+			
 			return
 		}
 		

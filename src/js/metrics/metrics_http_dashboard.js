@@ -1,6 +1,6 @@
 
 import T from 'typr'
-import assert from 'assert'
+// import assert from 'assert'
 import devapt from 'devapt'
 
 
@@ -9,11 +9,11 @@ const Render = devapt.Render
 const render = new Render('unused', 'unused', 'unused')
 const Table = render.rendering_manager.get_feature_class('Table')
 
-const context = 'devtools/metrics/metrics_http_dashboard'
+// const context = 'devtools/metrics/metrics_http_dashboard'
 
 
 
-export default class MetricsHttpTable extends Table
+export default class MetricsHttpDashboard extends Table
 {
 	constructor(arg_name, arg_settings)
 	{
@@ -61,61 +61,13 @@ export default class MetricsHttpTable extends Table
 		super(arg_name, arg_settings, state)
 		
 		this.$type = 'MetricsHttpTable'
-        
-        // GET RENDERER
-		const render = arg_settings.render ? arg_settings.render : null
-		assert( T.isObject(render) && render.is_render, context + ':bad render object')
-		this.renderer = render
 	}
 	
 	
 	// MUTABLE STATE
 	get_initial_state()
 	{
-		const json = require('../../resources/devtools/ui_metrics.json')
-		const state = json.views[this.get_name()].settings.state
+		const state = devapt.store.get_view(this.get_name()).state
 		return state
-		/*return {
-			headers: ['category', 'measure', 'value'],
-			items: [],
-			label:'Metrics Http dashboard',
-			show_label:false,
-			show_headers:true,
-			
-			bindings: {
-				services:[
-					{
-						service:'metrics_http',
-						method:'get',
-						transform:{
-							result_type:'object',
-							fields:[
-								{
-									name:'id_counter',
-									path:'id_counter'
-								},
-								{
-									name:'latency_min',
-									path:'latency_min'
-								},
-								{
-									name:'latency_mean',
-									path:'latency_mean'
-								},
-								{
-									name:'latency_max',
-									path:'latency_max'
-								}
-							]
-						},
-						target_view:this.get_name(),
-						target_method:'update_metrics',
-						options:{
-							method: { poll_interval:3000, poll_name:'metrics_http_table' }
-						}
-					}
-				]
-			}
-		}*/
 	}
 }

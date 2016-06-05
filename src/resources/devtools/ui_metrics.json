@@ -1,10 +1,8 @@
 {
-	"devapt.version.views.json":"3",
-	
-	"views":{
-		"metrics_tabs":{
-			"type":"Tabs",
-			"settings":{
+	"application":{
+		"views":{
+			"metrics_tabs":{
+				"type":"Tabs",
 				"state":{
 					"label":"Metrics Tabs",
 					"has_vertical":true,
@@ -36,12 +34,22 @@
 						}
 					]
 				}
-			}
-		},
-		
-		"metrics_http_details_table":{
-			"type":"MetricsTable",
-			"settings":{
+			},
+			
+			"metrics_http_details":{
+				"type":"Container",
+				"children":["metrics_http_details_toolsbar", "metrics_http_details_table"],
+				"state":{}
+			},
+			
+			"metrics_http_details_toolsbar":{
+				"type":"Container",
+				"children":["metrics_http_details_clear", "metrics_http_details_max"],
+				"state":{}
+			},
+			
+			"metrics_http_details_table":{
+				"type":"MetricsHttpDetails",
 				"state":{
 					"headers": ["protocole", "pid", "url", "server", "method", "status", "latency"],
 					"items": [],
@@ -112,39 +120,29 @@
 						]
 					}
 				}
-			}
-		},
-		
-		"metrics_http_details":{
-			"type":"Component",
-			"children":["metrics_http_details_toolsbar", "metrics_http_details_table"],
-			"settings":{}
-		},
-		
-		"metrics_http_details_clear":{
-			"type":"Button",
-			"settings":{
+			},
+			
+			"metrics_http_details_clear":{
+				"type":"Button",
 				"html_before":"<div class='row'><div class='small-2 columns'>",
 				"state": {
 					"label":"Clear",
 					"bindings": {
 						"dom":[
 							{
-								"dom_selector":"metrics_http_details_clear",
+								"dom_selector":"#metrics_http_details_clear",
 								"dom_event":"click",
 								"transform":null,
-								"target_view":"metrics_http_details",
+								"target_view":"metrics_http_details_table",
 								"target_method":"do_action_clear_items"
 							}
 						]
 					}
 				}
-			}
-		},
-		
-		"metrics_http_details_max":{
-			"type":"InputField",
-			"settings": {
+			},
+			
+			"metrics_http_details_max":{
+				"type":"InputField",
 				"html_before":"</div><div class='small-2 columns'>",
 				"html_between":"</div><div class='small-3 columns'>",
 				"html_after":"</div><div class='small-5 columns'></div></div>",
@@ -168,24 +166,16 @@
 										}
 									]
 								},
-								"target_view":"metrics_http_details",
+								"target_view":"metrics_http_details_table",
 								"target_method":"do_action_set_resize_max"
 							}
 						]
 					}
 				}
-			}
-		},
-		
-		"metrics_http_details_toolsbar":{
-			"type":"Component",
-			"children":["metrics_http_details_clear", "metrics_http_details_max"],
-			"settings":{}
-		},
-		
-		"metrics_http_dashboard":{
-			"type":"MetricsHttpTable",
-			"settings":{
+			},
+			
+			"metrics_http_dashboard":{
+				"type":"MetricsHttpDashboard",
 				"state":{
 					"headers": ["category", "measure", "value"],
 					"items": [],
@@ -228,20 +218,18 @@
 						]
 					}
 				}
-			}
-		},
-		
-		"metrics_http_tree":{
-			"type":"MetricsTree",
-			"settings":{}
-		},
-		
-		
-		"metrics_bus_dashboard":{
-			"type":"Table",
-			"settings":{
+			},
+			
+			"metrics_http_tree":{
+				"type":"MetricsHttpTree",
+				"state":{}
+			},
+			
+			
+			"metrics_bus_dashboard":{
+				"type":"Table",
 				"state":{
-					"browser_type":"OneRecordTable",
+					"browser_type":"RecordsTable",
 					"headers": ["Bus", "Measure", "Value"],
 					"items": [],
 					"label":"Metrics Bus table",
@@ -333,15 +321,13 @@
 						]
 					}
 				}
-			}
-		},
-		
-		
-		"metrics_host_dashboard":{
-			"type":"Table",
-			"settings":{
+			},
+			
+			
+			"metrics_host_dashboard":{
+				"type":"Table",
 				"state":{
-					"browser_type":"OneRecordTable",
+					"browser_type":"RecordsTable",
 					"headers": ["Hostname", "Measure", "Value"],
 					"items": [],
 					"label":"Metrics Host table",
@@ -461,15 +447,13 @@
 						]
 					}
 				}
-			}
-		},
-		
-		
-		"metrics_nodejs_dashboard":{
-			"type":"Table",
-			"settings":{
+			},
+			
+			
+			"metrics_nodejs_dashboard":{
+				"type":"Table",
 				"state":{
-					"browser_type":"OneRecordTable",
+					"browser_type":"RecordsTable",
 					"headers": ["NodeJS Runtime", "Measure", "Value"],
 					"items": [],
 					"label":"Metrics NodeJs table",

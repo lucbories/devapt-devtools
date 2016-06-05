@@ -36,8 +36,9 @@ export default class Topology extends FlowGraph
 	// MUTABLE STATE
 	get_initial_state()
 	{
-		const json = require('../../resources/devtools/ui_topology.json')
-		const state = json.views[this.get_name()].settings.state
+		// const json = require('../../resources/devtools/ui_topology.json')
+		// const state = json.views[this.get_name()].settings.state
+		const state = devapt.store.get_view(this.get_name()).state
 		return state
 	}
 }

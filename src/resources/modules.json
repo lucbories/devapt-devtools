@@ -1,5 +1,16 @@
 {
 	"modules":{
+		"devtools":{
+			"base_dir":"../devtools",
+			"resources":[
+				"ui_menubars.json",
+				"ui_metrics.json",
+				"ui_topology.json"
+			],
+			"templates":[],
+			"includes":[]
+		},
+		
 		"home":{
 			"base_dir":"home",
 			"resources":[
