@@ -11,10 +11,14 @@
 			"port":5000
 		},
 		"logs_bus":{
-			"type":"local"
+			"type":"simplebus_server",
+			"host":"localhost",
+			"port":5001
 		},
 		"metrics_bus":{
-			"type":"local"
+			"type":"simplebus_server",
+			"host":"localhost",
+			"port":5002
 		}
 	},
 	

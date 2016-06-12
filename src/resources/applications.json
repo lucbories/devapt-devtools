@@ -108,7 +108,7 @@
 		"tutorial-1": {
 			"url":"tutorial-1",
 			
-			"from_file": "private/app-tutorial-1/app_cfg.ini.json",
+			"from_file": "../resources/app-tutorial-1/app_cfg.ini.json",
 			
 			"services":{
 				"provides":{
@@ -120,7 +120,7 @@
 			},
 			
 			"modules": ["home", "security", "appbuilder", "demo_views", "backend_security"],
-			"plugins":["backend-foundation5"],
+			"plugins":[],
 			"resources":[],
 			
 			"assets":{

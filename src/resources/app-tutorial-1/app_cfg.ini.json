@@ -64,7 +64,7 @@
 			}
 		},
 
-		"traces":{ // class name regexp : instance name regexp : method name regexp : level(all, debug, info, warning, error)
+		"traces":{
 			"enabled":true,
 			"items":{
 				"view_access_user_inspector_form":":view_access_user_inspector_form::all",
@@ -86,7 +86,7 @@
 		},
 	
 		"sessions":{
-			"mode":"disabled", // disabled, standard
+			"mode":"disabled",
 		
 			"standard":{
 				"cache_expire":1,
@@ -98,7 +98,7 @@
 		
 		"security":{
 			"connexions":{
-				"files"[]:"db_connexions.ini"
+				"files":"db_connexions.ini"
 			}
 		},
 

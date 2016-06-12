@@ -27,7 +27,7 @@ export default class MetricsTree extends Container
 
 
 		// GET METRICS STATE
-		const metrics_server = runtime.node.metrics_server
+		const metrics_server = runtime.node.get_metrics_server()
 		const http_state = metrics_server.get_http_metrics_state_values()
 
 		// CREATE STATE TREE

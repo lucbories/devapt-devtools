@@ -10,7 +10,7 @@ const runtime = devapt.runtime
 
 const runtime_settings = require('../resources/nodes/nodeB.json')
 runtime_settings.base_dir = path.join(__dirname, '..')
-runtime_settings.is_master = true
+// runtime_settings.is_master = false
 
 // const runtime_settings = {
 // 	'is_master':false,

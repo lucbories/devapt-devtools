@@ -6,23 +6,26 @@
 		"name":"NodeA",
 		
 		"msg_bus":{
-			"type":"simplebus_server",
+			"type":"simplebus_client",
 			"host":"localhost",
 			"port":5000
 		},
 		"logs_bus":{
-			"type":"local"
+			"type":"simplebus_client",
+			"host":"localhost",
+			"port":5001
 		},
 		"metrics_bus":{
-			"type":"local"
+			"type":"simplebus_client",
+			"host":"localhost",
+			"port":5002
 		}
 	},
 	
 	"base_dir": "",
 	
 	"settings_provider": {
-		"source":"local_file",
-		"relative_path":"resources/world.json"
+		"source":"master"
 	},
 	
 	"trace": {
@@ -30,15 +33,15 @@
 			"enabled":true,
 			
 			"RuntimeStage0":{
-				"enabled":false
+				"enabled":true
 			},
 			
 			"RuntimeStage1":{
-				"enabled":false
+				"enabled":true
 			},
 			
 			"RuntimeStage2":{
-				"enabled":false
+				"enabled":true
 			},
 			
 			"RuntimeStage3":{

@@ -7,10 +7,14 @@
 		},
 		
 		"classes":{
+			"Node":true,
+			"NodeMessaging":true,
 			".*":false
 		},
 		
 		"instances":{
+			"NodeA":true,
+			"NodeB":true,
 			".*":false
 		},
 		
