@@ -5,7 +5,7 @@
 			
 			"services":{
 				"provides":{
-					"html_assets_1": { "servers":["NodeALocal8081"], "filters":["*"] }
+					"html_assets_1": { "servers":["NodeALocal8081", "NodeBLocal7081"], "filters":["*"] }
 				},
 				"consumes":{
 				}
@@ -29,14 +29,15 @@
 			
 			"services":{
 				"provides":{
-					"devtools_store": { "servers":["NodeALocal8080"] },
-					"devtools_panel": { "servers":["NodeALocal8081"] },
-					"metrics_http": { "servers":["NodeALocal8081"] },
-					"metrics_host": { "servers":["NodeALocal8081"] },
-					"metrics_nodejs": { "servers":["NodeALocal8081"] },
-					"metrics_bus": { "servers":["NodeALocal8081"] },
-					"topology": { "servers":["NodeALocal8081"] },
-					"logs": { "servers":["NodeALocal8081"] }
+					"devtools_store": { "servers":["NodeALocal8080", "NodeBLocal7081"] },
+					"devtools_panel": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"metrics_http": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"metrics_host": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"metrics_nodejs": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"metrics_bus": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"topology": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"logs": { "servers":["NodeALocal8081", "NodeBLocal7081"] },
+					"messages": { "servers":["NodeALocal8081", "NodeBLocal7081"] }
 				},
 				"consumes":{
 				}
@@ -86,7 +87,7 @@
 			"services":{
 				"provides":{
 					"rest_api_resources_query_1": { "servers":["NodeALocal8080"], "filters":["*"] },
-					"rest_api_models_query_1": { "servers":["NodeALocal8080"], "filters":["*"] }
+					"rest_api_models_query_1": { "servers":["NodeALocal8080", "NodeBLocal7080"], "filters":["*"] }
 				},
 				"consumes":{
 				}

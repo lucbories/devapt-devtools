@@ -1,0 +1,61 @@
+{
+	"is_master":false,
+	"name":"NodeC",
+	
+	"master":{
+		"name":"NodeA",
+		
+		"msg_bus":{
+			"type":"simplebus_client",
+			"host":"localhost",
+			"port":5000
+		},
+		"logs_bus":{
+			"type":"simplebus_client",
+			"host":"localhost",
+			"port":5001
+		},
+		"metrics_bus":{
+			"type":"simplebus_client",
+			"host":"localhost",
+			"port":5002
+		}
+	},
+	
+	"base_dir": "",
+	
+	"settings_provider": {
+		"source":"master",
+		"delay":500
+	},
+	
+	"trace": {
+		"stages":{
+			"enabled":true,
+			
+			"RuntimeStage0":{
+				"enabled":true
+			},
+			
+			"RuntimeStage1":{
+				"enabled":true
+			},
+			
+			"RuntimeStage2":{
+				"enabled":true
+			},
+			
+			"RuntimeStage3":{
+				"enabled":true
+			},
+			
+			"RuntimeStage4":{
+				"enabled":true
+			},
+			
+			"RuntimeStage5":{
+				"enabled":true
+			}
+		}
+	}
+}

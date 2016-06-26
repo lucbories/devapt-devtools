@@ -10,18 +10,7 @@ const runtime = devapt.runtime
 
 const runtime_settings = require('../resources/nodes/nodeB.json')
 runtime_settings.base_dir = path.join(__dirname, '..')
-// runtime_settings.is_master = false
-
-// const runtime_settings = {
-// 	'is_master':false,
-// 	'name':'NodeB',
-	
-// 	'master':{
-// 		'name':'NodeA',
-// 		'host':"localhost",
-// 		'port':5000
-// 	}
-// }
+console.log('start B settings', runtime_settings)
 
 runtime.load(runtime_settings)
 

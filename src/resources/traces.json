@@ -7,14 +7,20 @@
 		},
 		
 		"classes":{
-			"Node":true,
-			"NodeMessaging":true,
+			"Application":false,
+			"Service":false,
+			"ServiceProvider":false,
+			"AuthenticationWrapper":true,
+			"AuthenticationLowDbPlugin":false,
+			"AuthenticationManager":false,
 			".*":false
 		},
 		
 		"instances":{
-			"NodeA":true,
+			"NodeA":false,
 			"NodeB":true,
+			"NodeB_msg_bus":true,
+			"NodeB_msg_bus_gateway":true,
 			".*":false
 		},
 		
@@ -22,7 +28,6 @@
 			"levels":["debug", "info", "warn", "error"],
 			"NodeALocal8081xxx":true,
 			".*Server.*":true,
-			"AuthenticationPluginURL":true,
 			"common/executables/executable_route_assets":true,
 			"common/security/authentication_wrapper":true
 		}

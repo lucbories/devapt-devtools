@@ -3,21 +3,23 @@
 import path from 'path'
 // import cp from 'child_process'
 import chokidar from 'chokidar'
-
 import devapt from 'devapt'
-import Foundation6 from 'devapt-features-foundation6'
-import Cytoscape from 'devapt-features-cytoscape'
-
 
 const runtime = devapt.runtime
 
 
-const runtime_settings = require('../resources/nodes/nodeA.json')
+
+const DEVAPT_NODE_NAME = 'nodeA'
+const DEVAPT_NODE_CFG = '../resources/nodes/' + DEVAPT_NODE_NAME + '.json'
+
+
+
+const runtime_settings = require(DEVAPT_NODE_CFG)
 runtime_settings.base_dir = path.join(__dirname, '..')
 runtime_settings.is_master = true
 
 
-const DEBUG = true
+const DEBUG = false
 
 
 // LOAD RUNTIME AND PLUGINS
@@ -34,20 +36,6 @@ runtime.load(runtime_settings)
 				watch(SRC_DIR)
 				watch(SRC_DIR2)
 			}
-			
-			// PLUGINS
-			console.info('load runtime rendering plugins')
-			
-			var DevtoolsRenderingPlugin = require('./devtools_rendering_plugin').default
-
-			const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
-			const plugin1 = new DevtoolsRenderingPlugin(plugins_mgr)
-			const plugin2 = new Foundation6(plugins_mgr)
-			const plugin3 = new Cytoscape(plugins_mgr)
-			
-			plugins_mgr.load_at_first(plugin1)
-			plugins_mgr.load_at_first(plugin2)
-			plugins_mgr.load_at_first(plugin3)
 			
 			return
 		}

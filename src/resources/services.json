@@ -40,6 +40,10 @@
 			"type":"logs"
 		},
 		
+		"messages":{
+			"type":"messages"
+		},
+		
 		"devtools_panel":{
 			"type":"middleware",
 			"routes":[

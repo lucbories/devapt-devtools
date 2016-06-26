@@ -4,7 +4,7 @@ import common_mw from '../common_mw'
 
 
 // HTTP METRICS COMPONENTS
-import MetricsHttpDetails from './metrics_http_details'
+// import MetricsHttpDetails from './metrics_http_details'
 import MetricsHttpDashboard from './metrics_http_dashboard'
 import MetricsHttpTree from './metrics_http_tree'
 
@@ -17,6 +17,7 @@ import MetricsHttpTree from './metrics_http_tree'
 const Render = devapt.Render
 const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', undefined)
 const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
+// const Table = renderer.rendering_manager.get_feature_class('Table')
 // const Table = renderer.rendering_manager.get_feature_class('Table')
 // const Button = renderer.rendering_manager.get_feature_class('Button')
 // const InputField = renderer.rendering_manager.get_feature_class('InputField')
@@ -31,7 +32,8 @@ const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 // BUILD HTTP METRICS UI
 const metrics_http_dashboard = new MetricsHttpDashboard('metrics_http_dashboard', { render:renderer })
 const metrics_http_tree = new MetricsHttpTree('metrics_http_tree', { render:renderer })
-const metrics_http_details_table = new MetricsHttpDetails('metrics_http_details_table', { render:renderer })
+// const metrics_http_details_table = new MetricsHttpDetails('metrics_http_details_table', { render:renderer })
+// const metrics_http_details_table = new Table('metrics_http_details_table', { render:renderer })
 
 // const metrics_http_details_max_cfg = json.application.views.metrics_http_details_max.settings
 // const metrics_http_details_max_cfg = devapt.store.get_view('metrics_http_details_max')
@@ -64,7 +66,7 @@ const metrics_http_details_table = new MetricsHttpDetails('metrics_http_details_
 // const metrics_bus_dashboard_settings = devapt.store.get_view('metrics_bus_dashboard')
 // const metrics_bus_dashboard = new Table('metrics_bus_dashboard', metrics_bus_dashboard_settings)
 
-renderer.rendering_manager.add_instance(metrics_http_details_table)
+// renderer.rendering_manager.add_instance(metrics_http_details_table)
 // renderer.rendering_manager.add_instance(metrics_http_details)
 renderer.rendering_manager.add_instance(metrics_http_dashboard)
 renderer.rendering_manager.add_instance(metrics_http_tree)

@@ -25,7 +25,8 @@
 	"base_dir": "",
 	
 	"settings_provider": {
-		"source":"master"
+		"source":"master",
+		"delay":500
 	},
 	
 	"trace": {
@@ -45,15 +46,15 @@
 			},
 			
 			"RuntimeStage3":{
-				"enabled":false
+				"enabled":true
 			},
 			
 			"RuntimeStage4":{
-				"enabled":false
+				"enabled":true
 			},
 			
 			"RuntimeStage5":{
-				"enabled":false
+				"enabled":true
 			}
 		}
 	}

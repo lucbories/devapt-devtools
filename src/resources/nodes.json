@@ -34,7 +34,7 @@
 					"security": {
 						"authentication": {
 							"enabled":false,
-							"plugins":["file_users", "db_users"]
+							"plugins":["file_users"]
 						}
 					}
 				}
@@ -59,18 +59,19 @@
 					}
 				},
 				
-				"clusterB2":{
+				"clusterBLocal7082":{
 					"type":"cluster",
-					"port":7081,
+					"port":7082,
 					"protocole":"http",
 					"servers":["serverB21", "serverB22"]
 				},
 				
-				"serverB21":{
+				"NodeBLocal7081":{
 					"type":"express",
-					"port":7082,
+					"port":7081,
 					"protocole":"http",
 					"middlewares":[],
+					"use_socketio":true,
 					
 					"security": {
 						"authentication": {
@@ -80,9 +81,29 @@
 					}
 				},
 				
-				"serverB22":{
+				"NodeBLocal7083":{
 					"type":"express",
 					"port":7083,
+					"protocole":"http",
+					"middlewares":[],
+					
+					"security": {
+						"authentication": {
+							"enabled":true,
+							"plugins":["file_users"]
+						}
+					}
+				}
+			}
+		},
+		
+		"NodeC":{
+			"host":"localhost",
+			"is_master":false,
+			"servers":{
+				"NodeCLocal6080":{
+					"type":"restify",
+					"port":6080,
 					"protocole":"http",
 					"middlewares":[],
 					

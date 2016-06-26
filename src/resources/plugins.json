@@ -1,5 +1,19 @@
 {
 	"plugins":{
+		"rendering":[
+			{
+				"name":"DevtoolsRenderingPlugin",
+				"file":"js/devtools_rendering_plugin"
+			},
+			{
+				"name":"Cytoscape",
+				"package":"devapt-features-cytoscape"
+			},
+			{
+				"name":"Foundation6",
+				"package":"devapt-features-foundation6"
+			}
+		]
 	},
 	
 	"todo_resources_classes":{
