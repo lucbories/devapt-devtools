@@ -9,19 +9,9 @@
 					"app_url":"devtools",
 					"items":[
 						{
-							"label":"Settings",
+							"label":"Runtime",
 							"items":[
-								{ "url":"/store/config/all/", "label":"Config All" },
-								{ "url":"/store/config/applications/", "label":"Config Applications" },
-								{ "url":"/store/config/resources/", "label":"Config Resources" },
-								{ "url":"/store/config/views/", "label":"Config Views" },
-								{ "url":"/store/config/models/", "label":"Config Models" },
-								{ "url":"/store/config/menubars/", "label":"Config Menubars" },
-								{ "url":"/store/config/menus/", "label":"Config Menus" },
-								{ "url":"/store/config/modules/", "label":"Config Modules" },
-								{ "url":"/store/config/plugins/", "label":"Config Plugins" },
-								{ "url":"/store/config/nodes/", "label":"Config Nodes" },
-								{ "url":"/store/config/services/", "label":"Config Services" }
+								{ "url":"/runtime/settings/", "label":"All settings" }
 							]
 						},
 						{

@@ -7,20 +7,11 @@
 				"ui_messages.json",
 				"ui_logs.json",
 				"ui_metrics.json",
-				"ui_topology.json"
+				"ui_topology.json",
+				"ui_runtime.json"
 			],
 			"templates":[],
 			"includes":[]
-		},
-		
-		"home":{
-			"base_dir":"home",
-			"resources":[
-				"home_views.ini.json",
-				"home_menubars.ini.json"
-			],
-			"templates":["template/layouts.default.footer.html.template", "template/layouts.default.header.html.template"],
-			"includes":["VIEW_CONTENT_1.html.include", "VIEW_CONTENT_2.html.include", "VIEW_HOME.html.include"]
 		},
 		
 		"security":{
@@ -43,40 +34,6 @@
 				
 				"roles/auth_models_roles.ini.json",
 				"roles/auth_models_roles_users.ini.json"
-			],
-			"templates":[],
-			"includes":[]
-		},
-		
-		"appbuilder":{
-			"base_dir":"appbuilder",
-			"resources":[
-				"appbuilder_views.ini.json",
-				"appbuilder_menubars.ini.json"
-			],
-			"templates":[],
-			"includes":["app_builder_welcome.html.include"]
-		},
-		
-		"demo_views":{
-			"base_dir":"demo_views",
-			"resources":[
-				"demo_views.ini.json",
-				"demo_containers.ini.json",
-				"demo_menus.ini.json",
-				"demo_menubars.ini.json"
-			],
-			"templates":["view_demo_simple.html.template"],
-			"includes":["VIEW_TU_MODELS.html.include"]
-		},
-		
-		"backend_security":{
-			"base_dir":"backend_security",
-			"resources":[
-				"demo_access_views_users.ini.json",
-				"demo_access_views_user_inspector.ini.json",
-				"demo_access_views_groups.ini.json",
-				"demo_access_menus.ini.json"
 			],
 			"templates":[],
 			"includes":[]

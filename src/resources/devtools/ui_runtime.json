@@ -1,0 +1,52 @@
+{
+	"application":{
+		"views":{
+			"settings_tabs":{
+				"type":"Tabs",
+				"state":{
+					"label":"Settings Tabs",
+					"has_vertical":true,
+					
+					"items":[
+						{
+							"label":"Applications settings",
+							"content_view":"apps_settings_tree"
+						},
+						{
+							"label":"Modules settings",
+							"content_view":"modules_settings_tree"
+						},
+						{
+							"label":"Plugins settings",
+							"content_view":"plugins_settings_tree"
+						},
+						{
+							"label":"Resources settings",
+							"content_view":"resources_settings_tree"
+						},
+						{
+							"label":"Security settings",
+							"content_view":"security_settings_tree"
+						},
+						{
+							"label":"Nodes settings",
+							"content_view":"nodes_settings_tree"
+						},
+						{
+							"label":"Services settings",
+							"content_view":"services_settings_tree"
+						},
+						{
+							"label":"Loggers settings",
+							"content_view":"loggers_settings_tree"
+						},
+						{
+							"label":"Traces settings",
+							"content_view":"traces_settings_tree"
+						}
+					]
+				}
+			}
+		}
+	}
+}

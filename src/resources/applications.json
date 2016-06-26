@@ -93,7 +93,7 @@
 				}
 			},
 			
-			"modules": ["home", "security", "appbuilder"],
+			"modules": ["security"],
 			"plugins":[],
 			"resources":[],
 			
@@ -102,33 +102,6 @@
 				"js":[],
 				"img":[],
 				"index":""
-			},
-			"license":"APACHE-LICENSE-2.0"
-		},
-		
-		"tutorial-1": {
-			"url":"tutorial-1",
-			
-			"from_file": "../resources/app-tutorial-1/app_cfg.ini.json",
-			
-			"services":{
-				"provides":{
-				},
-				"consumes":{
-					
-				},
-				"linked":["tutorial-auth", "tutorial-api"]
-			},
-			
-			"modules": ["home", "security", "appbuilder", "demo_views", "backend_security"],
-			"plugins":[],
-			"resources":[],
-			
-			"assets":{
-				"css":["assets/css/app.css"],
-				"js":[],
-				"img":[],
-				"index":"index.html"
 			},
 			"license":"APACHE-LICENSE-2.0"
 		}
