@@ -3,7 +3,6 @@
 Current version: 1.0.0 beta (do not use in production environment)
 Please see the develop branch for current development.
 
-For Devapt project, see [DEVAPT](https://github.com/lucbories/devapt)
 
 ## What is it?
 
@@ -15,10 +14,6 @@ Developpers Tools application helps you to develop applications using devapt run
 
 ## USAGE
 
-```js
-cd devapt-devtools
-node ./dist/js/start_master.js
-```
 
 
 ## LICENCE
@@ -28,19 +23,18 @@ See [LICENSE](https://github.com/lucbories/devapt-devtools/tree/master/LICENSE)
 
 ## BUGS
 
-See [ISSUES](https://github.com/lucbories/devapt-devtools/issues)
+See [LICENSE](https://github.com/lucbories/devapt-devtools/issues) TO CHECK
+
+
+## Technical details
+
+
 
 
 ## Installation
 
-Install nodejs modules:
-```js
-npm install --save devapt
-npm install --save devapt-devtools
-```
 
-Update configuration if needed:
-TODO
+Please see the file called INSTALL.md.
 
 
 ## Contacts
