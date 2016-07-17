@@ -1,0 +1,127 @@
+{
+	"application":{
+		"views":{
+			"logs_view":{
+				"type":"Container",
+				"children":["logs_table_toolsbar", "logs_table"],
+				"state":{}
+			},
+			
+			"logs_table_toolsbar":{
+				"type":"Container",
+				"children":["logs_table_clear", "logs_table_max"],
+				"state":{}
+			},
+			
+			"logs_table":{
+				"type":"Table",
+				"state":{
+					"headers": ["ts", "level", "text"],
+					"items": [],
+					"label":"Logs table",
+					"show_label":false,
+					"show_headers":true,
+					"has_scroll":true,
+					
+					"strategy":{
+						"update_mode":"prepend",
+						"resize_mode":"remove_last",
+						"resize_max":10
+					},
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"logs",
+								"method":"post",
+								"transform":{
+									"result_type":"array",
+									"flat_field_name":"logs",
+									"flat_fields":[
+										{
+											"name":"log",
+											"path":"log"
+										}
+									],
+									"fields":[
+										{
+											"name":"ts",
+											"path":"ts"
+										},
+										{
+											"name":"level",
+											"path":"level"
+										}
+									]
+								},
+								"target_view":"logs_table",
+								"target_method":"do_action_prepend"
+							}
+						],
+						"dom":[
+							{
+								"dom_selector":"#logs_view thead th:first",
+								"dom_event":"click",
+								"transform":null,
+								"target_dom_selector":"#logs_view thead th:last",
+								"target_method":"toggle"
+							}
+						]
+					}
+				}
+			},
+			
+			"logs_table_clear":{
+				"type":"Button",
+				"html_before":"<div class='row'><div class='small-2 columns'>",
+				"state": {
+					"label":"Clear",
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"#logs_table_clear",
+								"dom_event":"click",
+								"transform":null,
+								"target_view":"logs_table",
+								"target_method":"do_action_clear_items"
+							}
+						]
+					}
+				}
+			},
+			
+			"logs_table_max":{
+				"type":"InputField",
+				"html_before":"</div><div class='small-2 columns'>",
+				"html_between":"</div><div class='small-3 columns'>",
+				"html_after":"</div><div class='small-5 columns'></div></div>",
+				"css_class_label":"text-right middle",
+				"format":"number",
+				"state": {
+					"label":"Max rows",
+					"placeholder":"enter an integer",
+					"value":100,
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"#logs_table_max",
+								"dom_event":"change",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"resize_max",
+											"path":["target", "value"]
+										}
+									]
+								},
+								"target_view":"logs_table",
+								"target_method":"do_action_set_resize_max"
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}

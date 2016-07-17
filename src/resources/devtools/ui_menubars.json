@@ -1,0 +1,47 @@
+{
+	"application":{
+		"menubars":{
+			"default_menubar":{
+				"class_name":"Menubar",
+				
+				"state":{
+					"label":"Devtools",
+					"app_url":"devtools",
+					"items":[
+						{
+							"label":"Runtime",
+							"items":[
+								{ "url":"/runtime/settings/", "label":"All settings" }
+							]
+						},
+						{
+							"label":"Monitor",
+							"items":[
+								{ "url":"/topology/logical/", "label":"Logical Topology" },
+								{ "url":"/topology/physical/", "label":"Physical Topology" },
+								{ "url":"/logs/", "label":"Logs" },
+								{ "url":"/messages/", "label":"Messages" },
+								{ "url":"/metrics/", "label":"Metrics" }
+							]
+						},
+						{
+							"label":"State",
+							"items":[
+							]
+						},
+						{
+							"label":"Api",
+							"items":[
+							]
+						},
+						{
+							"label":"Crud",
+							"items":[
+							]
+						}
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,132 @@
+{
+	"application":{
+		"views":{
+			"messages_view":{
+				"type":"Container",
+				"children":["messages_table_toolsbar", "messages_table"],
+				"state":{}
+			},
+			
+			"messages_table_toolsbar":{
+				"type":"Container",
+				"children":["messages_table_clear", "messages_table_max"],
+				"state":{}
+			},
+			
+			"messages_table":{
+				"type":"Table",
+				"state":{
+					"headers": ["ts", "transporter", "sender", "target", "payload"],
+					"items": [],
+					"label":"Messages table",
+					"show_label":false,
+					"show_headers":true,
+					"has_scroll":true,
+					
+					"strategy":{
+						"update_mode":"prepend",
+						"resize_mode":"remove_last",
+						"resize_max":10
+					},
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"messages",
+								"method":"post",
+								"transform":{
+									"result_type":"array",
+									"fields":[
+										{
+											"name":"ts",
+											"path":"ts"
+										},
+										{
+											"name":"transporter",
+											"path":"transporter"
+										},
+										{
+											"name":"sender",
+											"path":"sender"
+										},
+										{
+											"name":"target",
+											"path":"target"
+										},
+										{
+											"name":"payload",
+											"path":"payload"
+										}
+									]
+								},
+								"target_view":"messages_table",
+								"target_method":"do_action_prepend"
+							}
+						],
+						"dom":[
+							{
+								"dom_selector":"#messages_view thead th:first",
+								"dom_event":"click",
+								"transform":null,
+								"target_dom_selector":"#messages_view thead th:last",
+								"target_method":"toggle"
+							}
+						]
+					}
+				}
+			},
+			
+			"messages_table_clear":{
+				"type":"Button",
+				"html_before":"<div class='row'><div class='small-2 columns'>",
+				"state": {
+					"label":"Clear",
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"#messages_table_clear",
+								"dom_event":"click",
+								"transform":null,
+								"target_view":"messages_table",
+								"target_method":"do_action_clear_items"
+							}
+						]
+					}
+				}
+			},
+			
+			"messages_table_max":{
+				"type":"InputField",
+				"html_before":"</div><div class='small-2 columns'>",
+				"html_between":"</div><div class='small-3 columns'>",
+				"html_after":"</div><div class='small-5 columns'></div></div>",
+				"css_class_label":"text-right middle",
+				"format":"number",
+				"state": {
+					"label":"Max rows",
+					"placeholder":"enter an integer",
+					"value":100,
+					"bindings": {
+						"dom":[
+							{
+								"dom_selector":"#messages_table_max",
+								"dom_event":"change",
+								"transform":{
+									"result_type":"object",
+									"fields":[
+										{
+											"name":"resize_max",
+											"path":["target", "value"]
+										}
+									]
+								},
+								"target_view":"messages_table",
+								"target_method":"do_action_set_resize_max"
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}

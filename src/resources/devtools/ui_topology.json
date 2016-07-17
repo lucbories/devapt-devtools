@@ -1,0 +1,59 @@
+{
+	"application":{
+		"views":{
+			"topology_logical":{
+				"type":"Topology",
+				"state":{
+					"label":"Topology",
+					"mode":"logical",
+					"service":"topology",
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"topology",
+								"method":"get",
+								"transform":null,
+								
+								"target_view":"topology_logical",
+								"target_method":"update_topology",
+								"options":{
+									"method":{
+										"mode":"logical"
+									}
+								}
+							}
+						]
+					}
+				}
+			},
+			
+			"topology_physical":{
+				"type":"Topology",
+				"state":{
+					"label":"Topology",
+					"mode":"physical",
+					"service":"topology",
+					
+					"bindings": {
+						"services":[
+							{
+								"service":"topology",
+								"method":"get",
+								"transform":null,
+								
+								"target_view":"topology_physical",
+								"target_method":"update_topology",
+								"options":{
+									"method":{
+										"mode":"physical"
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}

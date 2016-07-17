@@ -5,8 +5,13 @@
 .project
 .buildpath
 npm-debug.log
+go.cmd
 
 .vscode
 dist
 tmp
 node_modules
+
+unused_*
+todo_*
+old_*
