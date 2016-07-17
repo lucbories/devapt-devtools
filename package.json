@@ -13,7 +13,7 @@
     "url": "git+https://github.com/lucbories/devapt-devtools/issues"
   },
   "homepage": "https://github.com/lucbories/devapt-devtools#readme.md",
-  "main": "dist/index.js",
+  "main": "dist/js/index.js",
   "engines": [],
   "directories": [
     "dist"
@@ -31,10 +31,10 @@
     "toolkit",
     "redux",
     "reactive",
+    "developper",
     "devtools"
   ],
   "dependencies": {
-    "chokidar": "^1.4.3",
     "devapt": "^1.0.0",
     "devapt-features-cytoscape": "^1.0.0",
     "devapt-features-foundation6": "^1.0.0",

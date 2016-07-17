@@ -35,7 +35,7 @@ export default function(arg_renderer, arg_main_view, arg_title/*, arg_label, arg
 		.script('main_script',
 			{
 				scripts:[],
-				scripts_urls:['js/vendor/browser.min.js', 'js/devapt-browser.js', 'js/app.js']
+				scripts_urls:['plugins/Devtools/browser.min.js', 'plugins/Devtools/devapt-browser.js', 'plugins/Devtools/app.js']
 			},
 			null)
 		.up()
