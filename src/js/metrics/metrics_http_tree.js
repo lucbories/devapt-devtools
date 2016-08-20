@@ -20,7 +20,7 @@ export default class MetricsTree extends Container
 		arg_settings = T.isObject(arg_settings) ? arg_settings : {}
 		arg_settings.styles = []
 		arg_settings.headers = ['<meta keywords="metrics_tree" />']
-		
+
 		super(arg_name, arg_settings)
 		
 		this.$type = 'MetricsTree'
@@ -31,7 +31,26 @@ export default class MetricsTree extends Container
 		const http_state = metrics_server ? metrics_server.get_http_metrics_state_values() : {}
 
 		// CREATE STATE TREE
-		const settings = { state:{tree:http_state, label:'HTTP Metrics Tree'} }
+		const settings = {
+			state:{
+				tree:http_state,
+				label:'HTTP Metrics Tree',
+				bindings:{
+					services:[
+						{
+							service:"metrics_http",
+							method:"get",
+							transform:null,
+							target_view:'this',
+							target_method:"on_refresh",
+							options:{
+								method: { "poll_interval":5000, "poll_name":"metrics_http_tree" }
+							}
+						}
+					]
+				}
+			}
+		}
 		const plugins_mgr = runtime.get_plugins_factory().get_rendering_manager()
 		let tree = plugins_mgr.create('Tree', this.get_name() + '_state_tree', settings)
 		assert( T.isObject(tree) && tree.is_component, context + ':bad Tree component object')

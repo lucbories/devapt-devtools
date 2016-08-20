@@ -43,6 +43,7 @@
     "devapt": "^1.0.0",
     "devapt-features-cytoscape": "^1.0.1",
     "devapt-features-foundation6": "^1.0.0",
+    "devapt-features-sparklines": "^1.0.0",
     "redux": "^3.5.2",
     "typr": "^0.2.1"
   },
