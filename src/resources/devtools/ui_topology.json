@@ -14,7 +14,6 @@
 								"service":"topology",
 								"method":"get",
 								"transform":null,
-								
 								"target_view":"topology_logical",
 								"target_method":"update_topology",
 								"options":{
@@ -41,7 +40,6 @@
 								"service":"topology",
 								"method":"get",
 								"transform":null,
-								
 								"target_view":"topology_physical",
 								"target_method":"update_topology",
 								"options":{

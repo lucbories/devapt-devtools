@@ -5,7 +5,7 @@ import common_mw from '../common_mw'
 
 // HTTP METRICS COMPONENTS
 // import MetricsHttpDetails from './metrics_http_details'
-import MetricsHttpDashboard from './metrics_http_dashboard'
+// import MetricsHttpDashboard from './metrics_http_dashboard'
 import MetricsHttpTree from './metrics_http_tree'
 
 
@@ -30,7 +30,7 @@ const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 
 
 // BUILD HTTP METRICS UI
-const metrics_http_dashboard = new MetricsHttpDashboard('metrics_http_dashboard', { render:renderer })
+// const metrics_http_dashboard = new MetricsHttpDashboard('metrics_http_dashboard', { render:renderer })
 const metrics_http_tree = new MetricsHttpTree('metrics_http_tree', { render:renderer })
 // const metrics_http_details_table = new MetricsHttpDetails('metrics_http_details_table', { render:renderer })
 // const metrics_http_details_table = new Table('metrics_http_details_table', { render:renderer })
@@ -68,7 +68,7 @@ const metrics_http_tree = new MetricsHttpTree('metrics_http_tree', { render:rend
 
 // renderer.rendering_manager.add_instance(metrics_http_details_table)
 // renderer.rendering_manager.add_instance(metrics_http_details)
-renderer.rendering_manager.add_instance(metrics_http_dashboard)
+// renderer.rendering_manager.add_instance(metrics_http_dashboard)
 renderer.rendering_manager.add_instance(metrics_http_tree)
 // renderer.rendering_manager.add_instance(metrics_host_dashboard)
 // renderer.rendering_manager.add_instance(metrics_nodejs_dashboard)
