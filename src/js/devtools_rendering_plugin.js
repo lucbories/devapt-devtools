@@ -10,7 +10,7 @@ const RenderingPlugin = Devapt.RenderingPlugin
 
 // HTTP METRICS COMPONENTS
 // import MetricsHttpDetails from './metrics/metrics_http_details'
-import MetricsHttpDashboard from './metrics/metrics_http_dashboard'
+// import MetricsHttpDashboard from './metrics/metrics_http_dashboard'
 import MetricsHttpTree from './metrics/metrics_http_tree'
 
 
@@ -82,7 +82,7 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		switch(arg_class_name)
 		{
 			// case 'MetricsHttpDetails':   return new MetricsHttpDetails(arg_name, arg_settings, arg_state)
-			case 'MetricsHttpDashboard': return new MetricsHttpDashboard(arg_name, arg_settings, arg_state)
+			// case 'MetricsHttpDashboard': return new MetricsHttpDashboard(arg_name, arg_settings, arg_state)
 			case 'MetricsHttpTree':      return new MetricsHttpTree(arg_name, arg_settings, arg_state)
 		}
 		
@@ -107,7 +107,7 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		switch(arg_class_name)
 		{
 			// case 'MetricsHttpDetails':   return MetricsHttpDetails
-			case 'MetricsHttpDashboard': return MetricsHttpDashboard
+			// case 'MetricsHttpDashboard': return MetricsHttpDashboard
 			case 'MetricsHttpTree':      return MetricsHttpTree
 		}
 		
@@ -129,7 +129,7 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		switch(arg_class_name)
 		{
 			// case 'MetricsHttpDetails':
-			case 'MetricsHttpDashboard':
+			// case 'MetricsHttpDashboard':
 			case 'MetricsHttpTree':
 				return true
 		}
