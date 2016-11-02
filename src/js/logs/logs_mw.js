@@ -1,14 +1,22 @@
-
+// NPM IMPORTS
 import devapt from 'devapt'
+
+// DEVTOOLS IMPORTS
 import common_mw from '../common_mw'
-// import LogsTable from './logs_table'
 
 
 const Render = devapt.Render
-const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', undefined)
-// const Container = renderer.rendering_manager.get_feature_class('Container')
-// const logs_view = new Container('logs_view', { render:renderer })
+const renderer = new Render()
 
-// console.log(logs_view, 'logs_view')
 
-export default common_mw(renderer, 'logs_view', 'Devapt Devtools - Logs', 'Devtools', 'devtools')
+// SERVICE VIEW CONFIG
+export const service_cfg = {
+	view:'logs_view',
+	title:'Devapt Devtools - Logs',
+	label:'Devtools',
+	url:'devtools'
+}
+
+
+// SERVICE MIDDLEWARE
+export default common_mw(renderer, 'logs_view', 'default_menubar', 'Devapt Devtools - Logs')

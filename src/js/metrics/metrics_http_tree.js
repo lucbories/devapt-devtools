@@ -44,7 +44,7 @@ export default class MetricsTree extends Container
 							target_view:'this',
 							target_method:"on_refresh",
 							options:{
-								method: { "poll_interval":5000, "poll_name":"metrics_http_tree" }
+								method: { "interval_milliseconds":5000, "name":"metrics_http_tree" }
 							}
 						}
 					]

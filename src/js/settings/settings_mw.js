@@ -1,31 +1,32 @@
-
+// NPM IMPORTS
 import assert from 'assert'
 import T from 'typr'
-
 import devapt from 'devapt'
+
+// DEVTOOLS IMPORTS
 import common_mw from '../common_mw'
 
 
 
 // STANDARD COMPONENTS
-const config = devapt.config
+const config = devapt.runtime.get_registry().root
 const Render = devapt.Render
-const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', undefined)
+const renderer = new Render()
 const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 
 
 
 // SETTINGS COMPONENTS VIEWS
-// const apps_settings = config().toMap().toJS()
-const apps_settings = config().get('applications').toMap().toJS()
-const modules_settings = config().get('modules').toMap().toJS()
-const plugins_settings = config().get('plugins').toMap().toJS()
-const resources_settings = config().get('resources').toMap().toJS()
-const security_settings = config().get('security').toMap().toJS()
-const nodes_settings = config().get('nodes').toMap().toJS()
-const services_settings = config().get('services').toMap().toJS()
-const loggers_settings = config().get('loggers').toMap().toJS()
-const traces_settings = config().get('traces').toMap().toJS()
+// const apps_settings = config.toMap().toJS()
+const apps_settings = config.get('applications').toMap().toJS()
+const modules_settings = config.get('modules').toMap().toJS()
+const plugins_settings = config.get('plugins').toMap().toJS()
+const resources_settings = config.get('resources').toMap().toJS()
+const security_settings = config.get('security').toMap().toJS()
+const nodes_settings = config.get('nodes').toMap().toJS()
+const services_settings = config.get('services').toMap().toJS()
+const loggers_settings = config.get('loggers').toMap().toJS()
+const traces_settings = config.get('traces').toMap().toJS()
 
 const apps_settings_cfg = { state:{tree:apps_settings, label:'Applications settings'} }
 const apps_settings_tree = renderer.rendering_manager.create('Tree', 'apps_settings_tree', apps_settings_cfg)
@@ -75,25 +76,18 @@ renderer.rendering_manager.add_instance(traces_settings_tree)
 
 
 // BUILD SETTINGS MAIN VIEW
-const settings_tabs_cfg = devapt.store.get_view('settings_tabs')
+const settings_tabs_cfg = devapt.runtime.get_registry().get_view('settings_tabs')
 const settings_tabs = new Tabs('settings_tabs', settings_tabs_cfg)
 
 
+// SERVICE VIEW CONFIG
+export const service_cfg = {
+	view:settings_tabs,
+	title:'Devapt Devtools - Settings',
+	label:'Devtools',
+	url:'devtools'
+}
 
-// METRICS MIDDLEWARE
-export default common_mw(renderer, settings_tabs, 'Devapt Devtools - Settings', 'Devtools', 'devtools')
 
-
-/*
-,
-								{ "url":"/store/config/applications/", "label":"Applications settings" },
-								{ "url":"/store/config/resources/", "label":"Resources settings" },
-								{ "url":"/store/config/views/", "label":"Views settings" },
-								{ "url":"/store/config/models/", "label":"Models settings" },
-								{ "url":"/store/config/menubars/", "label":"Menubars settings" },
-								{ "url":"/store/config/menus/", "label":"Menus settings" },
-								{ "url":"/store/config/modules/", "label":"Modules settings" },
-								{ "url":"/store/config/plugins/", "label":"Plugins settings" },
-								{ "url":"/store/config/nodes/", "label":"Nodes settings" },
-								{ "url":"/store/config/services/", "label":"Services settings" }
-								*/
+// SERVICE MIDDLEWARE
+export default common_mw(renderer, settings_tabs, 'default_menubar', 'Devapt Devtools - Settings')

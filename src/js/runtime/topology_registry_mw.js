@@ -11,12 +11,12 @@ const renderer = new Render()
 
 // SERVICE VIEW CONFIG
 export const service_cfg = {
-	view:'messages_view',
-	title:'Devapt Devtools - Messages',
+	view:'topology_registry_view',
+	title:'Devapt Devtools - Topology Registry',
 	label:'Devtools',
 	url:'devtools'
 }
 
 
 // SERVICE MIDDLEWARE
-export default common_mw(renderer, 'messages_view', 'default_menubar', 'Devapt Devtools - Messages')
+export default common_mw(renderer, 'topology_registry_view', 'default_menubar', 'Devapt Devtools - Topology Registry')

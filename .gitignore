@@ -4,7 +4,7 @@
 .settings
 .project
 .buildpath
-npm-debug.log
+npm-debug.log*
 go.cmd
 
 .vscode

@@ -1,55 +1,61 @@
 {
-	"application":{
-		"views":{
-			"topology_logical":{
-				"type":"Topology",
-				"state":{
-					"label":"Topology",
-					"mode":"logical",
-					"service":"topology",
-					
-					"bindings": {
-						"services":[
-							{
-								"service":"topology",
-								"method":"get",
-								"transform":null,
-								"target_view":"topology_logical",
-								"target_method":"update_topology",
-								"options":{
-									"method":{
-										"mode":"logical"
+	"views":{
+		"topology_logical":{
+			"type":"Topology",
+			"state":{
+				"label":"Topology",
+				"mode":"logical",
+				"service":"topology",
+				
+				"bindings": {
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":null,
+							"target_view":"topology_logical",
+							"target_method":"update_topology",
+							"options":{
+								"method":{
+									"mode":"logical",
+									"poller":{
+										"interval_milliseconds":5000,
+										"name":"topology_logical_view_poller"
 									}
 								}
 							}
-						]
-					}
+						}
+					]
 				}
-			},
-			
-			"topology_physical":{
-				"type":"Topology",
-				"state":{
-					"label":"Topology",
-					"mode":"physical",
-					"service":"topology",
-					
-					"bindings": {
-						"services":[
-							{
-								"service":"topology",
-								"method":"get",
-								"transform":null,
-								"target_view":"topology_physical",
-								"target_method":"update_topology",
-								"options":{
-									"method":{
-										"mode":"physical"
+			}
+		},
+		
+		"topology_physical":{
+			"type":"Topology",
+			"state":{
+				"label":"Topology",
+				"mode":"physical",
+				"service":"topology",
+				
+				"bindings": {
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":null,
+							"target_view":"topology_physical",
+							"target_method":"update_topology",
+							"options":{
+								"method":{
+									"mode":"physical",
+									"poller":{
+										"interval_milliseconds":5000,
+										"name":"topology_physical_view_poller"
 									}
 								}
 							}
-						]
-					}
+						}
+					]
 				}
 			}
 		}

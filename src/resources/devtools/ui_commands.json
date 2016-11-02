@@ -1,0 +1,34 @@
+{
+	"commands":{
+		"display_logical_topology":{
+			"type":"display",
+			"url":"/topology/logical",
+			"middleware":"devtools_panel",
+			"label":"Logical Topology"
+		},
+		"display_physical_topology":{
+			"type":"display",
+			"url":"/topology/physical",
+			"middleware":"devtools_panel",
+			"label":"Physical Topology"
+		},
+		"display_logs":{
+			"type":"display",
+			"middleware":"devtools_panel",
+			"url":"/logs/",
+			"label":"Logs"
+		},
+		"display_messages":{
+			"type":"display",
+			"middleware":"devtools_panel",
+			"url":"/messages/",
+			"label":"Messages"
+		},
+		"display_metrics":{
+			"type":"display",
+			"middleware":"devtools_panel",
+			"url":"/metrics/",
+			"label":"Metrics"
+		}
+	}
+}

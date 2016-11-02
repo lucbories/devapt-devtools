@@ -25,19 +25,23 @@ var SRC_RESOURCES_ALL = 'src/resources/**/*'
 
 var SRC_PUBLIC_ALL = 'src/public/**/*'
 var SRC_PUBLIC_JS = 'src/public/**/*.js'
-var SRC_JSPLUMB = 'node_modules/jsplumb/dist/'
-var SRC_JSPLUMB_ALL = 'node_modules/jsplumb/dist/**/*'
 var SRC_DEVAPT_BROWSER = 'node_modules/devapt/dist/devapt-browser.js*'
+var SRC_PUBLIC_CSS = 'src/public/**/*.css'
 
 var DST = 'dist'
 var DST_ALL_JS = 'dist/js'
 var DST_ALL_JADE = 'dist/jade'
 var DST_ALL_RESOURCES = 'dist/resources'
-var DST_PUBLIC = 'public'
+
+// var DST_PUBLIC = 'public'
+
 var DST_PUBLIC_JS = 'public/assets/js'
 var DST_PUBLIC_JS_BUNDLE = 'app.js'
 var DST_PUBLIC_JS_TMP = 'dist/public/js'
+
 var DST_DEVAPT_BROWSER = 'public/assets/js'
+
+var DST_PUBLIC_CSS = 'public/assets/css'
 
 const BABEL_CONFIG = {
 	presets: ['es2015']
@@ -219,7 +223,9 @@ gulp.task('build_public_js_bundle',
 			.ignore('sequelize')
 			.ignore('restify')
 			.ignore('socket.io')
+			.ignore('node-forge')
 			.external('client_runtime')
+			.external('forge-browser')
 			.external('ui')
 			.bundle()
 			.pipe( source(DST_PUBLIC_JS_BUNDLE) )
@@ -242,6 +248,38 @@ gulp.task('watch_public_js',
 		watcher_public_js.on('change',
 			(event) => {
 				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_js...')	
+			}
+		)
+	}
+)
+
+
+
+// **************************************************************************************************
+// DEVAPT-DEVTOOLS - PUBLIC - CSS
+// **************************************************************************************************
+
+gulp.task('build_public_css_bundle',
+	(/*callback*/) => {
+		return gulp.src(SRC_PUBLIC_CSS)
+			.pipe(changed(DST_PUBLIC_CSS))
+			.pipe(gulp.dest(DST_PUBLIC_CSS))
+			.pipe( livereload() )
+	}
+)
+
+gulp.task('build_public_css',
+	(callback) => {
+		sequence('build_public_css_bundle', callback)
+	}
+)
+
+gulp.task('watch_public_css',
+	(/*callback*/) => {
+		var watcher_public_js = gulp.watch(SRC_PUBLIC_CSS, sequence('build_public_css', 'restart') )
+		watcher_public_js.on('change',
+			(event) => {
+				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_css...')	
 			}
 		)
 	}
@@ -320,7 +358,7 @@ gulp.task('watch_public_devapt',
 // DEVAPT-DEVTOOLS - PUBLIC
 // **************************************************************************************************
 
-gulp.task('public', ['copy_devapt_public', 'build_public_js'])
+gulp.task('public', ['copy_devapt_public', 'build_public_js', 'build_public_css'])
 
 gulp.task('watch_public',
 	() => {

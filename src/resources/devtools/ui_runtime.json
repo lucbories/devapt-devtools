@@ -1,51 +1,463 @@
 {
-	"application":{
-		"views":{
-			"settings_tabs":{
-				"type":"Tabs",
-				"state":{
-					"label":"Settings Tabs",
-					"has_vertical":true,
-					
-					"items":[
+	"views":{
+
+		"topology_registry_view":{
+			"type":"Container",
+			"children":["topology_registry_view_clear", "topology_registry_tabs"],
+			"state":{
+				"label":"Topology registry view."
+			}
+		},
+
+		"topology_registry_view_clear":{
+			"type":"Button",
+			"html_before":"<div class='row'><div class='small-2 columns'>",
+			"html_after":"</div></div>",
+			"state": {
+				"label":"Refresh",
+				"bindings": {
+					"dom":[
 						{
-							"label":"Applications settings",
-							"content_view":"apps_settings_tree"
-						},
-						{
-							"label":"Modules settings",
-							"content_view":"modules_settings_tree"
-						},
-						{
-							"label":"Plugins settings",
-							"content_view":"plugins_settings_tree"
-						},
-						{
-							"label":"Resources settings",
-							"content_view":"resources_settings_tree"
-						},
-						{
-							"label":"Security settings",
-							"content_view":"security_settings_tree"
-						},
-						{
-							"label":"Nodes settings",
-							"content_view":"nodes_settings_tree"
-						},
-						{
-							"label":"Services settings",
-							"content_view":"services_settings_tree"
-						},
-						{
-							"label":"Loggers settings",
-							"content_view":"loggers_settings_tree"
-						},
-						{
-							"label":"Traces settings",
-							"content_view":"traces_settings_tree"
+							"dom_selector":"#topology_registry_view_clear",
+							"dom_event":"click",
+							"transform":null,
+							"target_view":"topology_registry_apps_tree",
+							"target_method":"do_refresh"
 						}
 					]
 				}
+			}
+		},
+
+		"topology_registry_tabs":{
+			"type":"Tabs",
+			"state":{
+				"label":"Topology registry Tabs",
+				"has_vertical":false,
+				"items":[
+					{
+						"label":"Applications",
+						"content_view":"topology_registry_apps_tree"
+					},
+					{
+						"label":"Modules",
+						"content_view":"topology_registry_modules_tree"
+					},
+					{
+						"label":"Plugins",
+						"content_view":"topology_registry_plugins_tree"
+					},
+					{
+						"label":"Resources",
+						"content_view":"topology_registry_resources_tree"
+					},
+					{
+						"label":"Nodes",
+						"content_view":"topology_registry_nodes_tree"
+					},
+					{
+						"label":"Services",
+						"content_view":"topology_registry_services_tree"
+					},
+					{
+						"label":"Loggers",
+						"content_view":"topology_registry_loggers_tree"
+					},
+					{
+						"label":"Traces",
+						"content_view":"topology_registry_traces_tree"
+					}
+				]
+			}
+		},
+
+		"topology_registry_apps_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry applications",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"applications",
+										"path":["applications"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_modules_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":false,
+				"label":"Topology registry modules",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"modules",
+										"path":["modules"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_plugins_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry plugins",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"plugins",
+										"path":["plugins"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_resources_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry resources",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"resources",
+										"path":["resources"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_nodes_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry nodes",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"nodes",
+										"path":["nodes"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_services_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry services",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"services",
+										"path":["services"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_loggers_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry loggers",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"loggers",
+										"path":["loggers"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_registry_traces_tree":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology registry traces",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":{
+								"result_type":"object",
+								"fields":[
+									{
+										"name":"traces",
+										"path":["traces"]
+									}
+								]
+							},
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"registry",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"topology_runtime_view":{
+			"type":"TableTree",
+			"state":{
+				"tree":{},
+				"max_depth":20,
+				"collapsed":true,
+				"label":"Topology runtime",
+				"headers":[],
+				"items":[],
+				"show_label":true,
+				"show_headers":false,
+				"bindings":{
+					"services":[
+						{
+							"service":"topology",
+							"method":"get",
+							"transform":null,
+							"target_view":"this",
+							"target_method":"update_tree",
+							"options":{
+								"method": {
+									"mode":"runtime",
+									"debounce_milliseconds":3000
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+
+		"settings_tabs":{
+			"type":"Tabs",
+			"state":{
+				"label":"Settings Tabs",
+				"has_vertical":true,
+				
+				"items":[
+					{
+						"label":"Applications settings",
+						"content_view":"apps_settings_tree"
+					},
+					{
+						"label":"Modules settings",
+						"content_view":"modules_settings_tree"
+					},
+					{
+						"label":"Plugins settings",
+						"content_view":"plugins_settings_tree"
+					},
+					{
+						"label":"Resources settings",
+						"content_view":"resources_settings_tree"
+					},
+					{
+						"label":"Security settings",
+						"content_view":"security_settings_tree"
+					},
+					{
+						"label":"Nodes settings",
+						"content_view":"nodes_settings_tree"
+					},
+					{
+						"label":"Services settings",
+						"content_view":"services_settings_tree"
+					},
+					{
+						"label":"Loggers settings",
+						"content_view":"loggers_settings_tree"
+					},
+					{
+						"label":"Traces settings",
+						"content_view":"traces_settings_tree"
+					}
+				]
 			}
 		}
 	}
