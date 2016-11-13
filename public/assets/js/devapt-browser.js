@@ -3452,6 +3452,46 @@ var Router = function (_RouterState) {
 		}
 
 		/**
+   * Evaluate a command.
+   * 
+   * @param {string} arg_command_name - command name.
+   * 
+   * @returns {Promise}
+   */
+
+	}, {
+		key: 'evaluate_command',
+		value: function evaluate_command(arg_command_name) {
+			var commands = this.state_store.get_state().get('commands', undefined);
+			if (!commands) {
+				return Promise.reject('no commands found for [' + arg_command_name + ']');
+			}
+			var command = commands.get(arg_command_name);
+			command = command ? command.toJS() : undefined;
+			console.log(command, 'evaluate_command:command');
+			var type = _typr2.default.isString(command.type) && command.type.length > 0 ? command.type.toLocaleLowerCase() : undefined;
+			var url = _typr2.default.isString(command.type) && command.url.length > 0 ? command.url : '';
+			var middleware = _typr2.default.isString(command.middleware) && command.middleware.length > 0 ? command.middleware : undefined;
+			var label = _typr2.default.isString(command.label) && command.label.length > 0 ? command.label : undefined;
+
+			if (!type) {
+				return Promise.reject('bad command type for [' + arg_command_name + ']');
+			}
+
+			switch (type) {
+				case 'display':
+					{
+						var app_url = this.state_store.get_state().get('app_url', undefined);
+						var route = _typr2.default.isString(app_url) ? '/' + app_url + url : url;
+						this.runtime.ui.render_with_middleware(command, route, this.session_credentials);
+						return Promise.resolve('done');
+					}
+			}
+
+			return Promise.reject('unknow command type for [' + arg_command_name + ']');
+		}
+
+		/**
    * Display the page content with given view and menubar.
    * 
    * @param {string} arg_view_name - view name
@@ -5078,9 +5118,9 @@ var UI = function (_Loggable) {
 			arg_rendering_result_body_scripts_tags.forEach(function (tag) {
 				var has_tag = false; // TODO
 				var e = document.createElement('script');
-				e.text = tag;
+				e.text = tag.content;
+				e.setAttribute('id', tag.id);
 				e.setAttribute('type', 'text/javascript');
-				e.setAttribute('name', 'todo');
 				document.body.appendChild(e);
 			});
 		}

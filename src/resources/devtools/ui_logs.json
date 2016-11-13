@@ -2,20 +2,25 @@
 	"views":{
 		"logs_view":{
 			"type":"Container",
-			"children":["logs_table_toolsbar", "logs_table"],
-			"state":{}
+			"state":{
+				"items":["logs_table_toolsbar", "logs_table"]
+			},
+			"settings":{}
 		},
 		
 		"logs_table_toolsbar":{
 			"type":"Container",
-			"children":["logs_table_clear", "logs_table_max"],
-			"state":{}
+			"state":{
+				"items":["logs_table_clear", "logs_table_max"]
+			},
+			"settings":{}
 		},
 		
 		"logs_table":{
 			"type":"Table",
+			"settings":{},
 			"state":{
-				"headers": ["ts", "level", "text"],
+				"headers": [["ts", "level", "text"]],
 				"items": [],
 				"label":"Logs table",
 				"show_label":false,
@@ -90,12 +95,14 @@
 		},
 		
 		"logs_table_max":{
-			"type":"InputField",
-			"html_before":"</div><div class='small-2 columns'>",
-			"html_between":"</div><div class='small-3 columns'>",
-			"html_after":"</div><div class='small-5 columns'></div></div>",
-			"css_class_label":"text-right middle",
-			"format":"number",
+			"type":"input-field",
+			"settings":{
+				"html_before":"</div><div class='small-2 columns'>",
+				"html_between":"</div><div class='small-3 columns'>",
+				"html_after":"</div><div class='small-5 columns'></div></div>",
+				"css_class_label":"text-right middle",
+				"format":"number"
+			},
 			"state": {
 				"label":"Max rows",
 				"placeholder":"enter an integer",

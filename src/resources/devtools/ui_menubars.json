@@ -18,11 +18,11 @@
 					{
 						"label":"Monitor",
 						"items":[
-							"display_logical_topology",
-							"display_physical_topology",
-							"display_logs",
-							"display_messages",
-							"display_metrics"
+							{ "label":"Logical Toppology", "command":"display_logical_topology" },
+							{ "label":"Physical Toppology", "command":"display_physical_topology" },
+							{ "label":"Logs", "command":"display_logs" },
+							{ "label":"Messages", "command":"display_messages" },
+							{ "label":"Metrics", "command":"display_metrics" }
 						]
 					},
 					{

@@ -2,13 +2,19 @@
 	"views":{
 		"messages_view":{
 			"type":"Container",
-			"children":[
-				{
-					"name":"messages_table_toolsbar",
+			"state":{
+				"items":["messages_table_toolsbar", "messages_table"]
+			},
+			"settings":{},
+			"children":{
+				"messages_table_toolsbar":{
 					"type":"Container",
-					"children":[
-						{
-							"name":"messages_table_clear",
+					"state":{
+						"items":["messages_table_clear", "messages_table_max"]
+					},
+					"settings":{},
+					"children":{
+						"messages_table_clear":{
 							"type":"Button",
 							"html_before":"<div class='row'><div class='small-2 columns'>",
 							"state": {
@@ -26,8 +32,7 @@
 								}
 							}
 						},
-						{
-							"name":"messages_table_max",
+						"messages_table_max":{
 							"type":"InputField",
 							"html_before":"</div><div class='small-2 columns'>",
 							"html_between":"</div><div class='small-3 columns'>",
@@ -59,14 +64,12 @@
 								}
 							}
 						}
-					],
-					"state":{}
+					}
 				},
-				{
-					"name":"messages_table",
+				"messages_table":{
 					"type":"Table",
 					"state":{
-						"headers": ["ts", "transporter", "sender", "target", "payload"],
+						"headers": [["ts", "transporter", "sender", "target", "payload"]],
 						"items": [],
 						"label":"Messages table",
 						"show_label":false,
@@ -125,8 +128,7 @@
 						}
 					}
 				}
-			],
-			"state":{}
+			}
 		}
 	}
 }
