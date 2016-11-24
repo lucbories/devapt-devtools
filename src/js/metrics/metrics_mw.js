@@ -13,17 +13,8 @@ import common_mw from '../common_mw'
 
 
 // STANDARD COMPONENTS
-const Render = devapt.Render
-const renderer = new Render()
-// const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
-
-
-// BUILD HTTP METRICS UI
-// const metrics_http_tree = new MetricsHttpTree('metrics_http_tree', { render:renderer })
-
-
-// BUILD HOST/NODEJS/BUS METRICS UI
-// renderer.rendering_manager.add_instance(metrics_http_tree)
+const RenderingBuilder = devapt.RenderingBuilder
+const renderer = new RenderingBuilder(devapt.runtime)
 
 
 // BUILD METRICS MAIN UI

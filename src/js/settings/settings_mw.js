@@ -10,8 +10,8 @@ import common_mw from '../common_mw'
 
 // STANDARD COMPONENTS
 const config = devapt.runtime.get_registry().root
-const Render = devapt.Render
-const renderer = new Render()
+const RenderingBuilder = devapt.RenderingBuilder
+const renderer = new RenderingBuilder(devapt.runtime)
 const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 
 

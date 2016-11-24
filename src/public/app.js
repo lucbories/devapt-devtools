@@ -1,8 +1,10 @@
 
-$(document).ready(
+window.devapt().on_content_rendered(
 	function()
 	{
-		$(document).foundation()
+		// console.log('devtools:app.js')
+
+		// $(document).foundation()
 		
 		var socket = io()
 		

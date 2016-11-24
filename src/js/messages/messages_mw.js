@@ -5,8 +5,8 @@ import devapt from 'devapt'
 import common_mw from '../common_mw'
 
 
-const Render = devapt.Render
-const renderer = new Render()
+const RenderingBuilder = devapt.RenderingBuilder
+const renderer = new RenderingBuilder(devapt.runtime)
 
 
 // SERVICE VIEW CONFIG

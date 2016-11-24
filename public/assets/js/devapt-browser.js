@@ -504,7 +504,7 @@ var Component = function (_Bindable) {
 
 						var target_object = _this2;
 						if (_typr2.default.isString(target_view) && target_view != 'this') {
-							target_object = _this2.runtime.ui.get(target_view);
+							target_object = _this2.runtime._ui.get(target_view);
 						} else if (_typr2.default.isString(target_dom_selector)) {
 							if (target_dom_selector == 'this') {
 								target_object = $('#' + _this2.get_dom_id());
@@ -529,7 +529,7 @@ var Component = function (_Bindable) {
 
 								var timeline_objects = [];
 								target_views.forEach(function (view_name) {
-									var view = _this2.runtime.ui.get(view_name);
+									var view = _this2.runtime._ui.get(view_name);
 									if (view) {
 										timeline_objects.push(view);
 									}
@@ -554,7 +554,7 @@ var Component = function (_Bindable) {
 
 						var target_object = _this2;
 						if (_typr2.default.isString(target_view) && target_view != 'this') {
-							target_object = _this2.runtime.ui.get(target_view);
+							target_object = _this2.runtime._ui.get(target_view);
 						} else if (_typr2.default.isString(target_dom_selector)) {
 							if (target_dom_selector == 'this') {
 								target_object = $('#' + _this2.get_dom_id());
@@ -964,10 +964,10 @@ var Container = function (_Component) {
 		/**
    * Store actions reducer pure function.
    * 
-   * @param {object} arg_previous_state - previous state.
+   * @param {Immutable.Map} arg_previous_state - previous state.
    * @param {object} arg_action - store action: { type:'', component:'', ...}
    * 
-   * @returns {object} - new state
+   * @returns {Immutable.Map} - new state
    */
 
 	}, {
@@ -1271,9 +1271,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 // import document from 'global/document'
 
-var _vdomVirtualize = require('vdom-virtualize');
+var _vdomParser = require('vdom-parser');
 
-var _vdomVirtualize2 = _interopRequireDefault(_vdomVirtualize);
+var _vdomParser2 = _interopRequireDefault(_vdomParser);
 
 var _diff = require('virtual-dom/diff');
 
@@ -1363,8 +1363,8 @@ var Page = function () {
 			if (!this.target_tree) {
 				console.log('Page.render_html_with_vdom:init');
 
-				this.target_tree_head = (0, _vdomVirtualize2.default)(this.target_elem_head);
-				this.target_tree_body = (0, _vdomVirtualize2.default)(this.target_elem_body);
+				this.target_tree_head = (0, _vdomParser2.default)(this.target_elem_head);
+				this.target_tree_body = (0, _vdomParser2.default)(this.target_elem_body);
 
 				this.target_node_head = (0, _createElement2.default)(this.target_tree_head);
 				this.target_node_body = (0, _createElement2.default)(this.target_tree_body);
@@ -1403,7 +1403,7 @@ var Page = function () {
 exports.default = Page;
 
 
-},{"html-to-vdom":624,"vdom-virtualize":668,"virtual-dom/create-element":670,"virtual-dom/diff":671,"virtual-dom/patch":672,"virtual-dom/vnode/vnode":687,"virtual-dom/vnode/vtext":689}],5:[function(require,module,exports){
+},{"html-to-vdom":624,"vdom-parser":668,"virtual-dom/create-element":671,"virtual-dom/diff":672,"virtual-dom/patch":673,"virtual-dom/vnode/vnode":688,"virtual-dom/vnode/vtext":690}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3333,15 +3333,22 @@ var Router = function (_RouterState) {
 		var _this = _possibleConstructorReturn(this, (Router.__proto__ || Object.getPrototypeOf(Router)).call(this, log_context));
 
 		_this.is_router = true;
-		_this.router_engine = _crossroads2.default;
+
+		_this._router_engine = _crossroads2.default;
+		_this._hasher = _hasher2.default;
 
 		// DEBUG
 		// log all routes
-		_this.router_engine.routed.add(console.log, console);
-		// log all requests that were bypassed / not matched
-		_this.router_engine.bypassed.add(console.log, console);
+		_this._router_engine.routed.add(function (request, data) {
+			console.log('route found', request, data);
+		});
 
-		(0, _assert2.default)(_typr2.default.isObject(_this.state_store), context + ':constructor:bad state_store object');
+		// log all requests that were bypassed / not matched
+		_this._router_engine.bypassed.add(function (request) {
+			console.log('route not found', request);
+		});
+
+		(0, _assert2.default)(_typr2.default.isObject(_this._state_store), context + ':constructor:bad state_store object');
 		return _this;
 	}
 
@@ -3374,9 +3381,12 @@ var Router = function (_RouterState) {
 			// SETUP HASHER
 			var parseHash = function parseHash(arg_newHash, arg_oldHash) {
 				console.log('Hasher parse cb for new [%s] and old [%s]', arg_newHash, arg_oldHash);
-				_this2.router_engine.parse(arg_newHash);
+
+				// debugger
+
+				_this2._router_engine.parse(arg_newHash);
 			};
-			_hasher2.default.prependHash = '/';
+			_hasher2.default.prependHash = '';
 			_hasher2.default.initialized.add(parseHash); //parse initial hash
 			_hasher2.default.changed.add(parseHash); //parse hash changes
 			_hasher2.default.init(); //start listening for history change
@@ -3396,7 +3406,7 @@ var Router = function (_RouterState) {
 		value: function add_handler(arg_route, arg_handler) {
 			console.log('Crossroads add route handler for route:', arg_route);
 
-			this.router_engine.addRoute(arg_route, function () {
+			this._router_engine.addRoute(arg_route, function () {
 				for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 					args[_key] = arguments[_key];
 				}
@@ -3420,18 +3430,13 @@ var Router = function (_RouterState) {
 	}, {
 		key: 'parse',
 		value: function parse(arg_url) {
-			var app_url = this.state_store.get_state().get('app_url', undefined);
-			var has_app_url = app_url.length > 0 && arg_url.length > app_url.length && arg_url.substr(0, app_url.length) == app_url;
-
-			if (app_url.length > 0 && !has_app_url) {
-				arg_url = (app_url[0] == '/' ? '' : '/') + app_url + arg_url;
-			}
+			arg_url = (app_url.length > 0 && app_url[0] == '/' ? '' : '/') + app_url + arg_url;
 
 			if (arg_url.endsWith('/')) {
 				arg_url = arg_url.substr(0, arg_url.length - 1);
 			}
 
-			this.router_engine.parse(arg_url);
+			this._router_engine.parse(arg_url);
 		}
 
 		/**
@@ -3442,13 +3447,21 @@ var Router = function (_RouterState) {
    * 
    * @returns {nothing}
    */
+		// update_hash_self(arg_view_name, arg_menubar_name)
+		// {
+		// 	Hasher.changed.active = false
+		// 	Hasher.setHash('view=' + arg_view_name + ',menubar=' + arg_menubar_name)
+		// 	Hasher.changed.active = true
+		// }
 
 	}, {
-		key: 'update_hash_self',
-		value: function update_hash_self(arg_view_name, arg_menubar_name) {
-			_hasher2.default.changed.active = false;
-			_hasher2.default.setHash('view=' + arg_view_name + ',menubar=' + arg_menubar_name);
-			_hasher2.default.changed.active = true;
+		key: 'set_hash_if_empty',
+		value: function set_hash_if_empty(arg_hash) {
+			if (_hasher2.default.getHash() == '') {
+				_hasher2.default.changed.active = false;
+				_hasher2.default.setHash(arg_hash);
+				_hasher2.default.changed.active = true;
+			}
 		}
 
 		/**
@@ -3462,13 +3475,9 @@ var Router = function (_RouterState) {
 	}, {
 		key: 'evaluate_command',
 		value: function evaluate_command(arg_command_name) {
-			var commands = this.state_store.get_state().get('commands', undefined);
-			if (!commands) {
-				return Promise.reject('no commands found for [' + arg_command_name + ']');
-			}
-			var command = commands.get(arg_command_name);
-			command = command ? command.toJS() : undefined;
+			var command = this.command(arg_command_name);
 			console.log(command, 'evaluate_command:command');
+
 			var type = _typr2.default.isString(command.type) && command.type.length > 0 ? command.type.toLocaleLowerCase() : undefined;
 			var url = _typr2.default.isString(command.type) && command.url.length > 0 ? command.url : '';
 			var middleware = _typr2.default.isString(command.middleware) && command.middleware.length > 0 ? command.middleware : undefined;
@@ -3481,9 +3490,9 @@ var Router = function (_RouterState) {
 			switch (type) {
 				case 'display':
 					{
-						var app_url = this.state_store.get_state().get('app_url', undefined);
-						var route = _typr2.default.isString(app_url) ? '/' + app_url + url : url;
-						this.runtime.ui.render_with_middleware(command, route, this.session_credentials);
+						var _app_url = this._state_store.get_state().get('app_url', undefined);
+						var route = _typr2.default.isString(_app_url) ? '/' + _app_url + url : url;
+						this.runtime._ui.render_with_middleware(command, route, this.session_credentials);
 						return Promise.resolve('done');
 					}
 			}
@@ -3507,9 +3516,9 @@ var Router = function (_RouterState) {
 
 			this.enter_group('display_content_self');
 
-			var page_content = this.runtime.ui.page.content;
-			var page_menubar = this.runtime.ui.page.menubar;
-			var page_breadcrumbs = this.runtime.ui.page.breadcrumbs;
+			var page_content = this.runtime._ui.page.content;
+			var page_menubar = this.runtime._ui.page.menubar;
+			var page_breadcrumbs = this.runtime._ui.page.breadcrumbs;
 
 			var promises = [];
 
@@ -3525,8 +3534,8 @@ var Router = function (_RouterState) {
 			}
 			if (!page_content && _typr2.default.isString(arg_view_name)) {
 				this.debug('page content doesn t exist and view name is valid:', arg_view_name);
-				var page_content_promise = this.runtime.ui.render(arg_view_name).then(function (controller) {
-					_this3.runtime.ui.page.content = controller;
+				var page_content_promise = this.runtime._ui.render(arg_view_name).then(function (controller) {
+					_this3.runtime._ui.page.content = controller;
 				});
 				promises.push(page_content_promise);
 			}
@@ -3543,8 +3552,8 @@ var Router = function (_RouterState) {
 			}
 			if (!page_menubar && _typr2.default.isString(arg_menubar_name)) {
 				this.debug('page menubar doesn t exist and menubar name is valid:', arg_menubar_name);
-				var page_menubar_promise = this.runtime.ui.render(arg_menubar_name).then(function (controller) {
-					_this3.runtime.ui.page.menubar = controller;
+				var page_menubar_promise = this.runtime._ui.render(arg_menubar_name).then(function (controller) {
+					_this3.runtime._ui.page.menubar = controller;
 				});
 				promises.push(page_menubar_promise);
 			}
@@ -4613,9 +4622,9 @@ var _page = require('./components/page');
 
 var _page2 = _interopRequireDefault(_page);
 
-var _vdomVirtualize = require('vdom-virtualize');
+var _vdomParser = require('vdom-parser');
 
-var _vdomVirtualize2 = _interopRequireDefault(_vdomVirtualize);
+var _vdomParser2 = _interopRequireDefault(_vdomParser);
 
 var _diff = require('virtual-dom/diff');
 
@@ -4659,7 +4668,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // VTREE
 
-// import document from 'global/document'
 
 var vdom_from_json = _vdomAsJson2.default.fromJson;
 
@@ -4751,11 +4759,11 @@ var UI = function (_Loggable) {
 		key: 'create',
 		value: function create(arg_name) {
 			var current_state = this.store.get_state();
-			var state_path = [];
+			var state_path = ['views'];
 			var component_state = this.find_state(current_state, arg_name, state_path);
 			console.log('component_state', component_state);
 			(0, _assert2.default)(_typr2.default.isObject(component_state), context + ':create:bad state object for ' + arg_name);
-			state_path.shift();
+
 			this.state_by_path[arg_name] = state_path;
 
 			var type = component_state.has('browser_type') ? component_state.get('browser_type') : component_state.get('type');
@@ -4857,8 +4865,8 @@ var UI = function (_Loggable) {
 
 			var arg_state_path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-			// const js_state = arg_state.toJS()
-			// console.log('ui.find_state for ' + arg_name, arg_state_path, js_state)
+			var js_state = arg_state && arg_state.toJS ? arg_state.toJS() : arg_state;
+			console.log('ui.find_state for ' + arg_name, arg_state_path, js_state);
 
 			if (!arg_state) {
 				console.error('state is undefined for ' + arg_name);
@@ -4867,46 +4875,52 @@ var UI = function (_Loggable) {
 
 			if (!_typr2.default.isFunction(arg_state.get)) {
 				// GLOBAL STATE IS NOT AN IMMUTABLE.MAP
-				// console.error(context + ':find_state:state is not an Immutable for ' + arg_name)
+				console.error(context + ':find_state:state is not an Immutable for ' + arg_name);
 				// console.log(context + ':find_state:state:', arg_state)
 				return undefined;
 			}
 
 			// FOUND ON ROOT
-			arg_state_path.push(arg_state.get('name').toString());
 			if (arg_state.has('name')) {
-				if (arg_state.get('name') == arg_name) {
-					// console.log('ui.find_state FOUND 1 for ' + arg_name, arg_state_path)
+				var name = arg_state.get('name').toString();
+				arg_state_path.push(name);
+				if (name == arg_name) {
+					console.log('ui.find_state FOUND 1 for ' + arg_name, arg_state_path);
 					return arg_state;
 				}
 			}
 
-			// LOOKUP ON CHILDREN
-			if (arg_state.has('children')) {
+			// LOOKUP ON VIEWS CHILDREN
+			var children_key = 'children';
+			if (arg_state_path.length == 1 && arg_state_path[0] == 'views') {
+				children_key = 'views';
+				arg_state_path.pop();
+			}
+			if (arg_state.has(children_key)) {
 				var _ret = function () {
-					arg_state_path.push('children');
+					arg_state_path.push(children_key);
 
-					if (arg_state.hasIn(['children', arg_name])) {
+					if (arg_state.hasIn([children_key, arg_name])) {
 						arg_state_path.push(arg_name);
-						// console.log('ui.find_state FOUND 2 for ' + arg_name, arg_state_path)
+						console.log('ui.find_state FOUND 2 for ' + arg_name, arg_state_path);
 						return {
-							v: arg_state.getIn(['children', arg_name])
+							v: arg_state.getIn([children_key, arg_name])
 						};
 					}
 
 					var result = undefined;
-					arg_state.get('children').forEach(function (child_state /*, key*/) {
+					arg_state.get(children_key).forEach(function (child_state, key) {
 						if (!result) {
-							// console.log('ui.find_state loop on child ' + key + ' for ' + arg_name, arg_state_path)
+							console.log('ui.find_state loop on child ' + key + ' for ' + arg_name, arg_state_path);
 							result = _this2.find_state(child_state, arg_name, arg_state_path);
 							if (result) {
-								// console.log('ui.find_state FOUND 3 for ' + arg_name, arg_state_path)
+								console.log('ui.find_state FOUND 3 for ' + arg_name, arg_state_path);
 								return;
 							}
 						}
 					});
 					if (result) {
-						// console.log('ui.find_state FOUND 4 for ' + arg_name, arg_state_path, result.toJS())
+						console.log('ui.find_state FOUND 4 for ' + arg_name, arg_state_path, result && result.toJS ? result.toJS() : result);
 						return {
 							v: result
 						};
@@ -4918,7 +4932,9 @@ var UI = function (_Loggable) {
 				if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 			}
 
-			arg_state_path.pop(); // NAME
+			if (arg_state.has('name')) {
+				arg_state_path.pop(); // NAME
+			}
 
 			// console.error('state not found for ' + arg_name)
 			return undefined;
@@ -5000,9 +5016,15 @@ var UI = function (_Loggable) {
 			var get_url_cb = function get_url_cb() {
 				var url = arg_route + '?' + arg_credentials.get_url_part();
 				_this4._router.add_handler(url, function () {
-					$.get(url).then(function (html) {
-						_this4.body_page.render_html(html); // TODO
-					});
+					// $.get(url).then(
+					// 	(html)=>{
+					// 		this.body_page.render_html(html) // TODO
+					// 	}
+					// )
+					var url_callback = function url_callback(html) {
+						_this4.body_page.render_html(html);
+					};
+					window.devapt().ajax.get_html(url, url_callback);
 				});
 			};
 
@@ -5025,7 +5047,10 @@ var UI = function (_Loggable) {
 						get_url_cb();
 					}
 
-					return _this4.process_rendering_result(rendering_result_response.datas);
+					if (_typr2.default.isObject(rendering_result_response.datas) && rendering_result_response.datas.is_rendering_result) {
+						return _this4.process_rendering_result(rendering_result_response.datas, arg_credentials);
+					}
+					throw 'rendering failed for middleware [' + arg_cmd.middleware + '] on route [' + arg_route + ']';
 				}, function (reason) {
 					console.error(context + ':render_with_middleware:error 2 for ' + arg_cmd.url, reason);
 				}).then(function (arg_content_ids) {
@@ -5035,23 +5060,37 @@ var UI = function (_Loggable) {
 				});
 			}, function (reason) {
 				console.error(context + ':render_with_middleware:error 1 for ' + arg_cmd.url, reason);
+			}).catch(function (reason) {
+				console.error(context + ':render_with_middleware:error for ' + arg_cmd.url, reason);
 			});
 		}
 	}, {
 		key: 'process_rendering_result',
-		value: function process_rendering_result(arg_rendering_result) {
+		value: function process_rendering_result(arg_rendering_result, arg_credentials) {
 			var _this5 = this;
 
-			console.log(context + ':process_rendering_result:rendering result:', arg_rendering_result);
+			this.enter_group('process_rendering_result');
+			this.debug('rendering result', arg_rendering_result);
+
+			if (!arg_credentials) {
+				arg_credentials = this.runtime.session_credentials;
+			}
+
+			this.assets_urls_templates = arg_rendering_result.assets_urls_templates;
 
 			// PROCESS HEADERS
-			this.process_rendering_result_headers(arg_rendering_result.headers);
+			this.process_rendering_result_headers(arg_rendering_result.headers, arg_credentials);
 
 			// PROCESS HTML CONTENT
 			var ids = [];
 			_lodash2.default.forEach(arg_rendering_result.vtrees, function (new_vtree_json, id) {
+				// GET NEW TREE AND STATE
 				var new_vtree = vdom_from_json(new_vtree_json);
-				console.log(context + ':process_rendering_result:id,new_vtree:', id, new_vtree);
+				new_vtree.prototype = _vnode2.default.prototype;
+				// const new_state = s
+
+				_this5.debug('id:', id);
+				_this5.debug('new_vtree:', new_vtree);
 
 				ids.push(id);
 
@@ -5065,13 +5104,16 @@ var UI = function (_Loggable) {
 				var prev_vtree = undefined;
 				if (id in _this5.vtrees) {
 					prev_vtree = _this5.vtrees[id];
+
+					// CHECK IF PREVIOUS VIEW STATE IS DIFFERENT FROM NEW VIEW STATE
+					// const p 
 				} else {
 					if (element) {
-						console.log(context + ':process_rendering_result:element found for id=' + id, element);
+						_this5.debug('element found for id=' + id, element);
 
-						prev_vtree = (0, _vdomVirtualize2.default)(element);
+						prev_vtree = (0, _vdomParser2.default)(element);
 					} else {
-						console.log(context + ':process_rendering_result:create element for id=' + id);
+						_this5.debug('create element for id=' + id);
 
 						var content = document.getElementById('content');
 						(0, _assert2.default)(content, context + ':process_rendering_result:bad content element');
@@ -5081,28 +5123,47 @@ var UI = function (_Loggable) {
 				}
 
 				if (prev_vtree) {
-					console.log(context + ':process_rendering_result:prev_vtree found for id=' + id, prev_vtree);
+					_this5.debug('prev_vtree found for id=' + id, prev_vtree);
 
 					if (_typr2.default.isArray(prev_vtree)) {
 						prev_vtree = new _vnode2.default('DIV', {}, prev_vtree, 'id', undefined);
 					}
 					var patches = (0, _diff2.default)(prev_vtree, new_vtree);
+					_this5.debug('patches', patches);
+
 					element = (0, _patch2.default)(element, patches);
+					_this5.debug('element', element);
+
 					_this5.vtrees_targets[id] = element;
 				}
 
 				_this5.vtrees[id] = new_vtree;
 			});
 
-			// PROCESS BODY SCRIPTS TAGS
-			this.process_rendering_result_body_scripts_tags(arg_rendering_result.body_scripts_tags);
+			// PROCESS HEAD STYLES AND SCRIPTS
+			this.process_rendering_result_styles_urls(document.head, arg_rendering_result.head_styles_urls, arg_credentials);
+			this.process_rendering_result_styles_tags(document.head, arg_rendering_result.head_styles_tags, arg_credentials);
+			this.process_rendering_result_scripts_urls(document.head, arg_rendering_result.head_scripts_urls, arg_credentials);
+			this.process_rendering_result_scripts_tags(document.head, arg_rendering_result.head_scripts_tags, arg_credentials);
 
+			// PROCESS BODY STYLES AND SCRIPTS
+			this.process_rendering_result_styles_urls(document.body, arg_rendering_result.body_styles_urls, arg_credentials);
+			this.process_rendering_result_styles_tags(document.body, arg_rendering_result.body_styles_tags, arg_credentials);
+			this.process_rendering_result_scripts_urls(document.body, arg_rendering_result.body_scripts_urls, arg_credentials);
+			this.process_rendering_result_scripts_tags(document.body, arg_rendering_result.body_scripts_tags, arg_credentials);
+
+			window.devapt().content_rendered();
+
+			this.leave_group('process_rendering_result');
 			return ids;
 		}
 	}, {
 		key: 'process_rendering_result_headers',
-		value: function process_rendering_result_headers(arg_rendering_result_headers) {
-			console.log(context + ':process_rendering_result_headers:rendering headers:', arg_rendering_result_headers);
+		value: function process_rendering_result_headers() {
+			var arg_rendering_result_headers = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+			var arg_credentials = arguments[1];
+
+			this.debug('process_rendering_result_headers:rendering headers', arg_rendering_result_headers);
 
 			arg_rendering_result_headers.forEach(function (header) {
 				var has_header = false; // TODO
@@ -5111,17 +5172,124 @@ var UI = function (_Loggable) {
 			});
 		}
 	}, {
-		key: 'process_rendering_result_body_scripts_tags',
-		value: function process_rendering_result_body_scripts_tags(arg_rendering_result_body_scripts_tags) {
-			console.log(context + ':process_rendering_result_body_scripts_tags:rendering body_scripts_tags:', arg_rendering_result_body_scripts_tags);
+		key: 'get_asset_url',
+		value: function get_asset_url(arg_url, arg_type, arg_credentials) {
+			var template = this.assets_urls_templates[arg_type];
+			var url = _typr2.default.isString(template) ? template.replace('{{url}}', arg_url) : arg_url;
+			var credentials_tag = '{{credentials_url}}';
 
-			arg_rendering_result_body_scripts_tags.forEach(function (tag) {
-				var has_tag = false; // TODO
-				var e = document.createElement('script');
+			if (url.indexOf(credentials_tag) >= 0) {
+				return url.replace(credentials_tag, arg_credentials.get_url_part());
+			}
+
+			return url + '?' + arg_credentials.get_url_part();
+		}
+	}, {
+		key: 'process_rendering_result_scripts_urls',
+		value: function process_rendering_result_scripts_urls(arg_dom_element) {
+			var _this6 = this;
+
+			var arg_rendering_result_scripts_urls = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+			var arg_credentials = arguments[2];
+
+			this.debug('process_rendering_result_scripts_urls:rendering body_scripts_urls', arg_rendering_result_scripts_urls);
+
+			arg_rendering_result_scripts_urls.forEach(function (url) {
+				url.src = _this6.get_asset_url(url.src, 'script', arg_credentials);
+
+				var e = document.getElementById(url.id);
+				if (e) {
+					if (e.getAttribute('src') == url.src) {
+						return;
+					}
+					e.parentNode.removeChild(e);
+				}
+
+				e = document.createElement('script');
+				e.setAttribute('id', url.id);
+				e.setAttribute('src', url.src);
+				e.setAttribute('type', 'text/javascript');
+				arg_dom_element.appendChild(e);
+			});
+		}
+	}, {
+		key: 'process_rendering_result_scripts_tags',
+		value: function process_rendering_result_scripts_tags(arg_dom_element) {
+			var arg_rendering_result_scripts_tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+			var arg_credentials = arguments[2];
+
+			this.debug('process_rendering_result_scripts_tags:rendering body_scripts_tags', arg_rendering_result_scripts_tags);
+
+			arg_rendering_result_scripts_tags.forEach(function (tag) {
+				var e = document.getElementById(tag.id);
+				if (e) {
+					if (e.text == tag.content) {
+						return;
+					}
+					e.parentNode.removeChild(e);
+				}
+
+				e = document.createElement('script');
 				e.text = tag.content;
 				e.setAttribute('id', tag.id);
 				e.setAttribute('type', 'text/javascript');
-				document.body.appendChild(e);
+				arg_dom_element.appendChild(e);
+			});
+		}
+	}, {
+		key: 'process_rendering_result_styles_urls',
+		value: function process_rendering_result_styles_urls(arg_dom_element) {
+			var _this7 = this;
+
+			var arg_rendering_result_styles_urls = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+			var arg_credentials = arguments[2];
+
+			this.debug('process_rendering_result_styles_urls:rendering body_styles_urls', arg_rendering_result_styles_urls);
+
+			arg_rendering_result_styles_urls.forEach(function (url) {
+				url.href = _this7.get_asset_url(url.href, 'style', arg_credentials);
+
+				var e = document.getElementById(url.id);
+				if (e) {
+					console.log('e exists', e);
+					if (e.getAttribute('href') == url.href) {
+						return;
+					}
+					console.log('existing e is different', e, url.href);
+					e.parentNode.removeChild(e);
+				}
+
+				e = document.createElement('link');
+				e.setAttribute('id', url.id);
+				e.setAttribute('href', url.href);
+				e.setAttribute('media', url.media ? url.media : 'all');
+				e.setAttribute('rel', 'stylesheet');
+				arg_dom_element.appendChild(e);
+			});
+		}
+	}, {
+		key: 'process_rendering_result_styles_tags',
+		value: function process_rendering_result_styles_tags(arg_dom_element) {
+			var arg_rendering_result_scripts_tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+			var arg_credentials = arguments[2];
+
+			this.debug('process_rendering_result_styles_tags:rendering body_styles_tags', arg_rendering_result_scripts_tags);
+
+			arg_rendering_result_scripts_tags.forEach(function (tag) {
+				var e = document.getElementById(tag.id);
+				if (e) {
+					if (e.text == tag.content) {
+						return;
+					}
+
+					e.parentNode.removeChild(e);
+				}
+
+				e = document.createElement('style');
+				e.text = tag.content;
+				e.setAttribute('id', tag.id);
+				e.setAttribute('type', 'text/stylesheet');
+				arg_dom_element.appendChild(e);
 			});
 		}
 	}]);
@@ -5132,7 +5300,7 @@ var UI = function (_Loggable) {
 exports.default = UI;
 
 
-},{"../common/base/loggable":21,"./components/component":2,"./components/page":4,"./components/records_table":5,"./components/table":6,"./components/table_tree":7,"./components/topology":8,"./components/tree":9,"assert":44,"html-to-vdom":624,"lodash":644,"typr":662,"vdom-as-json":665,"vdom-virtualize":668,"virtual-dom/create-element":670,"virtual-dom/diff":671,"virtual-dom/patch":672,"virtual-dom/vnode/vnode":687,"virtual-dom/vnode/vtext":689}],17:[function(require,module,exports){
+},{"../common/base/loggable":21,"./components/component":2,"./components/page":4,"./components/records_table":5,"./components/table":6,"./components/table_tree":7,"./components/topology":8,"./components/tree":9,"assert":44,"html-to-vdom":624,"lodash":644,"typr":662,"vdom-as-json":665,"vdom-parser":668,"virtual-dom/create-element":671,"virtual-dom/diff":672,"virtual-dom/patch":673,"virtual-dom/vnode/vnode":688,"virtual-dom/vnode/vtext":690}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6065,16 +6233,16 @@ var Loggable = function () {
   * 		separate_level_2():nothing
   * 		separate_level_3():nothing
   * 
-  * @param {string} arg_context - trace context.
+  * @param {string} arg_log_context - trace context.
   * @param {LoggerManager} arg_logger_manager - logger manager instance.
   * 
   * @returns {nothing}
   */
-	function Loggable(arg_context, arg_logger_manager) {
+	function Loggable(arg_log_context, arg_logger_manager) {
 		_classCallCheck(this, Loggable);
 
 		this.is_loggable = true;
-		this.$context = arg_context;
+		this.$context = _typr2.default.isString(arg_log_context) ? arg_log_context : context;
 
 		this.is_trace_enabled = true;
 
@@ -6443,13 +6611,15 @@ var Loggable = function () {
 	}, {
 		key: 'error',
 		value: function error() {
-			if (this.is_trace_enabled) {
-				for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-					args[_key4] = arguments[_key4];
-				}
-
-				this.get_logger_manager().error([this.$context].concat(args));
+			for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+				args[_key4] = arguments[_key4];
 			}
+
+			// if(this.is_trace_enabled)
+			// {
+			this.get_logger_manager().error([this.$context].concat(args));
+			console.error([this.$context].concat(args));
+			// }
 		}
 
 		/**
@@ -6598,7 +6768,7 @@ var RuntimeBase = function (_Settingsable) {
 		_this.is_base_runtime = true;
 
 		_this.current_state = undefined;
-		_this.state_store = undefined;
+		_this._state_store = undefined;
 
 		if (!_this.is_server_runtime) {
 			_this.update_trace_enabled();
@@ -6630,8 +6800,8 @@ var RuntimeBase = function (_Settingsable) {
 	}, {
 		key: 'get_state_store',
 		value: function get_state_store() {
-			(0, _assert2.default)(_typr2.default.isObject(this.state_store), context + ':get_state_store:bad state_store object');
-			return this.state_store;
+			(0, _assert2.default)(_typr2.default.isObject(this._state_store), context + ':get_state_store:bad state_store object');
+			return this._state_store;
 		}
 
 		/**
@@ -6659,7 +6829,7 @@ var RuntimeBase = function (_Settingsable) {
 		key: 'handle_store_change',
 		value: function handle_store_change() {
 			// let previous_state = this.current_state
-			// this.current_state = this.state_store.get_state()
+			// this.current_state = this._state_store.get_state()
 
 			/// TODO
 
@@ -6951,8 +7121,8 @@ var Stateable = function (_Settingsable) {
 
 		_this.runtime = arg_runtime;
 		_this.initial_state = arg_state;
-		_this.state_store = _this.runtime.get_state_store();
-		(0, _assert2.default)(_typr2.default.isObject(_this.state_store), context + ':constructor:bad state_store object');
+		_this._state_store = _this.runtime.get_state_store();
+		(0, _assert2.default)(_typr2.default.isObject(_this._state_store), context + ':constructor:bad state_store object');
 		_this.state_path = undefined;
 
 		// console.info(context + ':constructor:creating component ' + this.get_name())
@@ -6987,7 +7157,7 @@ var Stateable = function (_Settingsable) {
 			// console.log('component:state_path', this.state_path)
 			// console.log('component:state', this.runtime.get_state().getIn(path).toJS())
 
-			return this.state_store.get_state().getIn(path);
+			return this._state_store.get_state().getIn(path);
 		}
 
 		/**
@@ -6999,7 +7169,7 @@ var Stateable = function (_Settingsable) {
 	}, {
 		key: 'get_state_store',
 		value: function get_state_store() {
-			return this.state_store;
+			return this._state_store;
 		}
 
 		/**
@@ -7091,8 +7261,8 @@ var Stateable = function (_Settingsable) {
 
 			// console.info(context + ':dispatch_action:type=' + action.type + ' for ' + action.component, action)
 
-			// assert( T.isObject(this.state_store), context + ':dispatch_action:bad state_store object')
-			this.state_store.dispatch_action(action);
+			// assert( T.isObject(this._state_store), context + ':dispatch_action:bad state_store object')
+			this._state_store.dispatch_action(action);
 		}
 
 		/**
@@ -8314,7 +8484,7 @@ exports.default = LoggerWinston;
 
 
 }).call(this,require('_process'))
-},{"./logger":25,"_process":247,"typr":662,"winston":692}],30:[function(require,module,exports){
+},{"./logger":25,"_process":247,"typr":662,"winston":693}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -84776,7 +84946,7 @@ function fromJson(json) {
 }
 
 module.exports = fromJson;
-},{"./types":667,"virtual-dom/virtual-hyperscript/hooks/soft-set-hook":679,"virtual-dom/vnode/vnode":687,"virtual-dom/vnode/vpatch":688,"virtual-dom/vnode/vtext":689}],665:[function(require,module,exports){
+},{"./types":667,"virtual-dom/virtual-hyperscript/hooks/soft-set-hook":680,"virtual-dom/vnode/vnode":688,"virtual-dom/vnode/vpatch":689,"virtual-dom/vnode/vtext":690}],665:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -84911,7 +85081,7 @@ function toJson(obj) {
 }
 
 module.exports = toJson;
-},{"./types":667,"virtual-dom/virtual-hyperscript/hooks/soft-set-hook":679}],667:[function(require,module,exports){
+},{"./types":667,"virtual-dom/virtual-hyperscript/hooks/soft-set-hook":680}],667:[function(require,module,exports){
 module.exports = {
   VirtualTree: 1,
   VirtualPatch: 2,
@@ -84919,283 +85089,727 @@ module.exports = {
   SoftSetHook: 4
 };
 },{}],668:[function(require,module,exports){
-/*!
-* vdom-virtualize
-* Copyright 2014 by Marcel Klehr <mklehr@gmx.net>
-*
-* (MIT LICENSE)
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
-var VNode = require("virtual-dom/vnode/vnode")
-  , VText = require("virtual-dom/vnode/vtext")
-  , VComment = require("./vcomment")
 
-module.exports = createVNode
+/**
+ * index.js
+ *
+ * A client-side DOM to vdom parser based on DOMParser API
+ */
 
-function createVNode(domNode, key) {
-  key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
+'use strict';
 
-  if(domNode.nodeType == 1) return createFromElement(domNode, key)
-  if(domNode.nodeType == 3) return createFromTextNode(domNode, key)
-  if(domNode.nodeType == 8) return createFromCommentNode(domNode, key)
-  return
-}
+var VNode = require('virtual-dom/vnode/vnode');
+var VText = require('virtual-dom/vnode/vtext');
+var domParser;
 
-function createFromTextNode(tNode) {
-  return new VText(tNode.nodeValue)
-}
+var propertyMap = require('./property-map');
+var namespaceMap = require('./namespace-map');
 
+var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
-function createFromCommentNode(cNode) {
-  return new VComment(cNode.nodeValue)
-}
+module.exports = parser;
 
+/**
+ * DOM/html string to vdom parser
+ *
+ * @param   Mixed   el    DOM element or html string
+ * @param   String  attr  Attribute name that contains vdom key
+ * @return  Object        VNode or VText
+ */
+function parser(el, attr) {
+	// empty input fallback to empty text node
+	if (!el) {
+		return createNode(document.createTextNode(''));
+	}
 
-function createFromElement(el) {
-  var tagName = el.tagName
-  , namespace = el.namespaceURI == 'http://www.w3.org/1999/xhtml'? null : el.namespaceURI
-  , properties = getElementProperties(el)
-  , children = []
+	if (typeof el === 'string') {
+		if ( !('DOMParser' in window) ) {
+			throw new Error('DOMParser is not available, so parsing string to DOM node is not possible.');
+		}
+		domParser = domParser || new DOMParser();
+		var doc = domParser.parseFromString(el, 'text/html');
 
-  for (var i = 0; i < el.childNodes.length; i++) {
-    children.push(createVNode(el.childNodes[i]/*, i*/))
-  }
+		// most tags default to body
+		if (doc.body.firstChild) {
+			el = doc.getElementsByTagName('body')[0].firstChild;
 
-  return new VNode(tagName, properties, children, null, namespace)
-}
+		// some tags, like script and style, default to head
+		} else if (doc.head.firstChild && (doc.head.firstChild.tagName !== 'TITLE' || doc.title)) {
+			el = doc.head.firstChild;
 
+		// special case for html comment, cdata, doctype
+		} else if (doc.firstChild && doc.firstChild.tagName !== 'HTML') {
+			el = doc.firstChild;
 
-function getElementProperties(el) {
-  var obj = {}
+		// other element, such as whitespace, or html/body/head tag, fallback to empty text node
+		} else {
+			el = document.createTextNode('');
+		}
+	}
 
-  for(var i=0; i<props.length; i++) {
-    var propName = props[i]
-    if(!el[propName]) continue
+	if (typeof el !== 'object' || !el || !el.nodeType) {
+		throw new Error('invalid dom node', el);
+	}
 
-    // Special case: style
-    // .style is a DOMStyleDeclaration, thus we need to iterate over all
-    // rules to create a hash of applied css properties.
-    //
-    // You can directly set a specific .style[prop] = value so patching with vdom
-    // is possible.
-    if("style" == propName) {
-      var css = {}
-        , styleProp
-      if ('undefined' !== typeof el.style.length) {
-        for(var j=0; j<el.style.length; j++) {
-          styleProp = el.style[j]
-          css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
-        }
-      } else { // IE8
-        for (var styleProp in el.style) {
-          if (el.style[styleProp] && el.style.hasOwnProperty(styleProp)) {
-            css[styleProp] = el.style[styleProp];
-          }
-        }
-      }
-
-      if(Object.keys(css).length) obj[propName] = css
-      continue
-    }
-
-    // https://msdn.microsoft.com/en-us/library/cc848861%28v=vs.85%29.aspx
-    // The img element does not support the HREF content attribute.
-    // In addition, the href property is read-only for the img Document Object Model (DOM) object
-    if (el.tagName.toLowerCase() === 'img' && propName === 'href') {
-      continue;
-    }
-
-    // Special case: dataset
-    // we can iterate over .dataset with a simple for..in loop.
-    // The all-time foo with data-* attribs is the dash-snake to camelCase
-    // conversion.
-    //
-    // *This is compatible with h(), but not with every browser, thus this section was removed in favor
-    // of attributes (specified below)!*
-    //
-    // .dataset properties are directly accessible as transparent getters/setters, so
-    // patching with vdom is possible.
-    /*if("dataset" == propName) {
-      var data = {}
-      for(var p in el.dataset) {
-        data[p] = el.dataset[p]
-      }
-      obj[propName] = data
-      return
-    }*/
-
-    // Special case: attributes
-    // these are a NamedNodeMap, but we can just convert them to a hash for vdom,
-    // because of https://github.com/Matt-Esch/virtual-dom/blob/master/vdom/apply-properties.js#L57
-    if("attributes" == propName){
-      var atts = Array.prototype.slice.call(el[propName]);
-      var hash = {}
-      for(var k=0; k<atts.length; k++){
-        var name = atts[k].name;
-        if(obj[name] || obj[attrBlacklist[name]]) continue;
-        hash[name] = el.getAttribute(name);
-      }
-      obj[propName] = hash;
-      continue
-    }
-    if("tabIndex" == propName && el.tabIndex === -1) continue
-
-    // Special case: contentEditable
-    // browser use 'inherit' by default on all nodes, but does not allow setting it to ''
-    // diffing virtualize dom will trigger error
-    // ref: https://github.com/Matt-Esch/virtual-dom/issues/176
-    if("contentEditable" == propName && el[propName] === 'inherit') continue
-
-    if('object' === typeof el[propName]) continue
-
-    // default: just copy the property
-    obj[propName] = el[propName]
-  }
-
-  return obj
+	return createNode(el, attr);
 }
 
 /**
- * DOMNode property white list
- * Taken from https://github.com/Raynos/react/blob/dom-property-config/src/browser/ui/dom/DefaultDOMPropertyConfig.js
+ * Create vdom from dom node
+ *
+ * @param   Object  el    DOM element
+ * @param   String  attr  Attribute name that contains vdom key
+ * @return  Object        VNode or VText
  */
-var props =
+function createNode(el, attr) {
+	// html comment is not currently supported by virtual-dom
+	if (el.nodeType === 3) {
+		return createVirtualTextNode(el);
 
-module.exports.properties = [
- "accept"
-,"accessKey"
-,"action"
-,"alt"
-,"async"
-,"autoComplete"
-,"autoPlay"
-,"cellPadding"
-,"cellSpacing"
-,"checked"
-,"className"
-,"colSpan"
-,"content"
-,"contentEditable"
-,"controls"
-,"crossOrigin"
-,"data"
-//,"dataset" removed since attributes handles data-attributes
-,"defer"
-,"dir"
-,"download"
-,"draggable"
-,"encType"
-,"formNoValidate"
-,"href"
-,"hrefLang"
-,"htmlFor"
-,"httpEquiv"
-,"icon"
-,"id"
-,"label"
-,"lang"
-,"list"
-,"loop"
-,"max"
-,"mediaGroup"
-,"method"
-,"min"
-,"multiple"
-,"muted"
-,"name"
-,"noValidate"
-,"pattern"
-,"placeholder"
-,"poster"
-,"preload"
-,"radioGroup"
-,"readOnly"
-,"rel"
-,"required"
-,"rowSpan"
-,"sandbox"
-,"scope"
-,"scrollLeft"
-,"scrolling"
-,"scrollTop"
-,"selected"
-,"span"
-,"spellCheck"
-,"src"
-,"srcDoc"
-,"srcSet"
-,"start"
-,"step"
-,"style"
-,"tabIndex"
-,"target"
-,"title"
-,"type"
-,"value"
+	// cdata or doctype is not currently supported by virtual-dom
+	} else if (el.nodeType === 1 || el.nodeType === 9) {
+		return createVirtualDomNode(el, attr);
+	}
 
-// Non-standard Properties
-,"autoCapitalize"
-,"autoCorrect"
-,"property"
-
-, "attributes"
-]
-
-var attrBlacklist =
-module.exports.attrBlacklist = {
-  'class': 'className'
+	// default to empty text node
+	return new VText('');
 }
 
-},{"./vcomment":669,"virtual-dom/vnode/vnode":687,"virtual-dom/vnode/vtext":689}],669:[function(require,module,exports){
-module.exports = VirtualComment
-
-function VirtualComment(text) {
-  this.text = String(text)
+/**
+ * Create vtext from dom node
+ *
+ * @param   Object  el  Text node
+ * @return  Object      VText
+ */
+function createVirtualTextNode(el) {
+	return new VText(el.nodeValue);
 }
 
-VirtualComment.prototype.type = 'Widget'
+/**
+ * Create vnode from dom node
+ *
+ * @param   Object  el    DOM element
+ * @param   String  attr  Attribute name that contains vdom key
+ * @return  Object        VNode
+ */
+function createVirtualDomNode(el, attr) {
+	var ns = el.namespaceURI !== HTML_NAMESPACE ? el.namespaceURI : null;
+	var key = attr && el.getAttribute(attr) ? el.getAttribute(attr) : null;
 
-VirtualComment.prototype.init = function() {
-  return document.createComment(this.text)
+	return new VNode(
+		el.tagName
+		, createProperties(el)
+		, createChildren(el, attr)
+		, key
+		, ns
+	);
 }
 
-VirtualComment.prototype.update = function(previous, domNode) {
-  if(this.text === previous.text) return
-  domNode.nodeValue = this.text
+/**
+ * Recursively create vdom
+ *
+ * @param   Object  el    Parent element
+ * @param   String  attr  Attribute name that contains vdom key
+ * @return  Array         Child vnode or vtext
+ */
+function createChildren(el, attr) {
+	var children = [];
+	for (var i = 0; i < el.childNodes.length; i++) {
+		children.push(createNode(el.childNodes[i], attr));
+	};
+
+	return children;
 }
+
+/**
+ * Create properties from dom node
+ *
+ * @param   Object  el  DOM element
+ * @return  Object      Node properties and attributes
+ */
+function createProperties(el) {
+	var properties = {};
+
+	if (!el.hasAttributes()) {
+		return properties;
+	}
+
+	var ns;
+	if (el.namespaceURI && el.namespaceURI !== HTML_NAMESPACE) {
+		ns = el.namespaceURI;
+	}
+
+	var attr;
+	for (var i = 0; i < el.attributes.length; i++) {
+		// use built in css style parsing
+		if(el.attributes[i].name == 'style'){
+			attr = createStyleProperty(el);
+		}
+		else if (ns) {
+			attr = createPropertyNS(el.attributes[i]);
+		} else {
+			attr = createProperty(el.attributes[i]);
+		}
+
+		// special case, namespaced attribute, use properties.foobar
+		if (attr.ns) {
+			properties[attr.name] = {
+				namespace: attr.ns
+				, value: attr.value
+			};
+
+		// special case, use properties.attributes.foobar
+		} else if (attr.isAttr) {
+			// init attributes object only when necessary
+			if (!properties.attributes) {
+				properties.attributes = {}
+			}
+			properties.attributes[attr.name] = attr.value;
+
+		// default case, use properties.foobar
+		} else {
+			properties[attr.name] = attr.value;
+		}
+	};
+
+	return properties;
+}
+
+/**
+ * Create property from dom attribute
+ *
+ * @param   Object  attr  DOM attribute
+ * @return  Object        Normalized attribute
+ */
+function createProperty(attr) {
+	var name, value, isAttr;
+
+	// using a map to find the correct case of property name
+	if (propertyMap[attr.name]) {
+		name = propertyMap[attr.name];
+	} else {
+		name = attr.name;
+	}
+	// special cases for data attribute, we default to properties.attributes.data
+	if (name.indexOf('data-') === 0 || name.indexOf('aria-') === 0) {
+		value = attr.value;
+		isAttr = true;
+	} else {
+		value = attr.value;
+	}
+
+	return {
+		name: name
+		, value: value
+		, isAttr: isAttr || false
+	};
+}
+
+/**
+ * Create namespaced property from dom attribute
+ *
+ * @param   Object  attr  DOM attribute
+ * @return  Object        Normalized attribute
+ */
+function createPropertyNS(attr) {
+	var name, value;
+
+	return {
+		name: attr.name
+		, value: attr.value
+		, ns: namespaceMap[attr.name] || ''
+	};
+}
+
+/**
+ * Create style property from dom node
+ *
+ * @param   Object  el  DOM node
+ * @return  Object        Normalized attribute
+ */
+function createStyleProperty(el) {
+	var style = el.style;
+	var output = {};
+	for (var i = 0; i < style.length; ++i) {
+		var item = style.item(i);
+		output[item] = style[item];
+		// hack to workaround browser inconsistency with url()
+		if (output[item].indexOf('url') > -1) {
+			output[item] = output[item].replace(/\"/g, '')
+		}
+	}
+	return { name: 'style', value: output };
+}
+
+},{"./namespace-map":669,"./property-map":670,"virtual-dom/vnode/vnode":688,"virtual-dom/vnode/vtext":690}],669:[function(require,module,exports){
+
+/**
+ * namespace-map.js
+ *
+ * Necessary to map svg attributes back to their namespace
+ */
+
+'use strict';
+
+// extracted from https://github.com/Matt-Esch/virtual-dom/blob/master/virtual-hyperscript/svg-attribute-namespace.js
+var DEFAULT_NAMESPACE = null;
+var EV_NAMESPACE = 'http://www.w3.org/2001/xml-events';
+var XLINK_NAMESPACE = 'http://www.w3.org/1999/xlink';
+var XML_NAMESPACE = 'http://www.w3.org/XML/1998/namespace';
+
+var namespaces = {
+	'about': DEFAULT_NAMESPACE
+	, 'accent-height': DEFAULT_NAMESPACE
+	, 'accumulate': DEFAULT_NAMESPACE
+	, 'additive': DEFAULT_NAMESPACE
+	, 'alignment-baseline': DEFAULT_NAMESPACE
+	, 'alphabetic': DEFAULT_NAMESPACE
+	, 'amplitude': DEFAULT_NAMESPACE
+	, 'arabic-form': DEFAULT_NAMESPACE
+	, 'ascent': DEFAULT_NAMESPACE
+	, 'attributeName': DEFAULT_NAMESPACE
+	, 'attributeType': DEFAULT_NAMESPACE
+	, 'azimuth': DEFAULT_NAMESPACE
+	, 'bandwidth': DEFAULT_NAMESPACE
+	, 'baseFrequency': DEFAULT_NAMESPACE
+	, 'baseProfile': DEFAULT_NAMESPACE
+	, 'baseline-shift': DEFAULT_NAMESPACE
+	, 'bbox': DEFAULT_NAMESPACE
+	, 'begin': DEFAULT_NAMESPACE
+	, 'bias': DEFAULT_NAMESPACE
+	, 'by': DEFAULT_NAMESPACE
+	, 'calcMode': DEFAULT_NAMESPACE
+	, 'cap-height': DEFAULT_NAMESPACE
+	, 'class': DEFAULT_NAMESPACE
+	, 'clip': DEFAULT_NAMESPACE
+	, 'clip-path': DEFAULT_NAMESPACE
+	, 'clip-rule': DEFAULT_NAMESPACE
+	, 'clipPathUnits': DEFAULT_NAMESPACE
+	, 'color': DEFAULT_NAMESPACE
+	, 'color-interpolation': DEFAULT_NAMESPACE
+	, 'color-interpolation-filters': DEFAULT_NAMESPACE
+	, 'color-profile': DEFAULT_NAMESPACE
+	, 'color-rendering': DEFAULT_NAMESPACE
+	, 'content': DEFAULT_NAMESPACE
+	, 'contentScriptType': DEFAULT_NAMESPACE
+	, 'contentStyleType': DEFAULT_NAMESPACE
+	, 'cursor': DEFAULT_NAMESPACE
+	, 'cx': DEFAULT_NAMESPACE
+	, 'cy': DEFAULT_NAMESPACE
+	, 'd': DEFAULT_NAMESPACE
+	, 'datatype': DEFAULT_NAMESPACE
+	, 'defaultAction': DEFAULT_NAMESPACE
+	, 'descent': DEFAULT_NAMESPACE
+	, 'diffuseConstant': DEFAULT_NAMESPACE
+	, 'direction': DEFAULT_NAMESPACE
+	, 'display': DEFAULT_NAMESPACE
+	, 'divisor': DEFAULT_NAMESPACE
+	, 'dominant-baseline': DEFAULT_NAMESPACE
+	, 'dur': DEFAULT_NAMESPACE
+	, 'dx': DEFAULT_NAMESPACE
+	, 'dy': DEFAULT_NAMESPACE
+	, 'edgeMode': DEFAULT_NAMESPACE
+	, 'editable': DEFAULT_NAMESPACE
+	, 'elevation': DEFAULT_NAMESPACE
+	, 'enable-background': DEFAULT_NAMESPACE
+	, 'end': DEFAULT_NAMESPACE
+	, 'ev:event': EV_NAMESPACE
+	, 'event': DEFAULT_NAMESPACE
+	, 'exponent': DEFAULT_NAMESPACE
+	, 'externalResourcesRequired': DEFAULT_NAMESPACE
+	, 'fill': DEFAULT_NAMESPACE
+	, 'fill-opacity': DEFAULT_NAMESPACE
+	, 'fill-rule': DEFAULT_NAMESPACE
+	, 'filter': DEFAULT_NAMESPACE
+	, 'filterRes': DEFAULT_NAMESPACE
+	, 'filterUnits': DEFAULT_NAMESPACE
+	, 'flood-color': DEFAULT_NAMESPACE
+	, 'flood-opacity': DEFAULT_NAMESPACE
+	, 'focusHighlight': DEFAULT_NAMESPACE
+	, 'focusable': DEFAULT_NAMESPACE
+	, 'font-family': DEFAULT_NAMESPACE
+	, 'font-size': DEFAULT_NAMESPACE
+	, 'font-size-adjust': DEFAULT_NAMESPACE
+	, 'font-stretch': DEFAULT_NAMESPACE
+	, 'font-style': DEFAULT_NAMESPACE
+	, 'font-variant': DEFAULT_NAMESPACE
+	, 'font-weight': DEFAULT_NAMESPACE
+	, 'format': DEFAULT_NAMESPACE
+	, 'from': DEFAULT_NAMESPACE
+	, 'fx': DEFAULT_NAMESPACE
+	, 'fy': DEFAULT_NAMESPACE
+	, 'g1': DEFAULT_NAMESPACE
+	, 'g2': DEFAULT_NAMESPACE
+	, 'glyph-name': DEFAULT_NAMESPACE
+	, 'glyph-orientation-horizontal': DEFAULT_NAMESPACE
+	, 'glyph-orientation-vertical': DEFAULT_NAMESPACE
+	, 'glyphRef': DEFAULT_NAMESPACE
+	, 'gradientTransform': DEFAULT_NAMESPACE
+	, 'gradientUnits': DEFAULT_NAMESPACE
+	, 'handler': DEFAULT_NAMESPACE
+	, 'hanging': DEFAULT_NAMESPACE
+	, 'height': DEFAULT_NAMESPACE
+	, 'horiz-adv-x': DEFAULT_NAMESPACE
+	, 'horiz-origin-x': DEFAULT_NAMESPACE
+	, 'horiz-origin-y': DEFAULT_NAMESPACE
+	, 'id': DEFAULT_NAMESPACE
+	, 'ideographic': DEFAULT_NAMESPACE
+	, 'image-rendering': DEFAULT_NAMESPACE
+	, 'in': DEFAULT_NAMESPACE
+	, 'in2': DEFAULT_NAMESPACE
+	, 'initialVisibility': DEFAULT_NAMESPACE
+	, 'intercept': DEFAULT_NAMESPACE
+	, 'k': DEFAULT_NAMESPACE
+	, 'k1': DEFAULT_NAMESPACE
+	, 'k2': DEFAULT_NAMESPACE
+	, 'k3': DEFAULT_NAMESPACE
+	, 'k4': DEFAULT_NAMESPACE
+	, 'kernelMatrix': DEFAULT_NAMESPACE
+	, 'kernelUnitLength': DEFAULT_NAMESPACE
+	, 'kerning': DEFAULT_NAMESPACE
+	, 'keyPoints': DEFAULT_NAMESPACE
+	, 'keySplines': DEFAULT_NAMESPACE
+	, 'keyTimes': DEFAULT_NAMESPACE
+	, 'lang': DEFAULT_NAMESPACE
+	, 'lengthAdjust': DEFAULT_NAMESPACE
+	, 'letter-spacing': DEFAULT_NAMESPACE
+	, 'lighting-color': DEFAULT_NAMESPACE
+	, 'limitingConeAngle': DEFAULT_NAMESPACE
+	, 'local': DEFAULT_NAMESPACE
+	, 'marker-end': DEFAULT_NAMESPACE
+	, 'marker-mid': DEFAULT_NAMESPACE
+	, 'marker-start': DEFAULT_NAMESPACE
+	, 'markerHeight': DEFAULT_NAMESPACE
+	, 'markerUnits': DEFAULT_NAMESPACE
+	, 'markerWidth': DEFAULT_NAMESPACE
+	, 'mask': DEFAULT_NAMESPACE
+	, 'maskContentUnits': DEFAULT_NAMESPACE
+	, 'maskUnits': DEFAULT_NAMESPACE
+	, 'mathematical': DEFAULT_NAMESPACE
+	, 'max': DEFAULT_NAMESPACE
+	, 'media': DEFAULT_NAMESPACE
+	, 'mediaCharacterEncoding': DEFAULT_NAMESPACE
+	, 'mediaContentEncodings': DEFAULT_NAMESPACE
+	, 'mediaSize': DEFAULT_NAMESPACE
+	, 'mediaTime': DEFAULT_NAMESPACE
+	, 'method': DEFAULT_NAMESPACE
+	, 'min': DEFAULT_NAMESPACE
+	, 'mode': DEFAULT_NAMESPACE
+	, 'name': DEFAULT_NAMESPACE
+	, 'nav-down': DEFAULT_NAMESPACE
+	, 'nav-down-left': DEFAULT_NAMESPACE
+	, 'nav-down-right': DEFAULT_NAMESPACE
+	, 'nav-left': DEFAULT_NAMESPACE
+	, 'nav-next': DEFAULT_NAMESPACE
+	, 'nav-prev': DEFAULT_NAMESPACE
+	, 'nav-right': DEFAULT_NAMESPACE
+	, 'nav-up': DEFAULT_NAMESPACE
+	, 'nav-up-left': DEFAULT_NAMESPACE
+	, 'nav-up-right': DEFAULT_NAMESPACE
+	, 'numOctaves': DEFAULT_NAMESPACE
+	, 'observer': DEFAULT_NAMESPACE
+	, 'offset': DEFAULT_NAMESPACE
+	, 'opacity': DEFAULT_NAMESPACE
+	, 'operator': DEFAULT_NAMESPACE
+	, 'order': DEFAULT_NAMESPACE
+	, 'orient': DEFAULT_NAMESPACE
+	, 'orientation': DEFAULT_NAMESPACE
+	, 'origin': DEFAULT_NAMESPACE
+	, 'overflow': DEFAULT_NAMESPACE
+	, 'overlay': DEFAULT_NAMESPACE
+	, 'overline-position': DEFAULT_NAMESPACE
+	, 'overline-thickness': DEFAULT_NAMESPACE
+	, 'panose-1': DEFAULT_NAMESPACE
+	, 'path': DEFAULT_NAMESPACE
+	, 'pathLength': DEFAULT_NAMESPACE
+	, 'patternContentUnits': DEFAULT_NAMESPACE
+	, 'patternTransform': DEFAULT_NAMESPACE
+	, 'patternUnits': DEFAULT_NAMESPACE
+	, 'phase': DEFAULT_NAMESPACE
+	, 'playbackOrder': DEFAULT_NAMESPACE
+	, 'pointer-events': DEFAULT_NAMESPACE
+	, 'points': DEFAULT_NAMESPACE
+	, 'pointsAtX': DEFAULT_NAMESPACE
+	, 'pointsAtY': DEFAULT_NAMESPACE
+	, 'pointsAtZ': DEFAULT_NAMESPACE
+	, 'preserveAlpha': DEFAULT_NAMESPACE
+	, 'preserveAspectRatio': DEFAULT_NAMESPACE
+	, 'primitiveUnits': DEFAULT_NAMESPACE
+	, 'propagate': DEFAULT_NAMESPACE
+	, 'property': DEFAULT_NAMESPACE
+	, 'r': DEFAULT_NAMESPACE
+	, 'radius': DEFAULT_NAMESPACE
+	, 'refX': DEFAULT_NAMESPACE
+	, 'refY': DEFAULT_NAMESPACE
+	, 'rel': DEFAULT_NAMESPACE
+	, 'rendering-intent': DEFAULT_NAMESPACE
+	, 'repeatCount': DEFAULT_NAMESPACE
+	, 'repeatDur': DEFAULT_NAMESPACE
+	, 'requiredExtensions': DEFAULT_NAMESPACE
+	, 'requiredFeatures': DEFAULT_NAMESPACE
+	, 'requiredFonts': DEFAULT_NAMESPACE
+	, 'requiredFormats': DEFAULT_NAMESPACE
+	, 'resource': DEFAULT_NAMESPACE
+	, 'restart': DEFAULT_NAMESPACE
+	, 'result': DEFAULT_NAMESPACE
+	, 'rev': DEFAULT_NAMESPACE
+	, 'role': DEFAULT_NAMESPACE
+	, 'rotate': DEFAULT_NAMESPACE
+	, 'rx': DEFAULT_NAMESPACE
+	, 'ry': DEFAULT_NAMESPACE
+	, 'scale': DEFAULT_NAMESPACE
+	, 'seed': DEFAULT_NAMESPACE
+	, 'shape-rendering': DEFAULT_NAMESPACE
+	, 'slope': DEFAULT_NAMESPACE
+	, 'snapshotTime': DEFAULT_NAMESPACE
+	, 'spacing': DEFAULT_NAMESPACE
+	, 'specularConstant': DEFAULT_NAMESPACE
+	, 'specularExponent': DEFAULT_NAMESPACE
+	, 'spreadMethod': DEFAULT_NAMESPACE
+	, 'startOffset': DEFAULT_NAMESPACE
+	, 'stdDeviation': DEFAULT_NAMESPACE
+	, 'stemh': DEFAULT_NAMESPACE
+	, 'stemv': DEFAULT_NAMESPACE
+	, 'stitchTiles': DEFAULT_NAMESPACE
+	, 'stop-color': DEFAULT_NAMESPACE
+	, 'stop-opacity': DEFAULT_NAMESPACE
+	, 'strikethrough-position': DEFAULT_NAMESPACE
+	, 'strikethrough-thickness': DEFAULT_NAMESPACE
+	, 'string': DEFAULT_NAMESPACE
+	, 'stroke': DEFAULT_NAMESPACE
+	, 'stroke-dasharray': DEFAULT_NAMESPACE
+	, 'stroke-dashoffset': DEFAULT_NAMESPACE
+	, 'stroke-linecap': DEFAULT_NAMESPACE
+	, 'stroke-linejoin': DEFAULT_NAMESPACE
+	, 'stroke-miterlimit': DEFAULT_NAMESPACE
+	, 'stroke-opacity': DEFAULT_NAMESPACE
+	, 'stroke-width': DEFAULT_NAMESPACE
+	, 'surfaceScale': DEFAULT_NAMESPACE
+	, 'syncBehavior': DEFAULT_NAMESPACE
+	, 'syncBehaviorDefault': DEFAULT_NAMESPACE
+	, 'syncMaster': DEFAULT_NAMESPACE
+	, 'syncTolerance': DEFAULT_NAMESPACE
+	, 'syncToleranceDefault': DEFAULT_NAMESPACE
+	, 'systemLanguage': DEFAULT_NAMESPACE
+	, 'tableValues': DEFAULT_NAMESPACE
+	, 'target': DEFAULT_NAMESPACE
+	, 'targetX': DEFAULT_NAMESPACE
+	, 'targetY': DEFAULT_NAMESPACE
+	, 'text-anchor': DEFAULT_NAMESPACE
+	, 'text-decoration': DEFAULT_NAMESPACE
+	, 'text-rendering': DEFAULT_NAMESPACE
+	, 'textLength': DEFAULT_NAMESPACE
+	, 'timelineBegin': DEFAULT_NAMESPACE
+	, 'title': DEFAULT_NAMESPACE
+	, 'to': DEFAULT_NAMESPACE
+	, 'transform': DEFAULT_NAMESPACE
+	, 'transformBehavior': DEFAULT_NAMESPACE
+	, 'type': DEFAULT_NAMESPACE
+	, 'typeof': DEFAULT_NAMESPACE
+	, 'u1': DEFAULT_NAMESPACE
+	, 'u2': DEFAULT_NAMESPACE
+	, 'underline-position': DEFAULT_NAMESPACE
+	, 'underline-thickness': DEFAULT_NAMESPACE
+	, 'unicode': DEFAULT_NAMESPACE
+	, 'unicode-bidi': DEFAULT_NAMESPACE
+	, 'unicode-range': DEFAULT_NAMESPACE
+	, 'units-per-em': DEFAULT_NAMESPACE
+	, 'v-alphabetic': DEFAULT_NAMESPACE
+	, 'v-hanging': DEFAULT_NAMESPACE
+	, 'v-ideographic': DEFAULT_NAMESPACE
+	, 'v-mathematical': DEFAULT_NAMESPACE
+	, 'values': DEFAULT_NAMESPACE
+	, 'version': DEFAULT_NAMESPACE
+	, 'vert-adv-y': DEFAULT_NAMESPACE
+	, 'vert-origin-x': DEFAULT_NAMESPACE
+	, 'vert-origin-y': DEFAULT_NAMESPACE
+	, 'viewBox': DEFAULT_NAMESPACE
+	, 'viewTarget': DEFAULT_NAMESPACE
+	, 'visibility': DEFAULT_NAMESPACE
+	, 'width': DEFAULT_NAMESPACE
+	, 'widths': DEFAULT_NAMESPACE
+	, 'word-spacing': DEFAULT_NAMESPACE
+	, 'writing-mode': DEFAULT_NAMESPACE
+	, 'x': DEFAULT_NAMESPACE
+	, 'x-height': DEFAULT_NAMESPACE
+	, 'x1': DEFAULT_NAMESPACE
+	, 'x2': DEFAULT_NAMESPACE
+	, 'xChannelSelector': DEFAULT_NAMESPACE
+	, 'xlink:actuate': XLINK_NAMESPACE
+	, 'xlink:arcrole': XLINK_NAMESPACE
+	, 'xlink:href': XLINK_NAMESPACE
+	, 'xlink:role': XLINK_NAMESPACE
+	, 'xlink:show': XLINK_NAMESPACE
+	, 'xlink:title': XLINK_NAMESPACE
+	, 'xlink:type': XLINK_NAMESPACE
+	, 'xml:base': XML_NAMESPACE
+	, 'xml:id': XML_NAMESPACE
+	, 'xml:lang': XML_NAMESPACE
+	, 'xml:space': XML_NAMESPACE
+	, 'y': DEFAULT_NAMESPACE
+	, 'y1': DEFAULT_NAMESPACE
+	, 'y2': DEFAULT_NAMESPACE
+	, 'yChannelSelector': DEFAULT_NAMESPACE
+	, 'z': DEFAULT_NAMESPACE
+	, 'zoomAndPan': DEFAULT_NAMESPACE
+};
+
+module.exports = namespaces;
 
 },{}],670:[function(require,module,exports){
+
+/**
+ * property-map.js
+ *
+ * Necessary to map dom attributes back to vdom properties
+ */
+
+'use strict';
+
+// invert of https://www.npmjs.com/package/html-attributes
+var properties = {
+	'abbr': 'abbr'
+	, 'accept': 'accept'
+	, 'accept-charset': 'acceptCharset'
+	, 'accesskey': 'accessKey'
+	, 'action': 'action'
+	, 'allowfullscreen': 'allowFullScreen'
+	, 'allowtransparency': 'allowTransparency'
+	, 'alt': 'alt'
+	, 'async': 'async'
+	, 'autocomplete': 'autoComplete'
+	, 'autofocus': 'autoFocus'
+	, 'autoplay': 'autoPlay'
+	, 'cellpadding': 'cellPadding'
+	, 'cellspacing': 'cellSpacing'
+	, 'challenge': 'challenge'
+	, 'charset': 'charset'
+	, 'checked': 'checked'
+	, 'cite': 'cite'
+	, 'class': 'className'
+	, 'cols': 'cols'
+	, 'colspan': 'colSpan'
+	, 'command': 'command'
+	, 'content': 'content'
+	, 'contenteditable': 'contentEditable'
+	, 'contextmenu': 'contextMenu'
+	, 'controls': 'controls'
+	, 'coords': 'coords'
+	, 'crossorigin': 'crossOrigin'
+	, 'data': 'data'
+	, 'datetime': 'dateTime'
+	, 'default': 'default'
+	, 'defer': 'defer'
+	, 'dir': 'dir'
+	, 'disabled': 'disabled'
+	, 'download': 'download'
+	, 'draggable': 'draggable'
+	, 'dropzone': 'dropzone'
+	, 'enctype': 'encType'
+	, 'for': 'htmlFor'
+	, 'form': 'form'
+	, 'formaction': 'formAction'
+	, 'formenctype': 'formEncType'
+	, 'formmethod': 'formMethod'
+	, 'formnovalidate': 'formNoValidate'
+	, 'formtarget': 'formTarget'
+	, 'frameBorder': 'frameBorder'
+	, 'headers': 'headers'
+	, 'height': 'height'
+	, 'hidden': 'hidden'
+	, 'high': 'high'
+	, 'href': 'href'
+	, 'hreflang': 'hrefLang'
+	, 'http-equiv': 'httpEquiv'
+	, 'icon': 'icon'
+	, 'id': 'id'
+	, 'inputmode': 'inputMode'
+	, 'ismap': 'isMap'
+	, 'itemid': 'itemId'
+	, 'itemprop': 'itemProp'
+	, 'itemref': 'itemRef'
+	, 'itemscope': 'itemScope'
+	, 'itemtype': 'itemType'
+	, 'kind': 'kind'
+	, 'label': 'label'
+	, 'lang': 'lang'
+	, 'list': 'list'
+	, 'loop': 'loop'
+	, 'manifest': 'manifest'
+	, 'max': 'max'
+	, 'maxlength': 'maxLength'
+	, 'media': 'media'
+	, 'mediagroup': 'mediaGroup'
+	, 'method': 'method'
+	, 'min': 'min'
+	, 'minlength': 'minLength'
+	, 'multiple': 'multiple'
+	, 'muted': 'muted'
+	, 'name': 'name'
+	, 'novalidate': 'noValidate'
+	, 'open': 'open'
+	, 'optimum': 'optimum'
+	, 'pattern': 'pattern'
+	, 'ping': 'ping'
+	, 'placeholder': 'placeholder'
+	, 'poster': 'poster'
+	, 'preload': 'preload'
+	, 'radiogroup': 'radioGroup'
+	, 'readonly': 'readOnly'
+	, 'rel': 'rel'
+	, 'required': 'required'
+	, 'role': 'role'
+	, 'rows': 'rows'
+	, 'rowspan': 'rowSpan'
+	, 'sandbox': 'sandbox'
+	, 'scope': 'scope'
+	, 'scoped': 'scoped'
+	, 'scrolling': 'scrolling'
+	, 'seamless': 'seamless'
+	, 'selected': 'selected'
+	, 'shape': 'shape'
+	, 'size': 'size'
+	, 'sizes': 'sizes'
+	, 'sortable': 'sortable'
+	, 'span': 'span'
+	, 'spellcheck': 'spellCheck'
+	, 'src': 'src'
+	, 'srcdoc': 'srcDoc'
+	, 'srcset': 'srcSet'
+	, 'start': 'start'
+	, 'step': 'step'
+	, 'style': 'style'
+	, 'tabindex': 'tabIndex'
+	, 'target': 'target'
+	, 'title': 'title'
+	, 'translate': 'translate'
+	, 'type': 'type'
+	, 'typemustmatch': 'typeMustMatch'
+	, 'usemap': 'useMap'
+	, 'value': 'value'
+	, 'width': 'width'
+	, 'wmode': 'wmode'
+	, 'wrap': 'wrap'
+};
+
+module.exports = properties;
+
+},{}],671:[function(require,module,exports){
 var createElement = require("./vdom/create-element.js")
 
 module.exports = createElement
 
-},{"./vdom/create-element.js":674}],671:[function(require,module,exports){
+},{"./vdom/create-element.js":675}],672:[function(require,module,exports){
 var diff = require("./vtree/diff.js")
 
 module.exports = diff
 
-},{"./vtree/diff.js":691}],672:[function(require,module,exports){
+},{"./vtree/diff.js":692}],673:[function(require,module,exports){
 var patch = require("./vdom/patch.js")
 
 module.exports = patch
 
-},{"./vdom/patch.js":677}],673:[function(require,module,exports){
+},{"./vdom/patch.js":678}],674:[function(require,module,exports){
 var isObject = require("is-object")
 var isHook = require("../vnode/is-vhook.js")
 
@@ -85294,7 +85908,7 @@ function getPrototype(value) {
     }
 }
 
-},{"../vnode/is-vhook.js":682,"is-object":639}],674:[function(require,module,exports){
+},{"../vnode/is-vhook.js":683,"is-object":639}],675:[function(require,module,exports){
 var document = require("global/document")
 
 var applyProperties = require("./apply-properties")
@@ -85342,7 +85956,7 @@ function createElement(vnode, opts) {
     return node
 }
 
-},{"../vnode/handle-thunk.js":680,"../vnode/is-vnode.js":683,"../vnode/is-vtext.js":684,"../vnode/is-widget.js":685,"./apply-properties":673,"global/document":621}],675:[function(require,module,exports){
+},{"../vnode/handle-thunk.js":681,"../vnode/is-vnode.js":684,"../vnode/is-vtext.js":685,"../vnode/is-widget.js":686,"./apply-properties":674,"global/document":621}],676:[function(require,module,exports){
 // Maps a virtual DOM tree onto a real DOM tree in an efficient manner.
 // We don't want to read all of the DOM nodes in the tree so we use
 // the in-order tree indexing to eliminate recursion down certain branches.
@@ -85429,7 +86043,7 @@ function ascending(a, b) {
     return a > b ? 1 : -1
 }
 
-},{}],676:[function(require,module,exports){
+},{}],677:[function(require,module,exports){
 var applyProperties = require("./apply-properties")
 
 var isWidget = require("../vnode/is-widget.js")
@@ -85582,7 +86196,7 @@ function replaceRoot(oldRoot, newRoot) {
     return newRoot;
 }
 
-},{"../vnode/is-widget.js":685,"../vnode/vpatch.js":688,"./apply-properties":673,"./update-widget":678}],677:[function(require,module,exports){
+},{"../vnode/is-widget.js":686,"../vnode/vpatch.js":689,"./apply-properties":674,"./update-widget":679}],678:[function(require,module,exports){
 var document = require("global/document")
 var isArray = require("x-is-array")
 
@@ -85664,7 +86278,7 @@ function patchIndices(patches) {
     return indices
 }
 
-},{"./create-element":674,"./dom-index":675,"./patch-op":676,"global/document":621,"x-is-array":703}],678:[function(require,module,exports){
+},{"./create-element":675,"./dom-index":676,"./patch-op":677,"global/document":621,"x-is-array":704}],679:[function(require,module,exports){
 var isWidget = require("../vnode/is-widget.js")
 
 module.exports = updateWidget
@@ -85681,7 +86295,7 @@ function updateWidget(a, b) {
     return false
 }
 
-},{"../vnode/is-widget.js":685}],679:[function(require,module,exports){
+},{"../vnode/is-widget.js":686}],680:[function(require,module,exports){
 'use strict';
 
 module.exports = SoftSetHook;
@@ -85700,7 +86314,7 @@ SoftSetHook.prototype.hook = function (node, propertyName) {
     }
 };
 
-},{}],680:[function(require,module,exports){
+},{}],681:[function(require,module,exports){
 var isVNode = require("./is-vnode")
 var isVText = require("./is-vtext")
 var isWidget = require("./is-widget")
@@ -85742,14 +86356,14 @@ function renderThunk(thunk, previous) {
     return renderedThunk
 }
 
-},{"./is-thunk":681,"./is-vnode":683,"./is-vtext":684,"./is-widget":685}],681:[function(require,module,exports){
+},{"./is-thunk":682,"./is-vnode":684,"./is-vtext":685,"./is-widget":686}],682:[function(require,module,exports){
 module.exports = isThunk
 
 function isThunk(t) {
     return t && t.type === "Thunk"
 }
 
-},{}],682:[function(require,module,exports){
+},{}],683:[function(require,module,exports){
 module.exports = isHook
 
 function isHook(hook) {
@@ -85758,7 +86372,7 @@ function isHook(hook) {
        typeof hook.unhook === "function" && !hook.hasOwnProperty("unhook"))
 }
 
-},{}],683:[function(require,module,exports){
+},{}],684:[function(require,module,exports){
 var version = require("./version")
 
 module.exports = isVirtualNode
@@ -85767,7 +86381,7 @@ function isVirtualNode(x) {
     return x && x.type === "VirtualNode" && x.version === version
 }
 
-},{"./version":686}],684:[function(require,module,exports){
+},{"./version":687}],685:[function(require,module,exports){
 var version = require("./version")
 
 module.exports = isVirtualText
@@ -85776,17 +86390,17 @@ function isVirtualText(x) {
     return x && x.type === "VirtualText" && x.version === version
 }
 
-},{"./version":686}],685:[function(require,module,exports){
+},{"./version":687}],686:[function(require,module,exports){
 module.exports = isWidget
 
 function isWidget(w) {
     return w && w.type === "Widget"
 }
 
-},{}],686:[function(require,module,exports){
+},{}],687:[function(require,module,exports){
 module.exports = "2"
 
-},{}],687:[function(require,module,exports){
+},{}],688:[function(require,module,exports){
 var version = require("./version")
 var isVNode = require("./is-vnode")
 var isWidget = require("./is-widget")
@@ -85860,7 +86474,7 @@ function VirtualNode(tagName, properties, children, key, namespace) {
 VirtualNode.prototype.version = version
 VirtualNode.prototype.type = "VirtualNode"
 
-},{"./is-thunk":681,"./is-vhook":682,"./is-vnode":683,"./is-widget":685,"./version":686}],688:[function(require,module,exports){
+},{"./is-thunk":682,"./is-vhook":683,"./is-vnode":684,"./is-widget":686,"./version":687}],689:[function(require,module,exports){
 var version = require("./version")
 
 VirtualPatch.NONE = 0
@@ -85884,7 +86498,7 @@ function VirtualPatch(type, vNode, patch) {
 VirtualPatch.prototype.version = version
 VirtualPatch.prototype.type = "VirtualPatch"
 
-},{"./version":686}],689:[function(require,module,exports){
+},{"./version":687}],690:[function(require,module,exports){
 var version = require("./version")
 
 module.exports = VirtualText
@@ -85896,7 +86510,7 @@ function VirtualText(text) {
 VirtualText.prototype.version = version
 VirtualText.prototype.type = "VirtualText"
 
-},{"./version":686}],690:[function(require,module,exports){
+},{"./version":687}],691:[function(require,module,exports){
 var isObject = require("is-object")
 var isHook = require("../vnode/is-vhook")
 
@@ -85956,7 +86570,7 @@ function getPrototype(value) {
   }
 }
 
-},{"../vnode/is-vhook":682,"is-object":639}],691:[function(require,module,exports){
+},{"../vnode/is-vhook":683,"is-object":639}],692:[function(require,module,exports){
 var isArray = require("x-is-array")
 
 var VPatch = require("../vnode/vpatch")
@@ -86385,7 +86999,7 @@ function appendPatch(apply, patch) {
     }
 }
 
-},{"../vnode/handle-thunk":680,"../vnode/is-thunk":681,"../vnode/is-vnode":683,"../vnode/is-vtext":684,"../vnode/is-widget":685,"../vnode/vpatch":688,"./diff-props":690,"x-is-array":703}],692:[function(require,module,exports){
+},{"../vnode/handle-thunk":681,"../vnode/is-thunk":682,"../vnode/is-vnode":684,"../vnode/is-vtext":685,"../vnode/is-widget":686,"../vnode/vpatch":689,"./diff-props":691,"x-is-array":704}],693:[function(require,module,exports){
 /*
  * winston.js: Top-level include defining Winston.
  *
@@ -86552,7 +87166,7 @@ Object.defineProperty(winston, 'default', {
   }
 });
 
-},{"./winston/common":693,"./winston/config":694,"./winston/container":698,"./winston/exception":699,"./winston/logger":700,"./winston/transports":701,"./winston/transports/transport":702,"pkginfo":648}],693:[function(require,module,exports){
+},{"./winston/common":694,"./winston/config":695,"./winston/container":699,"./winston/exception":700,"./winston/logger":701,"./winston/transports":702,"./winston/transports/transport":703,"pkginfo":648}],694:[function(require,module,exports){
 (function (Buffer){
 /*
  * common.js: Internal helper and utility functions for winston
@@ -87050,7 +87664,7 @@ exports.stringArrayToSet = function (strArray, errMsg) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./config":694,"buffer":46,"crypto":50,"cycle":575,"fs":43,"stream":263,"string_decoder":264,"util":266}],694:[function(require,module,exports){
+},{"./config":695,"buffer":46,"crypto":50,"cycle":575,"fs":43,"stream":263,"string_decoder":264,"util":266}],695:[function(require,module,exports){
 /*
  * config.js: Default settings for all levels that winston knows about
  *
@@ -87120,7 +87734,7 @@ function mixin (target) {
   return target;
 };
 
-},{"./config/cli-config":695,"./config/npm-config":696,"./config/syslog-config":697,"colors/safe":278}],695:[function(require,module,exports){
+},{"./config/cli-config":696,"./config/npm-config":697,"./config/syslog-config":698,"colors/safe":278}],696:[function(require,module,exports){
 /*
  * cli-config.js: Config that conform to commonly used CLI logging levels.
  *
@@ -87157,7 +87771,7 @@ cliConfig.colors = {
   silly: 'magenta'
 };
 
-},{}],696:[function(require,module,exports){
+},{}],697:[function(require,module,exports){
 /*
  * npm-config.js: Config that conform to npm logging levels.
  *
@@ -87186,7 +87800,7 @@ npmConfig.colors = {
   silly: 'magenta'
 };
 
-},{}],697:[function(require,module,exports){
+},{}],698:[function(require,module,exports){
 /*
  * syslog-config.js: Config that conform to syslog logging levels.
  *
@@ -87219,7 +87833,7 @@ syslogConfig.colors = {
   debug: 'blue'
 };
 
-},{}],698:[function(require,module,exports){
+},{}],699:[function(require,module,exports){
 /*
  * container.js: Inversion of control container for winston logger instances
  *
@@ -87348,7 +87962,7 @@ Container.prototype._delete = function (id) {
 }
 
 
-},{"../winston":692,"./common":693,"util":266}],699:[function(require,module,exports){
+},{"../winston":693,"./common":694,"util":266}],700:[function(require,module,exports){
 (function (process){
 /*
  * exception.js: Utility methods for gathing information about uncaughtExceptions.
@@ -87408,7 +88022,7 @@ exception.getTrace = function (err) {
 };
 
 }).call(this,require('_process'))
-},{"_process":247,"os":245,"stack-trace":658}],700:[function(require,module,exports){
+},{"_process":247,"os":245,"stack-trace":658}],701:[function(require,module,exports){
 (function (process){
 /*
  * logger.js: Core logger object used by winston.
@@ -88135,7 +88749,7 @@ ProfileHandler.prototype.done = function (msg) {
 };
 
 }).call(this,require('_process'))
-},{"./common":693,"./config":694,"./exception":699,"_process":247,"async":40,"events":242,"stream":263,"util":266}],701:[function(require,module,exports){
+},{"./common":694,"./config":695,"./exception":700,"_process":247,"async":40,"events":242,"stream":263,"util":266}],702:[function(require,module,exports){
 (function (__dirname){
 /*
  * transports.js: Set of all transports Winston knows about
@@ -88168,7 +88782,7 @@ Object.defineProperties(
 );
 
 }).call(this,"/node_modules\\winston\\lib\\winston")
-},{"path":246}],702:[function(require,module,exports){
+},{"path":246}],703:[function(require,module,exports){
 /*
  * transport.js: Base Transport object for all Winston transports.
  *
@@ -88305,7 +88919,7 @@ Transport.prototype.logException = function (msg, meta, callback) {
   this.log(self.exceptionsLevel, msg, meta, function () { });
 };
 
-},{"events":242,"util":266}],703:[function(require,module,exports){
+},{"events":242,"util":266}],704:[function(require,module,exports){
 var nativeIsArray = Array.isArray
 var toString = Object.prototype.toString
 
@@ -88403,7 +89017,25 @@ var ClientRuntime = function (_RuntimeBase) {
 
 	/**
   * Create a client Runtime instance.
-  * @extends Loggable
+  * @extends RuntimeBase
+  * 
+  * 	API:
+  * 		->constructor()
+  * 		->load(arg_settings):nothing - Load runtime settings.
+  * 
+  * 		->register_service(arg_svc_name, arg_svc_settings):Promise(Service) - Register a remote service.
+  * 		->service(arg_name):Service - Get a service by its name.
+  * 
+  * 		->command(arg_name):object - Get a command by its name.
+  * 
+  * 		->ping():nothing - Emit a ping request through SocketIO.
+  * 
+  * 		->get_state_store():object - Get state store, a Redux data store.(INHERITED)
+  * 		->get_store_reducers():function - Get reducer pure function: (previous state, action) => new state.
+  * 		->handle_store_change():nothing - Handle Redux store changes.
+  * 		->create_store_observer(arg_component):unsubscribe function - Create a store change observer.
+  * 
+  * 		->router():Router - Get runtime router.
   * 
   * @returns {nothing}
   */
@@ -88421,12 +89053,14 @@ var ClientRuntime = function (_RuntimeBase) {
 
 		_this.is_browser_runtime = true;
 
-		_this.services = {};
-		_this.services_promises = {};
-		_this.ui = undefined;
+		_this._services = {};
+		_this._services_promises = {};
+		_this._ui = undefined;
 		_this._router = undefined;
+		_this._commands = undefined;
 
 		_this.info('Client Runtime is created');
+		_this.disable_trace();
 		return _this;
 	}
 
@@ -88453,7 +89087,7 @@ var ClientRuntime = function (_RuntimeBase) {
 
 			// GET INITIAL STATE
 			var initial_state = window ? window.__INITIAL_STATE__ : { error: 'no browser window object' };
-			console.log(initial_state, 'initialState');
+			this.debug(initial_state, 'initialState');
 
 			// GET DEFAULT REDUCER
 			if (_typr2.default.isFunction(arg_settings.reducers)) {
@@ -88467,73 +89101,74 @@ var ClientRuntime = function (_RuntimeBase) {
 			// CREATE STATE STORE
 			var reducer = this.get_store_reducers();
 			var self = this;
-			this.state_store = new _redux_store2.default(reducer, initial_state, context, this.logger_manager);
-			this.state_store_unsubscribe = this.state_store.subscribe(self.handle_store_change.bind(self));
-			this.state_store.dispatch({ type: 'store_created' });
+			this._state_store = new _redux_store2.default(reducer, initial_state, context, this.logger_manager);
+			this._state_store_unsubscribe = this._state_store.subscribe(self.handle_store_change.bind(self));
+			this._state_store.dispatch({ type: 'store_created' });
 
 			// CREATE CREDENTIALS INSTANCE
-			var credentials_settings = this.state_store.get_state().get('credentials', undefined);
-			// console.log('credentials_settings', credentials_settings)
+			var credentials_settings = this._state_store.get_state().get('credentials', undefined);
+			this.debug('credentials_settings', credentials_settings);
+
 			var credentials_update_handler = function credentials_update_handler(arg_credentials_map) {
-				_this2.state_store.dispatch({ type: 'SET_CREDENTIALS', credentials: arg_credentials_map });
+				_this2._state_store.dispatch({ type: 'SET_CREDENTIALS', credentials: arg_credentials_map });
 			};
 			var credentials_datas = credentials_settings ? credentials_settings.toJS() : _credentials2.default.get_empty_credentials();
 			this.session_credentials = new _credentials2.default(credentials_datas, credentials_update_handler);
 
 			// CREATE UI WRAPPER
-			this.ui = new _ui2.default(this, this.state_store);
+			this._ui = new _ui2.default(this, this._state_store);
 
 			// CREATE NAVIGATION ROUTER
 			this._router = new _router2.default();
-			this._router.init();
 
 			// ADD COMMANDS ROUTE
-			var app_url = this.state_store.get_state().get('app_url', undefined);
-			var commands = this.state_store.get_state().get('commands', {}).toJS();
-			Object.keys(commands).forEach(function (cmd_name) {
-				var cmd = commands[cmd_name];
+			this._commands = this._state_store.get_state().get('commands', {}).toJS();
+			Object.keys(this._commands).forEach(function (cmd_name) {
+				var cmd = _this2._commands[cmd_name];
 				if (_typr2.default.isString(cmd.url)) {
-					var _ret = function () {
-						var route = _typr2.default.isString(app_url) ? '/' + app_url + cmd.url : cmd.url;
+					// VIEW RENDERING
+					if (_typr2.default.isString(cmd.view)) {
+						var _ret = function () {
+							_this2.debug('load:add route handler for cmd [' + cmd_name + '] with view:' + cmd.view);
 
-						// VIEW RENDERING
-						if (_typr2.default.isString(cmd.view)) {
-							var _ret2 = function () {
-								console.log(context + ':load:add route handler for cmd [' + cmd_name + '] with view:' + cmd.view);
-
-								var menubar = _typr2.default.isString(cmd.menubar) ? cmd.menubar : undefined;
-								_this2._router.add_handler(route, function () {
-									return _this2._router.display_content(cmd.view, menubar);
-								});
-								return {
-									v: {
-										v: void 0
-									}
-								};
-							}();
-
-							if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
-						}
-
-						// MIDDLEWARE RENDERING
-						var middleware = cmd.middleware;
-						if (_typr2.default.isString(middleware)) {
-							console.log(context + ':load:add route handler for cmd [' + cmd_name + '] with middleware:' + middleware);
-
+							var route = cmd.url;
+							var menubar = _typr2.default.isString(cmd.menubar) ? cmd.menubar : undefined;
 							_this2._router.add_handler(route, function () {
-								return _this2.ui.render_with_middleware(cmd, route, _this2.session_credentials);
+								return _this2._router.display_content(cmd.view, menubar);
 							});
 							return {
 								v: void 0
 							};
-						}
+						}();
 
-						console.error(context + ':load:no route handler for cmd [' + cmd_name + ']:unknow cmd bad view/middleware');
-					}();
+						if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+					}
 
-					if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+					// MIDDLEWARE RENDERING
+					var middleware = cmd.middleware;
+					if (_typr2.default.isString(middleware)) {
+						var _ret2 = function () {
+							_this2.debug('load:add route handler for cmd [' + cmd_name + '] with middleware:' + middleware);
+
+							var app_url = _this2._state_store.get_state().get('app_url', undefined);
+							var mw_route = _typr2.default.isString(app_url) ? '/' + app_url + cmd.url : cmd.url;
+							_this2._router.add_handler(cmd.url, function () {
+								return _this2._ui.render_with_middleware(cmd, mw_route, _this2.session_credentials);
+							});
+							return {
+								v: void 0
+							};
+						}();
+
+						if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+					}
+
+					_this2.error('load:no route handler for cmd [' + cmd_name + ']:unknow cmd bad view/middleware');
 				}
 			});
+
+			// ENABLE HASH HANDLING
+			this._router.init();
 
 			this.leave_group('load');
 			this.separate_level_1();
@@ -88556,14 +89191,13 @@ var ClientRuntime = function (_RuntimeBase) {
 			var self = this;
 			this.enter_group('register_service:' + arg_svc_name);
 
-			if (arg_svc_name in this.services_promises) {
-				console.log(this.services_promises[arg_svc_name], 'this.services_promises[arg_svc_name]');
+			if (arg_svc_name in this._services_promises) {
 				this.leave_group('register_service:svc promise found for ' + arg_svc_name);
-				return this.services_promises[arg_svc_name];
+				return this._services_promises[arg_svc_name];
 			}
 
 			this.debug('register_service:create svc promise:' + arg_svc_name);
-			this.services_promises[arg_svc_name] = new Promise(function (resolve, reject) {
+			this._services_promises[arg_svc_name] = new Promise(function (resolve, reject) {
 				self.register_service_self(resolve, reject, arg_svc_name, arg_svc_settings);
 			}).then(function (service) {
 				_this3.leave_group('register_service:svc promise created for ' + arg_svc_name);
@@ -88573,11 +89207,11 @@ var ClientRuntime = function (_RuntimeBase) {
 			this.info('Client Service is created (async):' + arg_svc_name);
 
 			this.leave_group('register_service:async');
-			return this.services_promises[arg_svc_name];
+			return this._services_promises[arg_svc_name];
 		}
 
 		/**
-   * Register a remote service.
+   * Register a remote service (end of process).
    * 
    * @param {string} arg_svc_name - service name.
    * @param {object} arg_svc_settings - service settings.
@@ -88595,7 +89229,7 @@ var ClientRuntime = function (_RuntimeBase) {
 			// this.enter_group('register_service_self')
 
 
-			// const app_credentials = this.state_store.get_state().get('credentials')
+			// const app_credentials = this._state_store.get_state().get('credentials')
 			var app_credentials = this.session_credentials.get_credentials();
 			var request_svc_settings = 'request_settings';
 			var reply_svc_settings = 'reply_settings';
@@ -88608,10 +89242,10 @@ var ClientRuntime = function (_RuntimeBase) {
 			}
 
 			// TEST IF SERVICE IS ALREADY REGISTERED
-			if (this.services && arg_svc_name in this.services) {
+			if (this._services && arg_svc_name in this._services) {
 				this.debug('register_service_self:SERVICE IS ALREADY REGISTERED for ' + arg_svc_name);
 
-				var svc = this.services[arg_svc_name];
+				var svc = this._services[arg_svc_name];
 				// console.log(context + ':register_service_self:SERVICE IS ALREADY REGISTERED:svc', svc)
 				this.debug('register_service:svc promise resolved:' + arg_svc_name);
 				arg_resolve_cb(svc);
@@ -88635,7 +89269,7 @@ var ClientRuntime = function (_RuntimeBase) {
 				}
 				var _svc = new _service2.default(arg_svc_name, arg_svc_settings);
 				// console.log(context + ':register_service_self:SERVICE FROM GIVEN SETTINGS:svc', svc)
-				self.services[arg_svc_name] = _svc;
+				self._services[arg_svc_name] = _svc;
 				this.debug('register_service:svc promise resolved:' + arg_svc_name);
 				arg_resolve_cb(_svc);
 
@@ -88654,7 +89288,7 @@ var ClientRuntime = function (_RuntimeBase) {
 				// console.log(context + ':register_service_self:SERVICE FROM SERVER SETTINGS:response', response)
 				arg_svc_settings = response.settings;
 				(0, _assert2.default)(_typr2.default.isObject(arg_svc_settings), context + ':register_service:bad service settings object');
-				console.log(context + ':register_service_self:SERVICE FROM SERVER SETTINGS:arg_svc_settings', arg_svc_settings);
+				self.debug('register_service_self:SERVICE FROM SERVER SETTINGS:arg_svc_settings', arg_svc_settings);
 
 				// GET APPLICATION CREDENTIALS
 				// TODO CHECK CREDENTIAL FORMAT STRING -> MAP ?
@@ -88664,17 +89298,16 @@ var ClientRuntime = function (_RuntimeBase) {
 				}
 
 				var svc = new _service2.default(arg_svc_name, arg_svc_settings);
-				console.log(context + ':register_service_self:SERVICE FROM SERVER SETTINGS:svc', svc);
+				self.debug('register_service_self:SERVICE FROM SERVER SETTINGS:svc', svc);
 
-				self.services[arg_svc_name] = svc;
-				delete self.services_promises[arg_svc_name];
+				self._services[arg_svc_name] = svc;
+				delete self._services_promises[arg_svc_name];
 
 				self.debug('register_service:svc promise resolved:' + arg_svc_name);
 				arg_resolve_cb(svc);
 			});
 
 			get_settings_stream.onError(function (error) {
-				console.error(context + ':register_service:error:' + error);
 				self.error('register_service:svc promise rejected:' + arg_svc_name + ' with error:' + error);
 				arg_reject_cb(context + ':register_service:request error for  [' + arg_svc_name + '] error=' + error);
 			});
@@ -88705,11 +89338,28 @@ var ClientRuntime = function (_RuntimeBase) {
 		key: 'service',
 		value: function service(arg_name) {
 			// console.info('getting/creating service', arg_name)
-			return arg_name in this.services ? this.services[arg_name] : undefined;
+			return arg_name in this._services ? this._services[arg_name] : undefined;
 		}
 
 		/**
-   * Emit a ping request through SocketIO
+   * Get a command by its name.
+   * 
+   * @param {string} arg_name - command name.
+   * 
+   * @returns {object}
+   */
+
+	}, {
+		key: 'command',
+		value: function command(arg_name) {
+			// console.info('getting/creating service', arg_name)
+			return arg_name in this._commands ? this._commands[arg_name] : undefined;
+		}
+
+		/**
+   * Emit a ping request through SocketIO.
+   * 
+   * @returns {nothing}
    */
 
 	}, {
@@ -88731,24 +89381,24 @@ var ClientRuntime = function (_RuntimeBase) {
 			var _this4 = this;
 
 			return function (arg_previous_state, arg_action) {
-				console.info(context + ':reducer 1:type=' + arg_action.type + ' for ' + arg_action.component);
+				_this4.info('reducer 1:type=' + arg_action.type + ' for ' + arg_action.component);
 
 				// ADD JSON RESOURCE SETTINGS
 				if (_typr2.default.isString(arg_action.type) && arg_action.type == 'ADD_JSON_RESOURCE' && _typr2.default.isString(arg_action.resource) && _typr2.default.isObject(arg_action.json)) {
-					console.log(context + ':reducer:ADD_JSON_RESOURCE', arg_action.resource, arg_action.json);
+					_this4.debug('reducer:ADD_JSON_RESOURCE', arg_action.resource, arg_action.json);
 					return arg_previous_state.setIn(['children', arg_action.resource], (0, _immutable.fromJS)(arg_action.json));
 				}
 
 				// SET SESSION CREDENTIALS
 				if (_typr2.default.isString(arg_action.type) && arg_action.type == 'SET_CREDENTIALS' && _typr2.default.isObject(arg_action.credentials)) {
-					console.log(context + ':reducer:SET_CREDENTIALS', arg_action.credentials);
+					_this4.debug('reducer:SET_CREDENTIALS', arg_action.credentials);
 					return arg_previous_state.set('credentials', arg_action.credentials);
 				}
 
 				// DISPATCH TO COMPONENTS REDUCERS
 				if (_typr2.default.isString(arg_action.component)) {
 					// console.info(context + ':reducer 2:type=' + arg_action.type + ' for ' + arg_action.component)
-					var component = _this4.ui.get(arg_action.component);
+					var component = _this4._ui.get(arg_action.component);
 
 					if (_typr2.default.isObject(component) && component.is_component) {
 						// console.info(context + ':reducer 3:type=' + arg_action.type + ' for ' + arg_action.component, component)
@@ -88764,10 +89414,14 @@ var ClientRuntime = function (_RuntimeBase) {
 							// console.log(context + ':reducer 4:prev_component_state', prev_component_state.toJS())
 
 							var new_component_state = component.reduce_action(prev_component_state, arg_action);
+							if (new_component_state != prev_component_state) {
+								var prev_state_version = prev_component_state.get('state_version', 0);
+								new_component_state = new_component_state.set('state_version', prev_state_version + 1);
+							}
 
 							// console.log(context + ':reducer 4:new_component_state', new_component_state.toJS())
 
-							var state = _this4.state_store.get_state();
+							var state = _this4._state_store.get_state();
 							state = state.setIn(component.get_state_path(), new_component_state);
 							// console.log(context + ':reducer 4:state', state.toJS())
 
@@ -88781,6 +89435,7 @@ var ClientRuntime = function (_RuntimeBase) {
 
 		/**
    * Handle Redux store changes.
+   * 
    * @returns {nothing}
    */
 
@@ -88788,17 +89443,18 @@ var ClientRuntime = function (_RuntimeBase) {
 		key: 'handle_store_change',
 		value: function handle_store_change() {
 			// let previous_state = this.current_state
-			// this.current_state = this.state_store.get_state()
+			// this.current_state = this._state_store.get_state()
 
 			/// TODO
 
-			console.info(context + ':handle_store_change:global', this.state_store.get_state());
+			this.info('handle_store_change:global', this._state_store.get_state());
 		}
 
 		/**
    * Create a store change observer.
    * 
    * @param {Component} arg_component - component instance.
+   * 
    * @returns {function} - store unsubscribe function.
    */
 
@@ -88824,7 +89480,7 @@ var ClientRuntime = function (_RuntimeBase) {
 				// }
 			};
 
-			var unsubscribe = this.state_store.subscribe(handle_change);
+			var unsubscribe = this._state_store.subscribe(handle_change);
 
 			handle_change();
 

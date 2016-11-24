@@ -8,9 +8,8 @@ import Topology from './topology'
 
 // const context = 'devtools/topology/topology_physical_mw'
 
-const Render = devapt.Render
-const renderer = new Render()
-// const renderer = new Render('html_assets_1', 'html_assets_1', 'html_assets_1', undefined)
+const RenderingBuilder = devapt.RenderingBuilder
+const renderer = new RenderingBuilder(devapt.runtime)
 
 const topology = new Topology('topology_physical', { render:renderer })
 

@@ -34,11 +34,12 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 	 * 
 	 * @returns {nothing}
 	 */
-	constructor(arg_manager)
+	constructor(arg_runtime, arg_manager)
 	{
-		super(arg_manager, plugin_name, '1.0.0')
+		super(arg_runtime, arg_manager, plugin_name, '1.0.0')
 
 		const assets_dir = '../../public/assets'
+		const devapt_dir = '../../node_modules/devapt/public/'
 
 		this.add_public_asset('css', '/' + plugin_name + '/normalize.css',    path.join(__dirname, assets_dir, 'css/normalize.css') )
 		
@@ -47,6 +48,7 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		this.add_public_asset('js', '/' + plugin_name + '/browser.min.js',    path.join(__dirname, assets_dir, 'js/vendor/browser.min.js') )
 		this.add_public_asset('js', '/' + plugin_name + '/app.js',            path.join(__dirname, assets_dir, 'js/app.js') )
 		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.js', path.join(__dirname, assets_dir, 'js/devapt-browser.js') )
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-bootstrap.js', path.join(__dirname, devapt_dir, 'js/devapt-bootstrap.js') )
 	}
 	
 	

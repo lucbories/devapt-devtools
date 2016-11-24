@@ -35,205 +35,150 @@
 					"settings":{},
 					"state":{
 						"items":["metrics_http_details_toolsbar", "metrics_http_details_table"]
-					}
-				},
-				
-				"metrics_http_details_toolsbar":{
-					"type":"Container",
-					"settings":{},
-					"state":{},
+					},
 					"children":{
-						"metrics_http_details_clear":{
-							"type":"Button",
-							"html_before":"<div class='row'><div class='small-2 columns'>",
-							"state": {
-								"label":"Clear",
-								"bindings": {
-									"dom":[
-										{
-											"dom_selector":"#metrics_http_details_clear",
-											"dom_event":"click",
-											"transform":null,
-											"target_view":"metrics_http_details_table",
-											"target_method":"do_action_clear_items"
+						"metrics_http_details_toolsbar":{
+							"type":"hbox",
+							"settings":{
+								"sizes":[
+									"small-1",
+									"small-2",
+									"small-5"
+								]
+							},
+							"state":{
+								"items":["metrics_http_details_clear", "", "metrics_http_details_max"]
+							},
+							"children":{
+								"metrics_http_details_clear":{
+									"type":"button",
+									"settings":{
+										"html_before":"<div class='row'><div class='small-2 columns'>"
+									},
+									"state": {
+										"label":"Clear",
+										"bindings": {
+											"dom":[
+												{
+													"dom_selector":"#metrics_http_details_clear",
+													"dom_event":"click",
+													"transform":null,
+													"target_view":"metrics_http_details_table",
+													"target_method":"do_action_clear_items"
+												}
+											]
 										}
-									]
+									}
+								},
+								"metrics_http_details_max":{
+									"type":"input-field",
+									"settings":{
+										"html_before":"</div><div class='small-2 columns'>",
+										"html_between":"</div><div class='small-3 columns'>",
+										"html_after":"</div><div class='small-5 columns'></div></div>",
+										"class":"text-right middle",
+										"format":"number"
+									},
+									"state": {
+										"label":"Max rows",
+										"placeholder":"enter an integer",
+										"value":100,
+										"bindings": {
+											"dom":[
+												{
+													"dom_selector":"#metrics_http_details_max",
+													"dom_event":"change",
+													"transform":{
+														"result_type":"object",
+														"fields":[
+															{
+																"name":"resize_max",
+																"path":["target", "value"]
+															}
+														]
+													},
+													"target_view":"metrics_http_details_table",
+													"target_method":"do_action_set_resize_max"
+												}
+											]
+										}
+									}
 								}
 							}
 						},
 						
-						"metrics_http_details_max":{
-							"type":"InputField",
-							"html_before":"</div><div class='small-2 columns'>",
-							"html_between":"</div><div class='small-3 columns'>",
-							"html_after":"</div><div class='small-5 columns'></div></div>",
-							"css_class_label":"text-right middle",
-							"format":"number",
-							"state": {
-								"label":"Max rows",
-								"placeholder":"enter an integer",
-								"value":100,
+						"metrics_http_details_table":{
+							"type":"Table",
+							"state":{
+								"headers": [["protocole", "pid", "url", "server", "method", "status", "latency"]],
+								"items": [],
+								"label":"Metrics table",
+								"show_label":false,
+								"show_headers":true,
+								"has_scroll":true,
+								
+								"strategy":{
+									"update_mode":"prepend",
+									"resize_mode":"remove_last",
+									"resize_max":100
+								},
+								
 								"bindings": {
-									"dom":[
+									"services":[
 										{
-											"dom_selector":"#metrics_http_details_max",
-											"dom_event":"change",
+											"service":"metrics_http",
+											"method":"post",
 											"transform":{
-												"result_type":"object",
+												"result_type":"array",
+												"flat_field_name":"metrics",
+												"flat_fields":[
+													{
+														"name":"pid",
+														"path":"pid"
+													},
+													{
+														"name":"url",
+														"path":["service", "url"]
+													},
+													{
+														"name":"server_name",
+														"path":["server", "server_name"]
+													},
+													{
+														"name":"method",
+														"path":["service", "method"]
+													},
+													{
+														"name":"status",
+														"path":["response", "status"]
+													},
+													{
+														"name":"latency",
+														"path":["latency"]
+													}
+												],
 												"fields":[
 													{
-														"name":"resize_max",
-														"path":["target", "value"]
+														"name":"metric",
+														"path":["metric"]
 													}
 												]
 											},
 											"target_view":"metrics_http_details_table",
-											"target_method":"do_action_set_resize_max"
+											"target_method":"do_action_prepend"
+										}
+									],
+									"dom":[
+										{
+											"dom_selector":"#metrics_http_details thead th:first",
+											"dom_event":"click",
+											"transform":null,
+											"target_dom_selector":"#metrics_http_details thead th:last",
+											"target_method":"toggle"
 										}
 									]
 								}
 							}
-						}
-					}
-				},
-				
-				"metrics_http_details_table":{
-					"type":"Table",
-					"state":{
-						"headers": [["protocole", "pid", "url", "server", "method", "status", "latency"]],
-						"items": [],
-						"label":"Metrics table",
-						"show_label":false,
-						"show_headers":true,
-						"has_scroll":true,
-						
-						"strategy":{
-							"update_mode":"prepend",
-							"resize_mode":"remove_last",
-							"resize_max":100
-						},
-						
-						"bindings": {
-							"services":[
-								{
-									"service":"metrics_http",
-									"method":"post",
-									"transform":{
-										"result_type":"array",
-										"flat_field_name":"metrics",
-										"flat_fields":[
-											{
-												"name":"pid",
-												"path":"pid"
-											},
-											{
-												"name":"url",
-												"path":["service", "url"]
-											},
-											{
-												"name":"server_name",
-												"path":["server", "server_name"]
-											},
-											{
-												"name":"method",
-												"path":["service", "method"]
-											},
-											{
-												"name":"status",
-												"path":["response", "status"]
-											},
-											{
-												"name":"latency",
-												"path":["latency"]
-											}
-										],
-										"fields":[
-											{
-												"name":"metric",
-												"path":["metric"]
-											}
-										]
-									},
-									"target_view":"metrics_http_details_table",
-									"target_method":"do_action_prepend"
-								}
-							],
-							"dom":[
-								{
-									"dom_selector":"#metrics_http_details thead th:first",
-									"dom_event":"click",
-									"transform":null,
-									"target_dom_selector":"#metrics_http_details thead th:last",
-									"target_method":"toggle"
-								}
-							]
-						}
-					}
-				},
-				
-				
-				"metrics_http_dashboard_sparkline_requests_1":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"value {value}, {index} seconds ago",
-							"index_multiple":6
-						}
-					}
-				},
-				
-				"metrics_http_dashboard_sparkline_requests_2":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"value {value}, {index} seconds ago",
-							"index_multiple":36
-						}
-					}
-				},
-				
-				"metrics_http_dashboard_sparkline_requests_3":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"value {value}, {index} minutes ago",
-							"index_multiple":14.4
-						}
-					}
-				},
-				
-				"metrics_http_dashboard_sparkline_latency_mean_1":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"mean latency {value}, {index} seconds ago",
-							"index_multiple":6
-						}
-					}
-				},
-				
-				"metrics_http_dashboard_sparkline_latency_mean_2":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"mean latency {value}, {index} seconds ago",
-							"index_multiple":36
-						}
-					}
-				},
-				
-				"metrics_http_dashboard_sparkline_latency_mean_3":{
-					"type":"Sparklines",
-					"state":{
-						"items":[],
-						"options":{
-							"tooltip":"mean latency {value}, {index} minutes ago",
-							"index_multiple":14.4
 						}
 					}
 				},
@@ -249,45 +194,64 @@
 									"value":"Global"
 								},
 								{
-									"key":"0_1",
-									"value":"Counter"
-								},
-								{
-									"key":"id_counter",
-									"value":"N/A"
-								},
-								{
-									"key":"id_counter_sparkline_1",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_requests_1"
+									"type":"label",
+									"settings":{
+										"id":"0_1"
+									},
+									"state":{
+										"label":"Counter"
 									}
 								},
 								{
-									"key":"id_counter_sparkline_2",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_requests_2"
+									"type":"label",
+									"settings":{
+										"id":"id_counter"
+									},
+									"state":{
+										"label":"N/A"
 									}
 								},
 								{
-									"key":"id_counter_sparkline_3",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_requests_3"
+									"type":"container",
+									"settings":{
+										"id":"id_counter_sparkline_1"
+									},
+									"state":{
+										"items":["metrics_http_dashboard_sparkline_requests_1"]
+									}
+								},
+								{
+									"type":"container",
+									"settings":{
+										"id":"id_counter_sparkline_2"
+									},
+									"state":{
+										"items":["metrics_http_dashboard_sparkline_requests_2"]
+									}
+								},
+								{
+									"type":"container",
+									"settings":{
+										"id":"id_counter_sparkline_3"
+									},
+									"state":{
+										"items":["metrics_http_dashboard_sparkline_requests_3"]
 									}
 								}
 							],
-							{
-								"1_0":"Latency",
-								"1_1":"",
-								"1_2":"",
-								"1_3":"",
-								"1_4":"",
-								"1_5":""
-							},
-							{
-								"2_0":"",
-								"2_1":"Min latency",
-								"latency_min":"N/A"
-							},
+							[
+								{ "key":"1_0", "value":"Latency"},
+								{ "key":"1_1", "value":""},
+								{ "key":"1_2", "value":""},
+								{ "key":"1_3", "value":""},
+								{ "key":"1_4", "value":""},
+								{ "key":"1_5", "value":""}
+							],
+							[
+								{ "key":"2_0", "value":""},
+								{ "key":"2_1", "value":"Min latency"},
+								{ "key":"latency_min", "value":"N/A"}
+							],
 							[
 								{
 									"key":"3_0",
@@ -303,94 +267,85 @@
 								},
 								{
 									"key":"latency_mean_sparkline_1",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_latency_mean_1"
-									}
+									"value":"metrics_http_dashboard_sparkline_latency_mean_1"
 								},
 								{
 									"key":"latency_mean_sparkline_2",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_latency_mean_2"
-									}
+									"value":"metrics_http_dashboard_sparkline_latency_mean_2"
 								},
 								{
 									"key":"latency_mean_sparkline_3",
-									"value":{
-										"view":"metrics_http_dashboard_sparkline_latency_mean_3"
-									}
+									"value":"metrics_http_dashboard_sparkline_latency_mean_3"
 								}
 							],
-							{
-								"4_0":"",
-								"4_1":"Max latency",
-								"latency_max":"N/A"
-							},
-							{
-								"5_0":"Versions",
-								"5_1":"",
-								"versions":"",
-								"5_3":"",
-								"5_4":"",
-								"5_5":""
-							},
-							{
-								"6_0":"Services",
-								"6_1":"",
-								"services":"",
-								"6_3":"",
-								"6_4":"",
-								"6_5":""
-							},
-							{
-								"7_0":"Methods",
-								"7_1":"",
-								"methods":"",
-								"7_3":"",
-								"7_4":"",
-								"7_5":""
-							},
-							{
-								"8_0":"HTTP versions",
-								"8_1":"",
-								"http_versions":"",
-								"8_3":"",
-								"8_4":"",
-								"8_5":""
-							},
-							{
-								"9_0":"Nodes",
-								"9_1":"",
-								"nodes":"",
-								"9_3":"",
-								"9_4":"",
-								"9_5":""
-							},
-							{
-								"10_0":"Servers",
-								"10_1":"",
-								"servers":"",
-								"10_3":"",
-								"10_4":"",
-								"10_5":""
-							},
-							{
-								"11_0":"Routes",
-								"11_1":"",
-								"routes":"",
-								"11_3":"",
-								"11_4":"",
-								"11_5":""
-							},
 							[
-								"URLs",
-								"",
-								{
-									"key":"urls",
-									"value":""
-								},
-								"",
-								"",
-								""
+								{ "key":"4_0", "value":""},
+								{ "key":"4_1", "value":"Max latency"},
+								{ "key":"latency_max", "value":"N/A"}
+							],
+							[
+								{  "key":"5_0", "value":"Versions" },
+								{  "key":"5_1", "value":"" },
+								{  "key":"versions", "value":"" },
+								{  "key":"5_3", "value":"" },
+								{  "key":"5_4", "value":"" },
+								{  "key":"5_5", "value":"" }
+							],
+							[
+								{  "key":"6_0", "value":"Services" },
+								{  "key":"6_1", "value":"" },
+								{  "key":"services", "value":"" },
+								{  "key":"6_3", "value":"" },
+								{  "key":"6_4", "value":"" },
+								{  "key":"6_5", "value":"" }
+							],
+							[
+								{  "key":"7_0", "value":"Methods" },
+								{  "key":"7_1", "value":"" },
+								{  "key":"methods", "value":"" },
+								{  "key":"7_3", "value":"" },
+								{  "key":"7_4", "value":"" },
+								{  "key":"7_5", "value":"" }
+							],
+							[
+								{  "key":"8_0", "value":"HTTP versions" },
+								{  "key":"8_1", "value":"" },
+								{  "key":"http_versions", "value":"" },
+								{  "key":"8_3", "value":"" },
+								{  "key":"8_4", "value":"" },
+								{  "key":"8_5", "value":"" }
+							],
+							[
+								{  "key":"9_0", "value":"Nodes" },
+								{  "key":"9_1", "value":"" },
+								{  "key":"nodes", "value":"" },
+								{  "key":"9_3", "value":"" },
+								{  "key":"9_4", "value":"" },
+								{  "key":"9_5", "value":"" }
+							],
+							[
+								{  "key":"10_0", "value":"Servers" },
+								{  "key":"10_1", "value":"" },
+								{  "key":"servers", "value":"" },
+								{  "key":"10_3", "value":"" },
+								{  "key":"10_4", "value":"" },
+								{  "key":"10_5", "value":"" }
+							],
+							[
+								{  "key":"11_0", "value":"Routes" },
+								{  "key":"11_1", "value":"" },
+								{  "key":"routes", "value":"" },
+								{  "key":"11_3", "value":"" },
+								{  "key":"11_4", "value":"" },
+								{  "key":"11_5", "value":"" }
+							],
+							[
+								{  "key":"12_0", "value":"URLs" },
+								{  "key":"12_1", "value":"" },
+								{  "key":"urls", "value":"" },
+								{  "key":"12_3", "value":"" },
+								{  "key":"12_4", "value":"" },
+								{  "key":"12_5", "value":"" }
 							]
 						],
 						"label":"Metrics Http dashboard",
@@ -603,6 +558,74 @@
 									}
 								}
 							]
+						}
+					},
+					"settings":{},
+					"children":{
+						"metrics_http_dashboard_sparkline_requests_1":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"value {value}, {index} seconds ago",
+									"index_multiple":6
+								}
+							}
+						},
+						
+						"metrics_http_dashboard_sparkline_requests_2":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"value {value}, {index} seconds ago",
+									"index_multiple":36
+								}
+							}
+						},
+						
+						"metrics_http_dashboard_sparkline_requests_3":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"value {value}, {index} minutes ago",
+									"index_multiple":14.4
+								}
+							}
+						},
+						
+						"metrics_http_dashboard_sparkline_latency_mean_1":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"mean latency {value}, {index} seconds ago",
+									"index_multiple":6
+								}
+							}
+						},
+						
+						"metrics_http_dashboard_sparkline_latency_mean_2":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"mean latency {value}, {index} seconds ago",
+									"index_multiple":36
+								}
+							}
+						},
+						
+						"metrics_http_dashboard_sparkline_latency_mean_3":{
+							"type":"Sparklines",
+							"state":{
+								"items":[],
+								"options":{
+									"tooltip":"mean latency {value}, {index} minutes ago",
+									"index_multiple":14.4
+								}
+							}
 						}
 					}
 				},

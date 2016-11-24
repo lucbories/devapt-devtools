@@ -8,8 +8,8 @@ import Topology from './topology'
 
 // const context = 'devtools/topology/topology_logical_mw'
 
-const Render = devapt.Render
-const renderer = new Render()
+const RenderingBuilder = devapt.RenderingBuilder
+const renderer = new RenderingBuilder(devapt.runtime)
 
 const topology = new Topology('topology_logical', { render:renderer })
 
