@@ -3,8 +3,8 @@
 
 		"topology_registry_view":{
 			"type":"Container",
-			"children":["topology_registry_view_clear", "topology_registry_tabs"],
 			"state":{
+				"items":["topology_registry_view_clear", "topology_registry_tabs"],
 				"label":"Topology registry view."
 			}
 		},

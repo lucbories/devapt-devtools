@@ -15,18 +15,21 @@
 		"display_logs_monitor":{
 			"type":"display",
 			"middleware":"devtools_panel",
+			"view":"logs_view",
 			"url":"/monitor/logs",
 			"label":"Logs"
 		},
 		"display_messages_monitor":{
 			"type":"display",
 			"middleware":"devtools_panel",
+			"view":"messages_view",
 			"url":"/monitor/messages",
 			"label":"Messages"
 		},
 		"display_metrics_monitor":{
 			"type":"display",
 			"middleware":"devtools_panel",
+			"view":"metrics_tabs",
 			"url":"/monitor/metrics",
 			"label":"Metrics"
 		},

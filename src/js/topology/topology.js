@@ -31,12 +31,4 @@ export default class Topology extends FlowGraph
 		this.$type = 'Topology'
 		this.renderer = render
 	}
-	
-	
-	// MUTABLE STATE
-	get_initial_state()
-	{
-		const state = devapt.runtime.get_registry().get_view(this.get_name()).state
-		return state
-	}
 }

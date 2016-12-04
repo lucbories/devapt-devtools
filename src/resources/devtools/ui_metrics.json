@@ -189,55 +189,20 @@
 						"headers": [["category", "measure", "value", "5 minutes", "1 hour", "1 day"]],
 						"items": [
 							[
-								{
-									"key":"0_0",
-									"value":"Global"
-								},
+								{ "key":"0_0", "value":"Global" },
+								{ "key":"0_1", "value":"Counter"},
 								{
 									"type":"label",
 									"settings":{
-										"id":"0_1"
-									},
-									"state":{
-										"label":"Counter"
-									}
-								},
-								{
-									"type":"label",
-									"settings":{
-										"id":"id_counter"
+										"id":"metrics_http_dashboard_id_counter"
 									},
 									"state":{
 										"label":"N/A"
 									}
 								},
-								{
-									"type":"container",
-									"settings":{
-										"id":"id_counter_sparkline_1"
-									},
-									"state":{
-										"items":["metrics_http_dashboard_sparkline_requests_1"]
-									}
-								},
-								{
-									"type":"container",
-									"settings":{
-										"id":"id_counter_sparkline_2"
-									},
-									"state":{
-										"items":["metrics_http_dashboard_sparkline_requests_2"]
-									}
-								},
-								{
-									"type":"container",
-									"settings":{
-										"id":"id_counter_sparkline_3"
-									},
-									"state":{
-										"items":["metrics_http_dashboard_sparkline_requests_3"]
-									}
-								}
+								{ "key":"id_counter_sparkline_1", "view":"metrics_http_dashboard_sparkline_requests_1" },
+								{ "key":"id_counter_sparkline_2", "view":"metrics_http_dashboard_sparkline_requests_2" },
+								{ "key":"id_counter_sparkline_3", "view":"metrics_http_dashboard_sparkline_requests_3" }
 							],
 							[
 								{ "key":"1_0", "value":"Latency"},
@@ -253,30 +218,12 @@
 								{ "key":"latency_min", "value":"N/A"}
 							],
 							[
-								{
-									"key":"3_0",
-									"value":""
-								},
-								{
-									"key":"3_1",
-									"value":"Mean latency"
-								},
-								{
-									"key":"latency_mean",
-									"value":"N/A"
-								},
-								{
-									"key":"latency_mean_sparkline_1",
-									"value":"metrics_http_dashboard_sparkline_latency_mean_1"
-								},
-								{
-									"key":"latency_mean_sparkline_2",
-									"value":"metrics_http_dashboard_sparkline_latency_mean_2"
-								},
-								{
-									"key":"latency_mean_sparkline_3",
-									"value":"metrics_http_dashboard_sparkline_latency_mean_3"
-								}
+								{ "key":"3_0", "value":"" },
+								{ "key":"3_1", "value":"Mean latency" },
+								{ "key":"latency_mean", "value":"N/A" },
+								{ "key":"latency_mean_sparkline_1", "view":"metrics_http_dashboard_sparkline_latency_mean_1" },
+								{ "key":"latency_mean_sparkline_2", "view":"metrics_http_dashboard_sparkline_latency_mean_2" },
+								{ "key":"latency_mean_sparkline_3", "view":"metrics_http_dashboard_sparkline_latency_mean_3" }
 							],
 							[
 								{ "key":"4_0", "value":""},
@@ -358,6 +305,7 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"id_counter",
+									"state_path":["metrics_http_get_id_counter"],
 									"target_dom_selector":"#metrics_http_dashboard_id_counter",
 									"target_method":"text"
 								},
@@ -365,6 +313,7 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"requests_5m",
+									"state_path":["metrics_http_get_requests_5m"],
 									"target_views":["metrics_http_dashboard_sparkline_requests_1"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
@@ -652,9 +601,8 @@
 				
 				
 				"metrics_bus_dashboard":{
-					"type":"Table",
+					"type":"RecordsTable",
 					"state":{
-						"browser_type":"RecordsTable",
 						"headers": [["Bus", "Measure", "Value"]],
 						"items": [],
 						"label":"Metrics Bus table",
@@ -752,9 +700,8 @@
 				
 				
 				"metrics_host_dashboard":{
-					"type":"Table",
+					"type":"RecordsTable",
 					"state":{
-						"browser_type":"RecordsTable",
 						"headers": [["Hostname", "Measure", "Value"]],
 						"items": [],
 						"label":"Metrics Host table",
@@ -880,9 +827,8 @@
 				
 				
 				"metrics_nodejs_dashboard":{
-					"type":"Table",
+					"type":"RecordsTable",
 					"state":{
-						"browser_type":"RecordsTable",
 						"headers": [["NodeJS Runtime", "Measure", "Value"]],
 						"items": [],
 						"label":"Metrics NodeJs table",

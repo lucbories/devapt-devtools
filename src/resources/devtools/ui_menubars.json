@@ -1,7 +1,7 @@
 {
 	"menubars":{
 		"default_menubar":{
-			"class_name":"Menubar",
+			"type":"Menubar",
 			
 			"state":{
 				"label":"Devtools",

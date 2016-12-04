@@ -59,13 +59,6 @@ export default class MetricsTree extends Container
 	}
 	
 	
-	// MUTABLE STATE
-	get_initial_state()
-	{
-		return {}
-	}
-	
-	
 	// RENDERING
 	render()
 	{

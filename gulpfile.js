@@ -3,7 +3,6 @@
 
 var del = require('del')
 var gulp = require('gulp')
-var sequence = require('run-sequence')
 var sourcemaps = require('gulp-sourcemaps')
 var babel = require('gulp-babel')
 var changed = require('gulp-changed')
@@ -11,7 +10,7 @@ var livereload = require('gulp-livereload')
 
 
 var source = require('vinyl-source-stream')
-var buffer = require('vinyl-buffer')
+var Buffer = require('vinyl-buffer')
 var browserify = require('browserify')
 
 
@@ -52,7 +51,7 @@ const BABEL_CONFIG = {
 // **************************************************************************************************
 // DEVAPT-DEVTOOLS - RESTART
 // **************************************************************************************************
-
+/*
 var cp = require('child_process')
 
 var child = null
@@ -68,20 +67,22 @@ function killChild()
 }
 
 gulp.task('stop',
-	(/*callback*/) => {
+	(done) => {
 		killChild()
+		return done()
 	}
 )
 
 gulp.task('restart',
-	(/*callback*/) => {
+	(done) => {
 		killChild()
 		child = cp.fork('./dist/js/start_master.js')
 		
 		console.log('restarted with pid %i', child.pid)
+		return done()
 	}
 )
-
+*/
 
 
 // **************************************************************************************************
@@ -93,30 +94,28 @@ gulp.task('restart',
 		build only changed files
 */
 gulp.task('build_all_js',
-	(/*callback*/) => {
-		// try
-		// {
+	() => {
 		return gulp.src(SRC_JS_ALL)
 			.pipe(changed(DST_ALL_JS))
 			.pipe(sourcemaps.init())
 			.pipe( babel(BABEL_CONFIG) )
 			.pipe(sourcemaps.write('.'))
 			.pipe(gulp.dest(DST_ALL_JS))
-		// }
-		// catch(e)
-		// {
-		// 	console.log('an error occures', Object.keys(e) )
-		// }
 	}
 )
 
 
 gulp.task('watch_js',
-	(/*callback*/) => {
-		var watcher_all_js = gulp.watch(SRC_JS_ALL, sequence('build_all_js', 'restart') )
-		watcher_all_js.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_js...')
+	() => {
+		gulp.watch(SRC_JS_ALL, gulp.series('build_all_js'/*, 'restart'*/) )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_js...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_js...')
 			}
 		)
 	}
@@ -178,14 +177,19 @@ gulp.task('build_all_include',
 	}
 )
 
-gulp.task('build_resources', ['build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include'])
+gulp.task('build_resources', gulp.series('build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include') )
 
 gulp.task('watch_resources',
-	(/*callback*/) => {
-		var watcher_all_js = gulp.watch(SRC_RESOURCES_ALL, sequence('build_resources', 'restart') )
-		watcher_all_js.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_resources...')
+	() => {
+		gulp.watch(SRC_RESOURCES_ALL, gulp.series('build_resources', 'restart') )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_resources...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_resources...')
 			}
 		)
 	}
@@ -218,7 +222,7 @@ gulp.task('build_public_js_transpile',
 
 
 gulp.task('build_public_js_bundle',
-	(/*callback*/) => {
+	() => {
 		return browserify( { entries: DST_PUBLIC_JS_TMP + '/app.js' } )
 			.ignore('sequelize')
 			.ignore('restify')
@@ -229,25 +233,26 @@ gulp.task('build_public_js_bundle',
 			.external('ui')
 			.bundle()
 			.pipe( source(DST_PUBLIC_JS_BUNDLE) )
-			.pipe( buffer() )
+			.pipe( new Buffer() )
 			.pipe(sourcemaps.write('.'))
 			.pipe( gulp.dest(DST_PUBLIC_JS) )
 			.pipe( livereload() )
 	}
 )
 
-gulp.task('build_public_js',
-	(callback) => {
-		sequence('build_public_js_transpile', 'build_public_js_bundle', callback)
-	}
-)
+gulp.task('build_public_js', gulp.series('build_public_js_transpile', 'build_public_js_bundle') )
 
 gulp.task('watch_public_js',
-	(/*callback*/) => {
-		var watcher_public_js = gulp.watch(SRC_PUBLIC_JS, sequence('build_public_js', 'restart') )
-		watcher_public_js.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_js...')	
+	() => {
+		gulp.watch(SRC_PUBLIC_JS, gulp.series('build_public_js', 'restart') )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_public_js...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_public_js...')
 			}
 		)
 	}
@@ -260,7 +265,7 @@ gulp.task('watch_public_js',
 // **************************************************************************************************
 
 gulp.task('build_public_css_bundle',
-	(/*callback*/) => {
+	() => {
 		return gulp.src(SRC_PUBLIC_CSS)
 			.pipe(changed(DST_PUBLIC_CSS))
 			.pipe(gulp.dest(DST_PUBLIC_CSS))
@@ -268,18 +273,19 @@ gulp.task('build_public_css_bundle',
 	}
 )
 
-gulp.task('build_public_css',
-	(callback) => {
-		sequence('build_public_css_bundle', callback)
-	}
-)
+gulp.task('build_public_css', gulp.series('build_public_css_bundle', (done)=>done() ) )
 
 gulp.task('watch_public_css',
-	(/*callback*/) => {
-		var watcher_public_js = gulp.watch(SRC_PUBLIC_CSS, sequence('build_public_css', 'restart') )
-		watcher_public_js.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_css...')	
+	() => {
+		gulp.watch(SRC_PUBLIC_CSS, gulp.series('build_public_css', 'restart') )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_public_css...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_public_css...')
 			}
 		)
 	}
@@ -292,7 +298,7 @@ gulp.task('watch_public_css',
 // **************************************************************************************************
 
 gulp.task('copy_devapt_public',
-	(/*callback*/) => {
+	() => {
 		return gulp.src(SRC_DEVAPT_BROWSER)
 			.pipe(changed(DST_DEVAPT_BROWSER))
 			.pipe(gulp.dest(DST_DEVAPT_BROWSER))
@@ -301,11 +307,16 @@ gulp.task('copy_devapt_public',
 )
 
 gulp.task('watch_public_devapt',
-	(/*callback*/) => {
-		var watcher_devapt = gulp.watch(SRC_DEVAPT_BROWSER, ['copy_devapt_public'])
-		watcher_devapt.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_devapt...')
+	() => {
+		gulp.watch(SRC_DEVAPT_BROWSER, gulp.series('copy_devapt_public') )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_public_devapt...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_public_devapt...')
 			}
 		)
 	}
@@ -314,58 +325,22 @@ gulp.task('watch_public_devapt',
 
 
 // **************************************************************************************************
-// DEVAPT-DEVTOOLS - PUBLIC - JSPLUMB
-// **************************************************************************************************
-
-// gulp.task('build_jsplumb_js',
-// 	() => {
-// 		return gulp.src(SRC_JSPLUMB + 'js/*.js')
-// 			.pipe(changed(DST_PUBLIC + '/assets/js/vendor/jsplumb/js'))
-// 			.pipe(gulp.dest(DST_PUBLIC + '/assets/js/vendor/jsplumb/js'))
-// 	}
-// )
-// gulp.task('build_jsplumb_css',
-// 	() => {
-// 		return gulp.src(SRC_JSPLUMB + 'css/*.css')
-// 			.pipe(changed(DST_PUBLIC + '/assets/js/vendor/jsplumb/css'))
-// 			.pipe(gulp.dest(DST_PUBLIC + '/assets/js/vendor/jsplumb/css'))
-// 	}
-// )
-// gulp.task('build_jsplumb_img',
-// 	() => {
-// 		return gulp.src(SRC_JSPLUMB + 'img/*')
-// 			.pipe(changed(DST_PUBLIC + '/assets/js/vendor/jsplumb/img'))
-// 			.pipe(gulp.dest(DST_PUBLIC + '/assets/js/vendor/jsplumb/img'))
-// 	}
-// )
-// gulp.task('copy_jsplumb_public', ['build_jsplumb_js', 'build_jsplumb_css', 'build_jsplumb_img'])
-
-
-// gulp.task('watch_public_jsplumb',
-// 	(/*callback*/) => {
-// 		var watcher_devapt = gulp.watch(SRC_JSPLUMB_ALL, ['copy_jsplumb_public'])
-// 		watcher_devapt.on('change',
-// 			(event) => {
-// 				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public_jsplumb...')
-// 			}
-// 		)
-// 	}
-// )
-
-
-
-// **************************************************************************************************
 // DEVAPT-DEVTOOLS - PUBLIC
 // **************************************************************************************************
 
-gulp.task('public', ['copy_devapt_public', 'build_public_js', 'build_public_css'])
+gulp.task('public', gulp.series('copy_devapt_public', 'build_public_js', 'build_public_css') )
 
 gulp.task('watch_public',
 	() => {
-		var watcher = gulp.watch(SRC_PUBLIC_ALL, sequence('build_public_js', 'restart') )
-		watcher.on('change',
-			(event) => {
-				console.log('File ' + event.path + ' was ' + event.type + ', running tasks watch_public...')	
+		gulp.watch(SRC_PUBLIC_ALL, gulp.series('build_public_js', 'restart') )
+		.on('change',
+			(path, stats) => {
+				console.log('File ' + path + ' was changed, running tasks watch_public...')
+			}
+		)
+		.on('unlink',
+			(path, stats) => {
+				console.log('File ' + path + ' was deleted, running tasks watch_public...')
 			}
 		)
 	}
@@ -381,8 +356,8 @@ gulp.task('watch_public',
 	LIVE RELOAD SERVER
 */
 gulp.task('livereload',
-	(/*callback*/) => {
-		livereload.listen()
+	(done) => {
+		return livereload.listen() || done()
 	}
 )
 
@@ -392,14 +367,7 @@ gulp.task('clean',
 	}
 )
 
-// gulp.task('build_bundles', ['build_bundle_browser', 'build_bundle_common', 'build_bundle_server']);
+var watch_tasks = ['default', 'watch_js', 'watch_resources', 'watch_public_js', 'watch_public_devapt'/*, 'livereload'*/]
 
-// gulp.task('release', ['build_all_files', 'build_all_json']);
-
-var watch_tasks = ['watch_js', 'watch_resources', 'watch_public_js', 'watch_public_devapt', 'livereload']
-gulp.task('default', ['public', 'build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include'])
-// gulp.task('watch', ['default', 'watch_js', 'watch_resources', 'watch_public_js', 'watch_public_devapt', 'livereload'])
-
-
-gulp.task('watch', (/*cb*/) => sequence('default', watch_tasks))
-// gulp.task('watch', (/*cb*/) => sequence('default', 'restart', watch_tasks))
+gulp.task('default', gulp.series('public', 'build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include') )
+gulp.task('watch', gulp.series(...watch_tasks) )
