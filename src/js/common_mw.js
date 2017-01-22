@@ -25,16 +25,16 @@ export default function(arg_renderer, arg_main_view, arg_main_menubar, arg_title
 		const view_name = arg_main_view
 		const menubar_name = undefined
 		
-		const renderer_result = arg_renderer.render_page_content(title, view_name, menubar_name, credentials, req.devapt_assets_services)
+		const html = arg_renderer.render_html_page(title, view_name, menubar_name, credentials, req.devapt_assets_services)
 
 		// MANAGE ERROR
-		if (! T.isString(renderer_result) )
+		if (! T.isString(html) )
 		{
 			res.status(500)
 			res.send('a rendering error occures for view [' + view_name + ']')
 			return
 		}
 
-		res.send(renderer_result)
+		res.send(html)
 	}
 }

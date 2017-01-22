@@ -21,7 +21,7 @@
 		},
 		"display_messages_monitor":{
 			"type":"display",
-			"middleware":"devtools_panel",
+			"menubar":"default_menubar",
 			"view":"messages_view",
 			"url":"/monitor/messages",
 			"label":"Messages"

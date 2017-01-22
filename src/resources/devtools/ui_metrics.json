@@ -34,7 +34,7 @@
 					"type":"Container",
 					"settings":{},
 					"state":{
-						"items":["metrics_http_details_toolsbar", "metrics_http_details_table"]
+						"items":[{ "view":"metrics_http_details_toolsbar"}, {"view":"metrics_http_details_table"}]
 					},
 					"children":{
 						"metrics_http_details_toolsbar":{
@@ -58,12 +58,14 @@
 									"state": {
 										"label":"Clear",
 										"bindings": {
-											"dom":[
+											"emitter_dom":[
 												{
-													"dom_selector":"#metrics_http_details_clear",
+													"source_type":"dom",
+													"source_selector":"metrics_http_details_clear",
 													"dom_event":"click",
 													"transform":null,
-													"target_view":"metrics_http_details_table",
+													"target_type":"view",
+													"target_selector":"metrics_http_details_table",
 													"target_method":"do_action_clear_items"
 												}
 											]
@@ -84,9 +86,10 @@
 										"placeholder":"enter an integer",
 										"value":100,
 										"bindings": {
-											"dom":[
+											"emitter_dom":[
 												{
-													"dom_selector":"#metrics_http_details_max",
+													"source_type":"dom",
+													"source_selector":"metrics_http_details_max_input",
 													"dom_event":"change",
 													"transform":{
 														"result_type":"object",
@@ -97,7 +100,8 @@
 															}
 														]
 													},
-													"target_view":"metrics_http_details_table",
+													"target_type":"view",
+													"target_selector":"metrics_http_details_table",
 													"target_method":"do_action_set_resize_max"
 												}
 											]
@@ -164,17 +168,9 @@
 													}
 												]
 											},
-											"target_view":"metrics_http_details_table",
+											"target_type":"view",
+											"target_selector":"metrics_http_details_table",
 											"target_method":"do_action_prepend"
-										}
-									],
-									"dom":[
-										{
-											"dom_selector":"#metrics_http_details thead th:first",
-											"dom_event":"click",
-											"transform":null,
-											"target_dom_selector":"#metrics_http_details thead th:last",
-											"target_method":"toggle"
 										}
 									]
 								}
@@ -306,7 +302,8 @@
 									"method":"get",
 									"transform":"id_counter",
 									"state_path":["metrics_http_get_id_counter"],
-									"target_dom_selector":"#metrics_http_dashboard_id_counter",
+									"target_type":"jquery",
+									"target_selector":"#metrics_http_dashboard_id_counter",
 									"target_method":"text"
 								},
 								{
@@ -314,7 +311,8 @@
 									"method":"get",
 									"timeline":"requests_5m",
 									"state_path":["metrics_http_get_requests_5m"],
-									"target_views":["metrics_http_dashboard_sparkline_requests_1"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_requests_1"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -322,7 +320,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"requests_1h",
-									"target_views":["metrics_http_dashboard_sparkline_requests_2"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_requests_2"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -330,7 +329,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"requests_1d",
-									"target_views":["metrics_http_dashboard_sparkline_requests_3"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_requests_3"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -338,14 +338,16 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"latency_min",
-									"target_dom_selector":"#metrics_http_dashboard_latency_min",
+									"target_type":"jquery",
+									"target_selector":"#metrics_http_dashboard_latency_min",
 									"target_method":"text"
 								},
 								{
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"latency_mean",
-									"target_dom_selector":"#metrics_http_dashboard_latency_mean",
+									"target_type":"jquery",
+									"target_selector":"#metrics_http_dashboard_latency_mean",
 									"target_method":"text",
 									"options": {
 										"format":{
@@ -358,7 +360,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"latency_mean_5m",
-									"target_views":["metrics_http_dashboard_sparkline_latency_mean_1"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_1"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -366,7 +369,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"latency_mean_1h",
-									"target_views":["metrics_http_dashboard_sparkline_latency_mean_2"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_2"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -374,7 +378,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"timeline":"latency_mean_1d",
-									"target_views":["metrics_http_dashboard_sparkline_latency_mean_3"],
+									"target_type":"view",
+									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_3"],
 									"target_method":"update_values",
 									"options": {"dispatch":false}
 								},
@@ -382,20 +387,22 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"latency_max",
-									"target_dom_selector":"#metrics_http_dashboard_latency_max",
+									"target_type":"jquery",
+									"target_selector":"#metrics_http_dashboard_latency_max",
 									"target_method":"text"
 								},
 								{
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"version_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"versions",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_5"
+												"collection_dom_id":"metrics_http_dashboard_body_row_5"
 											}
 										}
 									}
@@ -404,13 +411,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"service_name_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"services",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_6"
+												"collection_dom_id":"metrics_http_dashboard_body_row_6"
 											}
 										}
 									}
@@ -419,13 +427,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"service_method_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"methods",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_7"
+												"collection_dom_id":"metrics_http_dashboard_body_row_7"
 											}
 										}
 									}
@@ -434,13 +443,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"service_http_version_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"http_versions",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_8"
+												"collection_dom_id":"metrics_http_dashboard_body_row_8"
 											}
 										}
 									}
@@ -449,13 +459,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"server_node_name_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"node_names",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_9"
+												"collection_dom_id":"metrics_http_dashboard_body_row_9"
 											}
 										}
 									}
@@ -464,13 +475,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"server_server_name_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"server_names",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_10"
+												"collection_dom_id":"metrics_http_dashboard_body_row_10"
 											}
 										}
 									}
@@ -479,13 +491,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"service_route_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"routes",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_11"
+												"collection_dom_id":"metrics_http_dashboard_body_row_11"
 											}
 										}
 									}
@@ -494,13 +507,14 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":"service_url_counters",
-									"target_view":"this",
+									"target_type":"view",
+									"target_selector":"this",
 									"target_method":"update_section_collection",
 									"options":{
 										"method":{
 											"operands":{
 												"collection_name":"urls",
-												"collection_dom_id":"#metrics_http_dashboard_body_row_12",
+												"collection_dom_id":"metrics_http_dashboard_body_row_12",
 												"collection_dom_template":"<tr> <td></td> <td colspan='4'> {collection_key} </td> <td id='{collection_id}'>{collection_value}</td> </tr>"
 											}
 										}
@@ -588,7 +602,8 @@
 									"service":"metrics_http",
 									"method":"get",
 									"transform":null,
-									"target_view":"metrics_http_tree",
+									"target_type":"view",
+									"target_selector":"metrics_http_tree",
 									"target_method":"on_refresh",
 									"options":{
 										"method": { "interval_milliseconds":3000, "name":"metrics_http_tree" }
@@ -641,7 +656,8 @@
 										]
 									},
 									
-									"target_view":"metrics_bus_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_bus_dashboard",
 									"target_method":"update_records",
 									"options":{
 										"method": {
@@ -681,7 +697,8 @@
 										]
 									},
 									
-									"target_view":"metrics_bus_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_bus_dashboard",
 									"target_method":"update_values",
 									"options":{
 										"method": {
@@ -748,7 +765,8 @@
 										]
 									},
 									
-									"target_view":"metrics_host_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_host_dashboard",
 									"target_method":"update_records",
 									"options":{
 										"method": {
@@ -810,7 +828,8 @@
 										]
 									},
 									
-									"target_view":"metrics_host_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_host_dashboard",
 									"target_method":"update_values",
 									"options":{
 										"method": {
@@ -879,7 +898,8 @@
 										]
 									},
 									
-									"target_view":"metrics_nodejs_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_nodejs_dashboard",
 									"target_method":"update_records",
 									"options":{
 										"method": {
@@ -952,7 +972,8 @@
 										]
 									},
 									
-									"target_view":"metrics_nodejs_dashboard",
+									"target_type":"view",
+									"target_selector":"metrics_nodejs_dashboard",
 									"target_method":"update_values",
 									"options":{
 										"method": {

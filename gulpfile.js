@@ -181,7 +181,7 @@ gulp.task('build_resources', gulp.series('build_all_json', 'build_all_jade', 'bu
 
 gulp.task('watch_resources',
 	() => {
-		gulp.watch(SRC_RESOURCES_ALL, gulp.series('build_resources', 'restart') )
+		gulp.watch(SRC_RESOURCES_ALL, gulp.series('build_resources'/*, 'restart'*/) )
 		.on('change',
 			(path, stats) => {
 				console.log('File ' + path + ' was changed, running tasks watch_resources...')
@@ -244,7 +244,7 @@ gulp.task('build_public_js', gulp.series('build_public_js_transpile', 'build_pub
 
 gulp.task('watch_public_js',
 	() => {
-		gulp.watch(SRC_PUBLIC_JS, gulp.series('build_public_js', 'restart') )
+		gulp.watch(SRC_PUBLIC_JS, gulp.series('build_public_js'/*, 'restart'*/) )
 		.on('change',
 			(path, stats) => {
 				console.log('File ' + path + ' was changed, running tasks watch_public_js...')
@@ -277,7 +277,7 @@ gulp.task('build_public_css', gulp.series('build_public_css_bundle', (done)=>don
 
 gulp.task('watch_public_css',
 	() => {
-		gulp.watch(SRC_PUBLIC_CSS, gulp.series('build_public_css', 'restart') )
+		gulp.watch(SRC_PUBLIC_CSS, gulp.series('build_public_css'/*, 'restart'*/) )
 		.on('change',
 			(path, stats) => {
 				console.log('File ' + path + ' was changed, running tasks watch_public_css...')
@@ -332,7 +332,7 @@ gulp.task('public', gulp.series('copy_devapt_public', 'build_public_js', 'build_
 
 gulp.task('watch_public',
 	() => {
-		gulp.watch(SRC_PUBLIC_ALL, gulp.series('build_public_js', 'restart') )
+		gulp.watch(SRC_PUBLIC_ALL, gulp.series('build_public_js'/*, 'restart'*/) )
 		.on('change',
 			(path, stats) => {
 				console.log('File ' + path + ' was changed, running tasks watch_public...')
@@ -357,7 +357,18 @@ gulp.task('watch_public',
 */
 gulp.task('livereload',
 	(done) => {
-		return livereload.listen() || done()
+		livereload.listen()
+		return done()
+	}
+)
+
+/*
+	LIVE RELOAD
+*/
+gulp.task('reload',
+	() => {
+		return gulp.src(DST + '/**/*')
+			.pipe( livereload() )
 	}
 )
 
@@ -370,4 +381,4 @@ gulp.task('clean',
 var watch_tasks = ['default', 'watch_js', 'watch_resources', 'watch_public_js', 'watch_public_devapt'/*, 'livereload'*/]
 
 gulp.task('default', gulp.series('public', 'build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include') )
-gulp.task('watch', gulp.series(...watch_tasks) )
+gulp.task('watch', gulp.parallel(...watch_tasks) )

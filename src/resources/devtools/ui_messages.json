@@ -3,14 +3,14 @@
 		"messages_view":{
 			"type":"Container",
 			"state":{
-				"items":["messages_table_toolsbar", "messages_table"]
+				"items":[{"view":"messages_table_toolsbar"}, {"view":"messages_table"}]
 			},
 			"settings":{},
 			"children":{
 				"messages_table_toolsbar":{
 					"type":"Container",
 					"state":{
-						"items":["messages_table_clear", "messages_table_max"]
+						"items":[{"view":"messages_table_clear"}, {"view":"messages_table_max"}]
 					},
 					"settings":{},
 					"children":{
@@ -20,12 +20,14 @@
 							"state": {
 								"label":"Clear",
 								"bindings": {
-									"dom":[
+									"emitter_dom":[
 										{
-											"dom_selector":"#messages_table_clear",
+											"source_type":"dom",
+											"source_selector":"messages_table_clear",
 											"dom_event":"click",
 											"transform":null,
-											"target_view":"messages_table",
+											"target_type":"view",
+											"target_selector":"messages_table",
 											"target_method":"do_action_clear_items"
 										}
 									]
@@ -44,9 +46,10 @@
 								"placeholder":"enter an integer",
 								"value":100,
 								"bindings": {
-									"dom":[
+									"emitter_dom":[
 										{
-											"dom_selector":"#messages_table_max",
+											"source_type":"dom",
+											"source_selector":"messages_table_max_input",
 											"dom_event":"change",
 											"transform":{
 												"result_type":"object",
@@ -57,7 +60,8 @@
 													}
 												]
 											},
-											"target_view":"messages_table",
+											"target_type":"view",
+											"target_selector":"messages_table",
 											"target_method":"do_action_set_resize_max"
 										}
 									]
@@ -112,17 +116,9 @@
 											}
 										]
 									},
-									"target_view":"messages_table",
+									"target_type":"view",
+									"target_selector":"messages_table",
 									"target_method":"do_action_prepend"
-								}
-							],
-							"dom":[
-								{
-									"dom_selector":"#messages_view thead th:first",
-									"dom_event":"click",
-									"transform":null,
-									"target_dom_selector":"#messages_view thead th:last",
-									"target_method":"toggle"
 								}
 							]
 						}

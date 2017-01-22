@@ -16,12 +16,14 @@
 			"state": {
 				"label":"Refresh",
 				"bindings": {
-					"dom":[
+					"emitter_dom":[
 						{
-							"dom_selector":"#topology_registry_view_clear",
+							"source_type":"dom",
+							"source_selector":"topology_registry_view_clear",
 							"dom_event":"click",
 							"transform":null,
-							"target_view":"topology_registry_apps_tree",
+							"target_type":"view",
+							"target_selector":"topology_registry_apps_tree",
 							"target_method":"do_refresh"
 						}
 					]
@@ -96,7 +98,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -135,7 +138,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -174,7 +178,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -213,7 +218,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -252,7 +258,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -291,7 +298,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -330,7 +338,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -369,7 +378,8 @@
 									}
 								]
 							},
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {
@@ -400,7 +410,8 @@
 							"service":"topology",
 							"method":"get",
 							"transform":null,
-							"target_view":"this",
+							"target_type":"view",
+							"target_selector":"this",
 							"target_method":"update_tree",
 							"options":{
 								"method": {

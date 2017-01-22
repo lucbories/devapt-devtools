@@ -3,24 +3,45 @@
 		"logs_view":{
 			"type":"Container",
 			"state":{
-				"items":["logs_table_toolsbar", "logs_table"]
+				"items":[{"view":"logs_table_toolsbar"}, {"view":"logs_table"}]
 			},
 			"settings":{}
 		},
 		
 		"logs_table_toolsbar":{
-			"type":"Container",
+			"type":"HBox",
 			"state":{
 				"items":["logs_table_clear", "logs_table_max"]
 			},
-			"settings":{}
+			"settings":{
+				"sizes":["small-2 large-1", "small-2 large-1 end"],
+				"layout":{
+					"type":"row",
+					"columns_small_sizes":[2, 2, 8],
+					"columns_medium_sizes":[1, 1, 10],
+					"columns_large_sizes":[1, 1, 10]
+				}
+			}
 		},
 		
 		"logs_table":{
-			"type":"Table",
+			"type":"LogsTable",
+			"rendering":"Table",
 			"settings":{},
 			"state":{
-				"headers": [["ts", "level", "text"]],
+				"headers": [
+					["ts", "level", "source", "context", "instance", "group", "action", "text"],
+					[
+						{ "view":"logs_table_filter_ts" },
+						{ "view":"logs_table_filter_level"},
+						{ "view":"logs_table_filter_source"},
+						{ "view":"logs_table_filter_context"},
+						{ "view":"logs_table_filter_instance"},
+						{ "view":"logs_table_filter_group"},
+						{ "view":"logs_table_filter_action"},
+						{ "view":"logs_table_filter_text"}
+					]
+				],
 				"items": [],
 				"label":"Logs table",
 				"show_label":false,
@@ -30,7 +51,7 @@
 				"strategy":{
 					"update_mode":"prepend",
 					"resize_mode":"remove_last",
-					"resize_max":10
+					"resize_max":500
 				},
 				
 				"bindings": {
@@ -43,11 +64,53 @@
 								"flat_field_name":"logs",
 								"flat_fields":[
 									{
-										"name":"log",
-										"path":"log"
+										"name":"ts",
+										"path":"ts"
+									},
+									{
+										"name":"level",
+										"path":"level"
+									},
+									{
+										"name":"context",
+										"path":"context"
+									},
+									{
+										"name":"instance",
+										"path":"instance"
+									},
+									{
+										"name":"group",
+										"path":"group"
+									},
+									{
+										"name":"action",
+										"path":"action"
+									},
+									{
+										"name":"text",
+										"path":"text"
 									}
 								],
 								"fields":[
+									{
+										"name":"source",
+										"path":"source"
+									}
+								]
+							},
+							"target_type":"view",
+							"target_selector":"logs_table",
+							"target_method":"do_action_prepend"
+						}
+					],
+					"streams":[
+						{
+							"source_stream":"runtime_logs",
+							"transform":{
+								"result_type":"array",
+								"flat_field_name":"logs",
+								"flat_fields":[
 									{
 										"name":"ts",
 										"path":"ts"
@@ -55,62 +118,316 @@
 									{
 										"name":"level",
 										"path":"level"
+									},
+									{
+										"name":"source",
+										"path":"source"
+									},
+									{
+										"name":"context",
+										"path":"context"
+									},
+									{
+										"name":"instance",
+										"path":"instance"
+									},
+									{
+										"name":"group",
+										"path":"group"
+									},
+									{
+										"name":"action",
+										"path":"action"
+									},
+									{
+										"name":"text",
+										"path":"text"
 									}
 								]
 							},
-							"target_view":"logs_table",
+							"target_type":"view",
+							"target_selector":"logs_table",
 							"target_method":"do_action_prepend"
 						}
 					],
-					"dom":[
+					"emitter_jquery":[
 						{
-							"dom_selector":"#logs_view thead th:first",
+							"source_type":"jquery",
+							"source_selector":"#logs_view thead th:first",
 							"dom_event":"click",
 							"transform":null,
-							"target_dom_selector":"#logs_view thead th:last",
+							"target_type":"dom",
+							"target_selector":"#logs_view thead th:last",
 							"target_method":"toggle"
 						}
+					],
+					"emitter_dom":[
+						{
+							"source_type":"dom",
+							"source_selector":"th",
+							"dom_event":"click",
+							"transform":null,
+							"target_type":"view",
+							"target_selector":"this",
+							"target_method":"do_click_th"
+						}
 					]
+				}
+			},
+			"children":{
+				"logs_table_filter_ts":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a timestamp filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["ts"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_level":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a level filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["level"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_source":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a source filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["source"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_context":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a context filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["context"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_instance":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type an instance filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["instance"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_group":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a group filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["group"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_action":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type an action filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["action"]
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"logs_table_filter_text":{
+					"type":"input-field",
+					"settings":{
+						"css_class_label":"text-right middle",
+						"format":"string"
+					},
+					"state": {
+						"label":null,
+						"placeholder":"type a text filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"logs_table",
+									"target_method":"do_action_filter_column",
+									"options":{
+										"method":{
+											"operands":["text"]
+										}
+									}
+								}
+							]
+						}
+					}
 				}
 			}
 		},
 		
 		"logs_table_clear":{
 			"type":"Button",
-			"html_before":"<div class='row'><div class='small-2 columns'>",
 			"state": {
 				"label":"Clear",
 				"bindings": {
-					"dom":[
+					"emitter_dom":[
 						{
-							"dom_selector":"#logs_table_clear",
+							"source_type":"dom",
+							"source_selector":"logs_table_clear",
 							"dom_event":"click",
 							"transform":null,
-							"target_view":"logs_table",
+							"target_type":"view",
+							"target_selector":"logs_table",
 							"target_method":"do_action_clear_items"
 						}
 					]
 				}
 			}
 		},
-		
 		"logs_table_max":{
 			"type":"input-field",
 			"settings":{
-				"html_before":"</div><div class='small-2 columns'>",
-				"html_between":"</div><div class='small-3 columns'>",
-				"html_after":"</div><div class='small-5 columns'></div></div>",
 				"css_class_label":"text-right middle",
 				"format":"number"
 			},
 			"state": {
 				"label":"Max rows",
-				"placeholder":"enter an integer",
+				"placeholder":"size",
 				"value":100,
 				"bindings": {
-					"dom":[
+					"emitter_dom":[
 						{
-							"dom_selector":"#logs_table_max",
+							"source_type":"dom",
+							"source_selector":"logs_table_max_input",
 							"dom_event":"change",
 							"transform":{
 								"result_type":"object",
@@ -121,7 +438,8 @@
 									}
 								]
 							},
-							"target_view":"logs_table",
+							"target_type":"view",
+							"target_selector":"logs_table",
 							"target_method":"do_action_set_resize_max"
 						}
 					]
