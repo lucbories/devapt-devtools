@@ -1,22 +1,5 @@
 {
 	"views":{
-		"devtools_resources_list_dropdown":{
-			"type":"Dropdown",
-			"settings":{
-				"has_mode_hover":true,
-				"has_mode_toggle":false,
-				"button":{
-					"has_hollow":false,
-					"has_dropdown":true
-				},
-				"view":"devtools_resources_list"
-			},
-			"state":{
-				"label":"Views list",
-				"items":["devtools_resources_list"]
-			},
-			"children":{}
-		},
 		"devtools_resources_from_json_dropdown":{
 			"type":"Dropdown",
 			"settings":{
@@ -32,110 +15,251 @@
 				"view":"devtools_resources_from_json_container"
 			},
 			"state":{
-				"label":"View JSON",
-				"items":["devtools_resources_from_json_container"]
+				"label":"JSON source"
 			},
-			"children":{}
-		},
-		"devtools_resources_from_json_textarea":{
-			"type":"TextArea",
-			"settings":{
-				"style":"min-height:200px;height:90%;"
-			},
-			"state":{
-			},
-			"children":{}
-		},
-		"devtools_resources_from_json_button":{
-			"type":"Button",
-			"settings":{},
-			"state":{
-				"label":"Process",
-				"bindings":{
-					"emitter_jquery":[
-						{
-							"source_type":"jquery",
-							"source_selector":"this",
-							"dom_event":"click",
-							"transform":null,
-							"target_types":["view"],
-							"target_selectors":["devtools_resources_preview"],
-							"target_method":"render_inside_from_json",
-							"options":{
-								"method": {
-									"operands":{
-										"json_source_view":"devtools_resources_from_json_textarea",
-										"json_source_getter":"get_object_value"
+			"children":{
+				"devtools_resources_from_json_container":{
+					"type":"VBox",
+					"settings":{
+					},
+					"state":{
+						"items":[{"view":"devtools_resources_from_json_buttons"}, {"view":"devtools_resources_from_json_textarea"}]
+					},
+					"children":{
+						"devtools_resources_from_json_textarea":{
+							"type":"TextArea",
+							"settings":{
+								"style":"min-height:200px;height:90%;"
+							},
+							"state":{
+							},
+							"children":{}
+						},
+						"devtools_resources_from_json_buttons":{
+							"type":"HBox",
+							"settings":{
+								"sizes":[
+									"small-4 large-3",
+									"small-4 large-3",
+									"small-4 large-3"
+								]
+							},
+							"state":{
+								"items":[{"view":"devtools_resources_from_json_clear"}, {"view":"devtools_resources_from_json_register"}, {"view":"devtools_resources_from_json_preview"}]
+							},
+							"children":{
+								"devtools_resources_from_json_clear":{
+									"type":"Anchor",
+									"settings":{
+										"class":"button",
+										"href":"#ignore_nothing"
+									},
+									"state":{
+										"label":"Clear",
+										"bindings":{
+											"emitter_jquery":[
+												{
+													"source_type":"jquery",
+													"source_selector":"#devtools_resources_from_json_clear",
+													"dom_event":"click",
+													"transform":null,
+													"target_types":["view"],
+													"target_selectors":["devtools_resources_from_json_textarea"],
+													"target_method":"clear_dom_value",
+													"options":{}
+												}
+											]
+										}
+									}
+								},
+								"devtools_resources_from_json_register":{
+									"type":"Anchor",
+									"settings":{
+										"class":"button",
+										"href":"#ignore_nothing"
+									},
+									"state":{
+										"label":"Register",
+										"bindings":{
+											"emitter_dom":[
+												{
+													"source_type":"delegate",
+													"source_selector":"a.button",
+													"dom_event":"click",
+													"transform":null,
+													"target_types":["view"],
+													"target_selectors":["devtools_resources_preview"],
+													"target_method":"register_from_json",
+													"options":{
+														"method": {
+															"operands":{
+																"json_source_view":"devtools_resources_from_json_textarea",
+																"json_source_getter":"get_object_value"
+															}
+														}
+													}
+												},
+												{
+													"source_type":"delegate",
+													"source_selector":"a.button",
+													"dom_event":"click",
+													"transform":null,
+													"target_types":["view", "view", "view", "view"],
+													"target_selectors":["devtools_resources_view_attributes", "devtools_resources_view_state", "devtools_resources_view_settings", "devtools_resources_view_children"],
+													"target_method":"set_object_attributes",
+													"options":{
+														"method": {
+															"operands":{
+																"json_source_view":"devtools_resources_from_json_textarea",
+																"json_source_getter":"get_object_value"
+															}
+														}
+													}
+												}
+											]
+										}
+									}
+								},
+								"devtools_resources_from_json_preview":{
+									"type":"Anchor",
+									"settings":{
+										"class":"button",
+										"href":"#ignore_nothing"
+									},
+									"state":{
+										"label":"Preview",
+										"bindings":{
+											"emitter_dom":[
+												{
+													"source_type":"delegate",
+													"source_selector":"a.button",
+													"dom_event":"click",
+													"transform":null,
+													"target_types":["view"],
+													"target_selectors":["devtools_resources_preview"],
+													"target_method":"register_and_render_inside_from_json",
+													"options":{
+														"method": {
+															"operands":{
+																"json_source_view":"devtools_resources_from_json_textarea",
+																"json_source_getter":"get_object_value"
+															}
+														}
+													}
+												}
+											]
+										}
 									}
 								}
 							}
 						}
-					]
+					}
 				}
 			}
 		},
-		"devtools_resources_from_json_container":{
-			"type":"Container",
+		"devtools_resources_list_dropdown":{
+			"type":"Dropdown",
 			"settings":{
+				"has_mode_hover":true,
+				"has_mode_toggle":false,
+				"button":{
+					"has_hollow":false,
+					"has_dropdown":true
+				},
+				"view":"devtools_resources_list_content"
 			},
 			"state":{
-				"items":[{"view":"devtools_resources_from_json_textarea"}, {"view":"devtools_resources_from_json_button"}]
+				"label":"Application views"
 			},
-			"children":{}
-		},
-		"devtools_resources_list":{
-			"type":"Container",
-			"rendering":"Drilldown",
-			"settings":{
-			},
-			"state":{
-				"label":"",
-				"items":[],
-				"headers":[["View name"]],
-				"bindings":{
-					"services":[
-						{
-							"service":"rest_api_resources_query_1",
-							"method":"list",
-							"transform":{
-								"result_type":"single",
-								"fields":[
-									{
-										"name":"resources",
-										"path":["resources_names"]
+			"children":{
+				"devtools_resources_list_content":{
+					"type":"Container",
+					"settings":{},
+					"state":{
+						"items":[{"view":"devtools_resources_filter"}, {"view":"devtools_resources_list"}]
+					}
+				},
+				"devtools_resources_filter":{
+					"type":"InputField",
+					"settings":{
+						"format":"string"
+					},
+					"state":{
+						"label":null,
+						"placeholder":"type a view filter",
+						"bindings":{
+							"streams":[
+								{
+									"source_stream":"keydown",
+									"transform":null,
+									"target_type":"view",
+									"target_selector":"devtools_resources_list",
+									"target_method":"ui_items_filter",
+									"options":{
+										"method":{
+											"operands":["li"]
+										}
 									}
-								]
-							},
-							"state_path":["items"],
-							"target_type":"view",
-							"target_selector":"this",
-							"target_method":"do_action_append",
-							"options":{
-								"method":{
-									"collection":"views"
 								}
-							}
+							]
 						}
-					],
-					"emitter_dom":[
-						{
-							"source_type":"delegate",
-							"source_selector":"a",
-							"dom_event":"click",
-							"transform":{
-								"result_type":"single",
-								"fields":[
-									{
-										"name":"text",
-										"path":["target", "textContent"]
+					}
+				},
+				"devtools_resources_list":{
+					"type":"Container",
+					"rendering":"Drilldown",
+					"settings":{},
+					"state":{
+						"label":"",
+						"items":[],
+						"headers":[["View name"]],
+						"bindings":{
+							"services":[
+								{
+									"service":"rest_api_resources_query_1",
+									"method":"list",
+									"transform":{
+										"result_type":"single",
+										"order":"resources:asc",
+										"fields":[
+											{
+												"name":"resources",
+												"path":["resources_names"]
+											}
+										]
+									},
+									"state_path":["items"],
+									"target_type":"view",
+									"target_selector":"this",
+									"target_method":"do_action_append",
+									"options":{
+										"method":{
+											"collection":"views"
+										}
 									}
-								]
-							},
-							"target_types":["view", "view", "view", "view"],
-							"target_selectors":["devtools_resources_view_attributes", "devtools_resources_view_state", "devtools_resources_view_settings", "devtools_resources_view_children"],
-							"target_method":"set_view_attributes_by_name"
+								}
+							],
+							"emitter_dom":[
+								{
+									"source_type":"delegate",
+									"source_selector":"a",
+									"dom_event":"click",
+									"transform":{
+										"result_type":"single",
+										"fields":[
+											{
+												"name":"text",
+												"path":["target", "textContent"]
+											}
+										]
+									},
+									"target_types":["view", "view", "view", "view", "view"],
+									"target_selectors":["devtools_resources_preview", "devtools_resources_view_attributes", "devtools_resources_view_state", "devtools_resources_view_settings", "devtools_resources_view_children"],
+									"target_methods":["render_inside_from_json", "set_view_attributes_by_name"]
+								}
+							]
 						}
-					]
+					}
 				}
 			}
 		},
@@ -154,29 +278,30 @@
 				"label":"Attributes",
 				"items":["devtools_resources_view_attributes"]
 			},
-			"children":{}
-		},
-		"devtools_resources_view_attributes":{
-			"type":"AttributesTable",
-			"rendering":"Table",
-			"settings":{
-				"style":"height:100%;",
-				"has_scroll":false,
-				"has_hover":true,
-				"has_body_cursor":true
-			},
-			"state":{
-				"label":"Attributes",
-				"items":[],
-				"headers":[["Attribute name", "Attribute value"]],
-				"show_label":true,
-				"show_headers":true,
-				"strategy":{
-					"update_mode":"replace",
-					"resize_mode":"remove_last",
-					"resize_max":100
-				},
-				"attributes_exclude":["state", "settings", "children"]
+			"children":{
+				"devtools_resources_view_attributes":{
+					"type":"AttributesTable",
+					"rendering":"Table",
+					"settings":{
+						"style":"height:100%;",
+						"has_scroll":false,
+						"has_hover":true,
+						"has_body_cursor":true
+					},
+					"state":{
+						"label":"Attributes",
+						"items":[],
+						"headers":[["Attribute name", "Attribute value"]],
+						"show_label":true,
+						"show_headers":true,
+						"strategy":{
+							"update_mode":"replace",
+							"resize_mode":"remove_last",
+							"resize_max":100
+						},
+						"attributes_exclude":["state", "settings", "children"]
+					}
+				}
 			}
 		},
 		"devtools_resources_view_state_dropdown":{
@@ -194,33 +319,35 @@
 				"label":"State",
 				"items":["devtools_resources_view_state"]
 			},
-			"children":{}
-		},
-		"devtools_resources_view_state":{
-			"type":"AttributesTable",
-			"rendering":"Table",
-			"settings":{
-				"style":"height:100%;",
-				"has_scroll":false,
-				"has_hover":true,
-				"has_body_cursor":true
-			},
-			"state":{
-				"label":"State",
-				"items":[],
-				"headers":[["Attribute name", "Attribute value"]],
-				"show_label":true,
-				"show_headers":true,
-				"strategy":{
-					"update_mode":"replace",
-					"resize_mode":"remove_last",
-					"resize_max":100
-				},
-				"attributes_path":["state"]
+			"children":{
+				"devtools_resources_view_state":{
+					"type":"AttributesTable",
+					"rendering":"Table",
+					"settings":{
+						"style":"height:100%;",
+						"has_scroll":false,
+						"has_hover":true,
+						"has_body_cursor":true
+					},
+					"state":{
+						"label":"State",
+						"items":[],
+						"headers":[["Attribute name", "Attribute value"]],
+						"show_label":true,
+						"show_headers":true,
+						"strategy":{
+							"update_mode":"replace",
+							"resize_mode":"remove_last",
+							"resize_max":100
+						},
+						"attributes_path":["state"]
+					}
+				}
 			}
 		},
 		"devtools_resources_view_settings_dropdown":{
-			"type":"Dropdown",
+			"type":"Container",
+			"rendering":"Dropdown",
 			"settings":{
 				"has_mode_hover":true,
 				"has_mode_toggle":false,
@@ -234,29 +361,30 @@
 				"label":"Settings",
 				"items":["devtools_resources_view_settings"]
 			},
-			"children":{}
-		},
-		"devtools_resources_view_settings":{
-			"type":"AttributesTable",
-			"rendering":"Table",
-			"settings":{
-				"style":"height:100%;",
-				"has_scroll":false,
-				"has_hover":true,
-				"has_body_cursor":true
-			},
-			"state":{
-				"label":"Settings",
-				"items":[],
-				"headers":[["Attribute name", "Attribute value"]],
-				"show_label":true,
-				"show_headers":true,
-				"strategy":{
-					"update_mode":"replace",
-					"resize_mode":"remove_last",
-					"resize_max":100
-				},
-				"attributes_path":["settings"]
+			"children":{
+				"devtools_resources_view_settings":{
+					"type":"AttributesTable",
+					"rendering":"Table",
+					"settings":{
+						"style":"height:100%;",
+						"has_scroll":false,
+						"has_hover":true,
+						"has_body_cursor":true
+					},
+					"state":{
+						"label":"Settings",
+						"items":[],
+						"headers":[["Attribute name", "Attribute value"]],
+						"show_label":true,
+						"show_headers":true,
+						"strategy":{
+							"update_mode":"replace",
+							"resize_mode":"remove_last",
+							"resize_max":100
+						},
+						"attributes_path":["settings"]
+					}
+				}
 			}
 		},
 		"devtools_resources_view_children_dropdown":{
@@ -274,29 +402,30 @@
 				"label":"Children",
 				"items":["devtools_resources_view_children"]
 			},
-			"children":{}
-		},
-		"devtools_resources_view_children":{
-			"type":"AttributesTable",
-			"rendering":"Table",
-			"settings":{
-				"style":"height:100%;",
-				"has_scroll":false,
-				"has_hover":true,
-				"has_body_cursor":true
-			},
-			"state":{
-				"label":"Children",
-				"items":[],
-				"headers":[["Attribute name", "Attribute value"]],
-				"show_label":true,
-				"show_headers":true,
-				"strategy":{
-					"update_mode":"replace",
-					"resize_mode":"remove_last",
-					"resize_max":100
-				},
-				"attributes_path":["children"]
+			"children":{
+				"devtools_resources_view_children":{
+					"type":"AttributesTable",
+					"rendering":"Table",
+					"settings":{
+						"style":"height:100%;",
+						"has_scroll":false,
+						"has_hover":true,
+						"has_body_cursor":true
+					},
+					"state":{
+						"label":"Children",
+						"items":[],
+						"headers":[["Attribute name", "Attribute value"]],
+						"show_label":true,
+						"show_headers":true,
+						"strategy":{
+							"update_mode":"replace",
+							"resize_mode":"remove_last",
+							"resize_max":100
+						},
+						"attributes_path":["children"]
+					}
+				}
 			}
 		},
 		"devtools_resources_preview":{
@@ -306,25 +435,7 @@
 			},
 			"state":{
 				"label":"",
-				"items":[{ "key":"space", "value":"" }]
-			}
-		},
-		"devtools_resources_description":{
-			"type":"HBox",
-			"settings":{
-				"sizes":[
-					"small-2 large-2",
-					"small-2 large-2",
-					"small-2 large-2",
-					"small-2 large-2",
-					"small-2 large-2",
-					"small-2 large-2"
-				]
-			},
-			"state":{
-				"label":"View resource description",
-				"show_label":false,
-				"items":["devtools_resources_list_dropdown", "devtools_resources_from_json_dropdown", "devtools_resources_view_attributes_dropdown", "devtools_resources_view_state_dropdown", "devtools_resources_view_settings_dropdown", "devtools_resources_view_children_dropdown"]
+				"items":[]
 			}
 		},
 		"devtools_resources_button_duplicate":{
@@ -362,7 +473,7 @@
 							"transform":null,
 							"target_types":["view"],
 							"target_selectors":["devtools_resources_preview"],
-							"target_method":"render_inside_from_json",
+							"target_method":"register_and_render_inside_from_json",
 							"options":{
 								"method": {
 									"operands":{
@@ -374,6 +485,24 @@
 						}
 					]
 				}
+			}
+		},
+		"devtools_resources_description":{
+			"type":"HBox",
+			"settings":{
+				"sizes":[
+					"small-2 large-2",
+					"small-2 large-2",
+					"small-2 large-2",
+					"small-2 large-2",
+					"small-2 large-2",
+					"small-2 large-2"
+				]
+			},
+			"state":{
+				"label":"View resource description",
+				"show_label":false,
+				"items":["devtools_resources_from_json_dropdown", "devtools_resources_list_dropdown", "devtools_resources_view_attributes_dropdown", "devtools_resources_view_state_dropdown", "devtools_resources_view_settings_dropdown", "devtools_resources_view_children_dropdown"]
 			}
 		},
 		"devtools_resources_buttons":{

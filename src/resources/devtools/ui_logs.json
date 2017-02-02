@@ -156,7 +156,7 @@
 							"source_selector":"#logs_view thead th:first",
 							"dom_event":"click",
 							"transform":null,
-							"target_type":"dom",
+							"target_type":"jquery",
 							"target_selector":"#logs_view thead th:last",
 							"target_method":"toggle"
 						}

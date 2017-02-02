@@ -39,16 +39,16 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		super(arg_runtime, arg_manager, plugin_name, '1.0.0')
 
 		const assets_dir = '../../public/assets'
-		const devapt_dir = '../../node_modules/devapt/public/'
-
 		this.add_public_asset('css', '/' + plugin_name + '/normalize.css',    path.join(__dirname, assets_dir, 'css/normalize.css') )
 		
 		this.add_public_asset('img', '/' + plugin_name + '/favico.png',       path.join(__dirname, assets_dir, 'img/favico.png') )
 
 		this.add_public_asset('js', '/' + plugin_name + '/browser.min.js',    path.join(__dirname, assets_dir, 'js/vendor/browser.min.js') )
 		this.add_public_asset('js', '/' + plugin_name + '/app.js',            path.join(__dirname, assets_dir, 'js/app.js') )
-		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.js', path.join(__dirname, assets_dir, 'js/devapt-browser.js') )
-		this.add_public_asset('js', '/' + plugin_name + '/devapt-bootstrap.js', path.join(__dirname, devapt_dir, 'js/devapt-bootstrap.js') )
+
+		const devapt_dir = '../../node_modules/devapt/'
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.js',   path.join(__dirname, devapt_dir, 'dist/devapt-browser.js') )
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-bootstrap.js', path.join(__dirname, devapt_dir, 'public/js/devapt-bootstrap.js') )
 	}
 	
 	

@@ -1,0 +1,163 @@
+{
+	"services":{
+		"devtools_store":{
+			"type":"html_assets",
+			"routes":[
+				{
+					"route":"/assets2",
+					"directory":"./public/tutorial-1",
+					"default_file":"index.html"
+				},
+				{
+					"route":"/examples",
+					"directory":"./public/devtools",
+					"default_file":"react_counter.html"
+				}
+			]
+		},
+		
+		"metrics_http":{
+			"type":"metrics_http",
+			"browser":{
+				"pollers":{
+					"get": {"interval_seconds":3, "name":"metrics_http_poller"}
+				},
+				"timeline":{
+					"get":[
+						{
+							"name":"requests_5m",
+							"transform":"id_counter",
+							"max":50,
+							"interval_seconds":6
+						},
+						{
+							"name":"requests_1h",
+							"transform":"id_counter",
+							"max":100,
+							"interval_seconds":36
+						},
+						{
+							"name":"requests_1d",
+							"transform":"id_counter",
+							"max":100,
+							"interval_seconds":864
+						},
+						{
+							"name":"latency_mean_5m",
+							"transform":"latency_mean",
+							"max":50,
+							"interval_seconds":6
+						},
+						{
+							"name":"latency_mean_1h",
+							"transform":"latency_mean",
+							"max":100,
+							"interval_seconds":36
+						},
+						{
+							"name":"latency_mean_1d",
+							"transform":"latency_mean",
+							"max":100,
+							"interval_seconds":864
+						}
+					]
+				}
+			}
+		},
+		
+		"metrics_host":{
+			"type":"metrics_host"
+		},
+		
+		"metrics_nodejs":{
+			"type":"metrics_nodejs"
+		},
+		
+		"metrics_bus":{
+			"type":"metrics_bus"
+		},
+		
+		"topology":{
+			"type":"topology"
+		},
+		
+		"logs":{
+			"type":"logs"
+		},
+		
+		"messages":{
+			"type":"messages"
+		},
+		
+		"devtools_monitor":{
+			"type":"middleware",
+			"routes":[
+				{
+					"route":"/home",
+					"page_view":"metrics_tabs",
+					"page_menubar":"default_menubar"
+				},
+				{
+					"route":"/monitor/metrics",
+					"page_view":"metrics_tabs",
+					"page_menubar":"default_menubar"
+				},
+				{
+					"route":"/monitor/topology/logical",
+					"mw_file":"js/topology/topology_logical_mw.js"
+				},
+				{
+					"route":"/monitor/topology/physical",
+					"mw_file":"js/topology/topology_physical_mw.js"
+				},
+				{
+					"route":"/monitor/metrics",
+					"mw_file":"js/metrics/metrics_mw.js"
+				},
+				{
+					"route":"/monitor/logs",
+					"mw_file":"js/logs/logs_mw.js"
+				},
+				{
+					"route":"/monitor/messages",
+					"mw_file":"js/messages/messages_mw.js"
+				}
+			]
+		},
+
+		"devtools_runtime":{
+			"type":"middleware",
+			"routes":[
+				{
+					"route":"/runtime/topology_registry",
+					"mw_file":"js/runtime/topology_registry_mw.js"
+				},
+				{
+					"route":"/runtime/topology_runtime",
+					"mw_file":"js/runtime/topology_runtime_mw.js"
+				},
+				{
+					"route":"/runtime/settings",
+					"mw_file":"js/settings/settings_mw.js"
+				},
+				
+				
+				{
+					"route":"/logs2",
+					"redirect":"logs"
+				}
+			]
+		},
+		
+		"devtools_admin":{
+			"type":"middleware",
+			"routes":[
+				{
+					"route":"/admin/resources",
+					"page_view":"devtools_resources_admin",
+					"page_menubar":"default_menubar"
+				}
+			]
+		}
+	}
+}

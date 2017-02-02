@@ -35,7 +35,7 @@ var DST_ALL_RESOURCES = 'dist/resources'
 // var DST_PUBLIC = 'public'
 
 var DST_PUBLIC_JS = 'public/assets/js'
-var DST_PUBLIC_JS_BUNDLE = 'app.js'
+// var DST_PUBLIC_JS_BUNDLE = 'app.js'
 var DST_PUBLIC_JS_TMP = 'dist/public/js'
 
 var DST_DEVAPT_BROWSER = 'public/assets/js'
@@ -205,58 +205,58 @@ gulp.task('watch_resources',
 		with sourcemap files
 		build only changed files
 */
-gulp.task('build_public_js_transpile',
-	() => {
-		return gulp.src(SRC_PUBLIC_JS)
-			.pipe(changed(DST_PUBLIC_JS_TMP))
-			.pipe(sourcemaps.init())
-			.pipe(
-				babel({
-					presets: ['es2015']
-				})
-			)
-			.pipe(sourcemaps.write('.'))
-			.pipe(gulp.dest(DST_PUBLIC_JS_TMP))
-	}
-)
+// gulp.task('build_public_js_transpile',
+// 	() => {
+// 		return gulp.src(SRC_PUBLIC_JS)
+// 			.pipe(changed(DST_PUBLIC_JS_TMP))
+// 			.pipe(sourcemaps.init())
+// 			.pipe(
+// 				babel({
+// 					presets: ['es2015']
+// 				})
+// 			)
+// 			.pipe(sourcemaps.write('.'))
+// 			.pipe(gulp.dest(DST_PUBLIC_JS_TMP))
+// 	}
+// )
 
 
-gulp.task('build_public_js_bundle',
-	() => {
-		return browserify( { entries: DST_PUBLIC_JS_TMP + '/app.js' } )
-			.ignore('sequelize')
-			.ignore('restify')
-			.ignore('socket.io')
-			.ignore('node-forge')
-			.external('client_runtime')
-			.external('forge-browser')
-			.external('ui')
-			.bundle()
-			.pipe( source(DST_PUBLIC_JS_BUNDLE) )
-			.pipe( new Buffer() )
-			.pipe(sourcemaps.write('.'))
-			.pipe( gulp.dest(DST_PUBLIC_JS) )
-			.pipe( livereload() )
-	}
-)
+// gulp.task('build_public_js_bundle',
+// 	() => {
+// 		return browserify( { entries: DST_PUBLIC_JS_TMP + '/app.js' } )
+// 			.ignore('sequelize')
+// 			.ignore('restify')
+// 			.ignore('socket.io')
+// 			.ignore('node-forge')
+// 			.external('client_runtime')
+// 			.external('forge-browser')
+// 			.external('ui')
+// 			.bundle()
+// 			.pipe( source(DST_PUBLIC_JS_BUNDLE) )
+// 			.pipe( new Buffer() )
+// 			.pipe(sourcemaps.write('.'))
+// 			.pipe( gulp.dest(DST_PUBLIC_JS) )
+// 			.pipe( livereload() )
+// 	}
+// )
 
-gulp.task('build_public_js', gulp.series('build_public_js_transpile', 'build_public_js_bundle') )
+// gulp.task('build_public_js', gulp.series('build_public_js_transpile', 'build_public_js_bundle') )
 
-gulp.task('watch_public_js',
-	() => {
-		gulp.watch(SRC_PUBLIC_JS, gulp.series('build_public_js'/*, 'restart'*/) )
-		.on('change',
-			(path, stats) => {
-				console.log('File ' + path + ' was changed, running tasks watch_public_js...')
-			}
-		)
-		.on('unlink',
-			(path, stats) => {
-				console.log('File ' + path + ' was deleted, running tasks watch_public_js...')
-			}
-		)
-	}
-)
+// gulp.task('watch_public_js',
+// 	() => {
+// 		gulp.watch(SRC_PUBLIC_JS, gulp.series('build_public_js'/*, 'restart'*/) )
+// 		.on('change',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was changed, running tasks watch_public_js...')
+// 			}
+// 		)
+// 		.on('unlink',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was deleted, running tasks watch_public_js...')
+// 			}
+// 		)
+// 	}
+// )
 
 
 
@@ -297,30 +297,30 @@ gulp.task('watch_public_css',
 // DEVAPT-DEVTOOLS - PUBLIC - DEVAPT
 // **************************************************************************************************
 
-gulp.task('copy_devapt_public',
-	() => {
-		return gulp.src(SRC_DEVAPT_BROWSER)
-			.pipe(changed(DST_DEVAPT_BROWSER))
-			.pipe(gulp.dest(DST_DEVAPT_BROWSER))
-			.pipe( livereload() )
-	}
-)
+// gulp.task('copy_devapt_public',
+// 	() => {
+// 		return gulp.src(SRC_DEVAPT_BROWSER)
+// 			.pipe(changed(DST_DEVAPT_BROWSER))
+// 			.pipe(gulp.dest(DST_DEVAPT_BROWSER))
+// 			.pipe( livereload() )
+// 	}
+// )
 
-gulp.task('watch_public_devapt',
-	() => {
-		gulp.watch(SRC_DEVAPT_BROWSER, gulp.series('copy_devapt_public') )
-		.on('change',
-			(path, stats) => {
-				console.log('File ' + path + ' was changed, running tasks watch_public_devapt...')
-			}
-		)
-		.on('unlink',
-			(path, stats) => {
-				console.log('File ' + path + ' was deleted, running tasks watch_public_devapt...')
-			}
-		)
-	}
-)
+// gulp.task('watch_public_devapt',
+// 	() => {
+// 		gulp.watch(SRC_DEVAPT_BROWSER, gulp.series('copy_devapt_public') )
+// 		.on('change',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was changed, running tasks watch_public_devapt...')
+// 			}
+// 		)
+// 		.on('unlink',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was deleted, running tasks watch_public_devapt...')
+// 			}
+// 		)
+// 	}
+// )
 
 
 
@@ -328,23 +328,23 @@ gulp.task('watch_public_devapt',
 // DEVAPT-DEVTOOLS - PUBLIC
 // **************************************************************************************************
 
-gulp.task('public', gulp.series('copy_devapt_public', 'build_public_js', 'build_public_css') )
+gulp.task('public', gulp.series(/*'copy_devapt_public', 'build_public_js',*/ 'build_public_css') )
 
-gulp.task('watch_public',
-	() => {
-		gulp.watch(SRC_PUBLIC_ALL, gulp.series('build_public_js'/*, 'restart'*/) )
-		.on('change',
-			(path, stats) => {
-				console.log('File ' + path + ' was changed, running tasks watch_public...')
-			}
-		)
-		.on('unlink',
-			(path, stats) => {
-				console.log('File ' + path + ' was deleted, running tasks watch_public...')
-			}
-		)
-	}
-)
+// gulp.task('watch_public',
+// 	() => {
+// 		gulp.watch(SRC_PUBLIC_ALL, gulp.series('build_public_js'/*, 'restart'*/) )
+// 		.on('change',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was changed, running tasks watch_public...')
+// 			}
+// 		)
+// 		.on('unlink',
+// 			(path, stats) => {
+// 				console.log('File ' + path + ' was deleted, running tasks watch_public...')
+// 			}
+// 		)
+// 	}
+// )
 
 
 
@@ -378,7 +378,7 @@ gulp.task('clean',
 	}
 )
 
-var watch_tasks = ['default', 'watch_js', 'watch_resources', 'watch_public_js', 'watch_public_devapt'/*, 'livereload'*/]
+var watch_tasks = ['default', 'watch_js', 'watch_resources', /*'watch_public_js', 'watch_public_devapt', 'livereload'*/]
 
 gulp.task('default', gulp.series('public', 'build_all_js', 'build_all_json', 'build_all_jade', 'build_all_template', 'build_all_include') )
 gulp.task('watch', gulp.parallel(...watch_tasks) )

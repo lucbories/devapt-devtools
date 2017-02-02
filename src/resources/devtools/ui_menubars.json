@@ -40,6 +40,12 @@
 							{ "command":"display_logs_debug" },
 							{ "command":"display_state_debug" }
 						]
+					},
+					{
+						"label":"AmazingLabs",
+						"items":[
+							{ "command":"display_numerical_calculation_labs" }
+						]
 					}
 				]
 			}

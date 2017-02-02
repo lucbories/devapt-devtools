@@ -3,18 +3,18 @@
 		"display_logical_topology_monitor":{
 			"type":"display",
 			"url":"/monitor/topology/logical",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_monitor",
 			"label":"Logical Topology"
 		},
 		"display_physical_topology_monitor":{
 			"type":"display",
 			"url":"/monitor/topology/physical",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_monitor",
 			"label":"Physical Topology"
 		},
 		"display_logs_monitor":{
 			"type":"display",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_monitor",
 			"view":"logs_view",
 			"url":"/monitor/logs",
 			"label":"Logs"
@@ -28,7 +28,7 @@
 		},
 		"display_metrics_monitor":{
 			"type":"display",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_monitor",
 			"view":"metrics_tabs",
 			"url":"/monitor/metrics",
 			"label":"Metrics"
@@ -41,13 +41,13 @@
 		},
 		"display_defined_topology":{
 			"type":"display",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_runtime",
 			"url":"/topology/defined",
 			"label":"Defined Topology"
 		},
 		"display_deployed_topology":{
 			"type":"display",
-			"middleware":"devtools_panel",
+			"middleware":"devtools_runtime",
 			"url":"/topology/deployed",
 			"label":"Deployed Topology"
 		},
