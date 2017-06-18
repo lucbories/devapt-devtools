@@ -168,7 +168,7 @@
 					"services":[
 						{
 							"service":"topology",
-							"method":"get",
+							"method":"devapt-deployed-tenant-infos",
 							"transform":{
 								"result_type":"object",
 								"fields":[

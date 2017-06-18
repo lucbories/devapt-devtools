@@ -1,12 +1,14 @@
 
-import T from 'typr'
+// NPM IMPORTS
 import assert from 'assert'
-import devapt from 'devapt'
+
+// DEVAPT CORE COMMON IMPORTS
+import T                from 'devapt-core-common/dist/js/utils/types'
+import RenderingBuilder from 'devapt-core-common/dist/js/rendering/rendering_builder'
+import runtime          from 'devapt-core-common/dist/js/base/runtime'
 
 
-
-const RenderingBuilder = devapt.RenderingBuilder
-const renderer = new RenderingBuilder(devapt.runtime, 'unused', 'unused', 'unused', 'unused', undefined)
+const renderer = new RenderingBuilder(runtime, 'unused', 'unused', 'unused', 'unused', undefined)
 const FlowGraph = renderer.rendering_manager.get_feature_class('FlowGraph')
 assert( T.isFunction(FlowGraph), context + ':FlowGraph class not found')
 

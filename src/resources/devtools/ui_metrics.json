@@ -131,7 +131,7 @@
 									"services":[
 										{
 											"service":"metrics_http",
-											"method":"post",
+											"method":"devapt-metrics-http-get",
 											"transform":{
 												"result_type":"array",
 												"flat_field_name":"metrics",
@@ -299,7 +299,7 @@
 							"services":[
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"id_counter",
 									"state_path":["metrics_http_get_id_counter"],
 									"target_type":"jquery",
@@ -308,7 +308,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"requests_5m",
 									"state_path":["metrics_http_get_requests_5m"],
 									"target_type":"view",
@@ -318,7 +318,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"requests_1h",
 									"target_type":"view",
 									"target_selectors":["metrics_http_dashboard_sparkline_requests_2"],
@@ -327,7 +327,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"requests_1d",
 									"target_type":"view",
 									"target_selectors":["metrics_http_dashboard_sparkline_requests_3"],
@@ -336,7 +336,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"latency_min",
 									"target_type":"jquery",
 									"target_selector":"#metrics_http_dashboard_latency_min",
@@ -344,7 +344,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"latency_mean",
 									"target_type":"jquery",
 									"target_selector":"#metrics_http_dashboard_latency_mean",
@@ -358,7 +358,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"latency_mean_5m",
 									"target_type":"view",
 									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_1"],
@@ -367,7 +367,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"latency_mean_1h",
 									"target_type":"view",
 									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_2"],
@@ -376,7 +376,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"timeline":"latency_mean_1d",
 									"target_type":"view",
 									"target_selectors":["metrics_http_dashboard_sparkline_latency_mean_3"],
@@ -385,7 +385,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"latency_max",
 									"target_type":"jquery",
 									"target_selector":"#metrics_http_dashboard_latency_max",
@@ -393,7 +393,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"version_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -409,7 +409,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"service_name_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -425,7 +425,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"service_method_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -441,7 +441,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"service_http_version_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -457,7 +457,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"server_node_name_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -473,7 +473,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"server_server_name_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -489,7 +489,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"service_route_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -505,7 +505,7 @@
 								},
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":"service_url_counters",
 									"target_type":"view",
 									"target_selector":"this",
@@ -600,7 +600,7 @@
 							"services":[
 								{
 									"service":"metrics_http",
-									"method":"get",
+									"method":"devapt-metrics-http-get",
 									"transform":null,
 									"target_type":"view",
 									"target_selector":"metrics_http_tree",
@@ -645,7 +645,7 @@
 							"services":[
 								{
 									"service":"metrics_bus",
-									"method":"list",
+									"method":"devapt-metrics-bus-list",
 									"transform":{
 										"result_type":"object",
 										"fields":[
@@ -669,7 +669,7 @@
 								},
 								{
 									"service":"metrics_bus",
-									"method":"get",
+									"method":"devapt-metrics-bus-get",
 									"transform":{
 										"result_type":"object",
 										"loop_on_keys":true,
@@ -754,7 +754,7 @@
 							"services":[
 								{
 									"service":"metrics_host",
-									"method":"list",
+									"method":"devapt-metrics-host-list",
 									"transform":{
 										"result_type":"object",
 										"fields":[
@@ -780,7 +780,7 @@
 								},
 								{
 									"service":"metrics_host",
-									"method":"get",
+									"method":"devapt-metrics-host-get",
 									"transform":{
 										"result_type":"object",
 										"loop_on_keys":true,
@@ -887,7 +887,7 @@
 							"services":[
 								{
 									"service":"metrics_nodejs",
-									"method":"list",
+									"method":"devapt-metrics-nodejs-list",
 									"transform":{
 										"result_type":"object",
 										"fields":[
@@ -911,7 +911,7 @@
 								},
 								{
 									"service":"metrics_nodejs",
-									"method":"get",
+									"method":"devapt-metrics-nodejs-get",
 									"transform":{
 										"result_type":"object",
 										"loop_on_keys":true,

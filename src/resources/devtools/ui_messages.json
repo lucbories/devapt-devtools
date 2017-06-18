@@ -90,7 +90,7 @@
 							"services":[
 								{
 									"service":"messages",
-									"method":"post",
+									"method":"devapt-subscribe",
 									"transform":{
 										"result_type":"array",
 										"fields":[

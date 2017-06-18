@@ -1,7 +1,7 @@
 {
 	"services":{
 		"devtools_store":{
-			"type":"html_assets",
+			"type":"html_assets_svc",
 			"routes":[
 				{
 					"route":"/assets2",
@@ -17,13 +17,13 @@
 		},
 		
 		"metrics_http":{
-			"type":"metrics_http",
+			"type":"metrics_svc",
 			"browser":{
 				"pollers":{
-					"get": {"interval_seconds":3, "name":"metrics_http_poller"}
+					"devapt-metrics-http-get": {"interval_seconds":3, "name":"metrics_http_poller"}
 				},
 				"timeline":{
-					"get":[
+					"devapt-metrics-http-get":[
 						{
 							"name":"requests_5m",
 							"transform":"id_counter",
@@ -66,31 +66,31 @@
 		},
 		
 		"metrics_host":{
-			"type":"metrics_host"
+			"type":"metrics_svc"
 		},
 		
 		"metrics_nodejs":{
-			"type":"metrics_nodejs"
+			"type":"metrics_svc"
 		},
 		
 		"metrics_bus":{
-			"type":"metrics_bus"
+			"type":"metrics_svc"
 		},
 		
 		"topology":{
-			"type":"topology"
+			"type":"topology_svc"
 		},
 		
 		"logs":{
-			"type":"logs"
+			"type":"logs_svc"
 		},
 		
 		"messages":{
-			"type":"messages"
+			"type":"messages_svc"
 		},
 		
 		"devtools_monitor":{
-			"type":"middleware",
+			"type":"middlewares_svc",
 			"routes":[
 				{
 					"route":"/home",
@@ -126,7 +126,7 @@
 		},
 
 		"devtools_runtime":{
-			"type":"middleware",
+			"type":"middlewares_svc",
 			"routes":[
 				{
 					"route":"/runtime/topology_registry",
@@ -150,7 +150,7 @@
 		},
 		
 		"devtools_admin":{
-			"type":"middleware",
+			"type":"middlewares_svc",
 			"routes":[
 				{
 					"route":"/admin/resources",

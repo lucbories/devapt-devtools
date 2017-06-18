@@ -1,12 +1,15 @@
+
 // NPM IMPORTS
-import devapt from 'devapt'
+
+// DEVAPT CORE COMMON IMPORTS
+import RenderingBuilder from 'devapt-core-common/dist/js/rendering/rendering_builder'
+import runtime from 'devapt-core-common/dist/js/base/runtime'
 
 // DEVTOOLS IMPORTS
 import common_mw from '../common_mw'
 
 
-const RenderingBuilder = devapt.RenderingBuilder
-const renderer = new RenderingBuilder(devapt.runtime)
+const renderer = new RenderingBuilder(runtime)
 
 
 // SERVICE VIEW CONFIG

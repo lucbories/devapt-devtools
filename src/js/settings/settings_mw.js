@@ -1,7 +1,11 @@
+
 // NPM IMPORTS
 import assert from 'assert'
-import T from 'typr'
-import devapt from 'devapt'
+
+// DEVAPT CORE COMMON IMPORTS
+import T                from 'devapt-core-common/dist/js/utils/types'
+import RenderingBuilder from 'devapt-core-common/dist/js/rendering/rendering_builder'
+import runtime          from 'devapt-core-common/dist/js/base/runtime'
 
 // DEVTOOLS IMPORTS
 import common_mw from '../common_mw'
@@ -9,9 +13,8 @@ import common_mw from '../common_mw'
 
 
 // STANDARD COMPONENTS
-const config = devapt.runtime.get_registry().root
-const RenderingBuilder = devapt.RenderingBuilder
-const renderer = new RenderingBuilder(devapt.runtime)
+const config = runtime.get_registry().root
+const renderer = new RenderingBuilder(runtime)
 const Tabs = renderer.rendering_manager.get_feature_class('Tabs')
 
 
@@ -76,7 +79,7 @@ renderer.rendering_manager.add_instance(traces_settings_tree)
 
 
 // BUILD SETTINGS MAIN VIEW
-const settings_tabs_cfg = devapt.runtime.get_registry().get_view('settings_tabs')
+const settings_tabs_cfg = runtime.get_registry().get_view('settings_tabs')
 const settings_tabs = new Tabs('settings_tabs', settings_tabs_cfg)
 
 

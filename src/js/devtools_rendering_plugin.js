@@ -1,18 +1,14 @@
 
-import T from 'typr'
+// NPM IMPORTS
 import assert from 'assert'
 import path from 'path'
 
-import Devapt from 'devapt'
-
-const RenderingPlugin = Devapt.RenderingPlugin
-
+// DEVAPT CORE COMMON IMPORTS
+import T               from 'devapt-core-common/dist/js/utils/types'
+import RenderingPlugin from 'devapt-core-common/dist/js/plugins/rendering_plugin'
 
 // HTTP METRICS COMPONENTS
-// import MetricsHttpDetails from './metrics/metrics_http_details'
-// import MetricsHttpDashboard from './metrics/metrics_http_dashboard'
 import MetricsHttpTree from './metrics/metrics_http_tree'
-
 
 
 const plugin_name = 'Devtools' 
@@ -46,9 +42,11 @@ export default class DevtoolsRenderingPlugin extends RenderingPlugin
 		this.add_public_asset('js', '/' + plugin_name + '/browser.min.js',    path.join(__dirname, assets_dir, 'js/vendor/browser.min.js') )
 		this.add_public_asset('js', '/' + plugin_name + '/app.js',            path.join(__dirname, assets_dir, 'js/app.js') )
 
-		const devapt_dir = '../../node_modules/devapt/'
-		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.js',   path.join(__dirname, devapt_dir, 'dist/devapt-browser.js') )
-		this.add_public_asset('js', '/' + plugin_name + '/devapt-bootstrap.js', path.join(__dirname, devapt_dir, 'public/js/devapt-bootstrap.js') )
+		const devapt_common_dir = '../../node_modules/devapt-core-common/'
+		const devapt_browser_dir = '../../node_modules/devapt-core-browser/'
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.js',   path.join(__dirname, devapt_browser_dir, 'public/js/build/devapt-core-browser.js') )
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-browser.j.map',   path.join(__dirname, devapt_browser_dir, 'public/js/build/devapt-core-browser.js.map') )
+		this.add_public_asset('js', '/' + plugin_name + '/devapt-bootstrap.js', path.join(__dirname, devapt_common_dir,  'public/js/devapt-bootstrap.js') )
 	}
 	
 	

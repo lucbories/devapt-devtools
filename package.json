@@ -44,12 +44,12 @@
     "devtools"
   ],
   "dependencies": {
-    "devapt": ">=1.0.0",
-    "devapt-features-cytoscape": ">=1.0.1",
-    "devapt-features-foundation6": ">=1.0.0",
-    "devapt-features-sparklines": ">=1.0.0",
-    "redux": ">=3.5.2",
-    "typr": ">=0.2.1"
+    "devapt-core-common": "^2.0.0",
+    "devapt-core-browser": "^2.0.0",
+    "devapt-features-cytoscape": ">=2.0.0",
+    "devapt-features-foundation6": ">=2.0.0",
+    "devapt-features-sparklines": ">=2.0.0",
+    "redux": ">=3.5.2"
   },
   "devDependencies": {
     "babel": ">=6.5.2",

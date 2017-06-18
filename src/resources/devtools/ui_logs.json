@@ -58,7 +58,7 @@
 					"services":[
 						{
 							"service":"logs",
-							"method":"post",
+							"method":"devapt-subscribe",
 							"transform":{
 								"result_type":"array",
 								"flat_field_name":"logs",

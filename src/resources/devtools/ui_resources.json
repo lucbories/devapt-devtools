@@ -216,8 +216,8 @@
 						"bindings":{
 							"services":[
 								{
-									"service":"rest_api_resources_query_1",
-									"method":"list",
+									"service":"resources",
+									"method":"devapt-res-list",
 									"transform":{
 										"result_type":"single",
 										"order":"resources:asc",

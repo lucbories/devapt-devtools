@@ -41,7 +41,7 @@
 					"services":[
 						{
 							"service":"topology",
-							"method":"get",
+							"method":"devapt-deployed-nodes",
 							"transform":null,
 							"target_view":"topology_physical",
 							"target_method":"update_topology",

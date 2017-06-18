@@ -1,6 +1,9 @@
+
 // NPM IMPORTS
-import T from 'typr'
 import assert from 'assert'
+
+// DEVAPT CORE COMMON IMPORTS
+import T from 'devapt-core-common/dist/js/utils/types'
 
 
 const context = 'devtools/js/common_mw'

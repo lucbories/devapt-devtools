@@ -1,12 +1,15 @@
 
-import T from 'typr'
+// NPM IMPORTS
 import assert from 'assert'
-import devapt from 'devapt'
 
 
+// DEVAPT CORE COMMON IMPORTS
+import T                from 'devapt-core-common/dist/js/utils/types'
+import runtime          from 'devapt-core-common/dist/js/base/runtime'
 
-const runtime = devapt.runtime
-const Container = devapt.Container
+// DEVAPT CORE BROWSER IMPORTS
+import Container        from 'devapt-core-browser/dist/js/base/component'
+
 
 const context = 'devtools/metrics/metrics_tree'
 

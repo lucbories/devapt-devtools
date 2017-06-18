@@ -1,5 +1,9 @@
+
 // NPM IMPORTS
-import devapt from 'devapt'
+
+// DEVAPT CORE COMMON IMPORTS
+import RenderingBuilder from 'devapt-core-common/dist/js/rendering/rendering_builder'
+import runtime          from 'devapt-core-common/dist/js/base/runtime'
 
 // DEVTOOLS IMPORTS
 import common_mw from '../common_mw'
@@ -13,12 +17,11 @@ import common_mw from '../common_mw'
 
 
 // STANDARD COMPONENTS
-const RenderingBuilder = devapt.RenderingBuilder
-const renderer = new RenderingBuilder(devapt.runtime)
+const renderer = new RenderingBuilder(runtime)
 
 
 // BUILD METRICS MAIN UI
-const metrics_tabs_settings = devapt.runtime.get_registry().get_view('metrics_tabs')
+// const metrics_tabs_settings = runtime.get_registry().get_view('metrics_tabs')
 // const metrics_tabs = new Tabs('metrics_tabs', metrics_tabs_settings)
 
 
